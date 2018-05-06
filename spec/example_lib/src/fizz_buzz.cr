@@ -1,5 +1,3 @@
-class FizzBuzz
-  def call(num)
-    num
-  end
+def fizz_buzz(num)
+  num
 end
