@@ -60,4 +60,3 @@ module Crytic
     end
   end
 end
-
