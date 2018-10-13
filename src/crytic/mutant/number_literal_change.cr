@@ -5,6 +5,7 @@ module Crytic
   module Mutant
     class NumberLiteralChange < Mutant
       def visit(node : Crystal::NumberLiteral)
+        return false if @did_apply
         node.value = "#{node.value}1"
         @did_apply = true
         true
