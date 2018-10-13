@@ -11,8 +11,7 @@ module Crytic
       Mutant::NumberLiteralSignFlip.new
     ]
 
-    def initialize()
-      @io = IO::Memory.new
+    def initialize(@io = IO::Memory.new)
     end
 
     def run(source : String, specs : Array(String)) : Bool
@@ -24,7 +23,7 @@ module Crytic
         Mutation.with(mutant: mutant, original: source, specs: specs).run
       end
 
-      puts "Ran original suite: #{original_result.exit_code == 0 ? "Passed" : "Failed"}\n Mutations covered by tests:\n    #{results.map { |res| res.exit_code == 0 ? "F" : "." }.join("")}"
+      @io << "Ran original suite: #{original_result.exit_code == 0 ? "Passed" : "Failed"}\n Mutations covered by tests:\n    #{results.map { |res| res.exit_code == 0 ? "F" : "." }.join("")}"
 
       return results.map(&.exit_code).sum > 0
     end
