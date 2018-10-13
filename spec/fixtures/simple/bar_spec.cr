@@ -1,3 +1,4 @@
+require "./bar"
 require "spec"
 
 describe "bar" do
