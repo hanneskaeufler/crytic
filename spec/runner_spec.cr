@@ -29,4 +29,20 @@ describe Crytic::Runner do
       io.to_s.should contain("❌ ConditionFlip")
     end
   end
+
+  describe "subject without any coverage" do
+    it "fails all mutants" do
+      io = IO::Memory.new
+      Crytic::Runner.new(io).run(
+        "./fixtures/uncovered/without.cr",
+        [
+          "./fixtures/uncovered/without_spec.cr"
+        ]
+      ).should eq false
+      io.to_s.should contain("❌ BoolLiteralFlip")
+      io.to_s.should contain("❌ ConditionFlip")
+      io.to_s.should contain("❌ NumberLiteralSignFlip")
+      io.to_s.should contain("❌ NumberLiteralChange")
+    end
+  end
 end
