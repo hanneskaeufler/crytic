@@ -2,8 +2,13 @@ name: crytic
 version: 0.1.0
 
 authors:
-  - Hannes Kaeufler <hannes.kaeufler@gmail.com>
+  - Hannes Käufler <hannes.kaeufler@gmail.com>
 
 crystal: 0.25.1
 
 license: MIT
+
+dependencies:
+  diff:
+    github: MakeNowJust/crystal-diff
+    branch: master
