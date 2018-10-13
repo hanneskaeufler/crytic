@@ -6,12 +6,13 @@ describe Crytic::Runner do
     it "passes the mutation specs" do
       io = IO::Memory.new
       Crytic::Runner.new(io).run(
-        "./spec/fixtures/simple/bar.cr",
+        "./fixtures/simple/bar.cr",
         [
-          "./spec/fixtures/simple/bar_spec.cr"
+          "./fixtures/simple/bar_spec.cr"
         ]
       ).should eq true
-      io.to_s.should contain("..")
+      io.to_s.should contain("✅ ConditionFlip")
+      io.to_s.should contain("✅ BoolLiteralFlip")
     end
   end
 
@@ -19,12 +20,13 @@ describe Crytic::Runner do
     it "fails the mutation specs" do
       io = IO::Memory.new
       Crytic::Runner.new(io).run(
-        "./spec/fixtures/conditionals/fully_covered.cr",
+        "./fixtures/conditionals/fully_covered.cr",
         [
-          "./spec/fixtures/conditionals/uncovered_spec.cr"
+          "./fixtures/conditionals/uncovered_spec.cr"
         ]
-      ).should eq true
-      io.to_s.should contain("F")
+      ).should eq false
+      io.to_s.should contain("❌ BoolLiteralFlip")
+      io.to_s.should contain("❌ ConditionFlip")
     end
   end
 end

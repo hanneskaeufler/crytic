@@ -8,7 +8,8 @@ module Crytic
     MUTANTS = [
       Mutant::ConditionFlip.new,
       Mutant::NumberLiteralChange.new,
-      Mutant::NumberLiteralSignFlip.new
+      Mutant::NumberLiteralSignFlip.new,
+      Mutant::BoolLiteralFlip.new,
     ]
 
     def initialize(@io = IO::Memory.new)
@@ -21,11 +22,14 @@ module Crytic
 
       results = MUTANTS.map do |mutant|
         Mutation.with(mutant: mutant, original: source, specs: specs).run
-      end
+      end.select(&.applicable)
 
-      @io << "Ran original suite: #{original_result.exit_code == 0 ? "Passed" : "Failed"}\n Mutations covered by tests:\n    #{results.map { |res| res.exit_code == 0 ? "F" : "." }.join("")}"
+      @io << "Original suite: "
+      @io << "#{original_result.exit_code == 0 ? "✅" : "❌"}\n"
+      @io << "Mutations covered by tests:\n"
+      @io << "#{results.map { |res| res.is_covered ? "\n✅ #{res.mutant_name}" : "\n❌ #{res.mutant_name}" }.join("")}"
 
-      return results.map(&.exit_code).sum > 0
+      return results.map(&.is_covered).all?
     end
   end
 end
