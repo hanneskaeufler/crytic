@@ -17,6 +17,19 @@ module Crytic
     end
 
     def run(source : String, specs : Array(String)) : Bool
+      validate_args!(source, specs)
+      original_result = Mutation::NoMutation.with(original: source, specs: specs).run
+
+      results = MUTANTS.map do |mutant|
+        Mutation::Mutation.with(mutant: mutant, original: source, specs: specs).run
+      end.select(&.applicable)
+
+      IoReporter.new(@io).report(original_result, results)
+
+      return results.map(&.is_covered).all?
+    end
+
+    private def validate_args!(source, specs)
       if specs.empty?
         raise ArgumentError.new("No spec files given.")
       end
@@ -30,18 +43,6 @@ module Crytic
           raise ArgumentError.new("Spec file #{spec_file} doesn't exist.")
         end
       end
-
-      original_result = Mutation::NoMutation.with(original: source, specs: specs).run
-      # return original_result.exit_code == 0
-      # pp original_result
-
-      results = MUTANTS.map do |mutant|
-        Mutation::Mutation.with(mutant: mutant, original: source, specs: specs).run
-      end.select(&.applicable)
-
-      IoReporter.new(@io).report(original_result, results)
-
-      return results.map(&.is_covered).all?
     end
   end
 end
