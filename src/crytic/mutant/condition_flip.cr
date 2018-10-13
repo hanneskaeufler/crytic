@@ -5,6 +5,7 @@ module Crytic
   module Mutant
     class ConditionFlip < Mutant
       def visit(node : Crystal::If)
+        return false if @did_apply
         tmp = node.else
         node.else = node.then
         node.then = tmp
