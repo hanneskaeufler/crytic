@@ -1,7 +1,0 @@
-#!/usr/local/bin/crystal
-
-require "../src/crytic"
-
-puts ARGV
-
-exit(Crytic::Runner.new.call(ARGV) ? 0 : 1)
