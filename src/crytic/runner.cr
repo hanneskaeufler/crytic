@@ -13,7 +13,10 @@ module Crytic
       @io = IO::Memory.new
     end
 
-    def run(original_source : String) : Bool
+    def run(sources : Array(String), specs : Array(String)) : Bool
+      original_source = File.read(sources.first)
+      original_source = "#{original_source}#{specs.map { |spec_file| File.read(spec_file) }.join("\n")}"
+
       original_result = Process.run("crystal", ["eval", original_source],
                                     output: @io,
                                     error: STDERR)
