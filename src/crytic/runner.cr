@@ -17,6 +17,20 @@ module Crytic
     end
 
     def run(source : String, specs : Array(String)) : Bool
+      if specs.empty?
+        raise ArgumentError.new("No spec files given.")
+      end
+
+      unless File.exists?(source)
+        raise ArgumentError.new("Source file for subject doesn't exist.")
+      end
+
+      specs.each do |spec_file|
+        unless File.exists?(spec_file)
+          raise ArgumentError.new("Spec file #{spec_file} doesn't exist.")
+        end
+      end
+
       original_result = NoMutation.with(original: source, specs: specs).run
       # return original_result.exit_code == 0
       # pp original_result
