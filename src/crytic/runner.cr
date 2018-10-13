@@ -3,31 +3,26 @@ require "./mutant/**"
 
 module Crytic
   class Runner
+    MUTANTS = [
+      Mutant::ConditionFlip.new,
+      Mutant::NumberLiteralChange.new,
+      Mutant::NumberLiteralSignFlip.new
+    ]
+
     def initialize()
       @io = IO::Memory.new
     end
 
-    def run(source : String) : Bool
-      original_source = source
+    def run(original_source : String) : Bool
+      original_result = Process.run("crystal", ["eval", original_source],
+                                    output: @io,
+                                    error: STDERR)
 
-      mutated_source1 = Crytic::Source.new(source, Crytic::Mutant::ConditionFlip.new)
-        .mutated_source
+      results = MUTANTS.map do |mutant|
+        Process.run("crystal", ["eval", Source.new(original_source, mutant).mutated_source], output: @io, error: STDERR)
+      end
 
-      mutated_source2 = Crytic::Source.new(source, Crytic::Mutant::NumberLiteralChange.new)
-        .mutated_source
-      puts mutated_source2
-
-      mutated_source3 = Crytic::Source.new(source, Crytic::Mutant::NumberLiteralSignFlip.new)
-        .mutated_source
-
-      results = [
-        Process.run("crystal", ["eval", original_source], output: @io, error: STDERR),
-        Process.run("crystal", ["eval", mutated_source1], output: @io, error: STDERR),
-        Process.run("crystal", ["eval", mutated_source2], output: @io, error: STDERR),
-        Process.run("crystal", ["eval", mutated_source3], output: @io, error: STDERR),
-      ]
-
-      puts "Ran original suite: #{results.first.exit_code == 0 ? "Passed" : "Failed"}\n Mutations covered by tests:\n    #{results[1..-1].map { |res| res.exit_code == 0 ? "F" : "." }.join("")}"
+      puts "Ran original suite: #{original_result.exit_code == 0 ? "Passed" : "Failed"}\n Mutations covered by tests:\n    #{results.map { |res| res.exit_code == 0 ? "F" : "." }.join("")}"
 
       return results.map(&.exit_code).sum > 0
     end
