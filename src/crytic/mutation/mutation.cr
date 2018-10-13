@@ -1,12 +1,12 @@
-require "diff"
-require "colorize"
-require "./inject_mutated_subject_into_specs"
 require "../mutant/mutant"
+require "./diff"
+require "./inject_mutated_subject_into_specs"
+require "./result"
 
-module Crytic
+module Crytic::Mutation
   class Mutation
     private def initialize(
-      @mutant : Mutant::Mutant,
+      @mutant : Crytic::Mutant::Mutant,
       @subject_file_path : String,
       @specs_file_paths : Array(String))
       @io = IO::Memory.new
@@ -15,7 +15,7 @@ module Crytic
     def run
       subject_source = File.read(@subject_file_path)
       mutated_source = Source.new(subject_source, @mutant).mutated_source
-      source_diff = diff(subject_source, mutated_source)
+      source_diff = Diff.new(subject_source, mutated_source).to_s
 
       unless @mutant.did_apply?
         return Result.new(is_covered: false, mutant: @mutant, diff: source_diff)
@@ -35,28 +35,6 @@ module Crytic
 
     def self.with(mutant : Mutant::Mutant, original : String, specs : Array(String) )
       new(mutant, original, specs)
-    end
-
-    private def diff(original : String, mutated : String)
-      io = IO::Memory.new
-      Diff.diff(original, mutated).each do |chunk|
-        io << chunk.data.colorize(
-          chunk.append? ? :green :
-          chunk.delete? ? :red   : :dark_gray)
-        io << "\n"
-      end
-
-      io.to_s
-    end
-  end
-
-  record Result, is_covered : Bool, mutant : Mutant::Mutant, diff : String do
-    def mutant_name
-      mutant.class.to_s.split("::").last
-    end
-
-    def applicable
-      mutant.did_apply?
     end
   end
 end

@@ -31,12 +31,12 @@ module Crytic
         end
       end
 
-      original_result = NoMutation.with(original: source, specs: specs).run
+      original_result = Mutation::NoMutation.with(original: source, specs: specs).run
       # return original_result.exit_code == 0
       # pp original_result
 
       results = MUTANTS.map do |mutant|
-        Mutation.with(mutant: mutant, original: source, specs: specs).run
+        Mutation::Mutation.with(mutant: mutant, original: source, specs: specs).run
       end.select(&.applicable)
 
       IoReporter.new(@io).report(original_result, results)

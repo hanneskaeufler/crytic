@@ -1,6 +1,6 @@
 require "./adapt_local_require_paths_to_current_working_dir"
 
-module Crytic
+module Crytic::Mutation
   class NoMutation
     def run
       fixed_specs_source = @specs_file_paths.map do |spec_file|
