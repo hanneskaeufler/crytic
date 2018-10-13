@@ -12,3 +12,9 @@ dependencies:
   diff:
     github: MakeNowJust/crystal-diff
     branch: master
+
+development_dependencies:
+  ameba:
+    github: veelenga/ameba
+  coverage:
+    github: anykeyh/crystal-coverage

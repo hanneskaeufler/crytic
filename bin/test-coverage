@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+list=(`find spec -name '*_spec.cr' -and -not -name 'runner_spec.cr'`)
+./bin/crystal-coverage "${list[@]}"

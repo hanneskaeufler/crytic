@@ -1,2 +1,5 @@
 lib/
 shard.lock
+bin/ameba
+bin/crystal-coverage
+coverage/
