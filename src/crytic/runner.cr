@@ -1,3 +1,4 @@
+require "./generator"
 require "./io_reporter"
 require "./mutant/**"
 require "./mutation/mutation"
@@ -29,19 +30,10 @@ module Crytic
         return false
       end
 
-      ast = Crystal::Parser.parse(File.read(source))
-
-      results = MUTANT_POSSIBILITIES.map do |inspector|
-        ast.accept(inspector)
-        inspector
-      end.select(&.any?).map do |inspector|
-        inspector.locations.map do |location|
-          mutant = inspector.mutant_class.at(location: location)
-          Mutation::Mutation
-            .with(mutant: mutant, original: source, specs: specs)
-            .run
-        end
-      end.flatten
+      results = Generator
+        .new
+        .mutations_for(source: source, specs: specs)
+        .map(&.run)
 
       IoReporter
         .new(@io)
