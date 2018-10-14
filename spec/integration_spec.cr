@@ -43,9 +43,9 @@ end
 def run_crytic(args : String)
   io = IO::Memory.new
   result = Process.run("crystal run src/crytic.cr -- #{args}",
-                       output: io,
-                       error: io,
-                       shell: true)
+    output: io,
+    error: io,
+    shell: true)
   CryticResult.new(exit_code: result.exit_code, output: io.to_s)
 end
 

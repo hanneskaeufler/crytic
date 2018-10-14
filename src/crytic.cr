@@ -6,7 +6,7 @@ spec_files = [] of String
 
 OptionParser.parse! do |parser|
   parser.banner = "Usage: crytic [arguments]"
-  parser.on("-s SOURCE", "--subject=SOURCE", "Specifies the source file for the subject") do|source|
+  parser.on("-s SOURCE", "--subject=SOURCE", "Specifies the source file for the subject") do |source|
     subject_source = source
   end
   parser.on("-h", "--help", "Show this help") { puts parser }

@@ -3,7 +3,6 @@ require "./possibilities"
 
 module Crytic::Mutant
   class NumberLiteralChangePossibilities < Possibilities
-
     def visit(node : Crystal::NumberLiteral)
       location = node.location
       unless location.nil?

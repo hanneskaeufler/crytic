@@ -22,7 +22,8 @@ module Crytic::Mutation
     private def initialize(
       @mutant : Crytic::Mutant::Mutant,
       @subject_file_path : String,
-      @specs_file_paths : Array(String))
+      @specs_file_paths : Array(String)
+    )
       @io = IO::Memory.new
       @process_runner = ProcessProcessRunner.new
     end
@@ -38,7 +39,7 @@ module Crytic::Mutation
         diff: source_diff)
     end
 
-    def self.with(mutant : Mutant::Mutant, original : String, specs : Array(String) )
+    def self.with(mutant : Mutant::Mutant, original : String, specs : Array(String))
       new(mutant, original, specs)
     end
 

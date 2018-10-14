@@ -7,7 +7,7 @@ module Crytic::Mutant
       location = node.location
       return if location.nil?
       if location.line_number == @location.line_number &&
-          location.column_number == @location.column_number
+         location.column_number == @location.column_number
         node.value = "#{node.value}1"
       end
       true

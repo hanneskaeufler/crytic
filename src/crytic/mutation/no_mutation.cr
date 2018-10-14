@@ -10,8 +10,8 @@ module Crytic::Mutation
       end.join("\n")
 
       Process.run("crystal", ["eval", fixed_specs_source],
-                  output: @io,
-                  error: @io)
+        output: @io,
+        error: @io)
     end
 
     def self.with(original : String, specs : Array(String))

@@ -10,8 +10,7 @@ module Crytic::Mutation
       io = IO::Memory.new
       ::Diff.diff(@original, @mutated).each do |chunk|
         io << chunk.data.colorize(
-          chunk.append? ? :green :
-          chunk.delete? ? :red   : :dark_gray)
+          chunk.append? ? :green : chunk.delete? ? :red : :dark_gray)
         io << "\n"
       end
 
