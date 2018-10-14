@@ -3,16 +3,26 @@ require "./mutant"
 
 module Crytic::Mutant
   class NumberLiteralChange < Mutant
+    def self.at(location : Crystal::Location)
+      new(location)
+    end
+
     def visit(node : Crystal::NumberLiteral)
-      return false if @did_apply
-      node.value = "#{node.value}1"
-      @did_apply = true
+      location = node.location
+      return if location.nil?
+      if location.line_number == @location.line_number &&
+          location.column_number == @location.column_number
+        node.value = "#{node.value}1"
+      end
       true
     end
 
     # Ignore other nodes for now
     def visit(node : Crystal::ASTNode)
       true
+    end
+
+    private def initialize(@location : Crystal::Location)
     end
   end
 end

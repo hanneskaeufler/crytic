@@ -6,11 +6,11 @@ require "./source"
 
 module Crytic
   class Runner
-    MUTANTS = [
-      Mutant::ConditionFlip.new,
-      Mutant::NumberLiteralChange.new,
-      Mutant::NumberLiteralSignFlip.new,
-      Mutant::BoolLiteralFlip.new,
+    MUTANT_POSSIBILITIES = [
+      # Mutant::ConditionFlip.new,
+      Mutant::NumberLiteralChangePossibilities.new,
+      # Mutant::NumberLiteralSignFlip.new,
+      # Mutant::BoolLiteralFlip.new,
     ]
 
     def initialize(@io = IO::Memory.new)
@@ -18,7 +18,10 @@ module Crytic
 
     def run(source : String, specs : Array(String)) : Bool
       validate_args!(source, specs)
-      original_result = Mutation::NoMutation.with(original: source, specs: specs).run
+
+      original_result = Mutation::NoMutation
+        .with(original: source, specs: specs)
+        .run
 
       if original_result.exit_code != 0
         @io << "❌ Original test suite failed.\n"
@@ -26,11 +29,23 @@ module Crytic
         return false
       end
 
-      results = MUTANTS.map do |mutant|
-        Mutation::Mutation.with(mutant: mutant, original: source, specs: specs).run
-      end.select(&.applicable)
+      ast = Crystal::Parser.parse(File.read(source))
 
-      IoReporter.new(@io).report(original_result, results)
+      results = MUTANT_POSSIBILITIES.map do |inspector|
+        ast.accept(inspector)
+        inspector
+      end.select(&.any?).map do |inspector|
+        inspector.locations.map do |location|
+          mutant = Mutant::NumberLiteralChange.at(location: location)
+          Mutation::Mutation
+            .with(mutant: mutant, original: source, specs: specs)
+            .run
+        end
+      end.flatten
+
+      IoReporter
+        .new(@io)
+        .report(original_result, results)
 
       return results.map(&.is_covered).all?
     end
