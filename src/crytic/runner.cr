@@ -26,6 +26,7 @@ module Crytic
 
       if original_result.exit_code != 0
         @io << "❌ Original test suite failed.\n"
+        @io << original_result.output
 
         return false
       end

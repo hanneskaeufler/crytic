@@ -9,9 +9,12 @@ module Crytic::Mutation
         spec_code.to_s
       end.join("\n")
 
-      Process.run("crystal", ["eval", fixed_specs_source],
-        output: @io,
-        error: @io)
+      io = IO::Memory.new
+
+      result = Process.run("crystal", ["eval", fixed_specs_source],
+        output: io,
+        error: io)
+      OriginalResult.new(exit_code: result.exit_code, output: io.to_s)
     end
 
     def self.with(original : String, specs : Array(String))
@@ -19,7 +22,8 @@ module Crytic::Mutation
     end
 
     private def initialize(@subject_file_path : String, @specs_file_paths : Array(String))
-      @io = IO::Memory.new
     end
   end
+
+  record OriginalResult, exit_code : Int32, output : String
 end
