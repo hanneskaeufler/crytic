@@ -14,7 +14,7 @@ module Crytic
       ast.accept(AdaptLocalRequirePathsToCurrentWorkingDir.new("", spec))
       ast.to_s.should eq <<-CODE
       require "diff"
-      require "./spec/spec_helper.src"
+      require "./spec/spec_helper"\n
       CODE
     end
   end

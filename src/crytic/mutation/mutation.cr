@@ -19,15 +19,6 @@ module Crytic::Mutation
     property process_runner
     @process_runner : ProcessRunner
 
-    private def initialize(
-      @mutant : Crytic::Mutant::Mutant,
-      @subject_file_path : String,
-      @specs_file_paths : Array(String)
-    )
-      @io = IO::Memory.new
-      @process_runner = ProcessProcessRunner.new
-    end
-
     def run
       subject_source = File.read(@subject_file_path)
       mutated_source = Source.new(subject_source, @mutant).mutated_source
@@ -41,6 +32,15 @@ module Crytic::Mutation
 
     def self.with(mutant : Mutant::Mutant, original : String, specs : Array(String))
       new(mutant, original, specs)
+    end
+
+    private def initialize(
+      @mutant : Crytic::Mutant::Mutant,
+      @subject_file_path : String,
+      @specs_file_paths : Array(String)
+    )
+      @io = IO::Memory.new
+      @process_runner = ProcessProcessRunner.new
     end
 
     private def run_process(mutated_source)

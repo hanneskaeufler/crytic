@@ -1,27 +1,25 @@
 require "./adapt_local_require_paths_to_current_working_dir"
+require "./mutation"
 
 module Crytic::Mutation
   class NoMutation
+    property process_runner
+    @process_runner : ProcessRunner
+
     def run
-      fixed_specs_source = @specs_file_paths.map do |spec_file|
-        spec_code = Crystal::Parser.parse(File.read(spec_file))
-        spec_code.accept(AdaptLocalRequirePathsToCurrentWorkingDir.new(@subject_file_path, spec_file))
-        spec_code.to_s
-      end.join("\n")
-
       io = IO::Memory.new
-
-      result = Process.run("crystal", ["eval", fixed_specs_source],
+      exit_code = process_runner.run("crystal", ["spec", @specs_file_paths.join(" ")],
         output: io,
         error: io)
-      OriginalResult.new(exit_code: result.exit_code, output: io.to_s)
+      OriginalResult.new(exit_code: exit_code, output: io.to_s)
     end
 
-    def self.with(original : String, specs : Array(String))
-      new(original, specs)
+    def self.with(specs : Array(String))
+      new(specs)
     end
 
-    private def initialize(@subject_file_path : String, @specs_file_paths : Array(String))
+    private def initialize(@specs_file_paths : Array(String))
+      @process_runner = ProcessProcessRunner.new
     end
   end
 
