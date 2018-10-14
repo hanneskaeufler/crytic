@@ -20,6 +20,12 @@ module Crytic
       validate_args!(source, specs)
       original_result = Mutation::NoMutation.with(original: source, specs: specs).run
 
+      if original_result.exit_code != 0
+        @io << "❌ Original test suite failed.\n"
+
+        return false
+      end
+
       results = MUTANTS.map do |mutant|
         Mutation::Mutation.with(mutant: mutant, original: source, specs: specs).run
       end.select(&.applicable)

@@ -4,14 +4,14 @@ module Crytic::Mutation
   class NoMutation
     def run
       fixed_specs_source = @specs_file_paths.map do |spec_file|
-        spec_code = Crystal::Parser.parse(File.read(@subject_file_path))
+        spec_code = Crystal::Parser.parse(File.read(spec_file))
         spec_code.accept(AdaptLocalRequirePathsToCurrentWorkingDir.new(@subject_file_path, spec_file))
         spec_code.to_s
       end.join("\n")
 
       Process.run("crystal", ["eval", fixed_specs_source],
                   output: @io,
-                  error: STDERR)
+                  error: @io)
     end
 
     def self.with(original : String, specs : Array(String))

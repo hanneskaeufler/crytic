@@ -30,6 +30,14 @@ describe Crytic do
       result.output.should contain("❌ NumberLiteralChange")
     end
   end
+
+  describe "a failing initial test suite" do
+    it "reports initial failure" do
+      result = run_crytic("-s ./fixtures/uncovered/without.cr ./fixtures/failing/failing_spec.cr")
+      result.exit_code.should be > 0
+      result.output.should eq "❌ Original test suite failed.\n"
+    end
+  end
 end
 
 def run_crytic(args : String)
