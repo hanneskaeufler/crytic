@@ -1,24 +1,19 @@
 require "compiler/crystal/syntax/*"
-require "./mutant"
+require "./possibilities"
 
 module Crytic::Mutant
-  class NumberLiteralChangePossibilities < Mutant
-    getter locations
-    @locations = [] of Crystal::Location
+  class NumberLiteralChangePossibilities < Possibilities
 
     def visit(node : Crystal::NumberLiteral)
-      if node.location != nil
-        @locations << node.location.not_nil!
+      location = node.location
+      unless location.nil?
+        @locations << location
       end
       true
     end
 
     def visit(node : Crystal::ASTNode)
       true
-    end
-
-    def any?
-      @locations.size > 0
     end
   end
 end

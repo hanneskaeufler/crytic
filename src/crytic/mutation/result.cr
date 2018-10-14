@@ -5,9 +5,5 @@ module Crytic::Mutation
     def mutant_name
       mutant.class.to_s.split("::").last
     end
-
-    def applicable
-      mutant.did_apply?
-    end
   end
 end
