@@ -4,14 +4,12 @@ require "./mutant"
 module Crytic::Mutant
   class BoolLiteralFlip < Mutant
     def visit(node : Crystal::BoolLiteral)
-      return false if @did_apply
-      node.value = !node.value
-      @did_apply = true
-      true
-    end
-
-    # Ignore other nodes for now
-    def visit(node : Crystal::ASTNode)
+      location = node.location
+      return if location.nil?
+      if location.line_number == @location.line_number &&
+          location.column_number == @location.column_number
+        node.value = !node.value
+      end
       true
     end
   end

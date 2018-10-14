@@ -5,7 +5,10 @@ module Crytic
   describe Mutant::ConditionFlip do
     it "flips the branches" do
       ast = Crystal::Parser.parse("if true 1; else 2; end")
-      ast.accept(Mutant::ConditionFlip.new)
+      ast.accept(Mutant::ConditionFlip.at(Crystal::Location.new(
+        filename: nil,
+        line_number: 1,
+        column_number: 1)))
       ast.to_s.should eq <<-AST
       if true
         2
@@ -15,29 +18,18 @@ module Crytic
       AST
     end
 
-    it "doesn't apply when no conditional occurs" do
-      ast = Crystal::Parser.parse("puts 1")
-      mutant = Mutant::ConditionFlip.new
-      ast.accept(mutant)
-      mutant.did_apply?.should eq false
-      ast.to_s.should eq "puts(1)"
-    end
-
-    it "only applies one mutation at a time" do
-      ast = Crystal::Parser.parse("if true 1; else 2; end; if false 1; else 2; end")
-      ast.accept(Mutant::ConditionFlip.new)
+    it "only applies to location" do
+      ast = Crystal::Parser.parse("if true 1; else 2; end")
+      ast.accept(Mutant::ConditionFlip.at(Crystal::Location.new(
+        filename: nil,
+        line_number: 100,
+        column_number: 100)))
       ast.to_s.should eq <<-AST
       if true
-        2
-      else
-        1
-      end
-      if false
         1
       else
         2
       end
-
       AST
     end
   end

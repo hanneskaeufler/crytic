@@ -12,22 +12,13 @@ module Crytic
       ast.to_s.should eq "1\n21\n"
     end
 
-    # it "doesn't apply when no number literal occurs" do
-    #   ast = Crystal::Parser.parse("puts \"hello\"")
-    #   mutant = Mutant::NumberLiteralChange.new
-    #   ast.accept(mutant)
-    #   mutant.did_apply?.should eq false
-    #   ast.to_s.should eq "puts(\"hello\")"
-    # end
-
-    # it "only applies one mutation at a time" do
-    #   ast = Crystal::Parser.parse("1; 2;")
-    #   ast.accept(Mutant::NumberLiteralChange.new)
-    #   ast.to_s.should eq <<-AST
-    #   11
-    #   2
-
-    #   AST
-    # end
+    it "only applies to location" do
+      ast = Crystal::Parser.parse("1; 2;")
+      ast.accept(Mutant::NumberLiteralChange.at(Crystal::Location.new(
+        filename: nil,
+        line_number: 100,
+        column_number: 100)))
+      ast.to_s.should eq "1\n2\n"
+    end
   end
 end

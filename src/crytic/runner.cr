@@ -9,7 +9,7 @@ module Crytic
     MUTANT_POSSIBILITIES = [
       # Mutant::ConditionFlip.new,
       Mutant::NumberLiteralChangePossibilities.new,
-      # Mutant::NumberLiteralSignFlip.new,
+      Mutant::NumberLiteralSignFlipPossibilities.new,
       # Mutant::BoolLiteralFlip.new,
     ]
 

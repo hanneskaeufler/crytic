@@ -5,26 +5,20 @@ module Crytic
   describe Mutant::NumberLiteralSignFlip do
     it "flips the sign of a literal" do
       ast = Crystal::Parser.parse("1")
-      ast.accept(Mutant::NumberLiteralSignFlip.new)
+      ast.accept(Mutant::NumberLiteralSignFlip.at(Crystal::Location.new(
+        filename: nil,
+        line_number: 1,
+        column_number: 1)))
       ast.to_s.should eq "-1"
     end
 
-    it "doesn't apply when no number literal occurs" do
-      ast = Crystal::Parser.parse("puts \"hello\"")
-      mutant = Mutant::NumberLiteralSignFlip.new
-      ast.accept(mutant)
-      mutant.did_apply?.should eq false
-      ast.to_s.should eq "puts(\"hello\")"
-    end
-
-    it "only applies one mutation at a time" do
-      ast = Crystal::Parser.parse("1; 2;")
-      ast.accept(Mutant::NumberLiteralSignFlip.new)
-      ast.to_s.should eq <<-AST
-      -1
-      2
-
-      AST
+    it "only applies to location" do
+      ast = Crystal::Parser.parse("1")
+      ast.accept(Mutant::NumberLiteralSignFlip.at(Crystal::Location.new(
+        filename: nil,
+        line_number: 100,
+        column_number: 100)))
+      ast.to_s.should eq "1"
     end
   end
 end

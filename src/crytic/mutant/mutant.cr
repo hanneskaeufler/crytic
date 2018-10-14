@@ -2,10 +2,15 @@ require "compiler/crystal/syntax/*"
 
 module Crytic::Mutant
   abstract class Mutant < Crystal::Visitor
-    @did_apply = false
+    def self.at(location : Crystal::Location)
+      new(location)
+    end
 
-    def did_apply? : Bool
-      @did_apply
+    def visit(node : Crystal::ASTNode)
+      true
+    end
+
+    private def initialize(@location : Crystal::Location)
     end
   end
 end

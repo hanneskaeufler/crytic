@@ -4,19 +4,15 @@ require "./mutant"
 module Crytic::Mutant
   class ConditionFlip < Mutant
     def visit(node : Crystal::If)
-      return false if @did_apply
-      tmp = node.else
-      node.else = node.then
-      node.then = tmp
-
-      @did_apply = true
-
+      location = node.location
+      return if location.nil?
+      if location.line_number == @location.line_number &&
+          location.column_number == @location.column_number
+        tmp = node.else
+        node.else = node.then
+        node.then = tmp
+      end
       true
       end
-
-    # Ignore other nodes for now
-    def visit(node : Crystal::ASTNode)
-      true
-    end
   end
 end

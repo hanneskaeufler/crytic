@@ -32,10 +32,6 @@ module Crytic::Mutation
       mutated_source = Source.new(subject_source, @mutant).mutated_source
       source_diff = Diff.new(subject_source, mutated_source).to_s
 
-      unless @mutant.did_apply?
-        return Result.new(is_covered: false, mutant: @mutant, diff: source_diff)
-      end
-
       Result.new(
         is_covered: run_process(mutated_source) != 0,
         mutant: @mutant,
