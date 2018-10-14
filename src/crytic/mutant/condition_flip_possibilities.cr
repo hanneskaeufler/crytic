@@ -2,9 +2,9 @@ require "compiler/crystal/syntax/*"
 require "./possibilities"
 
 module Crytic::Mutant
-  class NumberLiteralChangePossibilities < Possibilities
+  class ConditionFlipPossibilities < Possibilities
 
-    def visit(node : Crystal::NumberLiteral)
+    def visit(node : Crystal::If)
       location = node.location
       unless location.nil?
         @locations << location

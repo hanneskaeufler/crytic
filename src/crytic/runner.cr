@@ -7,10 +7,10 @@ require "./source"
 module Crytic
   class Runner
     MUTANT_POSSIBILITIES = [
-      # Mutant::ConditionFlip.new,
+      Mutant::ConditionFlipPossibilities.new,
       Mutant::NumberLiteralChangePossibilities.new,
       Mutant::NumberLiteralSignFlipPossibilities.new,
-      # Mutant::BoolLiteralFlip.new,
+      Mutant::BoolLiteralFlipPossibilities.new,
     ]
 
     def initialize(@io = IO::Memory.new)
@@ -36,7 +36,7 @@ module Crytic
         inspector
       end.select(&.any?).map do |inspector|
         inspector.locations.map do |location|
-          mutant = Mutant::NumberLiteralChange.at(location: location)
+          mutant = inspector.mutant_class.at(location: location)
           Mutation::Mutation
             .with(mutant: mutant, original: source, specs: specs)
             .run
