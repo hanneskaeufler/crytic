@@ -10,15 +10,15 @@ module Crytic
     def mutations_for(source : String, specs : Array(String))
       ast = Crystal::Parser.parse(File.read(source))
 
-      results = MUTANT_POSSIBILITIES.map do |inspector|
+      MUTANT_POSSIBILITIES.map do |inspector|
         ast.accept(inspector)
         inspector
       end.select(&.any?).map do |inspector|
         inspector.locations.map do |location|
           Mutation::Mutation
             .with(mutant: inspector.mutant_class.at(location: location),
-                  original: source,
-                  specs: specs)
+            original: source,
+            specs: specs)
         end
       end.flatten
     end

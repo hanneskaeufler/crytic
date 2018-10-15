@@ -12,10 +12,10 @@ module Crytic
       spec_file = "./fixtures/simple/bar_spec.cr"
       InjectMutatedSubjectIntoSpecs
         .new(
-          path: spec_file,
-          source: File.read(spec_file),
-          subject_path: "./fixtures/simple/bar.cr",
-          mutated_subject_source: "puts \"mutated source\"")
+        path: spec_file,
+        source: File.read(spec_file),
+        subject_path: "./fixtures/simple/bar.cr",
+        mutated_subject_source: "puts \"mutated source\"")
         .to_covered_source
         .should eq <<-CODE
         # require of `fixtures/simple/bar.cr` from `fixtures/simple/bar_spec.cr:1`
@@ -34,10 +34,10 @@ module Crytic
       spec_file = "./fixtures/simple/bar_with_helper_spec.cr"
       InjectMutatedSubjectIntoSpecs
         .new(
-          path: spec_file,
-          source: File.read(spec_file),
-          subject_path: "./fixtures/simple/bar.cr",
-          mutated_subject_source: "puts \"mutated source\"")
+        path: spec_file,
+        source: File.read(spec_file),
+        subject_path: "./fixtures/simple/bar.cr",
+        mutated_subject_source: "puts \"mutated source\"")
         .to_covered_source
         .should eq <<-CODE
         # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr:1`
