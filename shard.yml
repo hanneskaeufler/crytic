@@ -10,8 +10,8 @@ license: MIT
 
 dependencies:
   diff:
-    github: MakeNowJust/crystal-diff
-    branch: master
+    github: hanneskaeufler/crystal-diff
+    branch: oprypin/unified-diff
 
 development_dependencies:
   ameba:

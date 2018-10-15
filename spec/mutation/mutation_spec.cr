@@ -97,7 +97,7 @@ module Crytic::Mutation
         mutation.process_runner = fake
 
         mutation.run.diff.should eq <<-DIFF
-        \e[90mdef bar\n  if \e[0m\n\e[31mtru\e[0m\n\e[32mfals\e[0m\n\e[90me\n    2\n  else\n    3\n  end\nend\e[0m\n\e[31m\n\e[0m\n
+        @@ -1,5 +1,5 @@\n def bar\n\e[31m-\e[0m\e[31m  if true\e[0m\n\e[32m+\e[0m\e[32m  if false\e[0m\n     2\n   else\n     3\n
         DIFF
       end
 

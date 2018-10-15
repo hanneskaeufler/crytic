@@ -7,14 +7,7 @@ module Crytic::Mutation
     end
 
     def to_s
-      io = IO::Memory.new
-      ::Diff.diff(@original, @mutated).each do |chunk|
-        io << chunk.data.colorize(
-          chunk.append? ? :green : chunk.delete? ? :red : :dark_gray)
-        io << "\n"
-      end
-
-      io.to_s
+      ::Diff.unified_diff(@original, @mutated)
     end
   end
 end
