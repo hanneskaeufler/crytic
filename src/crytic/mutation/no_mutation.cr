@@ -1,4 +1,3 @@
-require "./adapt_local_require_paths_to_current_working_dir"
 require "./mutation"
 
 module Crytic::Mutation
