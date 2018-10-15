@@ -5,6 +5,10 @@ require "spec"
 
 module Crytic::Mutation
   describe Mutation do
+    Spec.before_each do
+      InjectMutatedSubjectIntoSpecs.reset
+    end
+
     describe "#run" do
       it "evals the mutated code in a separate process" do
         mutant = Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
@@ -23,14 +27,14 @@ module Crytic::Mutation
         mutation.run.should be_a(Crytic::Mutation::Result)
         fake.cmd.should eq "crystal"
         fake.args.should eq <<-CODE
-        eval \ndef bar
+        eval # require of `fixtures/simple/bar.cr` from `fixtures/simple/bar_spec.cr:1`
+        def bar
           if false
             2
           else
             3
           end
         end
-
         require "spec"
         describe("bar") do
           it("works") do
@@ -115,8 +119,10 @@ module Crytic::Mutation
         mutation.run
         fake.cmd.should eq "crystal"
         fake.args.should eq <<-CODE
+        eval # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr:1`
         require "http"
-        eval \ndef bar
+        # require of `fixtures/simple/bar.cr` from `fixtures/simple/spec_helper.cr:2`
+        def bar
           if false
             2
           else

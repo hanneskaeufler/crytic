@@ -46,7 +46,6 @@ module Crytic::Mutation
 
     private def run_process(mutated_source)
       full = mutated_specs_source(mutated_source)
-      puts full
       process_runner.run(
         "crystal", ["eval", full],
         output: @io,
@@ -54,14 +53,15 @@ module Crytic::Mutation
     end
 
     private def mutated_specs_source(mutated_source)
+      InjectMutatedSubjectIntoSpecs.reset
       @specs_file_paths.map do |spec_file|
-        spec_code = Crystal::Parser.parse(File.read(spec_file))
-        spec_code.accept(AdaptLocalRequirePathsToCurrentWorkingDir.new(@subject_file_path, spec_file))
-        spec_code.to_s
-      end.map do |spec_file|
         InjectMutatedSubjectIntoSpecs
-          .new(@subject_file_path, mutated_source, spec_file, File.read(spec_file))
-          .process
+          .new(
+            subject_path: @subject_file_path,
+            mutated_subject_source: mutated_source,
+            path: spec_file,
+            source: File.read(spec_file))
+          .to_covered_source
       end.join("\n")
     end
   end
