@@ -1,6 +1,7 @@
 require "../mutant/mutant"
 require "./diff"
 require "./inject_mutated_subject_into_specs"
+require "./adapt_local_require_paths_to_current_working_dir"
 require "./result"
 require "../source"
 
@@ -44,8 +45,10 @@ module Crytic::Mutation
     end
 
     private def run_process(mutated_source)
+      full = mutated_specs_source(mutated_source)
+      puts full
       process_runner.run(
-        "crystal", ["eval", mutated_specs_source(mutated_source)],
+        "crystal", ["eval", full],
         output: @io,
         error: STDERR)
     end
@@ -53,9 +56,13 @@ module Crytic::Mutation
     private def mutated_specs_source(mutated_source)
       @specs_file_paths.map do |spec_file|
         spec_code = Crystal::Parser.parse(File.read(spec_file))
-        spec_code.accept(InjectMutatedSubjectIntoSpecs.new(@subject_file_path, spec_file))
+        spec_code.accept(AdaptLocalRequirePathsToCurrentWorkingDir.new(@subject_file_path, spec_file))
         spec_code.to_s
-      end.join("\n").gsub(/require "PUTMEHERE"/, "\n#{mutated_source}\n")
+      end.map do |spec_file|
+        InjectMutatedSubjectIntoSpecs
+          .new(@subject_file_path, mutated_source, spec_file, File.read(spec_file))
+          .process
+      end.join("\n")
     end
   end
 end

@@ -96,6 +96,43 @@ module Crytic::Mutation
         \e[90mdef bar\n  if \e[0m\n\e[31mtru\e[0m\n\e[32mfals\e[0m\n\e[90me\n    2\n  else\n    3\n  end\nend\e[0m\n\e[31m\n\e[0m\n
         DIFF
       end
+
+      it "resolves nested requires" do
+        mutant = Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
+          filename: nil,
+          line_number: 2,
+          column_number: 6,
+        ))
+        mutation = Mutation.with(
+          mutant,
+          "./fixtures/simple/bar.cr",
+          ["./fixtures/simple/bar_with_helper_spec.cr"])
+
+        fake = FakeProcessRunner.new
+        fake.exit_code = 0
+        mutation.process_runner = fake
+
+        mutation.run
+        fake.cmd.should eq "crystal"
+        fake.args.should eq <<-CODE
+        require "http"
+        eval \ndef bar
+          if false
+            2
+          else
+            3
+          end
+        end
+
+        require "spec"
+        describe("bar") do
+          it("works") do
+            bar.should(eq(2))
+          end
+        end
+
+        CODE
+      end
     end
   end
 end
