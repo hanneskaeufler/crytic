@@ -1,9 +1,10 @@
 require "../mutant/mutant"
+require "../source"
+require "./adapt_local_require_paths_to_current_working_dir"
 require "./diff"
 require "./inject_mutated_subject_into_specs"
-require "./adapt_local_require_paths_to_current_working_dir"
 require "./result"
-require "../source"
+require "compiler/crystal/syntax/*"
 
 module Crytic::Mutation
   abstract class ProcessRunner
@@ -23,7 +24,7 @@ module Crytic::Mutation
     def run
       subject_source = File.read(@subject_file_path)
       mutated_source = Source.new(subject_source, @mutant).mutated_source
-      source_diff = Diff.new(subject_source, mutated_source).to_s
+      source_diff = Diff.new(Crystal::Parser.parse(subject_source).to_s, mutated_source).to_s
 
       Result.new(
         is_covered: run_process(mutated_source) != 0,
