@@ -11,6 +11,7 @@ jobs:
       - run: ./bin/code-style
       - run: ./bin/test
       - run: ./bin/test-coverage
+      - run: ./bin/test-mutations
 
 workflows:
   version: 2

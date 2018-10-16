@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+./bin/crytic --subject src/crytic/io_reporter.cr spec/io_reporter_spec.cr
