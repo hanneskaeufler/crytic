@@ -1,0 +1,19 @@
+version: 2
+
+jobs:
+  test:
+    docker:
+      - image: crystallang/crystal:0.25.1
+        steps:
+          - checkout
+          - run: shards
+          - run: ./bin/static-analysis
+          - run: ./bin/code-style
+          - run: ./bin/test
+          - run: ./bin/code-coverage
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - test

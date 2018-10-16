@@ -4,6 +4,8 @@ require "file_utils"
 
 module Crytic
   class InjectMutatedSubjectIntoSpecs < Crystal::Visitor
+    STR_CAPACITY = 2 ** 20
+
     def self.reset
       @@already_covered_file_name = Set(String).new
       @@file_list = [] of InjectMutatedSubjectIntoSpecs
@@ -86,7 +88,7 @@ module Crytic
         file_list = @@require_expanders[expansion_id]
 
         if file_list.any?
-          io = String::Builder.new(capacity: (2 ** 20))
+          io = String::Builder.new(capacity: STR_CAPACITY)
           file_list.each do |file|
             io << "#" << " require of `" << file.path
             io << "` from `" << self.path << ":#{file.required_at}" << "`" << "\n"
