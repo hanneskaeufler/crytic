@@ -10,7 +10,7 @@ jobs:
       - run: ./bin/static-analysis
       - run: ./bin/code-style
       - run: ./bin/test
-      - run: ./bin/code-coverage
+      - run: ./bin/test-coverage
 
 workflows:
   version: 2
