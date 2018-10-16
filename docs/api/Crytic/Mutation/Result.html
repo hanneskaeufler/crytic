@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.25.0">
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../../";
+</script>
+
+  <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
+  <title>Crytic::Mutation::Result - github.com/hanneskaeufler/crytic</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="../../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic" data-name="crytic">
+      <a href="../../Crytic.html">Crytic</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/AdaptLocalRequirePathsToCurrentWorkingDir" data-name="crytic::adaptlocalrequirepathstocurrentworkingdir">
+      <a href="../../Crytic/AdaptLocalRequirePathsToCurrentWorkingDir.html">AdaptLocalRequirePathsToCurrentWorkingDir</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Generator" data-name="crytic::generator">
+      <a href="../../Crytic/Generator.html">Generator</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/InjectMutatedSubjectIntoSpecs" data-name="crytic::injectmutatedsubjectintospecs">
+      <a href="../../Crytic/InjectMutatedSubjectIntoSpecs.html">InjectMutatedSubjectIntoSpecs</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/IoReporter" data-name="crytic::ioreporter">
+      <a href="../../Crytic/IoReporter.html">IoReporter</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
+      <a href="../../Crytic/Mutant.html">Mutant</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlip" data-name="crytic::mutant::boolliteralflip">
+      <a href="../../Crytic/Mutant/BoolLiteralFlip.html">BoolLiteralFlip</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlipPossibilities" data-name="crytic::mutant::boolliteralflippossibilities">
+      <a href="../../Crytic/Mutant/BoolLiteralFlipPossibilities.html">BoolLiteralFlipPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/ConditionFlip" data-name="crytic::mutant::conditionflip">
+      <a href="../../Crytic/Mutant/ConditionFlip.html">ConditionFlip</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/ConditionFlipPossibilities" data-name="crytic::mutant::conditionflippossibilities">
+      <a href="../../Crytic/Mutant/ConditionFlipPossibilities.html">ConditionFlipPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/Mutant" data-name="crytic::mutant::mutant">
+      <a href="../../Crytic/Mutant/Mutant.html">Mutant</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChange" data-name="crytic::mutant::numberliteralchange">
+      <a href="../../Crytic/Mutant/NumberLiteralChange.html">NumberLiteralChange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChangePossibilities" data-name="crytic::mutant::numberliteralchangepossibilities">
+      <a href="../../Crytic/Mutant/NumberLiteralChangePossibilities.html">NumberLiteralChangePossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralSignFlip" data-name="crytic::mutant::numberliteralsignflip">
+      <a href="../../Crytic/Mutant/NumberLiteralSignFlip.html">NumberLiteralSignFlip</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralSignFlipPossibilities" data-name="crytic::mutant::numberliteralsignflippossibilities">
+      <a href="../../Crytic/Mutant/NumberLiteralSignFlipPossibilities.html">NumberLiteralSignFlipPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/Possibilities" data-name="crytic::mutant::possibilities">
+      <a href="../../Crytic/Mutant/Possibilities.html">Possibilities</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
+      <a href="../../Crytic/Mutation.html">Mutation</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Diff" data-name="crytic::mutation::diff">
+      <a href="../../Crytic/Mutation/Diff.html">Diff</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
+      <a href="../../Crytic/Mutation/Mutation.html">Mutation</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/NoMutation" data-name="crytic::mutation::nomutation">
+      <a href="../../Crytic/Mutation/NoMutation.html">NoMutation</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/OriginalResult" data-name="crytic::mutation::originalresult">
+      <a href="../../Crytic/Mutation/OriginalResult.html">OriginalResult</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/ProcessProcessRunner" data-name="crytic::mutation::processprocessrunner">
+      <a href="../../Crytic/Mutation/ProcessProcessRunner.html">ProcessProcessRunner</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/ProcessRunner" data-name="crytic::mutation::processrunner">
+      <a href="../../Crytic/Mutation/ProcessRunner.html">ProcessRunner</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Result" data-name="crytic::mutation::result">
+      <a href="../../Crytic/Mutation/Result.html">Result</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
+      <a href="../../Crytic/Runner.html">Runner</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Source" data-name="crytic::source">
+      <a href="../../Crytic/Source.html">Source</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">struct</span> Crytic::Mutation::Result
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutation/Result.html">Crytic::Mutation::Result</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/result.cr#L4" target="_blank">crytic/mutation/result.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28is_covered%3ABool%2Cmutant%3AMutant%3A%3AMutant%2Cdiff%3AString%29-class-method" class="signature"><strong>.new</strong>(is_covered : Bool, mutant : Mutant::Mutant, diff : String)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#copy_with%28is_covered_is_covered%3D%40is_covered%2Cmutant_mutant%3D%40mutant%2Cdiff_diff%3D%40diff%29-instance-method" class="signature"><strong>#copy_with</strong>(is_covered _is_covered = @is_covered, mutant _mutant = @mutant, diff _diff = @diff)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#diff%3AString-instance-method" class="signature"><strong>#diff</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#is_covered%3ABool-instance-method" class="signature"><strong>#is_covered</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mutant%3AMutant%3A%3AMutant-instance-method" class="signature"><strong>#mutant</strong> : Mutant::Mutant</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mutant_name-instance-method" class="signature"><strong>#mutant_name</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(is_covered:Bool,mutant:Mutant::Mutant,diff:String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(is_covered : Bool, mutant : <a href="../../Crytic/Mutant/Mutant.html">Mutant::Mutant</a>, diff : String)
+
+        <a class="method-permalink" href="#new%28is_covered%3ABool%2Cmutant%3AMutant%3A%3AMutant%2Cdiff%3AString%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/result.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="clone-instance-method">
+      <div class="signature">
+        
+        def <strong>clone</strong>
+
+        <a class="method-permalink" href="#clone-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/result.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="copy_with(is_covered_is_covered=@is_covered,mutant_mutant=@mutant,diff_diff=@diff)-instance-method">
+      <div class="signature">
+        
+        def <strong>copy_with</strong>(is_covered _is_covered = @is_covered, mutant _mutant = @mutant, diff _diff = @diff)
+
+        <a class="method-permalink" href="#copy_with%28is_covered_is_covered%3D%40is_covered%2Cmutant_mutant%3D%40mutant%2Cdiff_diff%3D%40diff%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/result.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="diff:String-instance-method">
+      <div class="signature">
+        
+        def <strong>diff</strong> : String
+
+        <a class="method-permalink" href="#diff%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="is_covered:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>is_covered</strong> : Bool
+
+        <a class="method-permalink" href="#is_covered%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mutant:Mutant::Mutant-instance-method">
+      <div class="signature">
+        
+        def <strong>mutant</strong> : <a href="../../Crytic/Mutant/Mutant.html">Mutant::Mutant</a>
+
+        <a class="method-permalink" href="#mutant%3AMutant%3A%3AMutant-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mutant_name-instance-method">
+      <div class="signature">
+        
+        def <strong>mutant_name</strong>
+
+        <a class="method-permalink" href="#mutant_name-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/result.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

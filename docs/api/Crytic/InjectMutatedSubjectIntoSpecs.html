@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.25.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
+  <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
+  <title>Crytic::InjectMutatedSubjectIntoSpecs - github.com/hanneskaeufler/crytic</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic" data-name="crytic">
+      <a href="../Crytic.html">Crytic</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/AdaptLocalRequirePathsToCurrentWorkingDir" data-name="crytic::adaptlocalrequirepathstocurrentworkingdir">
+      <a href="../Crytic/AdaptLocalRequirePathsToCurrentWorkingDir.html">AdaptLocalRequirePathsToCurrentWorkingDir</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Generator" data-name="crytic::generator">
+      <a href="../Crytic/Generator.html">Generator</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/InjectMutatedSubjectIntoSpecs" data-name="crytic::injectmutatedsubjectintospecs">
+      <a href="../Crytic/InjectMutatedSubjectIntoSpecs.html">InjectMutatedSubjectIntoSpecs</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/IoReporter" data-name="crytic::ioreporter">
+      <a href="../Crytic/IoReporter.html">IoReporter</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
+      <a href="../Crytic/Mutant.html">Mutant</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlip" data-name="crytic::mutant::boolliteralflip">
+      <a href="../Crytic/Mutant/BoolLiteralFlip.html">BoolLiteralFlip</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlipPossibilities" data-name="crytic::mutant::boolliteralflippossibilities">
+      <a href="../Crytic/Mutant/BoolLiteralFlipPossibilities.html">BoolLiteralFlipPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/ConditionFlip" data-name="crytic::mutant::conditionflip">
+      <a href="../Crytic/Mutant/ConditionFlip.html">ConditionFlip</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/ConditionFlipPossibilities" data-name="crytic::mutant::conditionflippossibilities">
+      <a href="../Crytic/Mutant/ConditionFlipPossibilities.html">ConditionFlipPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/Mutant" data-name="crytic::mutant::mutant">
+      <a href="../Crytic/Mutant/Mutant.html">Mutant</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChange" data-name="crytic::mutant::numberliteralchange">
+      <a href="../Crytic/Mutant/NumberLiteralChange.html">NumberLiteralChange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChangePossibilities" data-name="crytic::mutant::numberliteralchangepossibilities">
+      <a href="../Crytic/Mutant/NumberLiteralChangePossibilities.html">NumberLiteralChangePossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralSignFlip" data-name="crytic::mutant::numberliteralsignflip">
+      <a href="../Crytic/Mutant/NumberLiteralSignFlip.html">NumberLiteralSignFlip</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralSignFlipPossibilities" data-name="crytic::mutant::numberliteralsignflippossibilities">
+      <a href="../Crytic/Mutant/NumberLiteralSignFlipPossibilities.html">NumberLiteralSignFlipPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/Possibilities" data-name="crytic::mutant::possibilities">
+      <a href="../Crytic/Mutant/Possibilities.html">Possibilities</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
+      <a href="../Crytic/Mutation.html">Mutation</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Diff" data-name="crytic::mutation::diff">
+      <a href="../Crytic/Mutation/Diff.html">Diff</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
+      <a href="../Crytic/Mutation/Mutation.html">Mutation</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/NoMutation" data-name="crytic::mutation::nomutation">
+      <a href="../Crytic/Mutation/NoMutation.html">NoMutation</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/OriginalResult" data-name="crytic::mutation::originalresult">
+      <a href="../Crytic/Mutation/OriginalResult.html">OriginalResult</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/ProcessProcessRunner" data-name="crytic::mutation::processprocessrunner">
+      <a href="../Crytic/Mutation/ProcessProcessRunner.html">ProcessProcessRunner</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/ProcessRunner" data-name="crytic::mutation::processrunner">
+      <a href="../Crytic/Mutation/ProcessRunner.html">ProcessRunner</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Result" data-name="crytic::mutation::result">
+      <a href="../Crytic/Mutation/Result.html">Result</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
+      <a href="../Crytic/Runner.html">Runner</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Source" data-name="crytic::source">
+      <a href="../Crytic/Source.html">Source</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Crytic::InjectMutatedSubjectIntoSpecs
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Crytic/InjectMutatedSubjectIntoSpecs.html">Crytic::InjectMutatedSubjectIntoSpecs</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L6" target="_blank">crytic/mutation/inject_mutated_subject_into_specs.cr</a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="STR_CAPACITY">
+        <strong>STR_CAPACITY</strong> = <code><span class="n">2</span> <span class="o">**</span> <span class="n">20</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28path%2Csource%2Csubject_path%3AString%2Cmutated_subject_source%3AString%2Crequired_at%3D0%29-class-method" class="signature"><strong>.new</strong>(path, source, subject_path : String, mutated_subject_source : String, required_at = <span class="n">0</span>)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#already_covered_file_name-class-method" class="signature"><strong>.already_covered_file_name</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#cover_file%28file%2C%26block%29-class-method" class="signature"><strong>.cover_file</strong>(file, &block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#file_list-class-method" class="signature"><strong>.file_list</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#outputter%3AString-class-method" class="signature"><strong>.outputter</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#outputter%3D%28outputter%3AString%29-class-method" class="signature"><strong>.outputter=</strong>(outputter : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#project_path-class-method" class="signature"><strong>.project_path</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#project_path%3F-class-method" class="signature"><strong>.project_path?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#register_file%28f%29-class-method" class="signature"><strong>.register_file</strong>(f)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#relative_path_to_project%28path%29-class-method" class="signature"><strong>.relative_path_to_project</strong>(path)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#require_expanders-class-method" class="signature"><strong>.require_expanders</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#reset-class-method" class="signature"><strong>.reset</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#use_require%3AString-class-method" class="signature"><strong>.use_require</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#use_require%3D%28use_require%3AString%29-class-method" class="signature"><strong>.use_require=</strong>(use_require : String)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#already_covered_locations%3ASet%28Crystal%3A%3ALocation%3F%29-instance-method" class="signature"><strong>#already_covered_locations</strong> : Set(Crystal::Location?)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#astree-instance-method" class="signature"><strong>#astree</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#astree%3F%3ACrystal%3A%3AASTNode%3F-instance-method" class="signature"><strong>#astree?</strong> : Crystal::ASTNode?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#enriched_source-instance-method" class="signature"><strong>#enriched_source</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#enriched_source%3F%3AString%3F-instance-method" class="signature"><strong>#enriched_source?</strong> : String?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#id%3AInt32-instance-method" class="signature"><strong>#id</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#lines%3AArray%28Int32%29-instance-method" class="signature"><strong>#lines</strong> : Array(Int32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#md5_signature%3AString-instance-method" class="signature"><strong>#md5_signature</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#path%3AString-instance-method" class="signature"><strong>#path</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#process-instance-method" class="signature"><strong>#process</strong></a>
+        
+          <div class="summary"><p>Inject in AST tree if required.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#required_at%3AInt32-instance-method" class="signature"><strong>#required_at</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#source%3AString-instance-method" class="signature"><strong>#source</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_covered_source-instance-method" class="signature"><strong>#to_covered_source</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#visit%28node%3ACrystal%3A%3ARequire%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::Require)</a>
+        
+          <div class="summary"><p>Management of required file is nasty and should be improved Since I've hard time to replace node on visit, I change the file argument to a number linked to an array of files Then on finalization, we replace each require "xxx" by the proper file.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::ASTNode)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(path,source,subject_path:String,mutated_subject_source:String,required_at=0)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(path, source, subject_path : String, mutated_subject_source : String, required_at = <span class="n">0</span>)
+
+        <a class="method-permalink" href="#new%28path%2Csource%2Csubject_path%3AString%2Cmutated_subject_source%3AString%2Crequired_at%3D0%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L54" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="already_covered_file_name-class-method">
+      <div class="signature">
+        
+        def self.<strong>already_covered_file_name</strong>
+
+        <a class="method-permalink" href="#already_covered_file_name-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L17" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="cover_file(file,&amp;block)-class-method">
+      <div class="signature">
+        
+        def self.<strong>cover_file</strong>(file, &block)
+
+        <a class="method-permalink" href="#cover_file%28file%2C%26block%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L47" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="file_list-class-method">
+      <div class="signature">
+        
+        def self.<strong>file_list</strong>
+
+        <a class="method-permalink" href="#file_list-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="outputter:String-class-method">
+      <div class="signature">
+        
+        def self.<strong>outputter</strong> : String
+
+        <a class="method-permalink" href="#outputter%3AString-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L21" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="outputter=(outputter:String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>outputter=</strong>(outputter : String)
+
+        <a class="method-permalink" href="#outputter%3D%28outputter%3AString%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L21" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="project_path-class-method">
+      <div class="signature">
+        
+        def self.<strong>project_path</strong>
+
+        <a class="method-permalink" href="#project_path-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="project_path?-class-method">
+      <div class="signature">
+        
+        def self.<strong>project_path?</strong>
+
+        <a class="method-permalink" href="#project_path%3F-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="register_file(f)-class-method">
+      <div class="signature">
+        
+        def self.<strong>register_file</strong>(f)
+
+        <a class="method-permalink" href="#register_file%28f%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L36" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="relative_path_to_project(path)-class-method">
+      <div class="signature">
+        
+        def self.<strong>relative_path_to_project</strong>(path)
+
+        <a class="method-permalink" href="#relative_path_to_project%28path%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="require_expanders-class-method">
+      <div class="signature">
+        
+        def self.<strong>require_expanders</strong>
+
+        <a class="method-permalink" href="#require_expanders-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="reset-class-method">
+      <div class="signature">
+        
+        def self.<strong>reset</strong>
+
+        <a class="method-permalink" href="#reset-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="use_require:String-class-method">
+      <div class="signature">
+        
+        def self.<strong>use_require</strong> : String
+
+        <a class="method-permalink" href="#use_require%3AString-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="use_require=(use_require:String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>use_require=</strong>(use_require : String)
+
+        <a class="method-permalink" href="#use_require%3D%28use_require%3AString%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="already_covered_locations:Set(Crystal::Location?)-instance-method">
+      <div class="signature">
+        
+        def <strong>already_covered_locations</strong> : Set(Crystal::Location?)
+
+        <a class="method-permalink" href="#already_covered_locations%3ASet%28Crystal%3A%3ALocation%3F%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L30" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="astree-instance-method">
+      <div class="signature">
+        
+        def <strong>astree</strong>
+
+        <a class="method-permalink" href="#astree-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="astree?:Crystal::ASTNode?-instance-method">
+      <div class="signature">
+        
+        def <strong>astree?</strong> : Crystal::ASTNode?
+
+        <a class="method-permalink" href="#astree%3F%3ACrystal%3A%3AASTNode%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="enriched_source-instance-method">
+      <div class="signature">
+        
+        def <strong>enriched_source</strong>
+
+        <a class="method-permalink" href="#enriched_source-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="enriched_source?:String?-instance-method">
+      <div class="signature">
+        
+        def <strong>enriched_source?</strong> : String?
+
+        <a class="method-permalink" href="#enriched_source%3F%3AString%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="id:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>id</strong> : Int32
+
+        <a class="method-permalink" href="#id%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L25" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="lines:Array(Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>lines</strong> : Array(Int32)
+
+        <a class="method-permalink" href="#lines%3AArray%28Int32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="md5_signature:String-instance-method">
+      <div class="signature">
+        
+        def <strong>md5_signature</strong> : String
+
+        <a class="method-permalink" href="#md5_signature%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="path:String-instance-method">
+      <div class="signature">
+        
+        def <strong>path</strong> : String
+
+        <a class="method-permalink" href="#path%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L26" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="process-instance-method">
+      <div class="signature">
+        
+        def <strong>process</strong>
+
+        <a class="method-permalink" href="#process-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Inject in AST tree if required.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L61" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="required_at:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>required_at</strong> : Int32
+
+        <a class="method-permalink" href="#required_at%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L34" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="source:String-instance-method">
+      <div class="signature">
+        
+        def <strong>source</strong> : String
+
+        <a class="method-permalink" href="#source%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L32" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_covered_source-instance-method">
+      <div class="signature">
+        
+        def <strong>to_covered_source</strong>
+
+        <a class="method-permalink" href="#to_covered_source-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L68" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="visit(node:Crystal::Require)-instance-method">
+      <div class="signature">
+        
+        def <strong>visit</strong>(node : Crystal::Require)
+
+        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3ARequire%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Management of required file is nasty and should be improved
+Since I've hard time to replace node on visit,
+I change the file argument to a number linked to an array of files
+Then on finalization, we replace each require "xxx" by the proper file.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L108" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="visit(node:Crystal::ASTNode)-instance-method">
+      <div class="signature">
+        
+        def <strong>visit</strong>(node : Crystal::ASTNode)
+
+        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/eb9c52377a4a990479d416bf0543ae3e555b407e/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L162" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
