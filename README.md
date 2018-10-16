@@ -1,37 +1,40 @@
 # crytic
 
-TODO: Write a description here
+Crytic, pronounced /ˈkrɪtɪk/, is a mutation testing framework for the crystal programming language. Mutation testing is a type of software testing where specific statements in the code are changed to determine if test cases find this defect.
+
+> Crytic is in a very early state of development. It is not very clever, making it slow as well.
 
 ## Installation
 
 Add this to your application's `shard.yml`:
 
 ```yaml
-dependencies:
+development_dependencies:
   crytic:
-    github: your-github-user/crytic
+    github: hanneskaeufler/crytic
 ```
 
 ## Usage
 
-```crystal
-require "crytic"
-```
+Crytic will only mutate statements in one file, let's call that our subject. You must also provide a list of test files to be executed in order to find the defects.
 
-TODO: Write usage instructions here
+```shell
+./bin/crytic --subject src/blog/pages/archive.cr spec/blog_spec.cr
+```
 
 ## Development
 
-TODO: Write development instructions here
+TODO
 
 ## Contributing
 
 1. Fork it (<https://github.com/your-github-user/crytic/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+3. Run tests locally with `crystal spec`
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create a new Pull Request
 
 ## Contributors
 
-- [your-github-user](https://github.com/your-github-user) Hannes Kaeufler - creator, maintainer
+- [hanneskaeufler](https://github.com/hanneskaeufler) Hannes Kaeufler - creator, maintainer
