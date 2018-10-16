@@ -15,7 +15,7 @@ dependencies:
 
 targets:
   crytic:
-    main: src/crytic/crytic.cr
+    main: src/crytic.cr
 
 scripts:
   postinstall: make bin
