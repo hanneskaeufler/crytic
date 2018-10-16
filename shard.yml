@@ -13,6 +13,10 @@ dependencies:
     github: hanneskaeufler/crystal-diff
     branch: oprypin/unified-diff
 
+targets:
+  crytic:
+    main: src/crytic/crytic.cr
+
 scripts:
   postinstall: make bin
 
