@@ -1,5 +1,5 @@
 name: crytic
-version: 0.1.0
+version: 1.0.0
 
 authors:
   - Hannes Käufler <hannes.kaeufler@gmail.com>
@@ -12,6 +12,9 @@ dependencies:
   diff:
     github: hanneskaeufler/crystal-diff
     branch: oprypin/unified-diff
+
+scripts:
+  postinstall: make bin
 
 development_dependencies:
   ameba:
