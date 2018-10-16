@@ -25,5 +25,3 @@ development_dependencies:
     github: veelenga/ameba
   coverage:
     github: anykeyh/crystal-coverage
-  crytic:
-    github: hanneskaeufler/crytic
