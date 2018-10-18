@@ -9,7 +9,7 @@ module Crytic
         filename: nil,
         line_number: 1,
         column_number: 4)))
-      ast.to_s.should eq "1\n21\n"
+      ast.to_s.should eq "1\n12\n"
     end
 
     it "only applies to location" do
