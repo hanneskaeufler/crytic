@@ -6,12 +6,15 @@ private def fake_mutant
   Crytic::Mutant::NumberLiteralChange.at(Crystal::Location.new(filename: nil, line_number: 0, column_number: 0))
 end
 
+private def original
+  Process::Status.new(0)
+end
+
 module Crytic
   describe IoReporter do
     describe "#report" do
       it "prints the original suites status" do
         io = IO::Memory.new
-        original = Process::Status.new(0)
         IoReporter.new(io).report(original, [] of Mutation::Result)
         io.to_s.should contain("Original suite: ✅\n")
       end
@@ -29,7 +32,6 @@ module Crytic
 
       it "prints failing mutants with count and diffs" do
         io = IO::Memory.new
-        original = Process::Status.new(0)
         results = [
           Mutation::Result.new(is_covered: false, did_error: false, mutant: fake_mutant, diff: "diff"),
           Mutation::Result.new(is_covered: true, did_error: false, mutant: fake_mutant, diff: "nope"),
@@ -42,7 +44,6 @@ module Crytic
 
       it "prints errored mutants" do
         io = IO::Memory.new
-        original = Process::Status.new(0)
         results = [
           Mutation::Result.new(is_covered: false, did_error: true, mutant: fake_mutant, diff: "diff"),
         ]
