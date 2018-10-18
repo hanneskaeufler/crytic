@@ -16,6 +16,8 @@ development_dependencies:
     github: hanneskaeufler/crytic
 ```
 
+After `shards install`, this will place the `crytic` executable into the `bin/` folder inside your project.
+
 ## Usage
 
 Crytic will only mutate statements in one file, let's call that our subject. You must also provide a list of test files to be executed in order to find the defects.
@@ -30,7 +32,7 @@ TODO
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/crytic/fork>)
+1. Fork it (<https://github.com/hanneskaeufler/crytic/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Run tests locally with `crystal spec`
 4. Commit your changes (`git commit -am 'Add some feature'`)
