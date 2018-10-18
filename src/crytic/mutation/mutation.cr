@@ -1,5 +1,6 @@
 require "../mutant/mutant"
 require "../process_runner"
+require "../process_process_runner"
 require "../source"
 require "./adapt_local_require_paths_to_current_working_dir"
 require "./diff"
@@ -11,7 +12,7 @@ module Crytic::Mutation
   # Represents a single mutation to a single source file
   class Mutation
     property process_runner
-    @process_runner : ProcessRunner
+    @process_runner : Crytic::ProcessRunner
 
     def run
       subject_source = File.read(@subject_file_path)
