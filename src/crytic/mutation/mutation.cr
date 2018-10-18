@@ -21,6 +21,7 @@ module Crytic::Mutation
 
       Result.new(
         is_covered: run_process(mutated_source) != 0,
+        did_error: (/Finished/ =~ @io.to_s) == nil,
         mutant: @mutant,
         diff: source_diff)
     end

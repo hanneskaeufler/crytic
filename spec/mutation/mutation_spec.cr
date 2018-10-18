@@ -139,6 +139,25 @@ module Crytic::Mutation
 
         CODE
       end
+
+      it "considers errors/failed to compile as not covered" do
+        mutant = Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
+          filename: nil,
+          line_number: 2,
+          column_number: 6,
+        ))
+        mutation = Mutation.with(
+          mutant,
+          "./fixtures/simple/bar.cr",
+          ["./fixtures/simple/bar_with_helper_spec.cr"])
+
+        fake = FakeProcessRunner.new
+        fake.exit_code = 1
+        fake.fill_output_with("compiler error/ no specs have run")
+        mutation.process_runner = fake
+
+        mutation.run.did_error.should eq true
+      end
     end
   end
 end

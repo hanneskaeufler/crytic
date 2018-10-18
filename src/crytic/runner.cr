@@ -40,7 +40,7 @@ module Crytic
         .new(@io)
         .report(original_result, results)
 
-      return results.map(&.is_covered).all?
+      return results.map(&.successful?).all?
     end
 
     private def validate_args!(source, specs)

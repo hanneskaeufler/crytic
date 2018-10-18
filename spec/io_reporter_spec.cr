@@ -20,8 +20,8 @@ module Crytic
         io = IO::Memory.new
         original = Process::Status.new(0)
         results = [
-          Mutation::Result.new(is_covered: true, mutant: fake_mutant, diff: ""),
-          Mutation::Result.new(is_covered: true, mutant: fake_mutant, diff: ""),
+          Mutation::Result.new(is_covered: true, did_error: false, mutant: fake_mutant, diff: ""),
+          Mutation::Result.new(is_covered: true, did_error: false, mutant: fake_mutant, diff: ""),
         ]
         IoReporter.new(io).report(original, results)
         io.to_s.should contain("✅ NumberLiteralChange (x2)")
@@ -31,13 +31,25 @@ module Crytic
         io = IO::Memory.new
         original = Process::Status.new(0)
         results = [
-          Mutation::Result.new(is_covered: false, mutant: fake_mutant, diff: "diff"),
-          Mutation::Result.new(is_covered: true, mutant: fake_mutant, diff: "nope"),
+          Mutation::Result.new(is_covered: false, did_error: false, mutant: fake_mutant, diff: "diff"),
+          Mutation::Result.new(is_covered: true, did_error: false, mutant: fake_mutant, diff: "nope"),
         ]
         IoReporter.new(io).report(original, results)
         io.to_s.should contain("❌ NumberLiteralChange (x2)")
         io.to_s.should contain("diff")
         io.to_s.should_not contain("nope")
+      end
+
+      it "prints errored mutants" do
+        io = IO::Memory.new
+        original = Process::Status.new(0)
+        results = [
+          Mutation::Result.new(is_covered: false, did_error: true, mutant: fake_mutant, diff: "diff"),
+        ]
+        IoReporter.new(io).report(original, results)
+        io.to_s.should contain("❌ NumberLiteralChange")
+        io.to_s.should contain("The following change broke the code")
+        io.to_s.should contain("diff")
       end
     end
   end

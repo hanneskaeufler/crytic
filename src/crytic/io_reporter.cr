@@ -1,6 +1,7 @@
 require "./mutation/mutation"
 
 module Crytic
+  # Reports crytics output into an IO. Useful for e.g. the console output
   class IoReporter
     INDENT = "    "
 
@@ -14,13 +15,18 @@ module Crytic
         .group_by(&.mutant_name)
         .map do |mutant_name, results_per_mutant|
           @io << INDENT
-          all_mutants_covered = results_per_mutant.map(&.is_covered).all?
+          all_mutants_successful = results_per_mutant.map(&.successful?).all?
 
-          @io << (all_mutants_covered ? "✅" : "❌")
+          @io << (all_mutants_successful ? "✅" : "❌")
           @io << " #{mutant_name} (x#{results_per_mutant.size})"
 
           results_per_mutant.each do |result|
-            unless result.is_covered
+            if result.did_error
+              @io << "\n#{INDENT + INDENT}The following change broke the code:\n"
+              @io << "#{INDENT + INDENT + INDENT}"
+              @io << result.diff.lines.join("\n#{INDENT + INDENT + INDENT}")
+              @io << "\n"
+            elsif !result.is_covered
               @io << "\n#{INDENT + INDENT}The following change didn't fail the test-suite:\n"
               @io << "#{INDENT + INDENT + INDENT}"
               @io << result.diff.lines.join("\n#{INDENT + INDENT + INDENT}")

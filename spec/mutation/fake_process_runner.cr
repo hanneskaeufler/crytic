@@ -6,6 +6,7 @@ module Crytic
     getter args
     property exit_code
     @args : String = ""
+    @output_io = IO::Memory.new
 
     def initialize
       @exit_code = 0
@@ -14,7 +15,12 @@ module Crytic
     def run(cmd : String, args : Array(String), output, error)
       @cmd = cmd
       @args = args.join(" ")
+      output << @output_io.to_s
       @exit_code
+    end
+
+    def fill_output_with(text : String)
+      @output_io << text
     end
   end
 end
