@@ -1,4 +1,5 @@
 require "../mutant/mutant"
+require "../process_runner"
 require "../source"
 require "./adapt_local_require_paths_to_current_working_dir"
 require "./diff"
@@ -7,16 +8,7 @@ require "./result"
 require "compiler/crystal/syntax/*"
 
 module Crytic::Mutation
-  abstract class ProcessRunner
-    abstract def run(cmd : String, args, output, error)
-  end
-
-  class ProcessProcessRunner < ProcessRunner
-    def run(cmd, args, output, error)
-      Process.run(cmd, args, output: output, error: error).exit_code
-    end
-  end
-
+  # Represents a single mutation to a single source file
   class Mutation
     property process_runner
     @process_runner : ProcessRunner
