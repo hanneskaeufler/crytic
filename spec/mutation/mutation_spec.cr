@@ -123,6 +123,47 @@ module Crytic::Mutation
         CODE
       end
 
+      it "only requires/includes the subject once for multiple spec files" do
+        mutation = Mutation.with(
+          mutant,
+          "./fixtures/simple/bar.cr",
+          ["./fixtures/simple/bar_with_helper_spec.cr", "./fixtures/simple/bar_additional_spec.cr"])
+
+        fake = FakeProcessRunner.new
+        mutation.process_runner = fake
+
+        mutation.run
+
+        fake.args.should eq <<-CODE
+        eval # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr:1`
+        require "http"
+        # require of `fixtures/simple/bar.cr` from `fixtures/simple/spec_helper.cr:2`
+        def bar
+          if false
+            2
+          else
+            3
+          end
+        end
+
+        require "spec"
+        describe("bar") do
+          it("works") do
+            bar.should(eq(2))
+          end
+        end
+
+
+        require "spec"
+        describe("bar") do
+          it("works") do
+            2.should(eq(2))
+          end
+        end
+
+        CODE
+      end
+
       it "considers errors/failed to compile as not covered" do
         mutation = Mutation.with(
           mutant,
