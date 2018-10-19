@@ -3,6 +3,14 @@ require "../../src/crytic/mutation/mutation"
 require "./fake_process_runner"
 require "spec"
 
+private def mutant
+  mutant = Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
+    filename: nil,
+    line_number: 2,
+    column_number: 6,
+  ))
+end
+
 module Crytic::Mutation
   describe Mutation do
     Spec.before_each do
@@ -11,11 +19,6 @@ module Crytic::Mutation
 
     describe "#run" do
       it "evals the mutated code in a separate process" do
-        mutant = Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
-          filename: nil,
-          line_number: 2,
-          column_number: 6,
-        ))
         mutation = Mutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
@@ -46,11 +49,6 @@ module Crytic::Mutation
       end
 
       it "considers a mutant covered if the process fails" do
-        mutant = Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
-          filename: nil,
-          line_number: 2,
-          column_number: 6,
-        ))
         mutation = Mutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
@@ -64,11 +62,6 @@ module Crytic::Mutation
       end
 
       it "considers a mutant uncovered if the process succeeds" do
-        mutant = Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
-          filename: nil,
-          line_number: 2,
-          column_number: 6,
-        ))
         mutation = Mutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
@@ -82,11 +75,6 @@ module Crytic::Mutation
       end
 
       it "returns a colored diff of the changes" do
-        mutant = Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
-          filename: nil,
-          line_number: 2,
-          column_number: 6,
-        ))
         mutation = Mutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
@@ -102,11 +90,6 @@ module Crytic::Mutation
       end
 
       it "resolves nested requires" do
-        mutant = Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
-          filename: nil,
-          line_number: 2,
-          column_number: 6,
-        ))
         mutation = Mutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
@@ -141,11 +124,6 @@ module Crytic::Mutation
       end
 
       it "considers errors/failed to compile as not covered" do
-        mutant = Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
-          filename: nil,
-          line_number: 2,
-          column_number: 6,
-        ))
         mutation = Mutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
