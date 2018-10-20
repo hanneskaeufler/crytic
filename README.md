@@ -6,6 +6,10 @@ Crytic, pronounced /ˈkrɪtɪk/, is a mutation testing framework for the crystal
 
 > Crytic is in a very early state of development. It is not very clever, making it slow as well.
 
+### Blog posts
+
+[Introducing crytic - mutation testing in crystal-lang](https://hannes.kaeufler.net/posts/introducing-crytic---mutation-testing-in-crystal-lang)
+
 ## Installation
 
 Add this to your application's `shard.yml`:
