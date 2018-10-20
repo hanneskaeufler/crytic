@@ -42,8 +42,8 @@ module Crytic
     def report_summary(results)
       @io << "\n\nFinished in #{Spec.to_human(elapsed_time)}:\n"
       summary = "#{results.size} mutations, "
-      summary += "#{results.count(&.is_covered)} covered, "
-      summary += "#{results.reject(&.is_covered).reject(&.did_error).size} uncovered, "
+      summary += "#{results.count(&.successful?)} covered, "
+      summary += "#{results.count { |result| !result.is_covered && !result.did_error }} uncovered, "
       summary += "#{results.count(&.did_error)} errored"
       summary += "\n"
       @io << summary.colorize(results.map(&.successful?).all? ? :green : :red).to_s
