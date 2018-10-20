@@ -14,6 +14,8 @@ module Crytic
       Mutant::BoolLiteralFlipPossibilities.new,
     ]
 
+    @io : IO
+
     def initialize(@io = IO::Memory.new)
     end
 
