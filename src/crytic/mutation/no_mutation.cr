@@ -1,4 +1,6 @@
-require "./mutation"
+require "../process_process_runner"
+require "../process_runner"
+require "./original_result"
 
 module Crytic::Mutation
   class NoMutation
@@ -21,6 +23,4 @@ module Crytic::Mutation
       @process_runner = ProcessProcessRunner.new
     end
   end
-
-  record OriginalResult, exit_code : Int32, output : String
 end

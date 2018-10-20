@@ -20,7 +20,6 @@ OptionParser.parse! do |parser|
   end
 end
 
-io = STDOUT
-success = Crytic::Runner.new(io).run(subject_source, spec_files)
+success = Crytic::Runner.new.run(subject_source, spec_files)
 
 exit(success ? 0 : 1)

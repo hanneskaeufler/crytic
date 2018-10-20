@@ -14,9 +14,7 @@ module Crytic
       Mutant::BoolLiteralFlipPossibilities.new,
     ]
 
-    @io : IO
-
-    def initialize(@io = IO::Memory.new)
+    def initialize(@reporter = IoReporter.new(STDOUT))
     end
 
     def run(source : String, specs : Array(String)) : Bool
@@ -26,21 +24,20 @@ module Crytic
         .with(specs: specs)
         .run
 
-      if original_result.exit_code != 0
-        @io << "❌ Original test suite failed.\n"
-        @io << original_result.output
+      @reporter.report_original_result(original_result)
 
-        return false
-      end
+      return false if original_result.exit_code != 0
 
       results = Generator
         .new
         .mutations_for(source: source, specs: specs)
-        .map(&.run)
+        .map do |mutation|
+          result = mutation.run
+          @reporter.report_result(result)
+          result
+        end
 
-      IoReporter
-        .new(@io)
-        .report(original_result, results)
+      @reporter.report_summary(results)
 
       return results.map(&.successful?).all?
     end
