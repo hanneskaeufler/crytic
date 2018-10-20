@@ -4,7 +4,7 @@ require "./fake_process_runner"
 require "spec"
 
 private def mutant
-  mutant = Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
+  Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
     filename: nil,
     line_number: 2,
     column_number: 6,
