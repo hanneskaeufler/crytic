@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutant - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::ProcessProcessRunner - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -56,7 +56,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
       <a href="../Crytic/Mutant.html">Mutant</a>
       
         <ul>
@@ -151,7 +151,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/ProcessProcessRunner" data-name="crytic::processprocessrunner">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/ProcessProcessRunner" data-name="crytic::processprocessrunner">
       <a href="../Crytic/ProcessProcessRunner.html">ProcessProcessRunner</a>
       
     </li>
@@ -185,10 +185,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Crytic::Mutant
+  <span class="kind">class</span> Crytic::ProcessProcessRunner
 
 </h1>
 
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Crytic/ProcessProcessRunner.html">Crytic::ProcessProcessRunner</a></li><li class="superclass"><a href="../Crytic/ProcessRunner.html">Crytic::ProcessRunner</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -209,52 +211,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutant/mutant.cr#L3" target="_blank">crytic/mutant/mutant.cr</a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutant/bool_literal_flip.cr#L4" target="_blank">crytic/mutant/bool_literal_flip.cr</a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutant/possibilities.cr#L3" target="_blank">crytic/mutant/possibilities.cr</a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutant/bool_literal_flip_possibilities.cr#L4" target="_blank">crytic/mutant/bool_literal_flip_possibilities.cr</a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutant/condition_flip.cr#L4" target="_blank">crytic/mutant/condition_flip.cr</a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutant/condition_flip_possibilities.cr#L4" target="_blank">crytic/mutant/condition_flip_possibilities.cr</a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutant/number_literal_change.cr#L4" target="_blank">crytic/mutant/number_literal_change.cr</a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutant/number_literal_change_possibilities.cr#L4" target="_blank">crytic/mutant/number_literal_change_possibilities.cr</a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutant/number_literal_sign_flip.cr#L4" target="_blank">crytic/mutant/number_literal_sign_flip.cr</a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutant/number_literal_sign_flip_possibilities.cr#L3" target="_blank">crytic/mutant/number_literal_sign_flip_possibilities.cr</a>
+      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/process_process_runner.cr#L4" target="_blank">crytic/process_process_runner.cr</a>
     
     <br/>
   
@@ -266,6 +223,16 @@
 
 
 
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#run%28cmd%2Cargs%2Coutput%2Cerror%29-instance-method" class="signature"><strong>#run</strong>(cmd, args, output, error)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -273,12 +240,70 @@
 
 <div class="methods-inherited">
   
+    
+
+  <h3>Instance methods inherited from class <code><a href="../Crytic/ProcessRunner.html">Crytic::ProcessRunner</a></code></h3>
+  
+  
+    <a href="../Crytic/ProcessRunner.html#run%28cmd%3AString%2Cargs%2Coutput%2Cerror%29%3AInt32-instance-method" class="tooltip">
+      <span>run(cmd : String, args, output, error) : Int32</span>
+    run</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
 
 
 
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="run(cmd,args,output,error)-instance-method">
+      <div class="signature">
+        
+        def <strong>run</strong>(cmd, args, output, error)
+
+        <a class="method-permalink" href="#run%28cmd%2Cargs%2Coutput%2Cerror%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/process_process_runner.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
