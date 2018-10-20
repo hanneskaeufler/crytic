@@ -54,5 +54,41 @@ module Crytic
 
         CODE
     end
+
+    it "respects the crystal require order" do
+      spec_file = "./fixtures/require_order/blog_spec.cr"
+      subject_file = "./fixtures/require_order/blog.cr"
+      InjectMutatedSubjectIntoSpecs
+        .new(
+        path: spec_file,
+        source: File.read(spec_file),
+        subject_path: subject_file,
+        mutated_subject_source: File.read(subject_file))
+        .to_covered_source
+        .should eq <<-CODE
+        # require of `fixtures/require_order/blog.cr` from `fixtures/require_order/blog_spec.cr:1`
+        # require of `fixtures/require_order/pages/main_layout.cr` from `fixtures/require_order/blog.cr:1`
+        abstract class MainLayout
+        end# require of `fixtures/require_order/pages/blog/archive.cr` from `fixtures/require_order/blog.cr:1`
+        class Archive < MainLayout
+          def render
+            "welcome page"
+          end
+        end
+        class Blog
+          def render
+            "\#{Archive.new.render} \#{1}"
+          end
+        end
+
+        require "spec"
+        describe(Blog) do
+          it("renders") do
+            Blog.new.render.should(eq("welcome page 1"))
+          end
+        end
+
+        CODE
+    end
   end
 end
