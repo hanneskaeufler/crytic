@@ -41,4 +41,4 @@ TODO
 
 ## Contributors
 
-- [hanneskaeufler](https://github.com/hanneskaeufler) Hannes Kaeufler - creator, maintainer
+- [hanneskaeufler](https://github.com/hanneskaeufler) Hannes Käufler - creator, maintainer
