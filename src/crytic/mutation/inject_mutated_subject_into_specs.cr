@@ -110,30 +110,14 @@ module Crytic
       # we cover only files which are relative to current file
       if file[0] == '.'
         current_directory = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.dirname(@path))
-        puts "cry"
         new_files_to_load = find_in_path_relative_to_dir(file, current_directory)
         return if new_files_to_load.nil?
         new_files_to_load = [new_files_to_load] if new_files_to_load.is_a?(String)
-        pp new_files_to_load
-
-        files_to_load = File.expand_path(file, current_directory)
-
-        if files_to_load =~ /\*$/
-          # Case when we want to require a directory and subdirectories
-          if files_to_load.size > 1 && files_to_load[-2..-1] == "**"
-            files_to_load += "/*.cr"
-          else
-            files_to_load += ".cr"
-          end
-        elsif files_to_load !~ /\.cr$/
-          files_to_load = files_to_load + ".cr" # << Add the extension for the crystal file.
-        end
 
         idx = InjectMutatedSubjectIntoSpecs.require_expanders.size
         list_of_required_file = [] of InjectMutatedSubjectIntoSpecs
         InjectMutatedSubjectIntoSpecs.require_expanders << list_of_required_file
 
-        d = Dir[files_to_load].sort
         new_files_to_load.each do |file_load|
           next if file_load !~ /\.cr$/
 
@@ -169,6 +153,8 @@ module Crytic
       true
     end
 
+    # All of the below code is stolen from crystal itself
+    # https://github.com/crystal-lang/crystal/blob/master/src/compiler/crystal/crystal_path.cr
     private def find_in_path_relative_to_dir(filename, relative_to)
       if relative_to.is_a?(String)
         # Check if it's a wildcard.
