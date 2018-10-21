@@ -18,9 +18,6 @@ module Crytic
     class_getter! project_path : String
     class_getter require_expanders = [] of Array(InjectMutatedSubjectIntoSpecs)
 
-    class_property outputter : String = "Coverage::Outputter::HtmlReport"
-    class_property use_require : String = "coverage/runtime"
-
     getter! astree : Crystal::ASTNode
     getter id : Int32 = 0
     getter path : String
