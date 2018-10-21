@@ -8,7 +8,7 @@ private def fake_mutant
 end
 
 private def original(exit_code = 0, output = "output")
-  OriginalResult.new(exit_code: exit_code, output: output)
+  Crytic::Mutation::OriginalResult.new(exit_code: exit_code, output: output)
 end
 
 module Crytic
