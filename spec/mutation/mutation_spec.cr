@@ -1,3 +1,4 @@
+require "../../src/crytic/mutant/and_or_swap"
 require "../../src/crytic/mutant/bool_literal_flip"
 require "../../src/crytic/mutation/mutation"
 require "./fake_process_runner"
@@ -15,6 +16,15 @@ module Crytic::Mutation
   describe Mutation do
     Spec.before_each do
       InjectMutatedSubjectIntoSpecs.reset
+    end
+
+    describe ".with" do
+      it "can be used with both types of mutations" do
+        Mutation.with(
+          original: "./bar.cr",
+          specs: ["./bar_spec.cr"],
+          mutant: Crytic::Mutant::AndOrSwap.at(Crystal::Location.new(nil, 0, 0)))
+      end
     end
 
     describe "#run" do

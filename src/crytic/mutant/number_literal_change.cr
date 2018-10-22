@@ -2,7 +2,7 @@ require "compiler/crystal/syntax/*"
 require "./mutant"
 
 module Crytic::Mutant
-  class NumberLiteralChange < Mutant
+  class NumberLiteralChange < VisitorMutant
     def visit(node : Crystal::NumberLiteral)
       location = node.location
       return if location.nil?

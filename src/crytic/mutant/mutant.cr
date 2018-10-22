@@ -1,7 +1,18 @@
 require "compiler/crystal/syntax/*"
 
 module Crytic::Mutant
-  abstract class Mutant < Crystal::Visitor
+  alias Mutant = VisitorMutant | TransformerMutant
+
+  abstract class TransformerMutant < Crystal::Transformer
+    def self.at(location : Crystal::Location)
+      new(location)
+    end
+
+    private def initialize(@location : Crystal::Location)
+    end
+  end
+
+  abstract class VisitorMutant < Crystal::Visitor
     def self.at(location : Crystal::Location)
       new(location)
     end

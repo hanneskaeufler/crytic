@@ -15,8 +15,9 @@ module Crytic::Mutation
 
     def run
       subject_source = File.read(@subject_file_path)
-      mutated_source = Source.new(subject_source, @mutant).mutated_source
-      source_diff = Diff.new(Crystal::Parser.parse(subject_source).to_s, mutated_source).to_s
+      source = Source.new(subject_source)
+      mutated_source = source.mutated_source(@mutant)
+      source_diff = Diff.new(source.original_source, mutated_source).to_s
 
       Result.new(
         is_covered: run_process(mutated_source) != 0,

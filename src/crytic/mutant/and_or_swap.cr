@@ -2,15 +2,15 @@ require "compiler/crystal/syntax/*"
 require "./mutant"
 
 module Crytic::Mutant
-  class BoolLiteralFlip < VisitorMutant
-    def visit(node : Crystal::BoolLiteral)
+  class AndOrSwap < TransformerMutant
+    def transform(node : Crystal::And)
       location = node.location
-      return if location.nil?
+      return node if location.nil?
       if location.line_number == @location.line_number &&
          location.column_number == @location.column_number
-        node.value = !node.value
+        return Crystal::Or.new(node.left, node.right)
       end
-      true
+      node
     end
   end
 end

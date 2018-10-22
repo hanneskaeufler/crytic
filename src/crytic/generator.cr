@@ -1,6 +1,7 @@
 module Crytic
   class Generator
     MUTANT_POSSIBILITIES = [
+      Mutant::AndOrSwapPossibilities.new,
       Mutant::BoolLiteralFlipPossibilities.new,
       Mutant::ConditionFlipPossibilities.new,
       Mutant::NumberLiteralChangePossibilities.new,
