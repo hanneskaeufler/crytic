@@ -7,13 +7,6 @@ require "./source"
 
 module Crytic
   class Runner
-    MUTANT_POSSIBILITIES = [
-      Mutant::ConditionFlipPossibilities.new,
-      Mutant::NumberLiteralChangePossibilities.new,
-      Mutant::NumberLiteralSignFlipPossibilities.new,
-      Mutant::BoolLiteralFlipPossibilities.new,
-    ]
-
     def initialize(@reporter = IoReporter.new(STDOUT))
     end
 

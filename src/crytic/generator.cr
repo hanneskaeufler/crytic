@@ -1,10 +1,11 @@
 module Crytic
   class Generator
     MUTANT_POSSIBILITIES = [
+      Mutant::BoolLiteralFlipPossibilities.new,
       Mutant::ConditionFlipPossibilities.new,
       Mutant::NumberLiteralChangePossibilities.new,
       Mutant::NumberLiteralSignFlipPossibilities.new,
-      Mutant::BoolLiteralFlipPossibilities.new,
+      Mutant::StringLiteralChangePossibilities.new,
     ]
 
     def mutations_for(source : String, specs : Array(String))
