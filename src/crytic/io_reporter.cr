@@ -19,21 +19,22 @@ module Crytic
     end
 
     def report_result(result)
-      if result.did_error
+      case result.status
+      when Mutation::Status::Error
         @io << "\n#{INDENT}"
         @io << "❌ #{result.mutant_name}"
         @io << "\n#{INDENT + INDENT}The following change broke the code:\n"
         @io << "#{INDENT + INDENT + INDENT}"
         @io << result.diff.lines.join("\n#{INDENT + INDENT + INDENT}")
         @io << "\n"
-      elsif !result.is_covered
+      when Mutation::Status::Uncovered
         @io << "\n#{INDENT}"
         @io << "❌ #{result.mutant_name}"
         @io << "\n#{INDENT + INDENT}The following change didn't fail the test-suite:\n"
         @io << "#{INDENT + INDENT + INDENT}"
         @io << result.diff.lines.join("\n#{INDENT + INDENT + INDENT}")
         @io << "\n"
-      else
+      when Mutation::Status::Covered
         @io << "\n#{INDENT}"
         @io << "✅ #{result.mutant_name} at line #{result.location.line_number}, column #{result.location.column_number}"
       end
@@ -42,17 +43,17 @@ module Crytic
     def report_summary(results)
       @io << "\n\nFinished in #{Spec.to_human(elapsed_time)}:\n"
       summary = "#{results.size} mutations, "
-      summary += "#{results.count(&.successful?)} covered, "
-      summary += "#{results.count { |result| !result.is_covered && !result.did_error }} uncovered, "
-      summary += "#{results.count(&.did_error)} errored."
+      summary += "#{results.map(&.status).count(&.covered?)} covered, "
+      summary += "#{results.map(&.status).count(&.uncovered?)} uncovered, "
+      summary += "#{results.map(&.status).count(&.errored?)} errored."
       summary += " Mutation score: #{score(results)}%"
       summary += "\n"
-      @io << summary.colorize(results.map(&.successful?).all? ? :green : :red).to_s
+      @io << summary.colorize(results.map(&.status.covered?).all? ? :green : :red).to_s
     end
 
     private def score(results)
       total = results.size
-      killed = results.count(&.successful?)
+      killed = results.count(&.status.covered?)
       (killed.to_f / total * 100).round(2)
     end
 

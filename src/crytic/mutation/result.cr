@@ -1,13 +1,27 @@
 require "../mutant/mutant"
 
 module Crytic::Mutation
-  record Result, is_covered : Bool, did_error : Bool, mutant : Mutant::Mutant, diff : String do
-    def mutant_name
-      mutant.class.to_s.split("::").last
+  enum Status
+    Covered
+    Uncovered
+    Error
+
+    def uncovered?
+      self == Uncovered
     end
 
-    def successful?
-      is_covered && !did_error
+    def errored?
+      self == Error
+    end
+
+    def covered?
+      self == Covered
+    end
+  end
+
+  record Result, status : Status, mutant : Mutant::Mutant, diff : String do
+    def mutant_name
+      mutant.class.to_s.split("::").last
     end
 
     def location

@@ -66,9 +66,10 @@ module Crytic::Mutation
 
         fake = FakeProcessRunner.new
         fake.exit_code = 1
+        fake.fill_output_with("Finished")
         mutation.process_runner = fake
 
-        mutation.run.is_covered.should eq true
+        mutation.run.status.should eq Status::Covered
       end
 
       it "considers a mutant uncovered if the process succeeds" do
@@ -81,7 +82,7 @@ module Crytic::Mutation
         fake.exit_code = 0
         mutation.process_runner = fake
 
-        mutation.run.is_covered.should eq false
+        mutation.run.status.should eq Status::Uncovered
       end
 
       it "returns a colored diff of the changes" do
@@ -185,7 +186,7 @@ module Crytic::Mutation
         fake.fill_output_with("compiler error/ no specs have run")
         mutation.process_runner = fake
 
-        mutation.run.did_error.should eq true
+        mutation.run.status.should eq Status::Error
       end
     end
   end

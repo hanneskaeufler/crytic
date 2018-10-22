@@ -18,12 +18,16 @@ module Crytic::Mutation
       source = Source.new(subject_source)
       mutated_source = source.mutated_source(@mutant)
       source_diff = Diff.new(source.original_source, mutated_source).to_s
+      process_result = run_process(mutated_source)
+      status = if process_result[:exit_code] == 0
+                 Status::Uncovered
+               elsif (/Finished/ =~ process_result[:output]) == nil
+                 Status::Error
+               else
+                 Status::Covered
+               end
 
-      Result.new(
-        is_covered: run_process(mutated_source) != 0,
-        did_error: (/Finished/ =~ @io.to_s) == nil,
-        mutant: @mutant,
-        diff: source_diff)
+      Result.new(status, @mutant, source_diff)
     end
 
     def self.with(mutant : Mutant::Mutant, original : String, specs : Array(String))
@@ -35,16 +39,17 @@ module Crytic::Mutation
       @subject_file_path : String,
       @specs_file_paths : Array(String)
     )
-      @io = IO::Memory.new
       @process_runner = ProcessProcessRunner.new
     end
 
     private def run_process(mutated_source)
       full = mutated_specs_source(mutated_source)
-      process_runner.run(
+      io = IO::Memory.new
+      exit_code = process_runner.run(
         "crystal", ["eval", full],
-        output: @io,
+        output: io,
         error: STDERR)
+      { exit_code: exit_code, output: io.to_s }
     end
 
     private def mutated_specs_source(mutated_source)

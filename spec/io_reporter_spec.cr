@@ -32,8 +32,7 @@ module Crytic
       it "prints the passing mutants name and location" do
         io = IO::Memory.new
         result = Mutation::Result.new(
-          is_covered: true,
-          did_error: false,
+          status: Mutation::Status::Covered,
           mutant: fake_mutant,
           diff: "")
         IoReporter.new(io).report_result(result)
@@ -42,7 +41,10 @@ module Crytic
 
       it "prints failing mutants name" do
         io = IO::Memory.new
-        result = Mutation::Result.new(is_covered: false, did_error: false, mutant: fake_mutant, diff: "diff")
+        result = Mutation::Result.new(
+          status: Mutation::Status::Uncovered,
+          mutant: fake_mutant,
+          diff: "diff")
         IoReporter.new(io).report_result(result)
         io.to_s.should contain("❌ NumberLiteralChange")
         io.to_s.should contain("diff")
@@ -51,7 +53,10 @@ module Crytic
 
       it "prints errored mutant" do
         io = IO::Memory.new
-        result = Mutation::Result.new(is_covered: false, did_error: true, mutant: fake_mutant, diff: "diff")
+        result = Mutation::Result.new(
+          status: Mutation::Status::Error,
+          mutant: fake_mutant,
+          diff: "diff")
         IoReporter.new(io).report_result(result)
         io.to_s.should contain("❌ NumberLiteralChange")
         io.to_s.should contain("The following change broke the code")
@@ -62,9 +67,12 @@ module Crytic
       it "outputs result counts with a score" do
         io = IO::Memory.new
         results = [
-          Mutation::Result.new(is_covered: false, did_error: false, mutant: fake_mutant, diff: "diff"),
-          Mutation::Result.new(is_covered: true, did_error: false, mutant: fake_mutant, diff: "diff"),
-          Mutation::Result.new(is_covered: false, did_error: true, mutant: fake_mutant, diff: "diff"),
+          Mutation::Result.new(
+            status: Mutation::Status::Uncovered, mutant: fake_mutant, diff: "diff"),
+          Mutation::Result.new(
+            status: Mutation::Status::Covered, mutant: fake_mutant, diff: "diff"),
+          Mutation::Result.new(
+            status: Mutation::Status::Error, mutant: fake_mutant, diff: "diff"),
         ]
         IoReporter.new(io).report_summary(results)
         io.to_s.should contain "Finished in"

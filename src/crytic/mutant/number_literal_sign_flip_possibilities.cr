@@ -1,4 +1,4 @@
-require "./number_literal_change_possibilities"
+require "./possibilities"
 
 module Crytic::Mutant
   class NumberLiteralSignFlipPossibilities < Possibilities

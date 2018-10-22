@@ -32,7 +32,7 @@ module Crytic
 
       @reporter.report_summary(results)
 
-      return results.map(&.successful?).all?
+      return results.map(&.status.covered?).all?
     end
 
     private def validate_args!(source, specs)
