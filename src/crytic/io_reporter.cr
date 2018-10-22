@@ -46,9 +46,14 @@ module Crytic
       summary += "#{results.map(&.status).count(&.covered?)} covered, "
       summary += "#{results.map(&.status).count(&.uncovered?)} uncovered, "
       summary += "#{results.map(&.status).count(&.errored?)} errored."
-      summary += " Mutation score: #{score(results)}%"
+      summary += " Mutation score: #{score_in_percent(results)}"
       summary += "\n"
       @io << summary.colorize(results.map(&.status.covered?).all? ? :green : :red).to_s
+    end
+
+    private def score_in_percent(results)
+      return "N/A" if results.empty?
+      "#{score(results)}%"
     end
 
     private def score(results)
