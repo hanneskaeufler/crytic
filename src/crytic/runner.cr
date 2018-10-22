@@ -19,7 +19,7 @@ module Crytic
 
       @reporter.report_original_result(original_result)
 
-      return false if original_result.exit_code != 0
+      return false unless original_result.successful?
 
       results = Generator
         .new
