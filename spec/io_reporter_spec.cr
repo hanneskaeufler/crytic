@@ -29,7 +29,7 @@ module Crytic
     end
 
     describe "#report_result" do
-      it "prints the passing mutants name" do
+      it "prints the passing mutants name and location" do
         io = IO::Memory.new
         result = Mutation::Result.new(
           is_covered: true,
@@ -37,7 +37,7 @@ module Crytic
           mutant: fake_mutant,
           diff: "")
         IoReporter.new(io).report_result(result)
-        io.to_s.should contain("✅ NumberLiteralChange")
+        io.to_s.should contain("✅ NumberLiteralChange at line 0, column 0")
       end
 
       it "prints failing mutants name" do

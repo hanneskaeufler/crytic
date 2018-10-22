@@ -4,6 +4,8 @@ module Crytic::Mutant
   alias Mutant = VisitorMutant | TransformerMutant
 
   abstract class TransformerMutant < Crystal::Transformer
+    getter location
+
     def self.at(location : Crystal::Location)
       new(location)
     end
@@ -13,6 +15,8 @@ module Crytic::Mutant
   end
 
   abstract class VisitorMutant < Crystal::Visitor
+    getter location
+
     def self.at(location : Crystal::Location)
       new(location)
     end

@@ -9,5 +9,9 @@ module Crytic::Mutation
     def successful?
       is_covered && !did_error
     end
+
+    def location
+      mutant.location
+    end
   end
 end

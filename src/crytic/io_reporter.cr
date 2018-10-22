@@ -35,7 +35,7 @@ module Crytic
         @io << "\n"
       else
         @io << "\n#{INDENT}"
-        @io << "✅ #{result.mutant_name}"
+        @io << "✅ #{result.mutant_name} at line #{result.location.line_number}, column #{result.location.column_number}"
       end
     end
 
