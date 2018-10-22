@@ -9,9 +9,8 @@ module Crytic::Mutation
 
     def run
       io = IO::Memory.new
-      exit_code = process_runner.run("crystal", ["spec", @specs_file_paths.join(" ")],
-        output: io,
-        error: io)
+      args = ["spec"] + @specs_file_paths
+      exit_code = process_runner.run("crystal", args, output: io, error: io)
       OriginalResult.new(exit_code: exit_code, output: io.to_s)
     end
 
