@@ -10,9 +10,7 @@ OptionParser.parse! do |parser|
     subject_source = source
   end
   parser.on("-h", "--help", "Show this help") { puts parser }
-  parser.unknown_args do |args|
-    spec_files = args
-  end
+  parser.unknown_args { |args| spec_files = args }
   parser.invalid_option do |flag|
     STDERR.puts "ERROR: #{flag} is not a valid option."
     STDERR.puts parser
