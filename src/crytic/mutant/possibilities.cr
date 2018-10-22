@@ -19,4 +19,16 @@ module Crytic::Mutant
       true
     end
   end
+
+  macro generate_possibilities_subclass(name, node)
+    class {{ name.id }} < Possibilities
+      def visit(node : {{ node }})
+        location = node.location
+        unless location.nil?
+          @locations << location
+        end
+        true
+      end
+    end
+  end
 end
