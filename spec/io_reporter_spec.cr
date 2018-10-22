@@ -59,7 +59,7 @@ module Crytic
       end
     end
     describe "#report_summary" do
-      it "outputs result counts" do
+      it "outputs result counts with a score" do
         io = IO::Memory.new
         results = [
           Mutation::Result.new(is_covered: false, did_error: false, mutant: fake_mutant, diff: "diff"),
@@ -68,7 +68,7 @@ module Crytic
         ]
         IoReporter.new(io).report_summary(results)
         io.to_s.should contain "Finished in"
-        io.to_s.should contain "3 mutations, 1 covered, 1 uncovered, 1 errored"
+        io.to_s.should contain "3 mutations, 1 covered, 1 uncovered, 1 errored. Mutation score: 33.33%"
       end
     end
   end

@@ -44,9 +44,16 @@ module Crytic
       summary = "#{results.size} mutations, "
       summary += "#{results.count(&.successful?)} covered, "
       summary += "#{results.count { |result| !result.is_covered && !result.did_error }} uncovered, "
-      summary += "#{results.count(&.did_error)} errored"
+      summary += "#{results.count(&.did_error)} errored."
+      summary += " Mutation score: #{score(results)}%"
       summary += "\n"
       @io << summary.colorize(results.map(&.successful?).all? ? :green : :red).to_s
+    end
+
+    private def score(results)
+      total = results.size
+      killed = results.count(&.successful?)
+      (killed.to_f / total * 100).round(2)
     end
 
     private def elapsed_time
