@@ -6,7 +6,6 @@ module Crytic
       Mutant::ConditionFlipPossibilities.new,
       Mutant::NumberLiteralChangePossibilities.new,
       Mutant::NumberLiteralSignFlipPossibilities.new,
-      Mutant::SelectRejectSwapPossibilities.new,
       Mutant::StringLiteralChangePossibilities.new,
     ]
 
