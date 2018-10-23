@@ -6,7 +6,7 @@ module Crytic::Mutant
         return true if node.name != "select"
         location = node.location
         unless location.nil?
-          @locations << location
+          @locations << Crystal::Location.new(nil, location.line_number, node.name_column_number)
         end
         true
       end

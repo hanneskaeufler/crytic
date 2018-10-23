@@ -23,6 +23,8 @@ module Crytic
       ast.accept(possibilities)
       possibilities.any?.should eq true
       possibilities.locations.size.should eq 1
+      possibilities.locations.first.line_number.should eq 1
+      possibilities.locations.first.column_number.should eq 5
     end
   end
 end
