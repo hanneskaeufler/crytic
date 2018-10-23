@@ -1,5 +1,4 @@
 require "diff"
-require "colorize"
 
 module Crytic::Mutation
   class Diff
