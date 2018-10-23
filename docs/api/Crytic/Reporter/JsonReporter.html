@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutation::Diff - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Reporter::JsonReporter - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -156,12 +156,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../../Crytic/Mutation.html">Mutation</a>
       
         <ul>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Diff" data-name="crytic::mutation::diff">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Diff" data-name="crytic::mutation::diff">
       <a href="../../Crytic/Mutation/Diff.html">Diff</a>
       
     </li>
@@ -206,6 +206,21 @@
       
     </li>
   
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter" data-name="crytic::reporter">
+      <a href="../../Crytic/Reporter.html">Reporter</a>
+      
+        <ul>
+  
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/JsonReporter" data-name="crytic::reporter::jsonreporter">
+      <a href="../../Crytic/Reporter/JsonReporter.html">JsonReporter</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
       <a href="../../Crytic/Runner.html">Runner</a>
       
@@ -230,12 +245,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Mutation::Diff
+  <span class="kind">class</span> Crytic::Reporter::JsonReporter
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutation/Diff.html">Crytic::Mutation::Diff</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Reporter/JsonReporter.html">Crytic::Reporter::JsonReporter</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -256,7 +271,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/diff.cr#L4" target="_blank">crytic/mutation/diff.cr</a>
+      <a href="https://github.com/hanneskaeufler/crytic/blob/991bfc7a6b6d43ccbe208776ef57cc6dff2aa183/src/crytic/reporter/json_reporter.cr#L5" target="_blank">crytic/reporter/json_reporter.cr</a>
     
     <br/>
   
@@ -264,16 +279,6 @@
 
 
 
-
-  <h2>Constructors</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#new%28original%3AString%2Cmutated%3AString%29-class-method" class="signature"><strong>.new</strong>(original : String, mutated : String)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -283,7 +288,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#to_s-instance-method" class="signature"><strong>#to_s</strong></a>
+        <a href="#report_original_result%28result%29-instance-method" class="signature"><strong>#report_original_result</strong>(result)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_json-instance-method" class="signature"><strong>#to_json</strong></a>
         
       </li>
     
@@ -318,43 +328,40 @@
 </div>
 
 
-  <h2>Constructor Detail</h2>
-  
-    <div class="entry-detail" id="new(original:String,mutated:String)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(original : String, mutated : String)
-
-        <a class="method-permalink" href="#new%28original%3AString%2Cmutated%3AString%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/diff.cr#L5" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-
 
 
 
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="to_s-instance-method">
+    <div class="entry-detail" id="report_original_result(result)-instance-method">
       <div class="signature">
         
-        def <strong>to_s</strong>
+        def <strong>report_original_result</strong>(result)
 
-        <a class="method-permalink" href="#to_s-instance-method">#</a>
+        <a class="method-permalink" href="#report_original_result%28result%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/diff.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/991bfc7a6b6d43ccbe208776ef57cc6dff2aa183/src/crytic/reporter/json_reporter.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_json-instance-method">
+      <div class="signature">
+        
+        def <strong>to_json</strong>
+
+        <a class="method-permalink" href="#to_json-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/991bfc7a6b6d43ccbe208776ef57cc6dff2aa183/src/crytic/reporter/json_reporter.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>

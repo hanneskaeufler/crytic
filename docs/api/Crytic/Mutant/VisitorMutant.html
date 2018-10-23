@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutation::Diff - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Mutant::VisitorMutant - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -56,7 +56,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
       <a href="../../Crytic/Mutant.html">Mutant</a>
       
         <ul>
@@ -146,7 +146,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/VisitorMutant" data-name="crytic::mutant::visitormutant">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/VisitorMutant" data-name="crytic::mutant::visitormutant">
       <a href="../../Crytic/Mutant/VisitorMutant.html">VisitorMutant</a>
       
     </li>
@@ -156,12 +156,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../../Crytic/Mutation.html">Mutation</a>
       
         <ul>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Diff" data-name="crytic::mutation::diff">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Diff" data-name="crytic::mutation::diff">
       <a href="../../Crytic/Mutation/Diff.html">Diff</a>
       
     </li>
@@ -230,12 +230,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Mutation::Diff
+  <span class="kind">abstract class</span> Crytic::Mutant::VisitorMutant
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutation/Diff.html">Crytic::Mutation::Diff</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -247,6 +247,21 @@
 
 
 
+
+  <h2>Direct Known Subclasses</h2>
+  <ul class="other-types-list">
+  
+    <li class="other-type"><a href="../../Crytic/Mutant/BoolLiteralFlip.html">Crytic::Mutant::BoolLiteralFlip</a></li>
+  
+    <li class="other-type"><a href="../../Crytic/Mutant/ConditionFlip.html">Crytic::Mutant::ConditionFlip</a></li>
+  
+    <li class="other-type"><a href="../../Crytic/Mutant/NumberLiteralChange.html">Crytic::Mutant::NumberLiteralChange</a></li>
+  
+    <li class="other-type"><a href="../../Crytic/Mutant/NumberLiteralSignFlip.html">Crytic::Mutant::NumberLiteralSignFlip</a></li>
+  
+    <li class="other-type"><a href="../../Crytic/Mutant/StringLiteralChange.html">Crytic::Mutant::StringLiteralChange</a></li>
+  
+  </ul>
 
 
 
@@ -256,7 +271,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/diff.cr#L4" target="_blank">crytic/mutation/diff.cr</a>
+      <a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutant/mutant.cr#L17" target="_blank">crytic/mutant/mutant.cr</a>
     
     <br/>
   
@@ -265,11 +280,13 @@
 
 
 
-  <h2>Constructors</h2>
+
+
+  <h2>Class Method Summary</h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28original%3AString%2Cmutated%3AString%29-class-method" class="signature"><strong>.new</strong>(original : String, mutated : String)</a>
+        <a href="#at%28location%3ACrystal%3A%3ALocation%29-class-method" class="signature"><strong>.at</strong>(location : Crystal::Location)</a>
         
       </li>
     
@@ -277,13 +294,16 @@
 
 
 
-
-
   <h2>Instance Method Summary</h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#to_s-instance-method" class="signature"><strong>#to_s</strong></a>
+        <a href="#location%3ACrystal%3A%3ALocation-instance-method" class="signature"><strong>#location</strong> : Crystal::Location</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::ASTNode)</a>
         
       </li>
     
@@ -315,23 +335,35 @@
 
 
   
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
-  <h2>Constructor Detail</h2>
+
+
+  <h2>Class Method Detail</h2>
   
-    <div class="entry-detail" id="new(original:String,mutated:String)-class-method">
+    <div class="entry-detail" id="at(location:Crystal::Location)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(original : String, mutated : String)
+        def self.<strong>at</strong>(location : Crystal::Location)
 
-        <a class="method-permalink" href="#new%28original%3AString%2Cmutated%3AString%29-class-method">#</a>
+        <a class="method-permalink" href="#at%28location%3ACrystal%3A%3ALocation%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/diff.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutant/mutant.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -339,22 +371,36 @@
 
 
 
-
-
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="to_s-instance-method">
+    <div class="entry-detail" id="location:Crystal::Location-instance-method">
       <div class="signature">
         
-        def <strong>to_s</strong>
+        def <strong>location</strong> : Crystal::Location
 
-        <a class="method-permalink" href="#to_s-instance-method">#</a>
+        <a class="method-permalink" href="#location%3ACrystal%3A%3ALocation-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/diff.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutant/mutant.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="visit(node:Crystal::ASTNode)-instance-method">
+      <div class="signature">
+        
+        def <strong>visit</strong>(node : Crystal::ASTNode)
+
+        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutant/mutant.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>

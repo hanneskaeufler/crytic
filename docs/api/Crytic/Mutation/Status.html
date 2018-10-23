@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutation::Diff - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Mutation::Status - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -161,7 +161,7 @@
       
         <ul>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Diff" data-name="crytic::mutation::diff">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Diff" data-name="crytic::mutation::diff">
       <a href="../../Crytic/Mutation/Diff.html">Diff</a>
       
     </li>
@@ -186,7 +186,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Status" data-name="crytic::mutation::status">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Status" data-name="crytic::mutation::status">
       <a href="../../Crytic/Mutation/Status.html">Status</a>
       
     </li>
@@ -230,12 +230,10 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Mutation::Diff
+  <span class="kind">enum</span> Crytic::Mutation::Status
 
 </h1>
 
-
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutation/Diff.html">Crytic::Mutation::Diff</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -256,24 +254,36 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/diff.cr#L4" target="_blank">crytic/mutation/diff.cr</a>
+      <a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/result.cr#L4" target="_blank">crytic/mutation/result.cr</a>
     
     <br/>
   
 
 
 
+  
+    <h2>Enum Members</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="Covered">
+        <strong>Covered</strong> = <code><span class="n">0</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Uncovered">
+        <strong>Uncovered</strong> = <code><span class="n">1</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Error">
+        <strong>Error</strong> = <code><span class="n">2</span></code>
+      </dt>
+      
+    
+  </dl>
 
 
-  <h2>Constructors</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#new%28original%3AString%2Cmutated%3AString%29-class-method" class="signature"><strong>.new</strong>(original : String, mutated : String)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -283,7 +293,22 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#to_s-instance-method" class="signature"><strong>#to_s</strong></a>
+        <a href="#covered%3F-instance-method" class="signature"><strong>#covered?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#error%3F-instance-method" class="signature"><strong>#error?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#errored%3F-instance-method" class="signature"><strong>#errored?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#uncovered%3F-instance-method" class="signature"><strong>#uncovered?</strong></a>
         
       </li>
     
@@ -315,27 +340,28 @@
 
 
   
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
-
-  <h2>Constructor Detail</h2>
-  
-    <div class="entry-detail" id="new(original:String,mutated:String)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(original : String, mutated : String)
-
-        <a class="method-permalink" href="#new%28original%3AString%2Cmutated%3AString%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/diff.cr#L5" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
@@ -343,18 +369,66 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="to_s-instance-method">
+    <div class="entry-detail" id="covered?-instance-method">
       <div class="signature">
         
-        def <strong>to_s</strong>
+        def <strong>covered?</strong>
 
-        <a class="method-permalink" href="#to_s-instance-method">#</a>
+        <a class="method-permalink" href="#covered%3F-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/diff.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/result.cr#L17" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="error?-instance-method">
+      <div class="signature">
+        
+        def <strong>error?</strong>
+
+        <a class="method-permalink" href="#error%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/result.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="errored?-instance-method">
+      <div class="signature">
+        
+        def <strong>errored?</strong>
+
+        <a class="method-permalink" href="#errored%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/result.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="uncovered?-instance-method">
+      <div class="signature">
+        
+        def <strong>uncovered?</strong>
+
+        <a class="method-permalink" href="#uncovered%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/result.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>

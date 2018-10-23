@@ -61,6 +61,16 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AndOrSwap" data-name="crytic::mutant::andorswap">
+      <a href="../Crytic/Mutant/AndOrSwap.html">AndOrSwap</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AndOrSwapPossibilities" data-name="crytic::mutant::andorswappossibilities">
+      <a href="../Crytic/Mutant/AndOrSwapPossibilities.html">AndOrSwapPossibilities</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlip" data-name="crytic::mutant::boolliteralflip">
       <a href="../Crytic/Mutant/BoolLiteralFlip.html">BoolLiteralFlip</a>
       
@@ -111,6 +121,36 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/SelectRejectSwap" data-name="crytic::mutant::selectrejectswap">
+      <a href="../Crytic/Mutant/SelectRejectSwap.html">SelectRejectSwap</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/SelectRejectSwapPossibilities" data-name="crytic::mutant::selectrejectswappossibilities">
+      <a href="../Crytic/Mutant/SelectRejectSwapPossibilities.html">SelectRejectSwapPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/StringLiteralChange" data-name="crytic::mutant::stringliteralchange">
+      <a href="../Crytic/Mutant/StringLiteralChange.html">StringLiteralChange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/StringLiteralChangePossibilities" data-name="crytic::mutant::stringliteralchangepossibilities">
+      <a href="../Crytic/Mutant/StringLiteralChangePossibilities.html">StringLiteralChangePossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/TransformerMutant" data-name="crytic::mutant::transformermutant">
+      <a href="../Crytic/Mutant/TransformerMutant.html">TransformerMutant</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/VisitorMutant" data-name="crytic::mutant::visitormutant">
+      <a href="../Crytic/Mutant/VisitorMutant.html">VisitorMutant</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -143,6 +183,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Result" data-name="crytic::mutation::result">
       <a href="../Crytic/Mutation/Result.html">Result</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Status" data-name="crytic::mutation::status">
+      <a href="../Crytic/Mutation/Status.html">Status</a>
       
     </li>
   
@@ -215,7 +260,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/io_reporter.cr#L5" target="_blank">crytic/io_reporter.cr</a>
+      <a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/io_reporter.cr#L6" target="_blank">crytic/io_reporter.cr</a>
     
     <br/>
   
@@ -240,7 +285,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28io%3AIO%29-class-method" class="signature"><strong>.new</strong>(io : IO)</a>
+        <a href="#new%28io%3AIO%2Cstart_time%3DTime.now%29-class-method" class="signature"><strong>.new</strong>(io : IO, start_time = <span class="t">Time</span>.now)</a>
         
       </li>
     
@@ -254,7 +299,17 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#report%28original_result%2Cresults%29-instance-method" class="signature"><strong>#report</strong>(original_result, results)</a>
+        <a href="#report_original_result%28original_result%29-instance-method" class="signature"><strong>#report_original_result</strong>(original_result)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#report_result%28result%29-instance-method" class="signature"><strong>#report_result</strong>(result)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#report_summary%28results%29-instance-method" class="signature"><strong>#report_summary</strong>(results)</a>
         
       </li>
     
@@ -291,18 +346,18 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(io:IO)-class-method">
+    <div class="entry-detail" id="new(io:IO,start_time=Time.now)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(io : IO)
+        def self.<strong>new</strong>(io : IO, start_time = <span class="t">Time</span>.now)
 
-        <a class="method-permalink" href="#new%28io%3AIO%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28io%3AIO%2Cstart_time%3DTime.now%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/io_reporter.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/io_reporter.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -314,18 +369,50 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="report(original_result,results)-instance-method">
+    <div class="entry-detail" id="report_original_result(original_result)-instance-method">
       <div class="signature">
         
-        def <strong>report</strong>(original_result, results)
+        def <strong>report_original_result</strong>(original_result)
 
-        <a class="method-permalink" href="#report%28original_result%2Cresults%29-instance-method">#</a>
+        <a class="method-permalink" href="#report_original_result%28original_result%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/io_reporter.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/io_reporter.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="report_result(result)-instance-method">
+      <div class="signature">
+        
+        def <strong>report_result</strong>(result)
+
+        <a class="method-permalink" href="#report_result%28result%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/io_reporter.cr#L21" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="report_summary(results)-instance-method">
+      <div class="signature">
+        
+        def <strong>report_summary</strong>(results)
+
+        <a class="method-permalink" href="#report_summary%28results%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/io_reporter.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>

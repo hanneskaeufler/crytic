@@ -61,6 +61,16 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AndOrSwap" data-name="crytic::mutant::andorswap">
+      <a href="../../Crytic/Mutant/AndOrSwap.html">AndOrSwap</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AndOrSwapPossibilities" data-name="crytic::mutant::andorswappossibilities">
+      <a href="../../Crytic/Mutant/AndOrSwapPossibilities.html">AndOrSwapPossibilities</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlip" data-name="crytic::mutant::boolliteralflip">
       <a href="../../Crytic/Mutant/BoolLiteralFlip.html">BoolLiteralFlip</a>
       
@@ -111,6 +121,36 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/SelectRejectSwap" data-name="crytic::mutant::selectrejectswap">
+      <a href="../../Crytic/Mutant/SelectRejectSwap.html">SelectRejectSwap</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/SelectRejectSwapPossibilities" data-name="crytic::mutant::selectrejectswappossibilities">
+      <a href="../../Crytic/Mutant/SelectRejectSwapPossibilities.html">SelectRejectSwapPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/StringLiteralChange" data-name="crytic::mutant::stringliteralchange">
+      <a href="../../Crytic/Mutant/StringLiteralChange.html">StringLiteralChange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/StringLiteralChangePossibilities" data-name="crytic::mutant::stringliteralchangepossibilities">
+      <a href="../../Crytic/Mutant/StringLiteralChangePossibilities.html">StringLiteralChangePossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/TransformerMutant" data-name="crytic::mutant::transformermutant">
+      <a href="../../Crytic/Mutant/TransformerMutant.html">TransformerMutant</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/VisitorMutant" data-name="crytic::mutant::visitormutant">
+      <a href="../../Crytic/Mutant/VisitorMutant.html">VisitorMutant</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -143,6 +183,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Result" data-name="crytic::mutation::result">
       <a href="../../Crytic/Mutation/Result.html">Result</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Status" data-name="crytic::mutation::status">
+      <a href="../../Crytic/Mutation/Status.html">Status</a>
       
     </li>
   
@@ -190,7 +235,7 @@
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/NumberLiteralSignFlip.html">Crytic::Mutant::NumberLiteralSignFlip</a></li><li class="superclass"><a href="../../Crytic/Mutant/Mutant.html">Crytic::Mutant::Mutant</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/NumberLiteralSignFlip.html">Crytic::Mutant::NumberLiteralSignFlip</a></li><li class="superclass"><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -211,7 +256,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutant/number_literal_sign_flip.cr#L5" target="_blank">crytic/mutant/number_literal_sign_flip.cr</a>
+      <a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutant/number_literal_sign_flip.cr#L5" target="_blank">crytic/mutant/number_literal_sign_flip.cr</a>
     
     <br/>
   
@@ -242,10 +287,15 @@
   
     
 
-  <h3>Instance methods inherited from class <code><a href="../../Crytic/Mutant/Mutant.html">Crytic::Mutant::Mutant</a></code></h3>
+  <h3>Instance methods inherited from class <code><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></code></h3>
   
   
-    <a href="../../Crytic/Mutant/Mutant.html#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="tooltip">
+    <a href="../../Crytic/Mutant/VisitorMutant.html#location%3ACrystal%3A%3ALocation-instance-method" class="tooltip">
+      <span>location : Crystal::Location</span>
+    location</a>, 
+    
+  
+    <a href="../../Crytic/Mutant/VisitorMutant.html#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="tooltip">
       <span>visit(node : Crystal::ASTNode)</span>
     visit</a>
     
@@ -257,10 +307,10 @@
 
     
 
-  <h3>Class methods inherited from class <code><a href="../../Crytic/Mutant/Mutant.html">Crytic::Mutant::Mutant</a></code></h3>
+  <h3>Class methods inherited from class <code><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></code></h3>
   
   
-    <a href="../../Crytic/Mutant/Mutant.html#at%28location%3ACrystal%3A%3ALocation%29-class-method" class="tooltip">
+    <a href="../../Crytic/Mutant/VisitorMutant.html#at%28location%3ACrystal%3A%3ALocation%29-class-method" class="tooltip">
       <span>at(location : Crystal::Location)</span>
     at</a>
     
@@ -318,7 +368,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutant/number_literal_sign_flip.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutant/number_literal_sign_flip.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>

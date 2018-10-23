@@ -61,6 +61,16 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AndOrSwap" data-name="crytic::mutant::andorswap">
+      <a href="Crytic/Mutant/AndOrSwap.html">AndOrSwap</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AndOrSwapPossibilities" data-name="crytic::mutant::andorswappossibilities">
+      <a href="Crytic/Mutant/AndOrSwapPossibilities.html">AndOrSwapPossibilities</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlip" data-name="crytic::mutant::boolliteralflip">
       <a href="Crytic/Mutant/BoolLiteralFlip.html">BoolLiteralFlip</a>
       
@@ -111,6 +121,36 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/SelectRejectSwap" data-name="crytic::mutant::selectrejectswap">
+      <a href="Crytic/Mutant/SelectRejectSwap.html">SelectRejectSwap</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/SelectRejectSwapPossibilities" data-name="crytic::mutant::selectrejectswappossibilities">
+      <a href="Crytic/Mutant/SelectRejectSwapPossibilities.html">SelectRejectSwapPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/StringLiteralChange" data-name="crytic::mutant::stringliteralchange">
+      <a href="Crytic/Mutant/StringLiteralChange.html">StringLiteralChange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/StringLiteralChangePossibilities" data-name="crytic::mutant::stringliteralchangepossibilities">
+      <a href="Crytic/Mutant/StringLiteralChangePossibilities.html">StringLiteralChangePossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/TransformerMutant" data-name="crytic::mutant::transformermutant">
+      <a href="Crytic/Mutant/TransformerMutant.html">TransformerMutant</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/VisitorMutant" data-name="crytic::mutant::visitormutant">
+      <a href="Crytic/Mutant/VisitorMutant.html">VisitorMutant</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -143,6 +183,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Result" data-name="crytic::mutation::result">
       <a href="Crytic/Mutation/Result.html">Result</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Status" data-name="crytic::mutation::status">
+      <a href="Crytic/Mutation/Status.html">Status</a>
       
     </li>
   
@@ -191,6 +236,8 @@
 
 <blockquote>Crytic is in a very early state of development. It is not very clever, making it slow as well.</blockquote>
 
+<p>See <a href="CHANGELOG.md" target="_blank">CHANGELOG.md</a> for changes between releases.</p>
+
 <h3>Blog posts</h3>
 
 <p><a href="https://hannes.kaeufler.net/posts/introducing-crytic---mutation-testing-in-crystal-lang" target="_blank">Introducing crytic - mutation testing in crystal-lang</a></p>
@@ -201,19 +248,111 @@
 
 <pre><code class="language-yaml">development_dependencies:
   crytic:
-    github: hanneskaeufler/crytic</code></pre>
+    github: hanneskaeufler/crytic
+    version: ~> 1.1.0</code></pre>
 
 <p>After <code>shards install</code>, this will place the <code>crytic</code> executable into the <code>bin/</code> folder inside your project.</p>
 
 <h2>Usage</h2>
 
-<p>Crytic will only mutate statements in one file, let's call that our subject. You must also provide a list of test files to be executed in order to find the defects.</p>
+<p>Crytic will only mutate statements in one file, let's call that our subject, or <code>--subject</code> in the command line interface. You must also provide a list of test files to be executed in order to find the defects.</p>
 
-<pre><code class="language-shell">./bin/crytic --subject src/blog/pages/archive.cr spec/blog_spec.cr</code></pre>
+<pre><code class="language-shell">./bin/crytic --subject src/blog/pages/archive.cr spec/blog_spec.cr spec/blog/pages/archive_spec.cr</code></pre>
 
-<h2>Development</h2>
+<p>This command determines a list of mutations that can be performed on the source code of <code>archive.cr</code> and joins the <code>blog_spec.cr</code> and <code>archive_spec.cr</code> as a test-suite to find suriving mutants.</p>
 
-<p><span class="flag orange">TODO</span> </p>
+<h3>How to read the output</h3>
+
+<pre><code class="language-shell">✅ Original test suite passed.
+
+    ✅ ConditionFlip at line 11, column 7
+    ✅ NumberLiteralChange at line 11, column 18
+    ✅ NumberLiteralChange at line 12, column 28
+    ✅ NumberLiteralChange at line 13, column 34
+    ❌ NumberLiteralSignFlip
+        The following change didn't fail the test-suite:
+        @@ -5,7 +5,7 @@
+        html_snippets = [] of String
+        scanner = StringScanner.new(content)
+        while scanner.skip_until(/RAW_HTML_START(.+?)RAW_HTML_END/m)
+        -      if scanner[1]?
+        +      if scanner[-1]?
+        matches &lt;&lt; scanner[0]
+        html_snippets &lt;&lt; scanner[1]
+        end
+
+    ✅ StringLiteralChange at line 35, column 29
+
+Finished in 36.35 seconds:
+6 mutations, 5 covered, 1 uncovered, 0 errored. Mutation score: 83.33%</code></pre>
+
+<p>The first good message here is that the <code>Original test suite passed</code>. Crytic ran <code>crystal spec [all the files you passed]</code> and that exited with exit code <code>0</code>. Any other result on your inital test suite and it would not have made sense to continue. Intentionally breaking source code which is already broken is of no use.</p>
+
+<p>Each following occurance of <code>✅</code> shows that a mutant has been killed, ergo that the change in the source code was detected by the test suite. The line and column numbers are printed to follow the progress through the subject file.</p>
+
+<p><code>❌ NumberLiteralSignFlip</code> is signaling that indeed a mutation was not detected. The diff below shows the change that was made which was not caught by the test suite.</p>
+
+<h3>Available mutants</h3>
+
+<p>There are many ways a code-base can be modified to introduce arbitrary failures. Crytic only provides mutators which keep the code compiling (at least in theory).</p>
+
+<h4>AndOrSwap</h4>
+
+<p>This mutant replaces the <code>&&</code> operator by the <code>||</code> operator. A typical mutation is:</p>
+
+<pre><code class="language-diff">- if cool && nice
++ if cool || nice</code></pre>
+
+<h4>BoolLiteralFlip</h4>
+
+<p>This mutant flips literal occurances of <code>true</code> or <code>false</code>. A typical mutation is:</p>
+
+<pre><code class="language-diff">  def valid
+-   return true
++   return false
+  end</code></pre>
+
+<h4>ConditionFlip</h4>
+
+<p>This mutant flips the <code>if</code> and <code>else</code> branch in conditions. It will create an <code>else</code> branch even if there is none. A typical mutation is:</p>
+
+<pre><code class="language-diff">  if true
++ else
+    doSomething()
+  end</code></pre>
+
+<h4>NumberLiteralChange</h4>
+
+<p>This mutation changes literal occurances of numbers by prefixing the number with a "1". A typical mutation is:</p>
+
+<pre><code class="language-diff">-  0
++  10</code></pre>
+
+<h4>NumberLiteralSignChange</h4>
+
+<p>This mutation changes the sign of literal numbers. It ignores literal "0". A typical mutation is:</p>
+
+<pre><code class="language-diff">- 5
++ -5</code></pre>
+
+<h4>StringLiteralChange</h4>
+
+<p>This mutation changes literal occurances of string by appending the string <code>__crytic__</code>. A typical mutation is:</p>
+
+<pre><code class="language-diff">- "Welcome"
++ "Welcome__crytic__"</code></pre>
+
+<h2>Credits & inspiration</h2>
+
+<p>I have to credit the crystal <a href="https://github.com/anykeyh/crystal-coverage" target="_blank">code-coverage</a> shard which finally helped me create a working mutation testing tool after one or two failed attempts. I took heavy inspirations from its <a href="https://github.com/anykeyh/crystal-coverage/blob/master/src/coverage/inject/source_file.cr" target="_blank">SourceFile</a> class and actually lifted nearly all the code.</p>
+
+<p>One of the more difficult parts of crytic was the resolving of <code>require</code> statements. In order to work for most projects, crytic has to resolve those statements identical to the way crystal itself does. I achieved this (for now) by copying a bunch of methods from crystal-lang itself.</p>
+
+<p>Obviously I didn't invent mutation testing. While I cannot remember where I have read about it initially, my first recollection is the <a href="https://github.com/mbj/mutant" target="_blank">mutant</a> gem for ruby.</p>
+
+<h3>Alternatives</h3>
+
+<p>Although not having tested it myself yet, the <a href="https://github.com/mull-project/mull" target="_blank">mull</a> libray is supposed to work for any llvm based language, which I believe crystal is.</p>
 
 <h2>Contributing</h2>
 

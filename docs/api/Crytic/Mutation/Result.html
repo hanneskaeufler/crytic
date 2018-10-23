@@ -61,6 +61,16 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AndOrSwap" data-name="crytic::mutant::andorswap">
+      <a href="../../Crytic/Mutant/AndOrSwap.html">AndOrSwap</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AndOrSwapPossibilities" data-name="crytic::mutant::andorswappossibilities">
+      <a href="../../Crytic/Mutant/AndOrSwapPossibilities.html">AndOrSwapPossibilities</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlip" data-name="crytic::mutant::boolliteralflip">
       <a href="../../Crytic/Mutant/BoolLiteralFlip.html">BoolLiteralFlip</a>
       
@@ -111,6 +121,36 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/SelectRejectSwap" data-name="crytic::mutant::selectrejectswap">
+      <a href="../../Crytic/Mutant/SelectRejectSwap.html">SelectRejectSwap</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/SelectRejectSwapPossibilities" data-name="crytic::mutant::selectrejectswappossibilities">
+      <a href="../../Crytic/Mutant/SelectRejectSwapPossibilities.html">SelectRejectSwapPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/StringLiteralChange" data-name="crytic::mutant::stringliteralchange">
+      <a href="../../Crytic/Mutant/StringLiteralChange.html">StringLiteralChange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/StringLiteralChangePossibilities" data-name="crytic::mutant::stringliteralchangepossibilities">
+      <a href="../../Crytic/Mutant/StringLiteralChangePossibilities.html">StringLiteralChangePossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/TransformerMutant" data-name="crytic::mutant::transformermutant">
+      <a href="../../Crytic/Mutant/TransformerMutant.html">TransformerMutant</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/VisitorMutant" data-name="crytic::mutant::visitormutant">
+      <a href="../../Crytic/Mutant/VisitorMutant.html">VisitorMutant</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -143,6 +183,11 @@
   
   <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Result" data-name="crytic::mutation::result">
       <a href="../../Crytic/Mutation/Result.html">Result</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Status" data-name="crytic::mutation::status">
+      <a href="../../Crytic/Mutation/Status.html">Status</a>
       
     </li>
   
@@ -211,7 +256,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutation/result.cr#L4" target="_blank">crytic/mutation/result.cr</a>
+      <a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/result.cr#L22" target="_blank">crytic/mutation/result.cr</a>
     
     <br/>
   
@@ -224,7 +269,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28is_covered%3ABool%2Cdid_error%3ABool%2Cmutant%3AMutant%3A%3AMutant%2Cdiff%3AString%29-class-method" class="signature"><strong>.new</strong>(is_covered : Bool, did_error : Bool, mutant : Mutant::Mutant, diff : String)</a>
+        <a href="#new%28status%3AStatus%2Cmutant%3AMutant%3A%3AMutant%2Cdiff%3AString%29-class-method" class="signature"><strong>.new</strong>(status : Status, mutant : Mutant::Mutant, diff : String)</a>
         
       </li>
     
@@ -243,12 +288,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#copy_with%28is_covered_is_covered%3D%40is_covered%2Cdid_error_did_error%3D%40did_error%2Cmutant_mutant%3D%40mutant%2Cdiff_diff%3D%40diff%29-instance-method" class="signature"><strong>#copy_with</strong>(is_covered _is_covered = @is_covered, did_error _did_error = @did_error, mutant _mutant = @mutant, diff _diff = @diff)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#did_error%3ABool-instance-method" class="signature"><strong>#did_error</strong> : Bool</a>
+        <a href="#copy_with%28status_status%3D%40status%2Cmutant_mutant%3D%40mutant%2Cdiff_diff%3D%40diff%29-instance-method" class="signature"><strong>#copy_with</strong>(status _status = @status, mutant _mutant = @mutant, diff _diff = @diff)</a>
         
       </li>
     
@@ -258,7 +298,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#is_covered%3ABool-instance-method" class="signature"><strong>#is_covered</strong> : Bool</a>
+        <a href="#location-instance-method" class="signature"><strong>#location</strong></a>
         
       </li>
     
@@ -273,7 +313,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#successful%3F-instance-method" class="signature"><strong>#successful?</strong></a>
+        <a href="#status%3AStatus-instance-method" class="signature"><strong>#status</strong> : Status</a>
         
       </li>
     
@@ -320,18 +360,18 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(is_covered:Bool,did_error:Bool,mutant:Mutant::Mutant,diff:String)-class-method">
+    <div class="entry-detail" id="new(status:Status,mutant:Mutant::Mutant,diff:String)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(is_covered : Bool, did_error : Bool, mutant : <a href="../../Crytic/Mutant/Mutant.html">Mutant::Mutant</a>, diff : String)
+        def self.<strong>new</strong>(status : <a href="../../Crytic/Mutation/Status.html">Status</a>, mutant : <a href="../../Crytic/Mutant/Mutant.html">Mutant::Mutant</a>, diff : String)
 
-        <a class="method-permalink" href="#new%28is_covered%3ABool%2Cdid_error%3ABool%2Cmutant%3AMutant%3A%3AMutant%2Cdiff%3AString%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28status%3AStatus%2Cmutant%3AMutant%3A%3AMutant%2Cdiff%3AString%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutation/result.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/result.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -354,37 +394,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutation/result.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/result.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="copy_with(is_covered_is_covered=@is_covered,did_error_did_error=@did_error,mutant_mutant=@mutant,diff_diff=@diff)-instance-method">
+    <div class="entry-detail" id="copy_with(status_status=@status,mutant_mutant=@mutant,diff_diff=@diff)-instance-method">
       <div class="signature">
         
-        def <strong>copy_with</strong>(is_covered _is_covered = @is_covered, did_error _did_error = @did_error, mutant _mutant = @mutant, diff _diff = @diff)
+        def <strong>copy_with</strong>(status _status = @status, mutant _mutant = @mutant, diff _diff = @diff)
 
-        <a class="method-permalink" href="#copy_with%28is_covered_is_covered%3D%40is_covered%2Cdid_error_did_error%3D%40did_error%2Cmutant_mutant%3D%40mutant%2Cdiff_diff%3D%40diff%29-instance-method">#</a>
+        <a class="method-permalink" href="#copy_with%28status_status%3D%40status%2Cmutant_mutant%3D%40mutant%2Cdiff_diff%3D%40diff%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutation/result.cr#L4" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="did_error:Bool-instance-method">
-      <div class="signature">
-        
-        def <strong>did_error</strong> : Bool
-
-        <a class="method-permalink" href="#did_error%3ABool-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/result.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -403,16 +429,18 @@
       </div>
     </div>
   
-    <div class="entry-detail" id="is_covered:Bool-instance-method">
+    <div class="entry-detail" id="location-instance-method">
       <div class="signature">
         
-        def <strong>is_covered</strong> : Bool
+        def <strong>location</strong>
 
-        <a class="method-permalink" href="#is_covered%3ABool-instance-method">#</a>
+        <a class="method-permalink" href="#location-instance-method">#</a>
       </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/result.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -442,23 +470,21 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutation/result.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/mutation/result.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="successful?-instance-method">
+    <div class="entry-detail" id="status:Status-instance-method">
       <div class="signature">
         
-        def <strong>successful?</strong>
+        def <strong>status</strong> : <a href="../../Crytic/Mutation/Status.html">Status</a>
 
-        <a class="method-permalink" href="#successful%3F-instance-method">#</a>
+        <a class="method-permalink" href="#status%3AStatus-instance-method">#</a>
       </div>
       
       <br/>
       <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/bfacf03741d1b5a9d61cb54fe0dfacc75b7bfd53/src/crytic/mutation/result.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
