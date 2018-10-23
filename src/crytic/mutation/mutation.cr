@@ -49,7 +49,7 @@ module Crytic::Mutation
         "crystal", ["eval", full],
         output: io,
         error: STDERR)
-      { exit_code: exit_code, output: io.to_s }
+      {exit_code: exit_code, output: io.to_s}
     end
 
     private def mutated_specs_source(mutated_source)
