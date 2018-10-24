@@ -1,0 +1,263 @@
+module Crytic
+  class Diff(A, B)
+    VERSION = "1.0.0"
+
+    struct Chunk(T)
+      def initialize(@diff : T, @type : Type, @range_a : Range(Int32, Int32), @range_b : Range(Int32, Int32))
+      end
+
+      property diff, type, range_a, range_b
+
+      def append?; type == Type::APPEND end
+      def delete?; type == Type::DELETE end
+      def no_change?; type == Type::NO_CHANGE end
+
+      def data
+        case type
+        when Type::APPEND
+          diff.b[range_b]
+        else
+          diff.a[range_a]
+        end
+      end
+
+      def ==(other : Chunk)
+        type == other.type &&
+        range_a == other.range_a &&
+        range_b == other.range_b
+      end
+    end
+
+    enum Type
+      NO_CHANGE
+      APPEND
+      DELETE
+
+      def reverse
+        case self
+        when APPEND
+          DELETE
+        when DELETE
+          APPEND
+        else
+          self
+        end
+      end
+    end
+
+    def self.diff(a, b)
+      Diff.new(a, b).run
+    end
+
+    @m : Int32
+    @n : Int32
+    @reverse : Bool
+    @edit_distance : Int32?
+
+    def initialize(@a : A, @b : B)
+      @m = a.size
+      @n = b.size
+      if @reverse = @n < @m
+        @a, @b = @b, @a
+        @m, @n = @n, @m
+      end
+
+      @table = {} of {Int32, Int32} => Int32
+    end
+
+    def a
+      @reverse ? @b : @a
+    end
+
+    def b
+      @reverse ? @a : @b
+    end
+
+    def edit_distance
+      if ed = @edit_distance
+        return ed
+      end
+
+      offset = @m + 1
+      delta = @n - @m
+      fp = Array.new @m + @n + 3, -1
+
+      p = 0
+      loop do
+        (-p       ..delta - 1).each         {|k| fp[k + offset] = snake k, [fp[k - 1 + offset] + 1, fp[k + 1 + offset]].max }
+        (delta + 1..delta + p).reverse_each {|k| fp[k + offset] = snake k, [fp[k - 1 + offset] + 1, fp[k + 1 + offset]].max }
+        fp[delta + offset] = snake delta, [fp[delta - 1 + offset] + 1, fp[delta + 1 + offset]].max
+
+        if fp[delta + offset] == @n
+          return @edit_distance = delta + p * 2
+        end
+        p += 1
+      end
+    end
+
+    private def snake(k, y)
+      x = y - k
+
+      i = 0
+      while x < @m && y < @n && @a[x] == @b[y]
+        x += 1
+        y += 1
+        i += 1
+      end
+      @table[{x, y}] = i
+      y
+    end
+
+    def run
+      edit_distance
+
+      x, y = @m, @n
+      chunk_list = [] of Chunk(self)
+      loop do
+        i = @table[{x, y}]
+        if i != 0
+          chunk_list.push chunk Type::NO_CHANGE, x - i...x, y - i...y
+        end
+        x, y = x - i, y - i
+
+        i = 0
+        flag = false
+        while @table[{x, y - 1}]?
+          y -= 1
+          i += 1
+        end
+        if i != 0
+          chunk_list.push chunk Type::APPEND, x...x, y...y + i
+          flag = true
+        end
+
+        i = 0
+        while @table[{x - 1, y}]?
+          x -= 1
+          i += 1
+        end
+        if i != 0
+          chunk_list.push chunk Type::DELETE, x...x + i, y...y
+          if flag && @reverse
+            chunk_list[-1], chunk_list[-2] = chunk_list[-2], chunk_list[-1]
+          end
+        end
+
+        if x == 0 && y == 0
+          return chunk_list.reverse!
+        end
+      end
+    end
+
+    private def chunk(type, range_a, range_b)
+      if @reverse
+        Chunk.new self, type.reverse, range_b, range_a
+      else
+        Chunk.new self, type, range_a, range_b
+      end
+    end
+  end
+  class Diff(A, B)
+    def self.unified_diff(a, b, n = 3, newline = "\n")
+      diff = Diff.new(a, b)
+      chunks = diff.run
+
+      result = [] of String
+      group = [] of String
+      start_a = start_b = 0
+
+      chunks.each_with_index do |cur, i|
+        next if cur.no_change?
+        prv = i > 0 ? chunks.at(i-1) : Chunk.new(diff, Type::NO_CHANGE, 0...0, 0...0)
+        nxt = chunks.at(i+1) { Chunk.new(diff, Type::NO_CHANGE, a.size...a.size, b.size...b.size) }
+
+        if group.empty? && prv.no_change?
+          start_a = {prv.range_a.end - n, 0}.max
+          start_b = {prv.range_b.end - n, 0}.max
+          add_with_prefix ' ', prv.data.last(n), group
+        end
+
+        prefix = cur.append? ? '+'.colorize(:green).to_s : '-'.colorize(:red).to_s
+        add_with_prefix prefix, cur.data.map { |d| d.colorize(cur.append? ? :green : :red).to_s }, group
+
+        if !group.last.ends_with?(newline)
+          if cur.delete? ? cur.range_a.end == a.size : cur.range_b.end == b.size
+            group[-1] += newline
+            group.push "\\ No newline at end of file" + newline
+          end
+        end
+
+        if nxt.no_change?
+          if nxt.data.size > n*2 || i >= chunks.size - 2
+            add_with_prefix ' ', nxt.data.first(n), group
+
+            size_a = {nxt.range_a.begin + n, a.size}.min - start_a
+            size_b = {nxt.range_b.begin + n, b.size}.min - start_b
+            start_a += 1 unless size_a == 0
+            start_b += 1 unless size_b == 0
+
+            result.push String.build {|io|
+              io << "@@ -" << start_a
+              io << "," << size_a unless size_a == 1
+              io << " +" << start_b
+              io << "," << size_b unless size_b == 1
+              io << " @@" << newline
+            }
+            result += group
+            group.clear
+          else
+            add_with_prefix ' ', nxt.data, group
+          end
+        end
+      end
+
+      result
+    end
+
+    private def self.add_with_prefix(prefix, lines, to array)
+      lines.each do |line|
+        array.push prefix + line + "\n"
+      end
+    end
+
+    def self.unified_diff(a : String, b : String, n = 3, newline = "\n")
+      unified_diff(a.lines, b.lines, n, newline).join
+    end
+
+    def self.apply(a, diff)
+      b = a.dup
+      index = 0
+      diff.each_with_index do |d, diff_index|
+        if d.chomp.empty?
+          d = " " + d
+        end
+        if d.starts_with? "@@"
+          index, size = (d.split[2][1..-1] + ",1").split(',').map &.to_i
+          index -= 1 unless size == 0
+          next
+        end
+        if diff.at(diff_index + 1) { "" } .starts_with? "\\ No newline at end of file"
+          d = d.chomp
+        end
+        if d[0] == '+'
+          b.insert(index, d[1..-1])
+          index += 1
+        elsif d[0] == ' ' || d[0] == '-'
+          if b[index] != d[1..-1]
+            raise ArgumentError.new("Failed to apply diff (line #{diff_index + 1})")
+          end
+          if d[0] == '-'
+            b.delete_at index
+          else
+            index += 1
+          end
+        end
+      end
+      b
+    end
+
+    def self.apply(a : String, diff : String)
+      apply(a.lines, diff.lines).join
+    end
+  end
+end

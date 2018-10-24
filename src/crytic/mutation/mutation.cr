@@ -1,8 +1,8 @@
+require "../diff"
 require "../mutant/mutant"
-require "../process_runner"
 require "../process_process_runner"
+require "../process_runner"
 require "../source"
-require "./diff"
 require "./inject_mutated_subject_into_specs"
 require "./result"
 require "compiler/crystal/syntax/*"
@@ -17,7 +17,7 @@ module Crytic::Mutation
       subject_source = File.read(@subject_file_path)
       source = Source.new(subject_source)
       mutated_source = source.mutated_source(@mutant)
-      source_diff = Diff.new(source.original_source, mutated_source).to_s
+      source_diff = Crytic::Diff.unified_diff(source.original_source, mutated_source).to_s
       process_result = run_process(mutated_source)
       status = if process_result[:exit_code] == 0
                  Status::Uncovered
