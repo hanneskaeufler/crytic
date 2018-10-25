@@ -59,7 +59,8 @@ module Crytic
     private def score(results)
       total = results.size
       killed = results.count(&.status.covered?)
-      (killed.to_f / total * 100).round(2)
+      msi = killed.to_f / total * 100
+      msi.round(2)
     end
 
     private def elapsed_time
