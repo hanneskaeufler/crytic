@@ -8,11 +8,6 @@ crystal: 0.25.1
 
 license: MIT
 
-dependencies:
-  diff:
-    github: hanneskaeufler/crystal-diff
-    branch: oprypin/unified-diff
-
 targets:
   crytic:
     main: src/crytic.cr
