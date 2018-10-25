@@ -5,14 +5,23 @@ module Crytic
         @diff : T,
         @type : Type,
         @range_a : Range(Int32, Int32),
-        @range_b : Range(Int32, Int32))
+        @range_b : Range(Int32, Int32)
+      )
       end
 
       property diff, type, range_a, range_b
 
-      def append?; type == Type::APPEND end
-      def delete?; type == Type::DELETE end
-      def no_change?; type == Type::NO_CHANGE end
+      def append?
+        type == Type::APPEND
+      end
+
+      def delete?
+        type == Type::DELETE
+      end
+
+      def no_change?
+        type == Type::NO_CHANGE
+      end
 
       def data
         case type
@@ -25,8 +34,8 @@ module Crytic
 
       def ==(other : Chunk)
         type == other.type &&
-        range_a == other.range_a &&
-        range_b == other.range_b
+          range_a == other.range_a &&
+          range_b == other.range_b
       end
     end
 
@@ -82,8 +91,8 @@ module Crytic
 
       p = 0
       loop do
-        (-p       ..delta - 1).each         {|k| fp[k + offset] = snake k, [fp[k - 1 + offset] + 1, fp[k + 1 + offset]].max }
-        (delta + 1..delta + p).reverse_each {|k| fp[k + offset] = snake k, [fp[k - 1 + offset] + 1, fp[k + 1 + offset]].max }
+        (-p..delta - 1).each { |k| fp[k + offset] = snake k, [fp[k - 1 + offset] + 1, fp[k + 1 + offset]].max }
+        (delta + 1..delta + p).reverse_each { |k| fp[k + offset] = snake k, [fp[k - 1 + offset] + 1, fp[k + 1 + offset]].max }
         fp[delta + offset] = snake delta, [fp[delta - 1 + offset] + 1, fp[delta + 1 + offset]].max
 
         if fp[delta + offset] == @n
@@ -155,6 +164,7 @@ module Crytic
       end
     end
   end
+
   class Diff(A, B)
     def self.unified_diff(a, b, n = 3, newline = "\n")
       diff = Diff.new(a, b)
@@ -166,8 +176,8 @@ module Crytic
 
       chunks.each_with_index do |cur, i|
         next if cur.no_change?
-        prv = i > 0 ? chunks.at(i-1) : Chunk.new(diff, Type::NO_CHANGE, 0...0, 0...0)
-        nxt = chunks.at(i+1) { Chunk.new(diff, Type::NO_CHANGE, a.size...a.size, b.size...b.size) }
+        prv = i > 0 ? chunks.at(i - 1) : Chunk.new(diff, Type::NO_CHANGE, 0...0, 0...0)
+        nxt = chunks.at(i + 1) { Chunk.new(diff, Type::NO_CHANGE, a.size...a.size, b.size...b.size) }
 
         if group.empty? && prv.no_change?
           start_a = {prv.range_a.end - n, 0}.max
@@ -194,7 +204,7 @@ module Crytic
             start_a += 1 unless size_a == 0
             start_b += 1 unless size_b == 0
 
-            result.push String.build {|io|
+            result.push String.build { |io|
               io << "@@ -" << start_a
               io << "," << size_a unless size_a == 1
               io << " +" << start_b
