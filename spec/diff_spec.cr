@@ -41,6 +41,23 @@ module Crytic
            8\n
           DIFF
       end
+
+      it "marks multiple changes" do
+        diff = Diff.unified_diff("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n", "1\n2\n3\n4\n6\n7\n8\n9\n10\n11")
+          .should eq <<-DIFF
+          @@ -2,9 +2,9 @@
+           2
+           3
+           4
+          #{"-".colorize.red}#{"5".colorize.red}
+           6
+           7
+           8
+           9
+           10
+          #{"+".colorize.green}#{"11".colorize.green}\n
+          DIFF
+      end
     end
   end
 end

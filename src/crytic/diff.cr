@@ -1,9 +1,11 @@
 module Crytic
   class Diff(A, B)
-    VERSION = "1.0.0"
-
     struct Chunk(T)
-      def initialize(@diff : T, @type : Type, @range_a : Range(Int32, Int32), @range_b : Range(Int32, Int32))
+      def initialize(
+        @diff : T,
+        @type : Type,
+        @range_a : Range(Int32, Int32),
+        @range_b : Range(Int32, Int32))
       end
 
       property diff, type, range_a, range_b
@@ -43,10 +45,6 @@ module Crytic
           self
         end
       end
-    end
-
-    def self.diff(a, b)
-      Diff.new(a, b).run
     end
 
     @m : Int32
@@ -222,42 +220,6 @@ module Crytic
 
     def self.unified_diff(a : String, b : String, n = 3, newline = "\n")
       unified_diff(a.lines, b.lines, n, newline).join
-    end
-
-    def self.apply(a, diff)
-      b = a.dup
-      index = 0
-      diff.each_with_index do |d, diff_index|
-        if d.chomp.empty?
-          d = " " + d
-        end
-        if d.starts_with? "@@"
-          index, size = (d.split[2][1..-1] + ",1").split(',').map &.to_i
-          index -= 1 unless size == 0
-          next
-        end
-        if diff.at(diff_index + 1) { "" } .starts_with? "\\ No newline at end of file"
-          d = d.chomp
-        end
-        if d[0] == '+'
-          b.insert(index, d[1..-1])
-          index += 1
-        elsif d[0] == ' ' || d[0] == '-'
-          if b[index] != d[1..-1]
-            raise ArgumentError.new("Failed to apply diff (line #{diff_index + 1})")
-          end
-          if d[0] == '-'
-            b.delete_at index
-          else
-            index += 1
-          end
-        end
-      end
-      b
-    end
-
-    def self.apply(a : String, diff : String)
-      apply(a.lines, diff.lines).join
     end
   end
 end
