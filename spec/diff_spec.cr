@@ -29,7 +29,7 @@ module Crytic
       end
 
       it "shows a few lines around the change" do
-        diff = Diff.unified_diff("1\n2\n3\n4\n5\n6\n7\n8\n9", "1\n2\n3\n4\n6\n7\n8\n9")
+        Diff.unified_diff("1\n2\n3\n4\n5\n6\n7\n8\n9", "1\n2\n3\n4\n6\n7\n8\n9")
           .should eq <<-DIFF
           @@ -2,7 +2,6 @@
            2
@@ -43,7 +43,7 @@ module Crytic
       end
 
       it "marks multiple changes" do
-        diff = Diff.unified_diff("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n", "1\n2\n3\n4\n6\n7\n8\n9\n10\n11")
+        Diff.unified_diff("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n", "1\n2\n3\n4\n6\n7\n8\n9\n10\n11")
           .should eq <<-DIFF
           @@ -2,9 +2,9 @@
            2
