@@ -1,5 +1,5 @@
-require "spec"
 require "../../src/crytic/mutant/number_literal_sign_flip"
+require "../spec_helper"
 
 module Crytic
   describe Mutant::NumberLiteralSignFlip do

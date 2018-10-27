@@ -1,6 +1,6 @@
-require "spec"
-require "../../src/crytic/mutant/select_reject_swap_possibilities"
 require "../../src/crytic/mutant/select_reject_swap"
+require "../../src/crytic/mutant/select_reject_swap_possibilities"
+require "../spec_helper"
 
 module Crytic
   describe Mutant::SelectRejectSwap do

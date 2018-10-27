@@ -1,5 +1,5 @@
-require "spec"
 require "../../src/crytic/mutant/condition_flip"
+require "../spec_helper"
 
 module Crytic
   describe Mutant::ConditionFlip do

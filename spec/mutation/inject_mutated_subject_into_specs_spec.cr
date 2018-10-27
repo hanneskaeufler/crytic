@@ -1,6 +1,6 @@
 require "../../src/crytic/mutation/inject_mutated_subject_into_specs"
 require "compiler/crystal/syntax/*"
-require "spec"
+require "../spec_helper"
 
 module Crytic
   describe InjectMutatedSubjectIntoSpecs do

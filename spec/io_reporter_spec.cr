@@ -1,7 +1,7 @@
 require "../src/crytic/io_reporter"
 require "../src/crytic/mutant/number_literal_change"
 require "../src/crytic/mutation/original_result"
-require "spec"
+require "./spec_helper"
 
 private def fake_mutant
   Crytic::Mutant::NumberLiteralChange.at(Crystal::Location.new(filename: nil, line_number: 0, column_number: 0))

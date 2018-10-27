@@ -1,5 +1,5 @@
-require "spec"
 require "../src/crytic/runner"
+require "./spec_helper"
 
 describe Crytic::Runner do
   describe "#run" do
