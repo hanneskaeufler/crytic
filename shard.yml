@@ -15,6 +15,10 @@ targets:
 scripts:
   postinstall: make bin
 
+dependencies:
+  timeout:
+    github: hugoabonizio/timeout.cr
+
 development_dependencies:
   ameba:
     github: veelenga/ameba
