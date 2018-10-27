@@ -1,6 +1,6 @@
 require "../src/crytic/diff"
 require "colorize"
-require "spec"
+require "./spec_helper"
 
 module Crytic
   describe Diff do

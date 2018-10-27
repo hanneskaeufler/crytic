@@ -155,7 +155,8 @@ module Crytic
     private def find_in_path_relative_to_dir(filename, relative_to)
       if relative_to.is_a?(String)
         # Check if it's a wildcard.
-        if filename.ends_with?("/*") || (recursive = filename.ends_with?("/**"))
+        recursive = filename.ends_with?("/**")
+        if filename.ends_with?("/*") || recursive
           filename_dir_index = filename.rindex('/').not_nil!
           filename_dir = filename[0..filename_dir_index]
           relative_dir = "#{relative_to}/#{filename_dir}"

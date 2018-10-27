@@ -1,5 +1,5 @@
-require "spec"
 require "../../src/crytic/mutant/and_or_swap"
+require "../spec_helper"
 
 module Crytic
   describe Mutant::AndOrSwap do

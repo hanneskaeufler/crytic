@@ -1,5 +1,5 @@
-require "spec"
 require "../../src/crytic/mutant/number_literal_change_possibilities"
+require "../spec_helper"
 
 module Crytic
   describe Mutant::NumberLiteralChangePossibilities do

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
 list=(`find spec -name '*_spec.cr' -and -not -name 'integration_spec.cr'`)
+printf '%s\n' "${list[@]}" | sort
 ./bin/crystal-coverage "${list[@]}"

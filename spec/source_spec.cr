@@ -1,7 +1,7 @@
 require "../src/crytic/mutant/and_or_swap"
 require "../src/crytic/mutant/number_literal_change"
 require "../src/crytic/source"
-require "spec"
+require "./spec_helper"
 
 describe Crytic::Source do
   describe "#original_source" do

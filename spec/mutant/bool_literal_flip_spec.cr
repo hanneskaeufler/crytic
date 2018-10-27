@@ -1,5 +1,5 @@
-require "spec"
 require "../../src/crytic/mutant/bool_literal_flip"
+require "../spec_helper"
 
 module Crytic
   describe Mutant::BoolLiteralFlip do

@@ -19,9 +19,10 @@ module Crytic::Mutation
       mutated_source = source.mutated_source(@mutant)
       source_diff = Crytic::Diff.unified_diff(source.original_source, mutated_source).to_s
       process_result = run_process(mutated_source)
+      success_messages_in_output = /Finished/ =~ process_result[:output]
       status = if process_result[:exit_code] == 0
                  Status::Uncovered
-               elsif (/Finished/ =~ process_result[:output]) == nil
+               elsif success_messages_in_output == nil
                  Status::Error
                else
                  Status::Covered

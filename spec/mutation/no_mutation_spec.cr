@@ -1,6 +1,6 @@
 require "../../src/crytic/mutation/no_mutation"
+require "../spec_helper"
 require "./fake_process_runner"
-require "spec"
 
 module Crytic::Mutation
   describe NoMutation do
