@@ -18,6 +18,10 @@ module Crytic::Mutation
     def covered?
       self == Covered
     end
+
+    def timeout?
+      self == Timeout
+    end
   end
 
   record Result, status : Status, mutant : Mutant::Mutant, diff : String do
