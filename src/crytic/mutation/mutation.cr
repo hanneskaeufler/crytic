@@ -22,6 +22,8 @@ module Crytic::Mutation
       success_messages_in_output = /Finished/ =~ process_result[:output]
       status = if process_result[:exit_code] == 0
                  Status::Uncovered
+               elsif process_result[:exit_code] == 28
+                 Status::Timeout
                elsif success_messages_in_output == nil
                  Status::Error
                else
@@ -49,7 +51,8 @@ module Crytic::Mutation
       exit_code = process_runner.run(
         "crystal", ["eval", full],
         output: io,
-        error: STDERR)
+        error: STDERR,
+        timeout: 10.seconds)
       {exit_code: exit_code, output: io.to_s}
     end
 

@@ -188,6 +188,19 @@ module Crytic::Mutation
 
         mutation.run.status.should eq Status::Error
       end
+
+      it "reports timed out mutations" do
+        mutation = Mutation.with(
+          mutant,
+          "./fixtures/simple/bar.cr",
+          ["./fixtures/simple/bar_with_helper_spec.cr"])
+
+        fake = FakeProcessRunner.new
+        fake.exit_code = 28
+        mutation.process_runner = fake
+
+        mutation.run.status.should eq Status::Timeout
+      end
     end
   end
 end

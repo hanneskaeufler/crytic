@@ -3,8 +3,9 @@ require "../mutant/mutant"
 module Crytic::Mutation
   enum Status
     Covered
-    Uncovered
     Error
+    Timeout
+    Uncovered
 
     def uncovered?
       self == Uncovered
