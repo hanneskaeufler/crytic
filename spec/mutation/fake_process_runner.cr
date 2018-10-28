@@ -19,6 +19,10 @@ module Crytic
       @exit_code
     end
 
+    def run(cmd : String, args : Array(String), output, error, timeout)
+      run(cmd, args, output, error)
+    end
+
     def fill_output_with(text : String)
       @output_io << text
     end
