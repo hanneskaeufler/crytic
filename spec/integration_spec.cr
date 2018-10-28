@@ -42,6 +42,15 @@ describe Crytic do
       result.exit_code.should be > 0
     end
   end
+
+  describe "a subject that is be mutated into an endless loop" do
+    it "finishes and reports a timed out spec" do
+      result = run_crytic("-s ./fixtures/timeout/timeout.cr ./fixtures/timeout/timeout_spec.cr")
+      result.output.should contain "✅ Original test suite passed.\n"
+      result.output.should contain "1 timeout"
+      result.exit_code.should be > 0
+    end
+  end
 end
 
 def run_crytic(args : String)

@@ -6,24 +6,31 @@ require "../source"
 require "./inject_mutated_subject_into_specs"
 require "./result"
 require "compiler/crystal/syntax/*"
+require "tempfile"
 
 module Crytic::Mutation
   # Represents a single mutation to a single source file
   class Mutation
     property process_runner
+    property file_remover
+    property tempfile_writer
     @process_runner : Crytic::ProcessRunner
+    @file_remover : (String -> Void)
+    @tempfile_writer : (String, String, String) -> String
 
     def run
       subject_source = File.read(@subject_file_path)
       source = Source.new(subject_source)
       mutated_source = source.mutated_source(@mutant)
       source_diff = Crytic::Diff.unified_diff(source.original_source, mutated_source).to_s
-      process_result = run_process(mutated_source)
+      process_result = run_mutation(mutated_source)
       success_messages_in_output = /Finished/ =~ process_result[:output]
-      status = if process_result[:exit_code] == 0
+      status = if process_result[:exit_code] == ProcessRunner::SUCCESS
                  Status::Uncovered
+               elsif process_result[:exit_code] == ProcessRunner::TIMEOUT
+                 Status::Timeout
                elsif success_messages_in_output == nil
-                 Status::Error
+                 Status::Errored
                else
                  Status::Covered
                end
@@ -41,16 +48,45 @@ module Crytic::Mutation
       @specs_file_paths : Array(String)
     )
       @process_runner = ProcessProcessRunner.new
+      @file_remover = ->File.delete(String)
+      @tempfile_writer = ->(name : String, extension : String, content : String) {
+        Tempfile.open(name, extension) { |file| file.print(content) }.path
+      }
     end
 
-    private def run_process(mutated_source)
-      full = mutated_specs_source(mutated_source)
+    private def run_mutation(mutated_source)
       io = IO::Memory.new
-      exit_code = process_runner.run(
-        "crystal", ["eval", full],
-        output: io,
-        error: STDERR)
+      tempfile_path = write_full_source_into_tempfile(mutated_source)
+      binary = compile_tempfile_into_binary(tempfile_path)
+      exit_code = execute_binary(binary, io)
+      remove_artifacts(tempfile_path, binary)
+
       {exit_code: exit_code, output: io.to_s}
+    end
+
+    private def write_full_source_into_tempfile(mutated_source)
+      @tempfile_writer.call("crytic", ".cr", mutated_specs_source(mutated_source))
+    end
+
+    private def compile_tempfile_into_binary(tempfile_path)
+      io = IO::Memory.new
+      binary = "#{File.dirname(tempfile_path)}/#{File.basename(tempfile_path, ".cr")}"
+      process_runner.run(
+        "crystal",
+        ["build", "-o", binary, "--no-debug", tempfile_path],
+        output: io,
+        error: io)
+      binary
+    end
+
+    private def execute_binary(binary, io)
+      process_runner
+        .run(binary, [] of String, output: io, error: STDERR, timeout: 10.seconds)
+    end
+
+    private def remove_artifacts(tempfile_path, binary)
+      @file_remover.call(tempfile_path)
+      @file_remover.call(binary)
     end
 
     private def mutated_specs_source(mutated_source)

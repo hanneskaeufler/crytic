@@ -11,8 +11,7 @@ module Crytic::Mutation
         mutation.process_runner = fake
         mutation.run
 
-        fake.cmd.should eq "crystal"
-        fake.args.should eq "spec ./single/test_spec.cr"
+        fake.cmd_with_args.last.should eq "crystal spec ./single/test_spec.cr"
       end
 
       it "runs crystal spec with multiple spec files" do
@@ -21,8 +20,7 @@ module Crytic::Mutation
         mutation.process_runner = fake
         mutation.run
 
-        fake.cmd.should eq "crystal"
-        fake.args.should eq "spec ./a/b_spec.cr ./a/c_spec.cr"
+        fake.cmd_with_args.last.should eq "crystal spec ./a/b_spec.cr ./a/c_spec.cr"
       end
     end
   end

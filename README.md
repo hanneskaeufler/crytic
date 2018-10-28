@@ -135,6 +135,8 @@ I have to credit the crystal [code-coverage](https://github.com/anykeyh/crystal-
 
 One of the more difficult parts of crytic was the resolving of `require` statements. In order to work for most projects, crytic has to resolve those statements identical to the way crystal itself does. I achieved this (for now) by copying a bunch of methods from crystal-lang itself.
 
+In order to avoid dependencies for tiny amounts of savings I rather copied/adapted a bit of code from [timeout.cr](https://github.com/hugoabonizio/timeout.cr) and [crystal-diff](https://github.com/MakeNowJust/crystal-diff).
+
 Obviously I didn't invent mutation testing. While I cannot remember where I have read about it initially, my first recollection is the [mutant](https://github.com/mbj/mutant) gem for ruby.
 
 ### Alternatives

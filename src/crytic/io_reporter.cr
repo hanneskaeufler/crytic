@@ -19,24 +19,30 @@ module Crytic
     end
 
     def report_result(result)
+      @io << "\n#{INDENT}"
       case result.status
-      when Mutation::Status::Error
-        @io << "\n#{INDENT}"
+      when Mutation::Status::Errored
         @io << "❌ #{result.mutant_name}"
         @io << "\n#{INDENT + INDENT}The following change broke the code:\n"
         @io << "#{INDENT + INDENT + INDENT}"
         @io << result.diff.lines.join("\n#{INDENT + INDENT + INDENT}")
         @io << "\n"
       when Mutation::Status::Uncovered
-        @io << "\n#{INDENT}"
         @io << "❌ #{result.mutant_name}"
         @io << "\n#{INDENT + INDENT}The following change didn't fail the test-suite:\n"
         @io << "#{INDENT + INDENT + INDENT}"
         @io << result.diff.lines.join("\n#{INDENT + INDENT + INDENT}")
         @io << "\n"
       when Mutation::Status::Covered
-        @io << "\n#{INDENT}"
         @io << "✅ #{result.mutant_name} at line #{result.location.line_number}, column #{result.location.column_number}"
+      when Mutation::Status::Timeout
+        @io << "❌ #{result.mutant_name}"
+        @io << "\n#{INDENT + INDENT}The following change timed out:\n"
+        @io << "#{INDENT + INDENT + INDENT}"
+        @io << result.diff.lines.join("\n#{INDENT + INDENT + INDENT}")
+        @io << "\n"
+      else
+        raise "There were mutations of unreported type"
       end
     end
 
@@ -45,7 +51,8 @@ module Crytic
       summary = "#{results.size} mutations, "
       summary += "#{results.map(&.status).count(&.covered?)} covered, "
       summary += "#{results.map(&.status).count(&.uncovered?)} uncovered, "
-      summary += "#{results.map(&.status).count(&.errored?)} errored."
+      summary += "#{results.map(&.status).count(&.errored?)} errored, "
+      summary += "#{results.map(&.status).count(&.timeout?)} timeout."
       summary += " Mutation score: #{score_in_percent(results)}"
       summary += "\n"
       @io << summary.colorize(results.map(&.status.covered?).all? ? :green : :red).to_s
