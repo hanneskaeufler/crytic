@@ -54,7 +54,7 @@ module Crytic
       it "prints errored mutant" do
         io = IO::Memory.new
         result = Mutation::Result.new(
-          status: Mutation::Status::Error,
+          status: Mutation::Status::Errored,
           mutant: fake_mutant,
           diff: "diff")
         IoReporter.new(io).report_result(result)
@@ -73,7 +73,7 @@ module Crytic
           Mutation::Result.new(
             status: Mutation::Status::Covered, mutant: fake_mutant, diff: "diff"),
           Mutation::Result.new(
-            status: Mutation::Status::Error, mutant: fake_mutant, diff: "diff"),
+            status: Mutation::Status::Errored, mutant: fake_mutant, diff: "diff"),
           Mutation::Result.new(
             status: Mutation::Status::Timeout, mutant: fake_mutant, diff: "diff"),
         ]

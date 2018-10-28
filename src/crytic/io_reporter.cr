@@ -21,7 +21,7 @@ module Crytic
     def report_result(result)
       @io << "\n#{INDENT}"
       case result.status
-      when Mutation::Status::Error
+      when Mutation::Status::Errored
         @io << "❌ #{result.mutant_name}"
         @io << "\n#{INDENT + INDENT}The following change broke the code:\n"
         @io << "#{INDENT + INDENT + INDENT}"

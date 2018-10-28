@@ -220,7 +220,7 @@ module Crytic::Mutation
         mutation.file_remover = ->FakeFile.delete(String)
         mutation.tempfile_writer = ->FakeFile.tempfile(String, String, String)
 
-        mutation.run.status.should eq Status::Error
+        mutation.run.status.should eq Status::Errored
       end
 
       it "reports timed out mutations" do

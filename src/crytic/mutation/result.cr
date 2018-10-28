@@ -3,25 +3,15 @@ require "../mutant/mutant"
 module Crytic::Mutation
   enum Status
     Covered
-    Error
+    Errored
     Timeout
     Uncovered
 
-    def uncovered?
-      self == Uncovered
-    end
-
-    def errored?
-      self == Error
-    end
-
-    def covered?
-      self == Covered
-    end
-
-    def timeout?
-      self == Timeout
-    end
+    {% for method in ["Uncovered", "Errored", "Covered", "Timeout"] %}
+      def {{ method.downcase.id }}?
+        self == {{ method.id }}
+      end
+    {% end %}
   end
 
   record Result, status : Status, mutant : Mutant::Mutant, diff : String do

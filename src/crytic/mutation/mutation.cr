@@ -30,7 +30,7 @@ module Crytic::Mutation
                elsif process_result[:exit_code] == ProcessRunner::TIMEOUT
                  Status::Timeout
                elsif success_messages_in_output == nil
-                 Status::Error
+                 Status::Errored
                else
                  Status::Covered
                end
