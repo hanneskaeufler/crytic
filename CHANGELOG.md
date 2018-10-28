@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This changelog
 - Avoid hanging forever by imposing a timeout for mutations
 
+### Changed
+- Calculate the mutation score as MSI, described in [infection](https://infection.github.io/guide/index.html#Mutation-Score-Indicator-MSI)
+
 ## [1.1.0] - 2018-10-23
 
 ### Added

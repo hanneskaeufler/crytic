@@ -53,20 +53,23 @@ module Crytic
       summary += "#{results.map(&.status).count(&.uncovered?)} uncovered, "
       summary += "#{results.map(&.status).count(&.errored?)} errored, "
       summary += "#{results.map(&.status).count(&.timeout?)} timeout."
-      summary += " Mutation score: #{score_in_percent(results)}"
+      summary += " Mutation Score Indicator (MSI): #{score_in_percent(results)}"
       summary += "\n"
       @io << summary.colorize(results.map(&.status.covered?).all? ? :green : :red).to_s
     end
 
     private def score_in_percent(results)
       return "N/A" if results.empty?
-      "#{score(results)}%"
+      "#{mutation_score_indicator(results)}%"
     end
 
-    private def score(results)
+    private def mutation_score_indicator(results)
       total = results.size
       killed = results.count(&.status.covered?)
-      msi = killed.to_f / total * 100
+      timed_out = results.count(&.status.timeout?)
+      errored = results.count(&.status.errored?)
+      total_defeated = killed + timed_out + errored
+      msi = total_defeated.to_f / total * 100
       msi.round(2)
     end
 

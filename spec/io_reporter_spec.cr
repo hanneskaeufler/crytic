@@ -79,14 +79,14 @@ module Crytic
         ]
         IoReporter.new(io).report_summary(results)
         io.to_s.should contain "Finished in"
-        io.to_s.should contain "4 mutations, 1 covered, 1 uncovered, 1 errored, 1 timeout. Mutation score: 25.0%"
+        io.to_s.should contain "4 mutations, 1 covered, 1 uncovered, 1 errored, 1 timeout. Mutation Score Indicator (MSI): 75.0%"
       end
 
       it "has a N/A score for 0 results" do
         io = IO::Memory.new
         results = [] of Mutation::Result
         IoReporter.new(io).report_summary(results)
-        io.to_s.should contain "Mutation score: N/A"
+        io.to_s.should contain "Mutation Score Indicator (MSI): N/A"
       end
     end
   end
