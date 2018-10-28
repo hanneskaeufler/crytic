@@ -1,5 +1,5 @@
 require "./process_runner"
-require "timeout"
+require "./timeout"
 
 module Crytic
   # Runs processes using crystals `Process` class
