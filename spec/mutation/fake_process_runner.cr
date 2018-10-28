@@ -5,6 +5,8 @@ module Crytic
     private getter cmd
     private getter args
     property exit_code
+    property timeout
+    @timeout = [] of Time::Span
     @cmd = [] of String
     @args = [] of String
     @output_io = IO::Memory.new
@@ -25,6 +27,7 @@ module Crytic
     end
 
     def run(cmd : String, args : Array(String), output, error, timeout)
+      @timeout << timeout
       run(cmd, args, output, error)
     end
 

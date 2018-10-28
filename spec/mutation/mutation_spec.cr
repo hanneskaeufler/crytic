@@ -236,6 +236,7 @@ module Crytic::Mutation
         mutation.tempfile_writer = ->FakeFile.tempfile(String, String, String)
 
         mutation.run.status.should eq Status::Timeout
+        fake.timeout.last.should eq 10.seconds
       end
     end
   end
