@@ -25,9 +25,9 @@ module Crytic::Mutation
       source_diff = Crytic::Diff.unified_diff(source.original_source, mutated_source).to_s
       process_result = run_mutation(mutated_source)
       success_messages_in_output = /Finished/ =~ process_result[:output]
-      status = if process_result[:exit_code] == 0
+      status = if process_result[:exit_code] == ProcessRunner::SUCCESS
                  Status::Uncovered
-               elsif process_result[:exit_code] == 28
+               elsif process_result[:exit_code] == ProcessRunner::TIMEOUT
                  Status::Timeout
                elsif success_messages_in_output == nil
                  Status::Error
