@@ -23,9 +23,6 @@ module Crytic::Mutation
     getter path : String
     getter md5_signature : String
 
-    getter lines = [] of Int32
-    getter already_covered_locations = Set(Crystal::Location?).new
-
     getter source : String
     getter! enriched_source : String
     getter required_at : Int32
