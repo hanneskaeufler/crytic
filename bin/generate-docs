@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
+rm -r docs/api
 crystal doc -o docs/api
 

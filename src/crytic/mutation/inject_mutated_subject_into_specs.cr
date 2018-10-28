@@ -2,7 +2,7 @@ require "compiler/crystal/syntax/*"
 require "digest"
 require "file_utils"
 
-module Crytic
+module Crytic::Mutation
   class InjectMutatedSubjectIntoSpecs < Crystal::Visitor
     STR_CAPACITY = 2 ** 20
 

@@ -2,7 +2,7 @@ require "../../src/crytic/mutation/inject_mutated_subject_into_specs"
 require "compiler/crystal/syntax/*"
 require "../spec_helper"
 
-module Crytic
+module Crytic::Mutation
   describe InjectMutatedSubjectIntoSpecs do
     Spec.before_each do
       InjectMutatedSubjectIntoSpecs.reset

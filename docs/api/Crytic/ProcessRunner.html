@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.25.0">
+<meta name="generator" content="Crystal Docs 0.26.0">
 
 
 <link href="../css/style.css" rel="stylesheet" type="text/css">
@@ -41,13 +41,28 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Generator" data-name="crytic::generator">
-      <a href="../Crytic/Generator.html">Generator</a>
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Diff" data-name="crytic::diff(a, b)">
+      <a href="../Crytic/Diff.html">Diff</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Diff/Chunk" data-name="crytic::diff::chunk(t)">
+      <a href="../Crytic/Diff/Chunk.html">Chunk</a>
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/InjectMutatedSubjectIntoSpecs" data-name="crytic::injectmutatedsubjectintospecs">
-      <a href="../Crytic/InjectMutatedSubjectIntoSpecs.html">InjectMutatedSubjectIntoSpecs</a>
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Diff/Type" data-name="crytic::diff::type">
+      <a href="../Crytic/Diff/Type.html">Type</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Generator" data-name="crytic::generator">
+      <a href="../Crytic/Generator.html">Generator</a>
       
     </li>
   
@@ -166,6 +181,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/InjectMutatedSubjectIntoSpecs" data-name="crytic::mutation::injectmutatedsubjectintospecs">
+      <a href="../Crytic/Mutation/InjectMutatedSubjectIntoSpecs.html">InjectMutatedSubjectIntoSpecs</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
       <a href="../Crytic/Mutation/Mutation.html">Mutation</a>
       
@@ -213,6 +233,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Source" data-name="crytic::source">
       <a href="../Crytic/Source.html">Source</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Timeout" data-name="crytic::timeout">
+      <a href="../Crytic/Timeout.html">Timeout</a>
       
     </li>
   
@@ -268,12 +293,31 @@ the crytic process itself</p>
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/process_runner.cr#L4" target="_blank">crytic/process_runner.cr</a>
+      <a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/process_runner.cr#L4" target="_blank">
+        crytic/process_runner.cr
+      </a>
     
     <br/>
   
 
 
+
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="SUCCESS">
+        <strong>SUCCESS</strong> = <code><span class="n">0</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="TIMEOUT">
+        <strong>TIMEOUT</strong> = <code><span class="n">28</span></code>
+      </dt>
+      
+    
+  </dl>
 
 
 
@@ -285,7 +329,7 @@ the crytic process itself</p>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#run%28cmd%3AString%2Cargs%2Coutput%2Cerror%29%3AInt32-instance-method" class="signature"><strong>#run</strong>(cmd : String, args, output, error) : Int32</a>
+        <a href="#run%28cmd%3AString%2Cargs%2Coutput%2Cerror%29-instance-method" class="signature"><strong>#run</strong>(cmd : String, args, output, error)</a>
         
           <div class="summary"><p>Run a process with the given command and args.</p></div>
         
@@ -328,12 +372,12 @@ the crytic process itself</p>
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="run(cmd:String,args,output,error):Int32-instance-method">
+    <div class="entry-detail" id="run(cmd:String,args,output,error)-instance-method">
       <div class="signature">
         abstract 
-        def <strong>run</strong>(cmd : String, args, output, error) : Int32
+        def <strong>run</strong>(cmd : String, args, output, error)
 
-        <a class="method-permalink" href="#run%28cmd%3AString%2Cargs%2Coutput%2Cerror%29%3AInt32-instance-method">#</a>
+        <a class="method-permalink" href="#run%28cmd%3AString%2Cargs%2Coutput%2Cerror%29-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Run a process with the given command and args.
@@ -342,7 +386,7 @@ Returns the status code of the finished process</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/ae30d8284f52ed32008cd2fbd9ca71608b33e947/src/crytic/process_runner.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/process_runner.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>

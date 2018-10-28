@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.25.0">
+<meta name="generator" content="Crystal Docs 0.26.0">
 
 
 <link href="../css/style.css" rel="stylesheet" type="text/css">
@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Reporter - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Diff(A, B) - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -41,13 +41,28 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Generator" data-name="crytic::generator">
-      <a href="../Crytic/Generator.html">Generator</a>
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Diff" data-name="crytic::diff(a, b)">
+      <a href="../Crytic/Diff.html">Diff</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Diff/Chunk" data-name="crytic::diff::chunk(t)">
+      <a href="../Crytic/Diff/Chunk.html">Chunk</a>
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/InjectMutatedSubjectIntoSpecs" data-name="crytic::injectmutatedsubjectintospecs">
-      <a href="../Crytic/InjectMutatedSubjectIntoSpecs.html">InjectMutatedSubjectIntoSpecs</a>
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Diff/Type" data-name="crytic::diff::type">
+      <a href="../Crytic/Diff/Type.html">Type</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Generator" data-name="crytic::generator">
+      <a href="../Crytic/Generator.html">Generator</a>
       
     </li>
   
@@ -166,6 +181,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/InjectMutatedSubjectIntoSpecs" data-name="crytic::mutation::injectmutatedsubjectintospecs">
+      <a href="../Crytic/Mutation/InjectMutatedSubjectIntoSpecs.html">InjectMutatedSubjectIntoSpecs</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
       <a href="../Crytic/Mutation/Mutation.html">Mutation</a>
       
@@ -206,21 +226,6 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter" data-name="crytic::reporter">
-      <a href="../Crytic/Reporter.html">Reporter</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/JsonReporter" data-name="crytic::reporter::jsonreporter">
-      <a href="../Crytic/Reporter/JsonReporter.html">JsonReporter</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
       <a href="../Crytic/Runner.html">Runner</a>
       
@@ -228,6 +233,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Source" data-name="crytic::source">
       <a href="../Crytic/Source.html">Source</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Timeout" data-name="crytic::timeout">
+      <a href="../Crytic/Timeout.html">Timeout</a>
       
     </li>
   
@@ -245,10 +255,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Crytic::Reporter
+  <span class="kind">class</span> Crytic::Diff(A, B)
 
 </h1>
 
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Crytic/Diff.html">Crytic::Diff(A, B)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -269,7 +281,16 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/991bfc7a6b6d43ccbe208776ef57cc6dff2aa183/src/crytic/reporter/json_reporter.cr#L4" target="_blank">crytic/reporter/json_reporter.cr</a>
+      <a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L2" target="_blank">
+        crytic/diff.cr:2
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L168" target="_blank">
+        crytic/diff.cr:168
+      </a>
     
     <br/>
   
@@ -278,9 +299,59 @@
 
 
 
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28a%3AA%2Cb%3AB%29-class-method" class="signature"><strong>.new</strong>(a : A, b : B)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#unified_diff%28a%3AString%2Cb%3AString%2Cn%3D3%2Cnewline%3D%26quot%3B%5Cn%26quot%3B%29-class-method" class="signature"><strong>.unified_diff</strong>(a : String, b : String, n = <span class="n">3</span>, newline = <span class="s">&quot;\n&quot;</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#unified_diff%28a%2Cb%2Cn%3D3%2Cnewline%3D%26quot%3B%5Cn%26quot%3B%29-class-method" class="signature"><strong>.unified_diff</strong>(a, b, n = <span class="n">3</span>, newline = <span class="s">&quot;\n&quot;</span>)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#a-instance-method" class="signature"><strong>#a</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#b-instance-method" class="signature"><strong>#b</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#edit_distance-instance-method" class="signature"><strong>#edit_distance</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#run-instance-method" class="signature"><strong>#run</strong></a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -288,12 +359,153 @@
 
 <div class="methods-inherited">
   
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(a:A,b:B)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(a : A, b : B)
+
+        <a class="method-permalink" href="#new%28a%3AA%2Cb%3AB%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L64" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="unified_diff(a:String,b:String,n=3,newline=&amp;quot;\n&amp;quot;)-class-method">
+      <div class="signature">
+        
+        def self.<strong>unified_diff</strong>(a : String, b : String, n = <span class="n">3</span>, newline = <span class="s">&quot;\n&quot;</span>)
+
+        <a class="method-permalink" href="#unified_diff%28a%3AString%2Cb%3AString%2Cn%3D3%2Cnewline%3D%26quot%3B%5Cn%26quot%3B%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L231" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="unified_diff(a,b,n=3,newline=&amp;quot;\n&amp;quot;)-class-method">
+      <div class="signature">
+        
+        def self.<strong>unified_diff</strong>(a, b, n = <span class="n">3</span>, newline = <span class="s">&quot;\n&quot;</span>)
+
+        <a class="method-permalink" href="#unified_diff%28a%2Cb%2Cn%3D3%2Cnewline%3D%26quot%3B%5Cn%26quot%3B%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L169" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="a-instance-method">
+      <div class="signature">
+        
+        def <strong>a</strong>
+
+        <a class="method-permalink" href="#a-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L75" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="b-instance-method">
+      <div class="signature">
+        
+        def <strong>b</strong>
+
+        <a class="method-permalink" href="#b-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L79" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="edit_distance-instance-method">
+      <div class="signature">
+        
+        def <strong>edit_distance</strong>
+
+        <a class="method-permalink" href="#edit_distance-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L83" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="run-instance-method">
+      <div class="signature">
+        
+        def <strong>run</strong>
+
+        <a class="method-permalink" href="#run-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L118" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

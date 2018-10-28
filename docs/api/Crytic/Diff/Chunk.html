@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutation::Result - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Diff::Chunk(T) - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -41,12 +41,12 @@
       
         <ul>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Diff" data-name="crytic::diff(a, b)">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Diff" data-name="crytic::diff(a, b)">
       <a href="../../Crytic/Diff.html">Diff</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Diff/Chunk" data-name="crytic::diff::chunk(t)">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Diff/Chunk" data-name="crytic::diff::chunk(t)">
       <a href="../../Crytic/Diff/Chunk.html">Chunk</a>
       
     </li>
@@ -171,7 +171,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../../Crytic/Mutation.html">Mutation</a>
       
         <ul>
@@ -201,7 +201,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Result" data-name="crytic::mutation::result">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Result" data-name="crytic::mutation::result">
       <a href="../../Crytic/Mutation/Result.html">Result</a>
       
     </li>
@@ -255,12 +255,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> Crytic::Mutation::Result
+  <span class="kind">struct</span> Crytic::Diff::Chunk(T)
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutation/Result.html">Crytic::Mutation::Result</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Diff/Chunk.html">Crytic::Diff::Chunk(T)</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -281,8 +281,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/mutation/result.cr#L17" target="_blank">
-        crytic/mutation/result.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L3" target="_blank">
+        crytic/diff.cr
       </a>
     
     <br/>
@@ -296,7 +296,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28status%3AStatus%2Cmutant%3AMutant%3A%3AMutant%2Cdiff%3AString%29-class-method" class="signature"><strong>.new</strong>(status : Status, mutant : Mutant::Mutant, diff : String)</a>
+        <a href="#new%28diff%3AT%2Ctype%3AType%2Crange_a%3ARange%28Int32%2CInt32%29%2Crange_b%3ARange%28Int32%2CInt32%29%29-class-method" class="signature"><strong>.new</strong>(diff : T, type : Type, range_a : Range(Int32, Int32), range_b : Range(Int32, Int32))</a>
         
       </li>
     
@@ -310,37 +310,67 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
+        <a href="#%3D%3D%28other%3AChunk%29-instance-method" class="signature"><strong>#==</strong>(other : Chunk)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#copy_with%28status_status%3D%40status%2Cmutant_mutant%3D%40mutant%2Cdiff_diff%3D%40diff%29-instance-method" class="signature"><strong>#copy_with</strong>(status _status = @status, mutant _mutant = @mutant, diff _diff = @diff)</a>
+        <a href="#append%3F-instance-method" class="signature"><strong>#append?</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#diff%3AString-instance-method" class="signature"><strong>#diff</strong> : String</a>
+        <a href="#data-instance-method" class="signature"><strong>#data</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#location-instance-method" class="signature"><strong>#location</strong></a>
+        <a href="#delete%3F-instance-method" class="signature"><strong>#delete?</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#mutant%3AMutant%3A%3AMutant-instance-method" class="signature"><strong>#mutant</strong> : Mutant::Mutant</a>
+        <a href="#diff-instance-method" class="signature"><strong>#diff</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#mutant_name-instance-method" class="signature"><strong>#mutant_name</strong></a>
+        <a href="#diff%3D%28diff%29-instance-method" class="signature"><strong>#diff=</strong>(diff)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#status%3AStatus-instance-method" class="signature"><strong>#status</strong> : Status</a>
+        <a href="#no_change%3F-instance-method" class="signature"><strong>#no_change?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#range_a-instance-method" class="signature"><strong>#range_a</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#range_a%3D%28range_a%29-instance-method" class="signature"><strong>#range_a=</strong>(range_a)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#range_b-instance-method" class="signature"><strong>#range_b</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#range_b%3D%28range_b%29-instance-method" class="signature"><strong>#range_b=</strong>(range_b)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#type-instance-method" class="signature"><strong>#type</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#type%3D%28type%29-instance-method" class="signature"><strong>#type=</strong>(type)</a>
         
       </li>
     
@@ -387,18 +417,18 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(status:Status,mutant:Mutant::Mutant,diff:String)-class-method">
+    <div class="entry-detail" id="new(diff:T,type:Type,range_a:Range(Int32,Int32),range_b:Range(Int32,Int32))-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(status : <a href="../../Crytic/Mutation/Status.html">Status</a>, mutant : <a href="../../Crytic/Mutant/Mutant.html">Mutant::Mutant</a>, diff : String)
+        def self.<strong>new</strong>(diff : T, type : <a href="../../Crytic/Diff/Type.html">Type</a>, range_a : Range(Int32, Int32), range_b : Range(Int32, Int32))
 
-        <a class="method-permalink" href="#new%28status%3AStatus%2Cmutant%3AMutant%3A%3AMutant%2Cdiff%3AString%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28diff%3AT%2Ctype%3AType%2Crange_a%3ARange%28Int32%2CInt32%29%2Crange_b%3ARange%28Int32%2CInt32%29%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/mutation/result.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L4" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -410,108 +440,210 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="clone-instance-method">
+    <div class="entry-detail" id="==(other:Chunk)-instance-method">
       <div class="signature">
         
-        def <strong>clone</strong>
+        def <strong>==</strong>(other : <a href="../../Crytic/Diff/Chunk.html">Chunk</a>)
 
-        <a class="method-permalink" href="#clone-instance-method">#</a>
+        <a class="method-permalink" href="#%3D%3D%28other%3AChunk%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/mutation/result.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="copy_with(status_status=@status,mutant_mutant=@mutant,diff_diff=@diff)-instance-method">
+    <div class="entry-detail" id="append?-instance-method">
       <div class="signature">
         
-        def <strong>copy_with</strong>(status _status = @status, mutant _mutant = @mutant, diff _diff = @diff)
+        def <strong>append?</strong>
 
-        <a class="method-permalink" href="#copy_with%28status_status%3D%40status%2Cmutant_mutant%3D%40mutant%2Cdiff_diff%3D%40diff%29-instance-method">#</a>
+        <a class="method-permalink" href="#append%3F-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/mutation/result.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="diff:String-instance-method">
+    <div class="entry-detail" id="data-instance-method">
       <div class="signature">
         
-        def <strong>diff</strong> : String
+        def <strong>data</strong>
 
-        <a class="method-permalink" href="#diff%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#data-instance-method">#</a>
       </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="location-instance-method">
+    <div class="entry-detail" id="delete?-instance-method">
       <div class="signature">
         
-        def <strong>location</strong>
+        def <strong>delete?</strong>
 
-        <a class="method-permalink" href="#location-instance-method">#</a>
+        <a class="method-permalink" href="#delete%3F-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/mutation/result.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="mutant:Mutant::Mutant-instance-method">
+    <div class="entry-detail" id="diff-instance-method">
       <div class="signature">
         
-        def <strong>mutant</strong> : <a href="../../Crytic/Mutant/Mutant.html">Mutant::Mutant</a>
+        def <strong>diff</strong>
 
-        <a class="method-permalink" href="#mutant%3AMutant%3A%3AMutant-instance-method">#</a>
+        <a class="method-permalink" href="#diff-instance-method">#</a>
       </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="mutant_name-instance-method">
+    <div class="entry-detail" id="diff=(diff)-instance-method">
       <div class="signature">
         
-        def <strong>mutant_name</strong>
+        def <strong>diff=</strong>(diff)
 
-        <a class="method-permalink" href="#mutant_name-instance-method">#</a>
+        <a class="method-permalink" href="#diff%3D%28diff%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/mutation/result.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="status:Status-instance-method">
+    <div class="entry-detail" id="no_change?-instance-method">
       <div class="signature">
         
-        def <strong>status</strong> : <a href="../../Crytic/Mutation/Status.html">Status</a>
+        def <strong>no_change?</strong>
 
-        <a class="method-permalink" href="#status%3AStatus-instance-method">#</a>
+        <a class="method-permalink" href="#no_change%3F-instance-method">#</a>
       </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="range_a-instance-method">
+      <div class="signature">
+        
+        def <strong>range_a</strong>
+
+        <a class="method-permalink" href="#range_a-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="range_a=(range_a)-instance-method">
+      <div class="signature">
+        
+        def <strong>range_a=</strong>(range_a)
+
+        <a class="method-permalink" href="#range_a%3D%28range_a%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="range_b-instance-method">
+      <div class="signature">
+        
+        def <strong>range_b</strong>
+
+        <a class="method-permalink" href="#range_b-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="range_b=(range_b)-instance-method">
+      <div class="signature">
+        
+        def <strong>range_b=</strong>(range_b)
+
+        <a class="method-permalink" href="#range_b%3D%28range_b%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="type-instance-method">
+      <div class="signature">
+        
+        def <strong>type</strong>
+
+        <a class="method-permalink" href="#type-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="type=(type)-instance-method">
+      <div class="signature">
+        
+        def <strong>type=</strong>(type)
+
+        <a class="method-permalink" href="#type%3D%28type%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/98fdd367930f0390fb2a48558c6aadf125432ccf/src/crytic/diff.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>

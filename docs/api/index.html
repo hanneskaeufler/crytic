@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.25.0">
+<meta name="generator" content="Crystal Docs 0.26.0">
 
 
 <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -41,13 +41,28 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Generator" data-name="crytic::generator">
-      <a href="Crytic/Generator.html">Generator</a>
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Diff" data-name="crytic::diff(a, b)">
+      <a href="Crytic/Diff.html">Diff</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Diff/Chunk" data-name="crytic::diff::chunk(t)">
+      <a href="Crytic/Diff/Chunk.html">Chunk</a>
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/InjectMutatedSubjectIntoSpecs" data-name="crytic::injectmutatedsubjectintospecs">
-      <a href="Crytic/InjectMutatedSubjectIntoSpecs.html">InjectMutatedSubjectIntoSpecs</a>
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Diff/Type" data-name="crytic::diff::type">
+      <a href="Crytic/Diff/Type.html">Type</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Generator" data-name="crytic::generator">
+      <a href="Crytic/Generator.html">Generator</a>
       
     </li>
   
@@ -166,6 +181,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/InjectMutatedSubjectIntoSpecs" data-name="crytic::mutation::injectmutatedsubjectintospecs">
+      <a href="Crytic/Mutation/InjectMutatedSubjectIntoSpecs.html">InjectMutatedSubjectIntoSpecs</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
       <a href="Crytic/Mutation/Mutation.html">Mutation</a>
       
@@ -213,6 +233,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Source" data-name="crytic::source">
       <a href="Crytic/Source.html">Source</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Timeout" data-name="crytic::timeout">
+      <a href="Crytic/Timeout.html">Timeout</a>
       
     </li>
   
@@ -347,6 +372,8 @@ Finished in 36.35 seconds:
 <p>I have to credit the crystal <a href="https://github.com/anykeyh/crystal-coverage" target="_blank">code-coverage</a> shard which finally helped me create a working mutation testing tool after one or two failed attempts. I took heavy inspirations from its <a href="https://github.com/anykeyh/crystal-coverage/blob/master/src/coverage/inject/source_file.cr" target="_blank">SourceFile</a> class and actually lifted nearly all the code.</p>
 
 <p>One of the more difficult parts of crytic was the resolving of <code>require</code> statements. In order to work for most projects, crytic has to resolve those statements identical to the way crystal itself does. I achieved this (for now) by copying a bunch of methods from crystal-lang itself.</p>
+
+<p>In order to avoid dependencies for tiny amounts of savings I rather copied/adapted a bit of code from <a href="https://github.com/hugoabonizio/timeout.cr" target="_blank">timeout.cr</a> and <a href="https://github.com/MakeNowJust/crystal-diff" target="_blank">crystal-diff</a>.</p>
 
 <p>Obviously I didn't invent mutation testing. While I cannot remember where I have read about it initially, my first recollection is the <a href="https://github.com/mbj/mutant" target="_blank">mutant</a> gem for ruby.</p>
 
