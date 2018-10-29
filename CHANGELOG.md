@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - This changelog
 - Avoid hanging forever by imposing a timeout for mutations
+- Use "fail fast" option of crystal spec runner
 
 ### Changed
 - Calculate the mutation score as MSI, described in [infection](https://infection.github.io/guide/index.html#Mutation-Score-Indicator-MSI)
