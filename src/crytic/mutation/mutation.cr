@@ -11,6 +11,8 @@ require "tempfile"
 module Crytic::Mutation
   # Represents a single mutation to a single source file
   class Mutation
+    private PREAMBLE = "require \"spec\"\nSpec.fail_fast = true\n"
+
     property process_runner
     property file_remover
     property tempfile_writer
@@ -65,7 +67,8 @@ module Crytic::Mutation
     end
 
     private def write_full_source_into_tempfile(mutated_source)
-      @tempfile_writer.call("crytic", ".cr", mutated_specs_source(mutated_source))
+      full_source = PREAMBLE + mutated_specs_source(mutated_source)
+      @tempfile_writer.call("crytic", ".cr", full_source)
     end
 
     private def compile_tempfile_into_binary(tempfile_path)
