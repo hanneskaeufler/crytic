@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
+## [1.2.0] - 2018-10-29
+
 ### Added
 - This changelog
 - Avoid hanging forever by imposing a timeout for mutations
