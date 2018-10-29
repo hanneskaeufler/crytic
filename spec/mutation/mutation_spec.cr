@@ -63,6 +63,8 @@ module Crytic::Mutation
         fake.cmd_with_args[-2].should eq "crystal build -o /tmp/crytic.RANDOM --no-debug /tmp/crytic.RANDOM.cr"
         fake.cmd_with_args.last.should eq "/tmp/crytic.RANDOM"
         FakeFile.tempfile_contents.last.should eq <<-CODE
+        require "spec"
+        Spec.fail_fast = true
         # require of `fixtures/simple/bar.cr` from `fixtures/simple/bar_spec.cr:1`
         def bar
           if false
@@ -143,6 +145,8 @@ module Crytic::Mutation
 
         mutation.run
         FakeFile.tempfile_contents.last.should eq <<-CODE
+        require "spec"
+        Spec.fail_fast = true
         # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr:1`
         require "http"
         # require of `fixtures/simple/bar.cr` from `fixtures/simple/spec_helper.cr:2`
@@ -178,6 +182,8 @@ module Crytic::Mutation
         mutation.run
 
         FakeFile.tempfile_contents.last.should eq <<-CODE
+        require "spec"
+        Spec.fail_fast = true
         # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr:1`
         require "http"
         # require of `fixtures/simple/bar.cr` from `fixtures/simple/spec_helper.cr:2`
