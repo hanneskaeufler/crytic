@@ -104,11 +104,11 @@ This mutant flips the `if` and `else` branch in conditions. It will create an `e
 
 #### NumberLiteralChange
 
-This mutation changes literal occurances of numbers by prefixing the number with a "1". A typical mutation is:
+This mutation changes literal occurances of numbers by replacing them with "0". "0" gets replaces by "1". A typical mutation is:
 
 ```diff
 -  0
-+  10
++  1
 ```
 
 #### NumberLiteralSignChange

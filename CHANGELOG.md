@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
+### Changed
+- NumberLiteralChange mutant now outputs 0 (for everything != 0) and 1 (for 0)
+
 ## [1.2.0] - 2018-10-29
 
 ### Added

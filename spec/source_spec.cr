@@ -29,7 +29,7 @@ describe Crytic::Source do
         column_number: 1))
 
       source = Crytic::Source.new(source: "1")
-      source.mutated_source(mutant).should eq "11"
+      source.mutated_source(mutant).should eq "0"
     end
   end
 end
