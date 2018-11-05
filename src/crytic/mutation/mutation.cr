@@ -6,7 +6,6 @@ require "../source"
 require "./inject_mutated_subject_into_specs"
 require "./result"
 require "compiler/crystal/syntax/*"
-require "tempfile"
 
 module Crytic::Mutation
   # Represents a single mutation to a single source file
@@ -52,7 +51,7 @@ module Crytic::Mutation
       @process_runner = ProcessProcessRunner.new
       @file_remover = ->File.delete(String)
       @tempfile_writer = ->(name : String, extension : String, content : String) {
-        Tempfile.open(name, extension) { |file| file.print(content) }.path
+        File.tempfile(name, extension) { |file| file.print(content) }.path
       }
     end
 
