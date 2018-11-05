@@ -4,7 +4,7 @@ version: 1.2.0
 authors:
   - Hannes Käufler <hannes.kaeufler@gmail.com>
 
-crystal: 0.25.1
+crystal: 0.27.0
 
 license: MIT
 
