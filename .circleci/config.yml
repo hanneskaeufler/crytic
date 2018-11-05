@@ -15,6 +15,10 @@ jobs:
     <<: *test-template
     docker:
       - image: crystallang/crystal:0.26.1
+  test-crystal-0.27.0:
+    <<: *test-template
+    docker:
+      - image: crystallang/crystal:0.27.0
 
 workflows:
   version: 2
@@ -22,3 +26,4 @@ workflows:
     jobs:
       - test-crystal-0.25.1
       - test-crystal-0.26.1
+      - test-crystal-0.27.0
