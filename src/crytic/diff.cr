@@ -176,8 +176,8 @@ module Crytic
 
       chunks.each_with_index do |cur, i|
         next if cur.no_change?
-        prv = i > 0 ? chunks.at(i - 1) : Chunk.new(diff, Type::NO_CHANGE, 0...0, 0...0)
-        nxt = chunks.at(i + 1) { Chunk.new(diff, Type::NO_CHANGE, a.size...a.size, b.size...b.size) }
+        prv = i > 0 ? chunks[i - 1] : Chunk.new(diff, Type::NO_CHANGE, 0...0, 0...0)
+        nxt = chunks.fetch(i + 1) { Chunk.new(diff, Type::NO_CHANGE, a.size...a.size, b.size...b.size) }
 
         if group.empty? && prv.no_change?
           start_a = {prv.range_a.end - n, 0}.max
