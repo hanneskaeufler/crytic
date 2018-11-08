@@ -1,3 +1,4 @@
+require "./crytic/autofind_runner"
 require "./crytic/reporter/http_client"
 require "./crytic/reporter/io_reporter"
 require "./crytic/reporter/stryker_badge_reporter"
@@ -39,8 +40,12 @@ if ENV["STRYKER_DASHBOARD_API_KEY"]?
   })
 end
 
-success = Crytic::Runner
-  .new(threshold: msi_threshold, reporters: reporters)
-  .run(subject_source, spec_files)
+if subject_source.empty?
+  success = Crytic::AutofindRunner.new.run
+else
+  success = Crytic::Runner
+    .new(threshold: msi_threshold, reporters: reporters)
+    .run(subject_source, spec_files)
+end
 
 exit(success ? 0 : 1)
