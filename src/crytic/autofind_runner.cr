@@ -14,6 +14,7 @@ module Crytic
       specs = Dir["./spec/**/*_spec.cr"]
       puts specs
       sources = Dir["./src/**/*.cr"]
+      puts sources
 
       original_result = Mutation::NoMutation
         .with(specs: specs)

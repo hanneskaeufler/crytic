@@ -59,6 +59,7 @@ module Crytic::Mutation
       io = IO::Memory.new
       tempfile_path = write_full_source_into_tempfile(mutated_source)
       binary = compile_tempfile_into_binary(tempfile_path)
+      puts binary
       exit_code = execute_binary(binary, io)
       remove_artifacts(tempfile_path, binary)
 
