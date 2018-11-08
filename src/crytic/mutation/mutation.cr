@@ -59,7 +59,7 @@ module Crytic::Mutation
       io = IO::Memory.new
       tempfile_path = write_full_source_into_tempfile(mutated_source)
       res = compile_tempfile_into_binary(tempfile_path)
-      unless res[:exit_code]
+      unless res[:exit_code] == 0
         @file_remover.call(tempfile_path)
         return {exit_code: res[:exit_code], output: res[:output]}
       end
@@ -84,6 +84,7 @@ module Crytic::Mutation
         ["build", "-o", binary, "--no-debug", tempfile_path],
         output: io,
         error: io)
+      puts io.to_s
       {exit_code: exit_code, binary: binary, output: io.to_s}
     end
 
