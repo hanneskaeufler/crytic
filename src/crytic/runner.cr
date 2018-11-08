@@ -6,6 +6,8 @@ require "./mutation/no_mutation"
 require "./source"
 
 module Crytic
+  # Executes the main flow of the framework.
+  # Generates mutations, runs them, determines success or failure.
   class Runner
     def initialize(@reporter = IoReporter.new(STDOUT))
     end
