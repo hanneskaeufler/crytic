@@ -147,6 +147,11 @@ module Crytic::Mutation
       true
     end
 
+    def visit(node : Crystal::MagicConstant)
+      puts "HELLO #{node}"
+      true
+    end
+
     # All of the below code is stolen from crystal itself
     # https://github.com/crystal-lang/crystal/blob/master/src/compiler/crystal/crystal_path.cr
     private def find_in_path_relative_to_dir(filename, relative_to)

@@ -67,12 +67,14 @@ module Crytic::Mutation
 
     private def write_full_source_into_tempfile(mutated_source)
       full_source = PREAMBLE + mutated_specs_source(mutated_source)
+      puts full_source
       @tempfile_writer.call("crytic", ".cr", full_source)
     end
 
     private def compile_tempfile_into_binary(tempfile_path)
       io = IO::Memory.new
-      binary = "#{File.dirname(tempfile_path)}/#{File.basename(tempfile_path, ".cr")}"
+      binary = "#{FileUtils.pwd}/#{File.basename(tempfile_path, ".cr")}"
+      puts binary
       process_runner.run(
         "crystal",
         ["build", "-o", binary, "--no-debug", tempfile_path],
@@ -88,7 +90,7 @@ module Crytic::Mutation
 
     private def remove_artifacts(tempfile_path, binary)
       @file_remover.call(tempfile_path)
-      @file_remover.call(binary)
+      # @file_remover.call(binary)
     end
 
     private def mutated_specs_source(mutated_source)

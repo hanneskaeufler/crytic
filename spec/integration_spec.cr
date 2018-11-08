@@ -51,6 +51,15 @@ describe Crytic do
       result.exit_code.should be > 0
     end
   end
+
+  describe "a spec using fixture files" do
+    it "runs the spec successfuly" do
+      result = run_crytic("-s ./fixtures/with_fixture_file/with_fixture.cr ./fixtures/with_fixture_file/with_fixture_spec.cr")
+      result.output.should contain "✅ Original test suite passed.\n"
+      result.output.should contain "1 uncovered"
+      result.exit_code.should be > 0
+    end
+  end
 end
 
 def run_crytic(args : String)
