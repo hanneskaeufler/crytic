@@ -74,11 +74,12 @@ module Crytic::Mutation
     private def compile_tempfile_into_binary(tempfile_path)
       io = IO::Memory.new
       binary = "#{File.dirname(tempfile_path)}/#{File.basename(tempfile_path, ".cr")}"
-      process_runner.run(
+      exit_code = process_runner.run(
         "crystal",
         ["build", "-o", binary, "--no-debug", tempfile_path],
         output: io,
         error: io)
+      raise "failed to compile:\n#{io.to_s}" unless exit_code == 0
       binary
     end
 
