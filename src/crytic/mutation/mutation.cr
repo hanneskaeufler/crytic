@@ -61,7 +61,7 @@ module Crytic::Mutation
       res = compile_tempfile_into_binary(tempfile_path)
       unless res[:exit_code]
         @file_remover.call(tempfile_path)
-        return {exit_code: exit_code, output: res[:output]}
+        return {exit_code: res[:exit_code], output: res[:output]}
       end
       binary = res[:binary]
       puts binary
