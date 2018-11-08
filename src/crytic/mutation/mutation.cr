@@ -58,7 +58,12 @@ module Crytic::Mutation
     private def run_mutation(mutated_source)
       io = IO::Memory.new
       tempfile_path = write_full_source_into_tempfile(mutated_source)
-      binary = compile_tempfile_into_binary(tempfile_path)
+      res = compile_tempfile_into_binary(tempfile_path)
+      unless res[:exit_code]
+        @file_remover.call(tempfile_path)
+        return {exit_code: exit_code, output: res[:output]}
+      end
+      binary = res[:binary]
       puts binary
       exit_code = execute_binary(binary, io)
       remove_artifacts(tempfile_path, binary)
@@ -79,8 +84,7 @@ module Crytic::Mutation
         ["build", "-o", binary, "--no-debug", tempfile_path],
         output: io,
         error: io)
-      raise "failed to compile:\n#{io.to_s}" unless exit_code == 0
-      binary
+      {exit_code: exit_code, binary: binary, output: io.to_s}
     end
 
     private def execute_binary(binary, io)
