@@ -1,3 +1,4 @@
+require "./msi_calculator"
 require "./mutation/mutation"
 require "spec/dsl"
 
@@ -60,17 +61,7 @@ module Crytic
 
     private def score_in_percent(results)
       return "N/A" if results.empty?
-      "#{mutation_score_indicator(results)}%"
-    end
-
-    private def mutation_score_indicator(results)
-      total = results.size
-      killed = results.count(&.status.covered?)
-      timed_out = results.count(&.status.timeout?)
-      errored = results.count(&.status.errored?)
-      total_defeated = killed + timed_out + errored
-      msi = total_defeated.to_f / total * 100
-      msi.round(2)
+      "#{MsiCalculator.new(results).msi}%"
     end
 
     private def elapsed_time

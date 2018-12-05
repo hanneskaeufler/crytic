@@ -20,6 +20,11 @@ describe Crytic do
       result.output.should contain("3 uncovered")
       result.exit_code.should be > 0
     end
+
+    it "exits successfully when the msi threshold is set sufficiently" do
+      result = run_crytic("--min-msi=0.0 -s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr")
+      result.exit_code.should eq 0
+    end
   end
 
   describe "subject without any coverage" do

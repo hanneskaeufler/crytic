@@ -1,5 +1,6 @@
 require "./generator"
 require "./io_reporter"
+require "./msi_calculator"
 require "./mutant/**"
 require "./mutation/mutation"
 require "./mutation/no_mutation"
@@ -7,7 +8,9 @@ require "./source"
 
 module Crytic
   class Runner
-    def initialize(@reporter = IoReporter.new(STDOUT))
+    alias Threshold = Float64
+
+    def initialize(@threshold : Threshold = 100.0, @reporter = IoReporter.new(STDOUT))
     end
 
     def run(source : String, specs : Array(String)) : Bool
@@ -32,7 +35,7 @@ module Crytic
 
       @reporter.report_summary(results)
 
-      return results.map(&.status.covered?).all?
+      return MsiCalculator.new(results).passes?(@threshold)
     end
 
     private def validate_args!(source, specs)

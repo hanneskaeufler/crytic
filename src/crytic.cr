@@ -2,12 +2,16 @@ require "option_parser"
 require "./crytic/runner"
 
 subject_source = ""
+msi_threshold = 100.0
 spec_files = [] of String
 
 OptionParser.parse! do |parser|
   parser.banner = "Usage: crytic [arguments]"
   parser.on("-s SOURCE", "--subject=SOURCE", "Specifies the source file for the subject") do |source|
     subject_source = source
+  end
+  parser.on("-m", "--min-msi=THRESHOLD", "Crytic will exit with zero if this threshold is reached.") do |threshold|
+    msi_threshold = threshold.to_f
   end
   parser.on("-h", "--help", "Show this help") { puts parser }
   parser.unknown_args { |args| spec_files = args }
@@ -18,6 +22,8 @@ OptionParser.parse! do |parser|
   end
 end
 
-success = Crytic::Runner.new.run(subject_source, spec_files)
+success = Crytic::Runner
+  .new(threshold: msi_threshold)
+  .run(subject_source, spec_files)
 
 exit(success ? 0 : 1)
