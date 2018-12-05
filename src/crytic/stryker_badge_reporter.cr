@@ -1,6 +1,8 @@
 require "./reporter/http_client"
 
 module Crytic::Reporter
+  # Sends a MSI score to the stryker dashboard
+  # See also https://infection.github.io/guide/mutation-badge.html
   class StrykerBadgeReporter
     private DASHBOARD_URL = "https://dashboard.stryker-mutator.io/api/reports"
 
