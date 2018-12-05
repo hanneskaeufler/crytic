@@ -1,10 +1,11 @@
 require "./msi_calculator"
 require "./reporter/http_client"
+require "./reporter/reporter"
 
 module Crytic::Reporter
   # Sends a MSI score to the stryker dashboard
   # See also https://infection.github.io/guide/mutation-badge.html
-  class StrykerBadgeReporter
+  class StrykerBadgeReporter < Reporter
     private DASHBOARD_URL = "https://dashboard.stryker-mutator.io/api/reports"
 
     def initialize(@client : HttpClient, @env : Hash(String, String) = ENV)
