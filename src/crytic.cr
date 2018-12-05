@@ -10,7 +10,7 @@ OptionParser.parse! do |parser|
   parser.on("-s SOURCE", "--subject=SOURCE", "Specifies the source file for the subject") do |source|
     subject_source = source
   end
-  parser.on("-t", "--msi-pass-threshold=THRESHOLD", "Crytic will exit with zero if this threshold is reached.") do |threshold|
+  parser.on("-t", "--min-msi=THRESHOLD", "Crytic will exit with zero if this threshold is reached.") do |threshold|
     msi_threshold = threshold.to_f
   end
   parser.on("-h", "--help", "Show this help") { puts parser }

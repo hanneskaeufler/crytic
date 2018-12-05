@@ -21,9 +21,8 @@ describe Crytic do
       result.exit_code.should be > 0
     end
 
-    it "exits successfull when the msi threshold is set sufficiently" do
-      result = run_crytic("--msi-pass-threshold=0.0 -s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr")
-      puts result.output.to_s
+    it "exits successfully when the msi threshold is set sufficiently" do
+      result = run_crytic("--min-msi=0.0 -s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr")
       result.exit_code.should eq 0
     end
   end
