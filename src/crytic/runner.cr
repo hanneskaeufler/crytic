@@ -1,5 +1,6 @@
 require "./generator"
 require "./io_reporter"
+require "./msi_calculator"
 require "./mutant/**"
 require "./mutation/mutation"
 require "./mutation/no_mutation"
@@ -34,7 +35,7 @@ module Crytic
 
       @reporter.report_summary(results)
 
-      return @reporter.result_msi.not_nil! >= @threshold
+      return MsiCalculator.new(results).passes?(@threshold)
     end
 
     private def validate_args!(source, specs)
