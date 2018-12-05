@@ -11,14 +11,18 @@ module Crytic::Reporter
       it "posts to the stryker dashboard" do
         client = FakeClient.new
 
-        StrykerBadgeReporter.new(client).report_msi(results)
+        StrykerBadgeReporter.new(client, {
+          "STRYKER_DASHBOARD_API_KEY" => "apikey",
+          "CIRCLE_PROJECT_USERNAME" => "hanneskaeufler",
+          "CIRCLE_PROJECT_REPONAME" => "crytic",
+        }).report_msi(results)
 
         client.path.should eq "https://dashboard.stryker-mutator.io/api/reports"
         client.body.should eq({
           "apiKey" => "apikey",
-          "repositorySlug" => "repo",
-          "branch" => "branch",
-          "mutationScore" => 75.9
+          "repositorySlug" => "github.com/hanneskaeufler/crytic",
+          "branch" => "master",
+          "mutationScore" => 100.0
         })
       end
     end
