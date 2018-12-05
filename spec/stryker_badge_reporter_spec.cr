@@ -29,13 +29,18 @@ module Crytic::Reporter
   end
 end
 
-class FakeClient < Crytic::Reporter::HttpClient
-  getter! path : String
-  getter! body : Hash(String, String | Float64)
-
-  def post(url, body)
+private class FakeClient < Crytic::Reporter::HttpClient
+  def post(url : String, bbody : Hash(String, String | Float64))
     @path = url
-    @body = body
+    @body = bbody
+  end
+
+  def path
+    @path
+  end
+
+  def body
+    @body
   end
 end
 

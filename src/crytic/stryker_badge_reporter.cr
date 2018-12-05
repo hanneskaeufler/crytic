@@ -29,9 +29,6 @@ module Crytic::Reporter
     def report_summary(results)
     end
 
-    def report_msi(results)
-    end
-
     private def slug
       "github.com/#{@env["CIRCLE_PROJECT_USERNAME"]}/#{@env["CIRCLE_PROJECT_REPONAME"]}"
     end
