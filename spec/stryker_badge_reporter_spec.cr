@@ -13,16 +13,16 @@ module Crytic::Reporter
 
         StrykerBadgeReporter.new(client, {
           "STRYKER_DASHBOARD_API_KEY" => "apikey",
-          "CIRCLE_PROJECT_USERNAME" => "hanneskaeufler",
-          "CIRCLE_PROJECT_REPONAME" => "crytic",
+          "CIRCLE_PROJECT_USERNAME"   => "hanneskaeufler",
+          "CIRCLE_PROJECT_REPONAME"   => "crytic",
         }).report_msi(results)
 
         client.path.should eq "https://dashboard.stryker-mutator.io/api/reports"
         client.body.should eq({
-          "apiKey" => "apikey",
+          "apiKey"         => "apikey",
           "repositorySlug" => "github.com/hanneskaeufler/crytic",
-          "branch" => "master",
-          "mutationScore" => 100.0
+          "branch"         => "master",
+          "mutationScore"  => 100.0,
         })
       end
     end

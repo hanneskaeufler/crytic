@@ -12,10 +12,10 @@ module Crytic::Reporter
 
     def report_msi(results)
       @client.post(DASHBOARD_URL, {
-        "apiKey" => @env["STRYKER_DASHBOARD_API_KEY"],
+        "apiKey"         => @env["STRYKER_DASHBOARD_API_KEY"],
         "repositorySlug" => slug,
-        "branch"=> "master",
-        "mutationScore"=> score(results),
+        "branch"         => "master",
+        "mutationScore"  => score(results),
       })
     end
 
