@@ -10,7 +10,7 @@ module Crytic
   class Runner
     alias Threshold = Float64
 
-    def initialize(@threshold : Threshold = 100.0, @reporter = IoReporter.new(STDOUT))
+    def initialize(@threshold : Threshold = 100.0, @reporters = [IoReporter.new(STDOUT)])
     end
 
     def run(source : String, specs : Array(String)) : Bool
@@ -20,7 +20,7 @@ module Crytic
         .with(specs: specs)
         .run
 
-      @reporter.report_original_result(original_result)
+      @reporters.each { |reporter| reporter.report_original_result(original_result) }
 
       return false unless original_result.successful?
 
@@ -29,11 +29,11 @@ module Crytic
         .mutations_for(source: source, specs: specs)
         .map do |mutation|
           result = mutation.run
-          @reporter.report_result(result)
+          @reporters.each { |reporter| reporter.report_result(result) }
           result
         end
 
-      @reporter.report_summary(results)
+      @reporters.each { |reporter| reporter.report_summary(results) }
 
       return MsiCalculator.new(results).passes?(@threshold)
     end
