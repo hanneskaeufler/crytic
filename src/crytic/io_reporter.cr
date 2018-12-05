@@ -5,6 +5,7 @@ module Crytic
   # Reports crytics output into an IO. Useful for e.g. the console output
   class IoReporter
     INDENT = "    "
+    getter result_msi : Float64?
 
     def initialize(@io : IO, @start_time = Time.now)
     end
@@ -70,7 +71,7 @@ module Crytic
       errored = results.count(&.status.errored?)
       total_defeated = killed + timed_out + errored
       msi = total_defeated.to_f / total * 100
-      msi.round(2)
+      @result_msi = msi.round(2)
     end
 
     private def elapsed_time

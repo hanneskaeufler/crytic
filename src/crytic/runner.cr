@@ -7,7 +7,9 @@ require "./source"
 
 module Crytic
   class Runner
-    def initialize(@reporter = IoReporter.new(STDOUT))
+    alias Threshold = Float64
+
+    def initialize(@threshold : Threshold = 100.0, @reporter = IoReporter.new(STDOUT))
     end
 
     def run(source : String, specs : Array(String)) : Bool
@@ -32,7 +34,7 @@ module Crytic
 
       @reporter.report_summary(results)
 
-      return results.map(&.status.covered?).all?
+      return @reporter.result_msi.not_nil! >= @threshold
     end
 
     private def validate_args!(source, specs)
