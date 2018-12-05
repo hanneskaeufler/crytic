@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
+### Added
+- `--min-msi` cli argument to allow passing the suite (exiting with 0) even when there are mutants that survived. Pass as float like `--min-msi=75.0`.
+
 ### Changed
 - NumberLiteralChange mutant now outputs 0 (for everything != 0) and 1 (for 0)
 - Depending on crystal 0.27.0, dropping all previous versions
