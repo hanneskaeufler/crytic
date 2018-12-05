@@ -1,10 +1,11 @@
-require "json"
 require "../src/crytic/mutant/number_literal_change"
 require "../src/crytic/mutation/result"
+require "../src/crytic/reporter/http_client"
 require "../src/crytic/stryker_badge_reporter"
 require "./spec_helper"
+require "json"
 
-module Crytic
+module Crytic::Reporter
   describe StrykerBadgeReporter do
     describe "#report_msi" do
       it "posts to the stryker dashboard" do
@@ -24,7 +25,7 @@ module Crytic
   end
 end
 
-class FakeClient < Crytic::HttpClient
+class FakeClient < Crytic::Reporter::HttpClient
   getter! path : String
   getter! body : Hash(String, String | Float64)
 

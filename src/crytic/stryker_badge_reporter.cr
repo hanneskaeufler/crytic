@@ -1,8 +1,6 @@
-module Crytic
-  abstract class HttpClient
-    abstract def post(url, body : Hash(String, String | Float64))
-  end
+require "./reporter/http_client"
 
+module Crytic::Reporter
   class StrykerBadgeReporter
     private DASHBOARD_URL = "https://dashboard.stryker-mutator.io/api/reports"
 
