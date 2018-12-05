@@ -20,6 +20,18 @@ module Crytic::Reporter
       })
     end
 
+    def report_original_result(original_result)
+    end
+
+    def report_result(result)
+    end
+
+    def report_summary(results)
+    end
+
+    def report_msi(results)
+    end
+
     private def slug
       "github.com/#{@env["CIRCLE_PROJECT_USERNAME"]}/#{@env["CIRCLE_PROJECT_REPONAME"]}"
     end

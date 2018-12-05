@@ -11,7 +11,7 @@ module Crytic
   class Runner
     alias Threshold = Float64
 
-    def initialize(@threshold : Threshold = 100.0, @reporters : Array(Reporter::Reporter) = [IoReporter.new(STDOUT)])
+    def initialize(@threshold : Threshold = 100.0, @reporters = [IoReporter.new(STDOUT)] of Reporter::Reporter)
     end
 
     def run(source : String, specs : Array(String)) : Bool
