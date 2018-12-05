@@ -35,6 +35,14 @@ Crytic will only mutate statements in one file, let's call that our subject, or 
 
 This command determines a list of mutations that can be performed on the source code of `archive.cr` and joins the `blog_spec.cr` and `archive_spec.cr` as a test-suite to find suriving mutants.
 
+### CLI options
+
+`--subject`/`-s` specifies a relative filepath to the sourcecode being mutated.
+
+`--min-msi`/`-m` specifies a threshold as to when to exit the program with 0 even when mutants survived. MSI is the Mutation Score Indicator.
+
+The rest of the unnamed positional arguments are relative filepaths to the specs to be run.
+
 ### How to read the output
 
 ```shell
