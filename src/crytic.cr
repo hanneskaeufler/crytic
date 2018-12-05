@@ -1,5 +1,8 @@
-require "option_parser"
+require "./crytic/io_reporter"
 require "./crytic/runner"
+require "./crytic/stryker_badge_reporter"
+require "./crytic/reporter/http_client"
+require "option_parser"
 
 subject_source = ""
 msi_threshold = 100.0
@@ -21,6 +24,13 @@ OptionParser.parse! do |parser|
     exit(1)
   end
 end
+
+reporters = [Crytic::IoReporter.new(STDOUT)] of Crytic::Reporter::Reporter
+
+# if ENV["STRYKER_DASHBOARD_API_KEY"]?
+#   client = Crytic::Reporter::DefaultHttpClient.new
+#   reporters << Crytic::Reporter::StrykerBadgeReporter.new(client)
+# end
 
 success = Crytic::Runner
   .new(threshold: msi_threshold)

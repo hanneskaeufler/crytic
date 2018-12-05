@@ -4,13 +4,14 @@ require "./msi_calculator"
 require "./mutant/**"
 require "./mutation/mutation"
 require "./mutation/no_mutation"
+require "./reporter/reporter"
 require "./source"
 
 module Crytic
   class Runner
     alias Threshold = Float64
 
-    def initialize(@threshold : Threshold = 100.0, @reporters = [IoReporter.new(STDOUT)])
+    def initialize(@threshold : Threshold = 100.0, @reporters : Array(Reporter::Reporter) = [IoReporter.new(STDOUT)])
     end
 
     def run(source : String, specs : Array(String)) : Bool
