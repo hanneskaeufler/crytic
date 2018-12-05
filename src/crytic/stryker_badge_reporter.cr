@@ -8,7 +8,7 @@ module Crytic::Reporter
   class StrykerBadgeReporter < Reporter
     private DASHBOARD_URL = "https://dashboard.stryker-mutator.io/api/reports"
 
-    def initialize(@client : HttpClient, @env : Hash(String, String) = ENV)
+    def initialize(@client : HttpClient, @env : Enumerable({String, String}) = ENV)
     end
 
     def report_msi(results)
