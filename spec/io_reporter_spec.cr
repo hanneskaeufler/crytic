@@ -89,5 +89,14 @@ module Crytic
         io.to_s.should contain "Mutation Score Indicator (MSI): N/A"
       end
     end
+
+    describe "#report_msi" do
+      it "is a noop" do
+        io = IO::Memory.new
+        results = [] of Mutation::Result
+        IoReporter.new(io).report_msi(results).should eq nil
+        io.to_s.should eq ""
+      end
+    end
   end
 end

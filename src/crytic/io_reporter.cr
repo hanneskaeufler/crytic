@@ -59,6 +59,10 @@ module Crytic
       @io << summary.colorize(results.map(&.status.covered?).all? ? :green : :red).to_s
     end
 
+    # intentional noop
+    def report_msi(results)
+    end
+
     private def score_in_percent(results)
       return "N/A" if results.empty?
       "#{MsiCalculator.new(results).msi}%"
