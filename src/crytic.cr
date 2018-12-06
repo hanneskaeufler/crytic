@@ -1,7 +1,7 @@
-require "./crytic/io_reporter"
+require "./crytic/reporter/http_client"
+require "./crytic/reporter/io_reporter"
 require "./crytic/runner"
 require "./crytic/stryker_badge_reporter"
-require "./crytic/reporter/http_client"
 require "option_parser"
 
 subject_source = ""
@@ -25,7 +25,7 @@ OptionParser.parse! do |parser|
   end
 end
 
-reporters = [Crytic::IoReporter.new(STDOUT)] of Crytic::Reporter::Reporter
+reporters = [Crytic::Reporter::IoReporter.new(STDOUT)] of Crytic::Reporter::Reporter
 
 if ENV["STRYKER_DASHBOARD_API_KEY"]?
   client = Crytic::Reporter::DefaultHttpClient.new

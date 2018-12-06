@@ -1,10 +1,9 @@
 require "./generator/**"
-require "./io_reporter"
 require "./msi_calculator"
 require "./mutant/**"
 require "./mutation/mutation"
 require "./mutation/no_mutation"
-require "./reporter/reporter"
+require "./reporter/**"
 require "./source"
 
 module Crytic
@@ -13,7 +12,7 @@ module Crytic
 
     def initialize(
       @threshold : Threshold = 100.0,
-      @reporters = [IoReporter.new(STDOUT)] of Reporter::Reporter,
+      @reporters = [Reporter::IoReporter.new(STDOUT)] of Reporter::Reporter,
       @generator : Generator = InMemoryMutationsGenerator.new
     )
     end

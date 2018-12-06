@@ -1,11 +1,11 @@
-require "./msi_calculator"
-require "./mutation/mutation"
-require "./reporter/reporter"
+require "../msi_calculator"
+require "../mutation/mutation"
+require "./reporter"
 require "spec/dsl"
 
-module Crytic
+module Crytic::Reporter
   # Reports crytics output into an IO. Useful for e.g. the console output
-  class IoReporter < Reporter::Reporter
+  class IoReporter < Reporter
     INDENT = "    "
 
     def initialize(@io : IO, @start_time = Time.now)

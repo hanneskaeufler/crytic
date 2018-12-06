@@ -1,7 +1,7 @@
-require "../src/crytic/io_reporter"
-require "../src/crytic/mutant/number_literal_change"
-require "../src/crytic/mutation/original_result"
-require "./spec_helper"
+require "../../src/crytic/mutant/number_literal_change"
+require "../../src/crytic/mutation/original_result"
+require "../../src/crytic/reporter/io_reporter"
+require "../spec_helper"
 
 private def fake_mutant
   Crytic::Mutant::NumberLiteralChange.at(Crystal::Location.new(filename: nil, line_number: 0, column_number: 0))
@@ -11,7 +11,7 @@ private def original(exit_code = 0, output = "output")
   Crytic::Mutation::OriginalResult.new(exit_code: exit_code, output: output)
 end
 
-module Crytic
+module Crytic::Reporter
   describe IoReporter do
     describe "#report_original_result" do
       it "prints the original passing suites status" do
