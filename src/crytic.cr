@@ -1,4 +1,3 @@
-require "./crytic/autofind_runner"
 require "./crytic/reporter/http_client"
 require "./crytic/reporter/io_reporter"
 require "./crytic/reporter/stryker_badge_reporter"
