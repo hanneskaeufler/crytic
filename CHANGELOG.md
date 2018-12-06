@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - `--min-msi` cli argument to allow passing the suite (exiting with 0) even when there are mutants that survived. Pass as float like `--min-msi=75.0`.
+- Post MSI score to [stryker dashboard](https://dashboard.stryker-mutator.io) if env vars are set.
 
 ### Changed
 - NumberLiteralChange mutant now outputs 0 (for everything != 0) and 1 (for 0)

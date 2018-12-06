@@ -76,6 +76,19 @@ Each following occurance of `✅` shows that a mutant has been killed, ergo that
 
 `❌ NumberLiteralSignFlip` is signaling that indeed a mutation was not detected. The diff below shows the change that was made which was not caught by the test suite.
 
+### Mutation Badge
+
+To show a badge about your mutation testing efforts like ![Mutation Score](https://badge.stryker-mutator.io/github.com/hanneskaeufler/crytic/master) you can make use of the [dashboard](https://dashboard.stryker-mutator.io) of stryker to post crytic's score to their api. To do that, make sure to have the following env vars set:
+
+```
+CIRCLE_BRANCH             => "master",
+CIRCLE_PROJECT_REPONAME   => "crytic",
+CIRCLE_PROJECT_USERNAME   => "hanneskaeufler",
+STRYKER_DASHBOARD_API_KEY => "apikey",
+```
+
+It is currently limited to work with Circle CI and assumes your project is hosted on GitHub.
+
 ### Available mutants
 
 There are many ways a code-base can be modified to introduce arbitrary failures. Crytic only provides mutators which keep the code compiling (at least in theory).
