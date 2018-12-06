@@ -1,7 +1,7 @@
 require "./crytic/reporter/http_client"
 require "./crytic/reporter/io_reporter"
+require "./crytic/reporter/stryker_badge_reporter"
 require "./crytic/runner"
-require "./crytic/stryker_badge_reporter"
 require "option_parser"
 
 subject_source = ""
