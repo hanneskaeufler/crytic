@@ -12,18 +12,22 @@ module Crytic::Mutation
   class Mutation
     private PREAMBLE = "require \"spec\"\nSpec.fail_fast = true\n"
 
-    property process_runner
-    property file_remover
-    property tempfile_writer
-    @process_runner : Crytic::ProcessRunner
-    @file_remover : (String -> Void)
-    @tempfile_writer : (String, String, String) -> String
+    property process_runner : Crytic::ProcessRunner
+    property file_remover : (String -> Void)
+    property tempfile_writer : (String, String, String) -> String
 
     def run
       subject_source = File.read(@subject_file_path)
       source = Source.new(subject_source)
       mutated_source = source.mutated_source(@mutant)
       source_diff = Crytic::Diff.unified_diff(source.original_source, mutated_source).to_s
+
+      if source_diff.empty?
+        pp @mutant
+        puts "something is wrong with this mutation, didnt produce a diff"
+        Result.new(Status::Uncovered, @mutant, source_diff)
+      end
+
       process_result = run_mutation(mutated_source)
       success_messages_in_output = /Finished/ =~ process_result[:output]
       status = if process_result[:exit_code] == ProcessRunner::SUCCESS
