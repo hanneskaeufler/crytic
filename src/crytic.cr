@@ -27,7 +27,7 @@ end
 
 reporters = [Crytic::Reporter::IoReporter.new(STDOUT)] of Crytic::Reporter::Reporter
 
-if ENV["STRYKER_DASHBOARD_API_KEY"]?
+if ENV["STRYKER_KEY"]?
   puts "USING STRYKER"
   client = Crytic::Reporter::DefaultHttpClient.new
   reporters << Crytic::Reporter::StrykerBadgeReporter.new(client, {
@@ -36,8 +36,10 @@ if ENV["STRYKER_DASHBOARD_API_KEY"]?
     "CIRCLE_BRANCH"             => ENV["CIRCLE_BRANCH"],
     "CIRCLE_PROJECT_REPONAME"   => ENV["CIRCLE_PROJECT_REPONAME"],
     "CIRCLE_PROJECT_USERNAME"   => ENV["CIRCLE_PROJECT_USERNAME"],
-    "STRYKER_DASHBOARD_API_KEY" => ENV["STRYKER_DASHBOARD_API_KEY"],
+    "STRYKER_DASHBOARD_API_KEY" => ENV["STRYKER_KEY"],
   })
+else
+  puts "Not using stryker"
 end
 
 success = Crytic::Runner
