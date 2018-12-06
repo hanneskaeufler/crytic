@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-./bin/crytic --subject src/crytic/reporter/io_reporter.cr spec/reporter/io_reporter_spec.cr
+crystal ./src/crytic.cr -- --min-msi=20.0 --subject src/crytic/reporter/io_reporter.cr spec/reporter/io_reporter_spec.cr
