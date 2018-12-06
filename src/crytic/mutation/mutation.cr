@@ -102,8 +102,7 @@ module Crytic::Mutation
 
     private def mutated_specs_source(mutated_source)
       InjectMutatedSubjectIntoSpecs.reset
-      pp @specs_file_paths
-      s = @specs_file_paths.map do |spec_file|
+      @specs_file_paths.map do |spec_file|
         InjectMutatedSubjectIntoSpecs
           .new(
           subject_path: @subject_file_path,
@@ -112,8 +111,6 @@ module Crytic::Mutation
           source: File.read(spec_file))
           .to_covered_source
       end.join("\n")
-      puts s
-      s
     end
   end
 end
