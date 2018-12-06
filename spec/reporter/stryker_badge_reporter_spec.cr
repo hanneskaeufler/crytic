@@ -1,8 +1,8 @@
-require "../src/crytic/mutant/number_literal_change"
-require "../src/crytic/mutation/result"
-require "../src/crytic/reporter/http_client"
-require "../src/crytic/stryker_badge_reporter"
-require "./spec_helper"
+require "../../src/crytic/mutant/number_literal_change"
+require "../../src/crytic/mutation/result"
+require "../../src/crytic/reporter/http_client"
+require "../../src/crytic/reporter/stryker_badge_reporter"
+require "../spec_helper"
 require "json"
 
 module Crytic::Reporter

@@ -1,6 +1,6 @@
-require "./msi_calculator"
-require "./reporter/http_client"
-require "./reporter/reporter"
+require "../msi_calculator"
+require "./http_client"
+require "./reporter"
 
 module Crytic::Reporter
   # Sends a MSI score to the stryker dashboard
