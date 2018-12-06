@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.26.0">
+<meta name="generator" content="Crystal Docs 0.26.1">
 
 
 <link href="../css/style.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
-      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
     </div>
 
     <div class="repository-links">
@@ -66,8 +66,13 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/IoReporter" data-name="crytic::ioreporter">
-      <a href="../Crytic/IoReporter.html">IoReporter</a>
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/InMemoryMutationsGenerator" data-name="crytic::inmemorymutationsgenerator">
+      <a href="../Crytic/InMemoryMutationsGenerator.html">InMemoryMutationsGenerator</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MsiCalculator" data-name="crytic::msicalculator">
+      <a href="../Crytic/MsiCalculator.html">MsiCalculator</a>
       
     </li>
   
@@ -221,8 +226,53 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter" data-name="crytic::reporter">
+      <a href="../Crytic/Reporter.html">Reporter</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/DefaultHttpClient" data-name="crytic::reporter::defaulthttpclient">
+      <a href="../Crytic/Reporter/DefaultHttpClient.html">DefaultHttpClient</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/HttpClient" data-name="crytic::reporter::httpclient">
+      <a href="../Crytic/Reporter/HttpClient.html">HttpClient</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/IoReporter" data-name="crytic::reporter::ioreporter">
+      <a href="../Crytic/Reporter/IoReporter.html">IoReporter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/Reporter" data-name="crytic::reporter::reporter">
+      <a href="../Crytic/Reporter/Reporter.html">Reporter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/StrykerBadgeReporter" data-name="crytic::reporter::strykerbadgereporter">
+      <a href="../Crytic/Reporter/StrykerBadgeReporter.html">StrykerBadgeReporter</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
       <a href="../Crytic/Runner.html">Runner</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Threshold" data-name="crytic::runner::threshold">
+      <a href="../Crytic/Runner/Threshold.html">Threshold</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -276,7 +326,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/10a26fcef2951a23145ba9d44f7199aeac91248a/src/crytic/runner.cr#L9" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/runner.cr#L10" target="_blank">
         crytic/runner.cr
       </a>
     
@@ -291,7 +341,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28reporter%3DIoReporter.new%28STDOUT%29%29-class-method" class="signature"><strong>.new</strong>(reporter = <span class="t">IoReporter</span>.<span class="k">new</span>(<span class="t">STDOUT</span>))</a>
+        <a href="#new%28threshold%3AThreshold%3D100.0%2Creporters%3D%5BReporter%3A%3AIoReporter.new%28STDOUT%29%5DofReporter%3A%3AReporter%2Cgenerator%3AGenerator%3DInMemoryMutationsGenerator.new%29-class-method" class="signature"><strong>.new</strong>(threshold : Threshold = <span class="n">100.0</span>, reporters = [<span class="t">Reporter</span><span class="t">::</span><span class="t">IoReporter</span>.<span class="k">new</span>(<span class="t">STDOUT</span>)] <span class="k">of</span> <span class="t">Reporter</span><span class="t">::</span><span class="t">Reporter</span>, generator : Generator = <span class="t">InMemoryMutationsGenerator</span>.<span class="k">new</span>)</a>
         
       </li>
     
@@ -342,18 +392,18 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(reporter=IoReporter.new(STDOUT))-class-method">
+    <div class="entry-detail" id="new(threshold:Threshold=100.0,reporters=[Reporter::IoReporter.new(STDOUT)]ofReporter::Reporter,generator:Generator=InMemoryMutationsGenerator.new)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(reporter = <span class="t">IoReporter</span>.<span class="k">new</span>(<span class="t">STDOUT</span>))
+        def self.<strong>new</strong>(threshold : <a href="../Crytic/Runner/Threshold.html">Threshold</a> = <span class="n">100.0</span>, reporters = [<span class="t">Reporter</span><span class="t">::</span><span class="t">IoReporter</span>.<span class="k">new</span>(<span class="t">STDOUT</span>)] <span class="k">of</span> <span class="t">Reporter</span><span class="t">::</span><span class="t">Reporter</span>, generator : <a href="../Crytic/Generator.html">Generator</a> = <span class="t">InMemoryMutationsGenerator</span>.<span class="k">new</span>)
 
-        <a class="method-permalink" href="#new%28reporter%3DIoReporter.new%28STDOUT%29%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28threshold%3AThreshold%3D100.0%2Creporters%3D%5BReporter%3A%3AIoReporter.new%28STDOUT%29%5DofReporter%3A%3AReporter%2Cgenerator%3AGenerator%3DInMemoryMutationsGenerator.new%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/10a26fcef2951a23145ba9d44f7199aeac91248a/src/crytic/runner.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/runner.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -376,7 +426,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/10a26fcef2951a23145ba9d44f7199aeac91248a/src/crytic/runner.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/runner.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>

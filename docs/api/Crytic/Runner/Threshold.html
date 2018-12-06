@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutant::NumberLiteralChange - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Runner::Threshold - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -76,7 +76,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
       <a href="../../Crytic/Mutant.html">Mutant</a>
       
         <ul>
@@ -116,7 +116,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChange" data-name="crytic::mutant::numberliteralchange">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChange" data-name="crytic::mutant::numberliteralchange">
       <a href="../../Crytic/Mutant/NumberLiteralChange.html">NumberLiteralChange</a>
       
     </li>
@@ -261,12 +261,12 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
       <a href="../../Crytic/Runner.html">Runner</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Threshold" data-name="crytic::runner::threshold">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Threshold" data-name="crytic::runner::threshold">
       <a href="../../Crytic/Runner/Threshold.html">Threshold</a>
       
     </li>
@@ -300,17 +300,18 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Mutant::NumberLiteralChange
+  <span class="kind">alias</span> Crytic::Runner::Threshold
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/NumberLiteralChange.html">Crytic::Mutant::NumberLiteralChange</a></li><li class="superclass"><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
 
+  <h2>Alias Definition</h2>
+  <code>Float64</code>
 
 
 
@@ -326,8 +327,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/mutant/number_literal_change.cr#L5" target="_blank">
-        crytic/mutant/number_literal_change.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/runner.cr#L11" target="_blank">
+        crytic/runner.cr
       </a>
     
     <br/>
@@ -341,84 +342,11 @@
 
 
 
-  <h2>Instance Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#visit%28node%3ACrystal%3A%3ANumberLiteral%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::NumberLiteral)</a>
-        
-      </li>
-    
-  </ul>
-
 
 
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></code></h3>
-  
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#location%3ACrystal%3A%3ALocation-instance-method" class="tooltip">
-      <span>location : Crystal::Location</span>
-    location</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="tooltip">
-      <span>visit(node : Crystal::ASTNode)</span>
-    visit</a>
-    
-  
-
-
-    
-
-
-    
-
-  <h3>Class methods inherited from class <code><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></code></h3>
-  
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#at%28location%3ACrystal%3A%3ALocation%29-class-method" class="tooltip">
-      <span>at(location : Crystal::Location)</span>
-    at</a>
-    
-  
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
   
 </div>
 
@@ -426,25 +354,6 @@
 
 
 
-
-  <h2>Instance Method Detail</h2>
-  
-    <div class="entry-detail" id="visit(node:Crystal::NumberLiteral)-instance-method">
-      <div class="signature">
-        
-        def <strong>visit</strong>(node : Crystal::NumberLiteral)
-
-        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3ANumberLiteral%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/mutant/number_literal_change.cr#L6" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 

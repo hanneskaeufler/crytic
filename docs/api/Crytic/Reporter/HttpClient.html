@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutant::NumberLiteralChange - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Reporter::HttpClient - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -76,7 +76,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
       <a href="../../Crytic/Mutant.html">Mutant</a>
       
         <ul>
@@ -116,7 +116,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChange" data-name="crytic::mutant::numberliteralchange">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChange" data-name="crytic::mutant::numberliteralchange">
       <a href="../../Crytic/Mutant/NumberLiteralChange.html">NumberLiteralChange</a>
       
     </li>
@@ -226,7 +226,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter" data-name="crytic::reporter">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter" data-name="crytic::reporter">
       <a href="../../Crytic/Reporter.html">Reporter</a>
       
         <ul>
@@ -236,7 +236,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/HttpClient" data-name="crytic::reporter::httpclient">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/HttpClient" data-name="crytic::reporter::httpclient">
       <a href="../../Crytic/Reporter/HttpClient.html">HttpClient</a>
       
     </li>
@@ -300,12 +300,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Mutant::NumberLiteralChange
+  <span class="kind">abstract class</span> Crytic::Reporter::HttpClient
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/NumberLiteralChange.html">Crytic::Mutant::NumberLiteralChange</a></li><li class="superclass"><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Reporter/HttpClient.html">Crytic::Reporter::HttpClient</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -317,6 +317,13 @@
 
 
 
+
+  <h2>Direct Known Subclasses</h2>
+  <ul class="other-types-list">
+  
+    <li class="other-type"><a href="../../Crytic/Reporter/DefaultHttpClient.html">Crytic::Reporter::DefaultHttpClient</a></li>
+  
+  </ul>
 
 
 
@@ -326,8 +333,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/mutant/number_literal_change.cr#L5" target="_blank">
-        crytic/mutant/number_literal_change.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/reporter/http_client.cr#L5" target="_blank">
+        crytic/reporter/http_client.cr
       </a>
     
     <br/>
@@ -345,7 +352,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#visit%28node%3ACrystal%3A%3ANumberLiteral%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::NumberLiteral)</a>
+        <a href="#post%28url%3AString%2Cbody%3AHash%28String%2CString%7CFloat64%29%29-instance-method" class="signature"><strong>#post</strong>(url : String, body : Hash(String, String | Float64))</a>
         
       </li>
     
@@ -356,49 +363,6 @@
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></code></h3>
-  
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#location%3ACrystal%3A%3ALocation-instance-method" class="tooltip">
-      <span>location : Crystal::Location</span>
-    location</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="tooltip">
-      <span>visit(node : Crystal::ASTNode)</span>
-    visit</a>
-    
-  
-
-
-    
-
-
-    
-
-  <h3>Class methods inherited from class <code><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></code></h3>
-  
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#at%28location%3ACrystal%3A%3ALocation%29-class-method" class="tooltip">
-      <span>at(location : Crystal::Location)</span>
-    at</a>
-    
-  
-
-
-  
-    
-
-
-    
-
-
-    
-
-
   
     
 
@@ -429,18 +393,18 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="visit(node:Crystal::NumberLiteral)-instance-method">
+    <div class="entry-detail" id="post(url:String,body:Hash(String,String|Float64))-instance-method">
       <div class="signature">
-        
-        def <strong>visit</strong>(node : Crystal::NumberLiteral)
+        abstract 
+        def <strong>post</strong>(url : String, body : Hash(String, String | Float64))
 
-        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3ANumberLiteral%29-instance-method">#</a>
+        <a class="method-permalink" href="#post%28url%3AString%2Cbody%3AHash%28String%2CString%7CFloat64%29%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/mutant/number_literal_change.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/reporter/http_client.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>

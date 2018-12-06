@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.26.0">
+<meta name="generator" content="Crystal Docs 0.26.1">
 
 
 <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
-      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
     </div>
 
     <div class="repository-links">
@@ -66,8 +66,13 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/IoReporter" data-name="crytic::ioreporter">
-      <a href="Crytic/IoReporter.html">IoReporter</a>
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/InMemoryMutationsGenerator" data-name="crytic::inmemorymutationsgenerator">
+      <a href="Crytic/InMemoryMutationsGenerator.html">InMemoryMutationsGenerator</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MsiCalculator" data-name="crytic::msicalculator">
+      <a href="Crytic/MsiCalculator.html">MsiCalculator</a>
       
     </li>
   
@@ -221,8 +226,53 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter" data-name="crytic::reporter">
+      <a href="Crytic/Reporter.html">Reporter</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/DefaultHttpClient" data-name="crytic::reporter::defaulthttpclient">
+      <a href="Crytic/Reporter/DefaultHttpClient.html">DefaultHttpClient</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/HttpClient" data-name="crytic::reporter::httpclient">
+      <a href="Crytic/Reporter/HttpClient.html">HttpClient</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/IoReporter" data-name="crytic::reporter::ioreporter">
+      <a href="Crytic/Reporter/IoReporter.html">IoReporter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/Reporter" data-name="crytic::reporter::reporter">
+      <a href="Crytic/Reporter/Reporter.html">Reporter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/StrykerBadgeReporter" data-name="crytic::reporter::strykerbadgereporter">
+      <a href="Crytic/Reporter/StrykerBadgeReporter.html">StrykerBadgeReporter</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
       <a href="Crytic/Runner.html">Runner</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Threshold" data-name="crytic::runner::threshold">
+      <a href="Crytic/Runner/Threshold.html">Threshold</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -248,7 +298,7 @@
 
 
 <div class="main-content">
-<p><a href="https://circleci.com/gh/hanneskaeufler/crytic/tree/master" target="_blank"><img src="https://circleci.com/gh/hanneskaeufler/crytic/tree/master.svg?style=svg" alt="CircleCI"/></a></p>
+<p><a href="https://circleci.com/gh/hanneskaeufler/crytic/tree/master" target="_blank"><img src="https://circleci.com/gh/hanneskaeufler/crytic/tree/master.svg?style=svg" alt="CircleCI"/></a> <img src="https://badge.stryker-mutator.io/github.com/hanneskaeufler/crytic/master" alt="Mutation Score"/></p>
 
 <h1>crytic</h1>
 
@@ -269,7 +319,7 @@
 <pre><code class="language-yaml">development_dependencies:
   crytic:
     github: hanneskaeufler/crytic
-    version: ~> 1.2.0</code></pre>
+    version: ~> 2.0.0</code></pre>
 
 <p>After <code>shards install</code>, this will place the <code>crytic</code> executable into the <code>bin/</code> folder inside your project.</p>
 
@@ -280,6 +330,14 @@
 <pre><code class="language-shell">./bin/crytic --subject src/blog/pages/archive.cr spec/blog_spec.cr spec/blog/pages/archive_spec.cr</code></pre>
 
 <p>This command determines a list of mutations that can be performed on the source code of <code>archive.cr</code> and joins the <code>blog_spec.cr</code> and <code>archive_spec.cr</code> as a test-suite to find suriving mutants.</p>
+
+<h3>CLI options</h3>
+
+<p><code>--subject</code>/<code>-s</code> specifies a relative filepath to the sourcecode being mutated.</p>
+
+<p><code>--min-msi</code>/<code>-m</code> specifies a threshold as to when to exit the program with 0 even when mutants survived. MSI is the Mutation Score Indicator.</p>
+
+<p>The rest of the unnamed positional arguments are relative filepaths to the specs to be run.</p>
 
 <h3>How to read the output</h3>
 
@@ -312,6 +370,17 @@ Finished in 36.35 seconds:
 
 <p><code>❌ NumberLiteralSignFlip</code> is signaling that indeed a mutation was not detected. The diff below shows the change that was made which was not caught by the test suite.</p>
 
+<h3>Mutation Badge</h3>
+
+<p>To show a badge about your mutation testing efforts like at the top of this readme you can make use of the <a href="https://dashboard.stryker-mutator.io" target="_blank">dashboard</a> of stryker by letting crytic post  the msi score to the stryker api. To do that, make sure to have the following env vars set:</p>
+
+<pre><code><span class="t">CIRCLE_BRANCH</span>             => <span class="s">&quot;master&quot;</span>,
+<span class="t">CIRCLE_PROJECT_REPONAME</span>   => <span class="s">&quot;crytic&quot;</span>,
+<span class="t">CIRCLE_PROJECT_USERNAME</span>   => <span class="s">&quot;hanneskaeufler&quot;</span>,
+<span class="t">STRYKER_DASHBOARD_API_KEY</span> => <span class="s">&quot;apikey&quot;</span>,</code></pre>
+
+<p>It is currently limited to work with Circle CI and assumes your project is hosted on GitHub.</p>
+
 <h3>Available mutants</h3>
 
 <p>There are many ways a code-base can be modified to introduce arbitrary failures. Crytic only provides mutators which keep the code compiling (at least in theory).</p>
@@ -343,10 +412,10 @@ Finished in 36.35 seconds:
 
 <h4>NumberLiteralChange</h4>
 
-<p>This mutation changes literal occurances of numbers by prefixing the number with a "1". A typical mutation is:</p>
+<p>This mutation changes literal occurances of numbers by replacing them with "0". "0" gets replaces by "1". A typical mutation is:</p>
 
 <pre><code class="language-diff">-  0
-+  10</code></pre>
++  1</code></pre>
 
 <h4>NumberLiteralSignChange</h4>
 

@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutant::NumberLiteralChange - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Reporter::IoReporter - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -76,7 +76,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
       <a href="../../Crytic/Mutant.html">Mutant</a>
       
         <ul>
@@ -116,7 +116,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChange" data-name="crytic::mutant::numberliteralchange">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChange" data-name="crytic::mutant::numberliteralchange">
       <a href="../../Crytic/Mutant/NumberLiteralChange.html">NumberLiteralChange</a>
       
     </li>
@@ -226,7 +226,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter" data-name="crytic::reporter">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter" data-name="crytic::reporter">
       <a href="../../Crytic/Reporter.html">Reporter</a>
       
         <ul>
@@ -241,7 +241,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/IoReporter" data-name="crytic::reporter::ioreporter">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/IoReporter" data-name="crytic::reporter::ioreporter">
       <a href="../../Crytic/Reporter/IoReporter.html">IoReporter</a>
       
     </li>
@@ -300,15 +300,19 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Mutant::NumberLiteralChange
+  <span class="kind">class</span> Crytic::Reporter::IoReporter
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/NumberLiteralChange.html">Crytic::Mutant::NumberLiteralChange</a></li><li class="superclass"><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Reporter/IoReporter.html">Crytic::Reporter::IoReporter</a></li><li class="superclass"><a href="../../Crytic/Reporter/Reporter.html">Crytic::Reporter::Reporter</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
+
+  <h2>Overview</h2>
+
+  <p>Reports crytics output into an IO. Useful for e.g. the console output</p>
 
 
 
@@ -326,8 +330,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/mutant/number_literal_change.cr#L5" target="_blank">
-        crytic/mutant/number_literal_change.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/reporter/io_reporter.cr#L8" target="_blank">
+        crytic/reporter/io_reporter.cr
       </a>
     
     <br/>
@@ -335,7 +339,29 @@
 
 
 
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="INDENT">
+        <strong>INDENT</strong> = <code><span class="s">&quot;    &quot;</span></code>
+      </dt>
+      
+    
+  </dl>
 
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28io%3AIO%2Cstart_time%3DTime.now%29-class-method" class="signature"><strong>.new</strong>(io : IO, start_time = <span class="t">Time</span>.now)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -345,7 +371,24 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#visit%28node%3ACrystal%3A%3ANumberLiteral%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::NumberLiteral)</a>
+        <a href="#report_msi%28results%29-instance-method" class="signature"><strong>#report_msi</strong>(results)</a>
+        
+          <div class="summary"><p>intentional noop</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#report_original_result%28original_result%29-instance-method" class="signature"><strong>#report_original_result</strong>(original_result)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#report_result%28result%29-instance-method" class="signature"><strong>#report_result</strong>(result)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#report_summary%28results%29-instance-method" class="signature"><strong>#report_summary</strong>(results)</a>
         
       </li>
     
@@ -359,38 +402,29 @@
   
     
 
-  <h3>Instance methods inherited from class <code><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></code></h3>
+  <h3>Instance methods inherited from class <code><a href="../../Crytic/Reporter/Reporter.html">Crytic::Reporter::Reporter</a></code></h3>
   
   
-    <a href="../../Crytic/Mutant/VisitorMutant.html#location%3ACrystal%3A%3ALocation-instance-method" class="tooltip">
-      <span>location : Crystal::Location</span>
-    location</a>, 
+    <a href="../../Crytic/Reporter/Reporter.html#report_msi%28results%29-instance-method" class="tooltip">
+      <span>report_msi(results)</span>
+    report_msi</a>, 
     
   
-    <a href="../../Crytic/Mutant/VisitorMutant.html#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="tooltip">
-      <span>visit(node : Crystal::ASTNode)</span>
-    visit</a>
+    <a href="../../Crytic/Reporter/Reporter.html#report_original_result%28original_result%29-instance-method" class="tooltip">
+      <span>report_original_result(original_result)</span>
+    report_original_result</a>, 
     
   
-
-
-    
-
-
-    
-
-  <h3>Class methods inherited from class <code><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></code></h3>
-  
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#at%28location%3ACrystal%3A%3ALocation%29-class-method" class="tooltip">
-      <span>at(location : Crystal::Location)</span>
-    at</a>
+    <a href="../../Crytic/Reporter/Reporter.html#report_result%28result%29-instance-method" class="tooltip">
+      <span>report_result(result)</span>
+    report_result</a>, 
     
   
-
-
-  
+    <a href="../../Crytic/Reporter/Reporter.html#report_summary%28results%29-instance-method" class="tooltip">
+      <span>report_summary(results)</span>
+    report_summary</a>
     
+  
 
 
     
@@ -423,24 +457,93 @@
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(io:IO,start_time=Time.now)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(io : IO, start_time = <span class="t">Time</span>.now)
+
+        <a class="method-permalink" href="#new%28io%3AIO%2Cstart_time%3DTime.now%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/reporter/io_reporter.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
 
 
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="visit(node:Crystal::NumberLiteral)-instance-method">
+    <div class="entry-detail" id="report_msi(results)-instance-method">
       <div class="signature">
         
-        def <strong>visit</strong>(node : Crystal::NumberLiteral)
+        def <strong>report_msi</strong>(results)
 
-        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3ANumberLiteral%29-instance-method">#</a>
+        <a class="method-permalink" href="#report_msi%28results%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>intentional noop</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/reporter/io_reporter.cr#L64" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="report_original_result(original_result)-instance-method">
+      <div class="signature">
+        
+        def <strong>report_original_result</strong>(original_result)
+
+        <a class="method-permalink" href="#report_original_result%28original_result%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/mutant/number_literal_change.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/reporter/io_reporter.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="report_result(result)-instance-method">
+      <div class="signature">
+        
+        def <strong>report_result</strong>(result)
+
+        <a class="method-permalink" href="#report_result%28result%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/reporter/io_reporter.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="report_summary(results)-instance-method">
+      <div class="signature">
+        
+        def <strong>report_summary</strong>(results)
+
+        <a class="method-permalink" href="#report_summary%28results%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/reporter/io_reporter.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>
