@@ -15,7 +15,7 @@ module Crytic::Reporter
       @client.post(DASHBOARD_URL, {
         "apiKey"         => @env["STRYKER_DASHBOARD_API_KEY"],
         "repositorySlug" => slug,
-        "branch"         => "master",
+        "branch"         => @env["CIRCLE_BRANCH"],
         "mutationScore"  => score(results),
       })
     end
