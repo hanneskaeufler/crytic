@@ -21,11 +21,8 @@ module Crytic
     def run(source : String, specs : Array(String)) : Bool
       validate_args!(source, specs)
 
-      original_result = Mutation::NoMutation
-        .with(specs: specs)
-        .run
-
-      @reporters.each { |reporter| reporter.report_original_result(original_result) }
+      original_result = Mutation::NoMutation.with(specs).run
+      @reporters.each(&.report_original_result(original_result))
 
       return false unless original_result.successful?
 
@@ -33,16 +30,14 @@ module Crytic
         .mutations_for(source: source, specs: specs)
         .map do |mutation|
           result = mutation.run
-          @reporters.each { |reporter| reporter.report_result(result) }
+          @reporters.each(&.report_result(result))
           result
         end
 
-      @reporters.each { |reporter| reporter.report_summary(results) }
+      @reporters.each(&.report_summary(results))
+      @reporters.each(&.report_msi(results))
 
-      msi = MsiCalculator.new(results)
-      @reporters.each { |reporter| reporter.report_msi(results) }
-
-      return msi.passes?(@threshold)
+      return MsiCalculator.new(results).passes?(@threshold)
     end
 
     private def validate_args!(source, specs)
