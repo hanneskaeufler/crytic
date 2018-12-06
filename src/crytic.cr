@@ -40,7 +40,7 @@ if ENV["STRYKER_DASHBOARD_API_KEY"]?
 end
 
 success = Crytic::Runner
-  .new(threshold: msi_threshold)
+  .new(threshold: msi_threshold, reporters: reporters)
   .run(subject_source, spec_files)
 
 exit(success ? 0 : 1)
