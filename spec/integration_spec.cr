@@ -27,6 +27,20 @@ describe Crytic do
     end
   end
 
+  describe "without passing a subject or tests" do
+    it "mutates all sources and runs all tests" do
+      result = run_crytic_in_dir("./fixtures/autofind")
+      result.output.should contain("✅ ConditionFlip")
+      result.output.should contain("✅ BoolLiteralFlip")
+      result.output.should contain("✅ NumberLiteralSignFlip")
+      result.output.should contain("✅ NumberLiteralChange")
+      result.output.should contain("❌ NumberLiteralSignFlip")
+      result.output.should contain("❌ NumberLiteralChange")
+      result.output.should contain("2 uncovered")
+      result.exit_code.should be > 0
+    end
+  end
+
   describe "subject without any coverage" do
     it "fails all mutants" do
       result = run_crytic("-s ./fixtures/uncovered/without.cr ./fixtures/uncovered/without_spec.cr")
@@ -56,6 +70,15 @@ describe Crytic do
       result.exit_code.should be > 0
     end
   end
+end
+
+def run_crytic_in_dir(dir : String)
+  io = IO::Memory.new
+  result = Process.run("cd #{dir} && crystal run ../../src/crytic.cr",
+    output: io,
+    error: io,
+    shell: true)
+  CryticResult.new(exit_code: result.exit_code, output: io.to_s)
 end
 
 def run_crytic(args : String)

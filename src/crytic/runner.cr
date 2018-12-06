@@ -17,7 +17,7 @@ module Crytic
     )
     end
 
-    def run(source : String, specs : Array(String)) : Bool
+    def run(source : Array(String), specs : Array(String)) : Bool
       validate_args!(source, specs)
 
       original_result = Mutation::NoMutation.with(specs).run
@@ -25,13 +25,11 @@ module Crytic
 
       return false unless original_result.successful?
 
-      results = @generator
-        .mutations_for(source: source, specs: specs)
-        .map do |mutation|
-          result = mutation.run
-          @reporters.each(&.report_result(result))
-          result
-        end
+      results = mutations(source, specs).map do |mutation|
+        result = mutation.run
+        @reporters.each(&.report_result(result))
+        result
+      end
 
       @reporters.each(&.report_summary(results))
       @reporters.each(&.report_msi(results))
@@ -39,12 +37,22 @@ module Crytic
       return MsiCalculator.new(results).passes?(@threshold)
     end
 
+    def run(source : String, specs : Array(String)) : Bool
+      run([source], specs)
+    end
+
+    private def mutations(source, specs)
+      source.map do |src|
+        @generator.mutations_for(source: src, specs: specs)
+      end.flatten
+    end
+
     private def validate_args!(source, specs)
       if specs.empty?
         raise ArgumentError.new("No spec files given.")
       end
 
-      unless File.exists?(source)
+      unless source.map { |path| File.exists?(path) }.all?
         raise ArgumentError.new("Source file for subject doesn't exist.")
       end
 

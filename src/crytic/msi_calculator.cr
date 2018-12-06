@@ -10,6 +10,7 @@ module Crytic
     end
 
     def msi
+      return 100.0 if results.empty?
       total = results.size
       killed = results.count(&.status.covered?)
       timed_out = results.count(&.status.timeout?)
