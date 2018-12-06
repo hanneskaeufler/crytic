@@ -1,4 +1,4 @@
-require "./generator"
+require "./generator/**"
 require "./io_reporter"
 require "./msi_calculator"
 require "./mutant/**"

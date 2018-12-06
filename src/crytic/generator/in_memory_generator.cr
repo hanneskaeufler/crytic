@@ -1,8 +1,6 @@
-module Crytic
-  abstract class Generator
-    abstract def mutations_for(source : String, specs : Array(String))
-  end
+require "./generator"
 
+module Crytic
   class InMemoryMutationsGenerator < Generator
     MUTANT_POSSIBILITIES = [
       Mutant::AndOrSwapPossibilities.new,
