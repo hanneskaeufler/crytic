@@ -78,7 +78,7 @@ Each following occurance of `✅` shows that a mutant has been killed, ergo that
 
 ### Mutation Badge
 
-To show a badge about your mutation testing efforts like ![Mutation Score](https://badge.stryker-mutator.io/github.com/hanneskaeufler/crytic/master) you can make use of the [dashboard](https://dashboard.stryker-mutator.io) of stryker to post crytic's score to their api. To do that, make sure to have the following env vars set:
+To show a badge about your mutation testing efforts like at the top of this readme you can make use of the [dashboard](https://dashboard.stryker-mutator.io) of stryker by letting crytic post  the msi score to the stryker api. To do that, make sure to have the following env vars set:
 
 ```
 CIRCLE_BRANCH             => "master",
