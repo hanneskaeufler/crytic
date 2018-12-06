@@ -1,10 +1,11 @@
-require "./msi_calculator"
-require "./mutation/mutation"
+require "../msi_calculator"
+require "../mutation/mutation"
+require "./reporter"
 require "spec/dsl"
 
-module Crytic
+module Crytic::Reporter
   # Reports crytics output into an IO. Useful for e.g. the console output
-  class IoReporter
+  class IoReporter < Reporter
     INDENT = "    "
 
     def initialize(@io : IO, @start_time = Time.now)
@@ -57,6 +58,10 @@ module Crytic
       summary += " Mutation Score Indicator (MSI): #{score_in_percent(results)}"
       summary += "\n"
       @io << summary.colorize(results.map(&.status.covered?).all? ? :green : :red).to_s
+    end
+
+    # intentional noop
+    def report_msi(results)
     end
 
     private def score_in_percent(results)

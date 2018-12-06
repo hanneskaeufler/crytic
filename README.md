@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/hanneskaeufler/crytic/tree/master.svg?style=svg)](https://circleci.com/gh/hanneskaeufler/crytic/tree/master)
+[![CircleCI](https://circleci.com/gh/hanneskaeufler/crytic/tree/master.svg?style=svg)](https://circleci.com/gh/hanneskaeufler/crytic/tree/master) ![Mutation Score](https://badge.stryker-mutator.io/github.com/hanneskaeufler/crytic/master)
 
 # crytic
 
@@ -75,6 +75,19 @@ The first good message here is that the `Original test suite passed`. Crytic ran
 Each following occurance of `✅` shows that a mutant has been killed, ergo that the change in the source code was detected by the test suite. The line and column numbers are printed to follow the progress through the subject file.
 
 `❌ NumberLiteralSignFlip` is signaling that indeed a mutation was not detected. The diff below shows the change that was made which was not caught by the test suite.
+
+### Mutation Badge
+
+To show a badge about your mutation testing efforts like at the top of this readme you can make use of the [dashboard](https://dashboard.stryker-mutator.io) of stryker by letting crytic post  the msi score to the stryker api. To do that, make sure to have the following env vars set:
+
+```
+CIRCLE_BRANCH             => "master",
+CIRCLE_PROJECT_REPONAME   => "crytic",
+CIRCLE_PROJECT_USERNAME   => "hanneskaeufler",
+STRYKER_DASHBOARD_API_KEY => "apikey",
+```
+
+It is currently limited to work with Circle CI and assumes your project is hosted on GitHub.
 
 ### Available mutants
 

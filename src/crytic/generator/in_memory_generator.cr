@@ -1,5 +1,7 @@
+require "./generator"
+
 module Crytic
-  class Generator
+  class InMemoryMutationsGenerator < Generator
     MUTANT_POSSIBILITIES = [
       Mutant::AndOrSwapPossibilities.new,
       Mutant::BoolLiteralFlipPossibilities.new,
