@@ -42,10 +42,10 @@ end
 if subject_source.empty? && spec_files.empty?
   subject_source = Dir["./src/**/*.cr"]
   spec_files = Dir["./spec/**/*_spec.cr"]
-else
-  success = Crytic::Runner
-    .new(threshold: msi_threshold, reporters: reporters)
-    .run(subject_source, spec_files)
 end
+
+success = Crytic::Runner
+  .new(threshold: msi_threshold, reporters: reporters)
+  .run(subject_source, spec_files)
 
 exit(success ? 0 : 1)
