@@ -4,34 +4,6 @@ require "../../src/crytic/mutation/mutation"
 require "./fake_process_runner"
 require "../spec_helper"
 
-private def mutant
-  Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
-    filename: nil,
-    line_number: 2,
-    column_number: 6,
-  ))
-end
-
-class FakeFile
-  @@files_deleted = [] of String
-  @@tempfiles_created = [] of String
-  @@tempfile_contents = [] of String
-
-  def self.tempfile_contents
-    @@tempfile_contents
-  end
-
-  def self.delete(filename : String)
-  end
-
-  def self.tempfile(name, extension, content) : String
-    filename = "#{name}.RANDOM#{extension}"
-    @@tempfile_contents << content
-    @@tempfiles_created << filename
-    "/tmp/#{filename}"
-  end
-end
-
 module Crytic::Mutation
   describe Mutation do
     Spec.before_each do
@@ -43,7 +15,7 @@ module Crytic::Mutation
         Mutation.with(
           original: "./bar.cr",
           specs: ["./bar_spec.cr"],
-          mutant: Crytic::Mutant::AndOrSwap.at(Crystal::Location.new(nil, 0, 0)))
+          mutant: Crytic::Mutant::AndOrSwap.at(Crystal::Location.new(nil, 0, 0))).should be_a(Crytic::Mutation::Mutation)
       end
     end
 
@@ -90,7 +62,7 @@ module Crytic::Mutation
           ["./fixtures/simple/bar_spec.cr"])
 
         fake = FakeProcessRunner.new
-        fake.exit_code = 1
+        fake.exit_code = [0, 1]
         fake.fill_output_with("Finished")
         mutation.process_runner = fake
         mutation.file_remover = ->FakeFile.delete(String)
@@ -106,7 +78,7 @@ module Crytic::Mutation
           ["./fixtures/simple/bar_spec.cr"])
 
         fake = FakeProcessRunner.new
-        fake.exit_code = 0
+        fake.exit_code = [0, 0]
         mutation.process_runner = fake
         mutation.file_remover = ->FakeFile.delete(String)
         mutation.tempfile_writer = ->FakeFile.tempfile(String, String, String)
@@ -121,7 +93,7 @@ module Crytic::Mutation
           ["./fixtures/simple/bar_spec.cr"])
 
         fake = FakeProcessRunner.new
-        fake.exit_code = 0
+        fake.exit_code = [0, 0]
         mutation.process_runner = fake
         mutation.file_remover = ->FakeFile.delete(String)
         mutation.tempfile_writer = ->FakeFile.tempfile(String, String, String)
@@ -138,7 +110,7 @@ module Crytic::Mutation
           ["./fixtures/simple/bar_with_helper_spec.cr"])
 
         fake = FakeProcessRunner.new
-        fake.exit_code = 0
+        fake.exit_code = [0, 0]
         mutation.process_runner = fake
         mutation.file_remover = ->FakeFile.delete(String)
         mutation.tempfile_writer = ->FakeFile.tempfile(String, String, String)
@@ -220,7 +192,7 @@ module Crytic::Mutation
           ["./fixtures/simple/bar_with_helper_spec.cr"])
 
         fake = FakeProcessRunner.new
-        fake.exit_code = 1
+        fake.exit_code = [1]
         fake.fill_output_with("compiler error/ no specs have run")
         mutation.process_runner = fake
         mutation.file_remover = ->FakeFile.delete(String)
@@ -236,7 +208,7 @@ module Crytic::Mutation
           ["./fixtures/simple/bar_with_helper_spec.cr"])
 
         fake = FakeProcessRunner.new
-        fake.exit_code = 28
+        fake.exit_code = [0, 28]
         mutation.process_runner = fake
         mutation.file_remover = ->FakeFile.delete(String)
         mutation.tempfile_writer = ->FakeFile.tempfile(String, String, String)
@@ -244,6 +216,57 @@ module Crytic::Mutation
         mutation.run.status.should eq Status::Timeout
         fake.timeout.last.should eq 10.seconds
       end
+
+      it "can handle compilation errors" do
+        mutation = Mutation.with(
+          mutant,
+          "./fixtures/simple/bar.cr",
+          ["./fixtures/simple/bar_with_helper_spec.cr"])
+
+        fake = FakeProcessRunner.new
+        fake.exit_code = [1]
+        mutation.process_runner = fake
+        mutation.file_remover = ->FakeFile.delete(String)
+        mutation.tempfile_writer = ->FakeFile.tempfile(String, String, String)
+
+        mutation.run.status.should eq Status::Errored
+      end
     end
+  end
+end
+
+private def mutant
+  Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
+    filename: nil,
+    line_number: 2,
+    column_number: 6,
+  ))
+end
+
+private def mutant_leading_to_compile_error
+  Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
+    filename: nil,
+    line_number: 2,
+    column_number: 6,
+  ))
+end
+
+private class FakeFile
+  @@files_deleted = [] of String
+  @@tempfiles_created = [] of String
+  @@tempfile_contents = [] of String
+
+  def self.tempfile_contents
+    @@tempfile_contents
+  end
+
+  def self.delete(filename : String)
+  end
+
+  def self.tempfile(name, extension, content) : String
+    filename = "#{name}.RANDOM#{extension}"
+    @@tempfile_contents << content
+    @@tempfiles_created << filename
+    "/tmp/#{filename}"
   end
 end

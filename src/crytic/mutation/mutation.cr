@@ -59,10 +59,13 @@ module Crytic::Mutation
       io = IO::Memory.new
       tempfile_path = write_full_source_into_tempfile(mutated_source)
       res = compile_tempfile_into_binary(tempfile_path)
-      unless res[:exit_code]
+
+      if res[:exit_code] != 0
         @file_remover.call(tempfile_path)
-        return {exit_code: exit_code, output: res[:output]}
+        puts res[:output]
+        return {exit_code: res[:exit_code], output: res[:output]}
       end
+
       binary = res[:binary]
       puts binary
       exit_code = execute_binary(binary, io)
@@ -79,7 +82,7 @@ module Crytic::Mutation
     private def compile_tempfile_into_binary(tempfile_path)
       io = IO::Memory.new
       binary = "#{File.dirname(tempfile_path)}/#{File.basename(tempfile_path, ".cr")}"
-      process_runner.run(
+      exit_code = process_runner.run(
         "crystal",
         ["build", "-o", binary, "--no-debug", tempfile_path],
         output: io,

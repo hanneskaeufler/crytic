@@ -2,7 +2,7 @@ require "../../src/crytic/process_runner"
 
 module Crytic
   class FakeProcessRunner < ProcessRunner
-    property exit_code : Int32 = 0
+    property exit_code : Array(Int32) = [0, 0]
     property timeout = [] of Time::Span
     @cmd = [] of String
     @args = [] of String
@@ -16,7 +16,7 @@ module Crytic
       @cmd << cmd
       @args << args.join(" ")
       output << @output_io.to_s
-      exit_code
+      exit_code.shift
     end
 
     def run(cmd : String, args : Array(String), output, error, timeout)
