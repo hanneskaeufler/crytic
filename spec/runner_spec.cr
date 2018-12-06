@@ -20,6 +20,17 @@ describe Crytic::Runner do
       end
     end
 
+    it "takes comma separated list of subjects" do
+      reporter = FakeReporter.new
+      runner = Crytic::Runner.new(
+        generator: FakeGenerator.new,
+        reporters: [reporter] of Crytic::Reporter::Reporter)
+
+      runner.run(
+        ["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"],
+        ["./fixtures/simple/bar_spec.cr"]).should eq true
+    end
+
     it "reports events in order" do
       reporter = FakeReporter.new
       runner = Crytic::Runner.new(

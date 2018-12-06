@@ -40,8 +40,9 @@ if ENV["STRYKER_DASHBOARD_API_KEY"]?
   })
 end
 
-if subject_source.empty?
-  success = Crytic::AutofindRunner.new.run
+if subject_source.empty? && spec_files.empty?
+  subject_source = Dir["./src/**/*.cr"]
+  spec_files = Dir["./spec/**/*_spec.cr"]
 else
   success = Crytic::Runner
     .new(threshold: msi_threshold, reporters: reporters)
