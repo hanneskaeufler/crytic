@@ -25,12 +25,18 @@ OptionParser.parse! do |parser|
   end
 end
 
-# reporters = [Crytic::IoReporter.new(STDOUT)] of Crytic::Reporter::Reporter
+reporters = [Crytic::IoReporter.new(STDOUT)] of Crytic::Reporter::Reporter
 
-# if ENV["STRYKER_DASHBOARD_API_KEY"]?
-#   client = Crytic::Reporter::DefaultHttpClient.new
-#   reporters << Crytic::Reporter::StrykerBadgeReporter.new(client)
-# end
+if ENV["STRYKER_DASHBOARD_API_KEY"]?
+  client = Crytic::Reporter::DefaultHttpClient.new
+  reporters << Crytic::Reporter::StrykerBadgeReporter.new(client, {
+    # manually map from ENV to a Hash because I am unable to conform ENV
+    # to anything that I can replace with a stub in the tests
+    "STRYKER_DASHBOARD_API_KEY" => ENV["STRYKER_DASHBOARD_API_KEY"],
+    "CIRCLE_PROJECT_USERNAME"   => ENV["CIRCLE_PROJECT_USERNAME"],
+    "CIRCLE_PROJECT_REPONAME"   => ENV["CIRCLE_PROJECT_REPONAME"],
+  })
+end
 
 success = Crytic::Runner
   .new(threshold: msi_threshold)
