@@ -1,31 +1,35 @@
 require "./generator"
-require "./io_reporter"
 require "./mutant/**"
 require "./mutation/mutation"
 require "./mutation/no_mutation"
+require "./reporter/io_reporter"
 require "./source"
 
 module Crytic
   class AutofindRunner
-    def initialize(@reporter = IoReporter.new(STDOUT))
+    private SRC = "./src/**/*.cr"
+    private SPEC = "./spec/**/*_spec.cr"
+
+    def initialize(
+      @generator : Generator = InMemoryMutationsGenerator.new,
+      @reporter : Reporter::Reporter = Reporter::IoReporter.new(STDOUT)
+    )
     end
 
     def run : Bool
-      specs = Dir["./spec/**/*_spec.cr"]
+      specs = Dir[SPEC]
       puts specs
-      sources = Dir["./src/**/*.cr"]
+      sources = Dir[SRC]
       puts sources
 
-      original_result = Mutation::NoMutation
-        .with(specs: specs)
-        .run
+      original_result = Mutation::NoMutation.with(specs: specs).run
 
       @reporter.report_original_result(original_result)
 
       return false unless original_result.successful?
 
       results = sources.map do |source|
-        Generator.new.mutations_for(source: source, specs: specs)
+        @generator.mutations_for(source: source, specs: specs)
       end
         .flatten
         .map do |mutation|

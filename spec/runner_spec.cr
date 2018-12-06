@@ -1,4 +1,6 @@
 require "../src/crytic/runner"
+require "./fake_reporter"
+require "./fake_generator"
 require "./spec_helper"
 
 describe Crytic::Runner do
@@ -28,32 +30,5 @@ describe Crytic::Runner do
 
       reporter.events.should eq ["report_original_result", "report_summary", "report_msi"]
     end
-  end
-end
-
-private class FakeReporter < Crytic::Reporter::Reporter
-  getter events
-  @events = [] of String
-
-  def report_original_result(original_result)
-    @events << "report_original_result"
-  end
-
-  def report_result(result)
-    @events << "report_result"
-  end
-
-  def report_summary(results)
-    @events << "report_summary"
-  end
-
-  def report_msi(results)
-    @events << "report_msi"
-  end
-end
-
-private class FakeGenerator < Crytic::Generator
-  def mutations_for(source : String, specs : Array(String))
-    [] of Crytic::Mutation::Mutation
   end
 end
