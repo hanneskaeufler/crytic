@@ -14,7 +14,8 @@ module Crytic
     def initialize(
       @threshold : Threshold = 100.0,
       @reporters = [IoReporter.new(STDOUT)] of Reporter::Reporter,
-      @generator : Generator = InMemoryMutationsGenerator.new)
+      @generator : Generator = InMemoryMutationsGenerator.new
+    )
     end
 
     def run(source : String, specs : Array(String)) : Bool

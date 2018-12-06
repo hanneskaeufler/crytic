@@ -32,28 +32,28 @@ describe Crytic::Runner do
 end
 
 private class FakeReporter < Crytic::Reporter::Reporter
-    getter events
-    @events = [] of String
+  getter events
+  @events = [] of String
 
-    def report_original_result(original_result)
-      @events << "report_original_result"
-    end
+  def report_original_result(original_result)
+    @events << "report_original_result"
+  end
 
-    def report_result(result)
-      @events << "report_result"
-    end
+  def report_result(result)
+    @events << "report_result"
+  end
 
-    def report_summary(results)
-      @events << "report_summary"
-    end
+  def report_summary(results)
+    @events << "report_summary"
+  end
 
-    def report_msi(results)
-      @events << "report_msi"
-    end
+  def report_msi(results)
+    @events << "report_msi"
+  end
 end
 
 private class FakeGenerator < Crytic::Generator
-    def mutations_for(source : String, specs : Array(String))
-      [] of Crytic::Mutation::Mutation
-    end
+  def mutations_for(source : String, specs : Array(String))
+    [] of Crytic::Mutation::Mutation
+  end
 end
