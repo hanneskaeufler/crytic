@@ -28,6 +28,7 @@ end
 reporters = [Crytic::Reporter::IoReporter.new(STDOUT)] of Crytic::Reporter::Reporter
 
 if ENV["STRYKER_DASHBOARD_API_KEY"]?
+  puts "USING STRYKER"
   client = Crytic::Reporter::DefaultHttpClient.new
   reporters << Crytic::Reporter::StrykerBadgeReporter.new(client, {
     # manually map from ENV to a Hash because I am unable to conform ENV
