@@ -11,7 +11,10 @@ module Crytic
   class Runner
     alias Threshold = Float64
 
-    def initialize(@threshold : Threshold = 100.0, @reporters = [IoReporter.new(STDOUT)] of Reporter::Reporter)
+    def initialize(
+      @threshold : Threshold = 100.0,
+      @reporters = [IoReporter.new(STDOUT)] of Reporter::Reporter,
+      @generator : Generator = InMemoryMutationsGenerator.new)
     end
 
     def run(source : String, specs : Array(String)) : Bool
@@ -25,8 +28,7 @@ module Crytic
 
       return false unless original_result.successful?
 
-      results = Generator
-        .new
+      results = @generator
         .mutations_for(source: source, specs: specs)
         .map do |mutation|
           result = mutation.run
@@ -36,7 +38,10 @@ module Crytic
 
       @reporters.each { |reporter| reporter.report_summary(results) }
 
-      return MsiCalculator.new(results).passes?(@threshold)
+      msi = MsiCalculator.new(results)
+      @reporters.each { |reporter| reporter.report_msi(results) }
+
+      return msi.passes?(@threshold)
     end
 
     private def validate_args!(source, specs)
