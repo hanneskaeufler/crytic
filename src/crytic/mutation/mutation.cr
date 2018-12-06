@@ -112,7 +112,7 @@ module Crytic::Mutation
           source: File.read(spec_file))
           .to_covered_source
       end.join("\n")
-      pp s
+      puts s
       s
     end
   end
