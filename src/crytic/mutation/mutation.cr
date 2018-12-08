@@ -60,12 +60,10 @@ module Crytic::Mutation
 
       if res[:exit_code] != 0
         @file_remover.call(tempfile_path)
-        puts res[:output]
         return {exit_code: res[:exit_code], output: res[:output]}
       end
 
       binary = res[:binary]
-      puts binary
       exit_code = execute_binary(binary, io)
       remove_artifacts(tempfile_path, binary)
 
