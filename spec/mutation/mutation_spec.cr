@@ -12,10 +12,11 @@ module Crytic::Mutation
 
     describe ".with" do
       it "can be used with both types of mutations" do
+        transformer_mutant = Crytic::Mutant::AndOrSwap.at(Crystal::Location.new(nil, 0, 0))
         Mutation.with(
           original: "./bar.cr",
           specs: ["./bar_spec.cr"],
-          mutant: Crytic::Mutant::AndOrSwap.at(Crystal::Location.new(nil, 0, 0))).should be_a(Crytic::Mutation::Mutation)
+          mutant: transformer_mutant).should be_a(Crytic::Mutation::Mutation)
       end
     end
 
