@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
+### Fixed
+- When the mutated source code fails to compile this is now being noted correctly
+
 ## [2.0.0] - 2018-12-06
 
 ### Added
