@@ -22,12 +22,6 @@ module Crytic::Mutation
       mutated_source = source.mutated_source(@mutant)
       source_diff = Crytic::Diff.unified_diff(source.original_source, mutated_source).to_s
 
-      if source_diff.empty?
-        pp @mutant
-        puts "something is wrong with this mutation, didnt produce a diff"
-        Result.new(Status::Uncovered, @mutant, source_diff)
-      end
-
       process_result = run_mutation(mutated_source)
       success_messages_in_output = /Finished/ =~ process_result[:output]
       status = if process_result[:exit_code] == ProcessRunner::SUCCESS
