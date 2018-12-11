@@ -5,7 +5,6 @@ require "../process_runner"
 require "../source"
 require "./inject_mutated_subject_into_specs"
 require "./result"
-require "compiler/crystal/syntax/*"
 
 module Crytic::Mutation
   # Represents a single mutation to a single source file

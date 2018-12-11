@@ -15,6 +15,10 @@ module Crytic::Mutant
       @locations.size > 0
     end
 
+    def reset
+      @locations = [] of Crystal::Location
+    end
+
     def visit(node : Crystal::ASTNode)
       true
     end

@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
+### Added
+- Simply running `./bin/crytic` without any arguments will now automatically find all src files and specs
+
 ### Fixed
 - When the mutated source code fails to compile this is now being noted correctly
 
