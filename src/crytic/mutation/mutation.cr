@@ -5,7 +5,6 @@ require "../process_runner"
 require "../source"
 require "./inject_mutated_subject_into_specs"
 require "./result"
-require "compiler/crystal/syntax/*"
 
 module Crytic::Mutation
   # Represents a single mutation to a single source file
@@ -21,6 +20,12 @@ module Crytic::Mutation
       source = Source.new(subject_source)
       mutated_source = source.mutated_source(@mutant)
       source_diff = Crytic::Diff.unified_diff(source.original_source, mutated_source).to_s
+
+      if source_diff.empty?
+        puts "this mutation did not produce a diff"
+        pp @mutant
+        return Result.new(Status::Uncovered, @mutant, source_diff)
+      end
 
       process_result = run_mutation(mutated_source)
       success_messages_in_output = /Finished/ =~ process_result[:output]

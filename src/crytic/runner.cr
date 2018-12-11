@@ -1,7 +1,5 @@
 require "./generator/**"
 require "./msi_calculator"
-require "./mutant/**"
-require "./mutation/mutation"
 require "./mutation/no_mutation"
 require "./reporter/**"
 require "./source"
