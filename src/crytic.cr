@@ -39,8 +39,11 @@ if ENV["STRYKER_DASHBOARD_API_KEY"]?
   })
 end
 
-if subject_source.empty? && spec_files.empty?
+if subject_source.empty?
   subject_source = Dir["./src/**/*.cr"]
+end
+
+if spec_files.empty?
   spec_files = Dir["./spec/**/*_spec.cr"]
 end
 
