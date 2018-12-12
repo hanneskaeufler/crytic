@@ -30,7 +30,6 @@ workflows:
     jobs:
       - test-crystal-0.27.0
       - test-mutations:
-        filters:
-          branches:
-            only:
-              - master
+          filters:
+            branches:
+              only: master
