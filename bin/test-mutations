@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-crystal ./src/crytic.cr -- --min-msi=20.0 --subject src/crytic/reporter/io_reporter.cr spec/reporter/io_reporter_spec.cr
+list=(`find spec -name '*_spec.cr' -and -not -name 'integration_spec.cr'`)
+printf '%s\n' "${list[@]}" | sort
+./bin/crytic --min-msi=20.0 "${list[@]}"
