@@ -8,7 +8,7 @@ module Crytic::Reporter
   class StrykerBadgeReporter < Reporter
     private DASHBOARD_URL = "https://dashboard.stryker-mutator.io/api/reports"
 
-    def initialize(@client : HttpClient, @env : Hash(String, String))
+    def initialize(@client : HttpClient, @env : Hash(String, String), @io : IO)
     end
 
     def report_msi(results)
@@ -18,6 +18,7 @@ module Crytic::Reporter
         "branch"         => @env["CIRCLE_BRANCH"],
         "mutationScore"  => score(results),
       })
+      @io << "Mutation score uploaded to stryker dashboard."
     end
 
     def report_original_result(original_result)

@@ -10,13 +10,14 @@ module Crytic::Reporter
     describe "#report_msi" do
       it "posts to the stryker dashboard" do
         client = FakeClient.new
+        io = IO::Memory.new
 
         StrykerBadgeReporter.new(client, {
           "CIRCLE_BRANCH"             => "master",
           "CIRCLE_PROJECT_REPONAME"   => "crytic",
           "CIRCLE_PROJECT_USERNAME"   => "hanneskaeufler",
           "STRYKER_DASHBOARD_API_KEY" => "apikey",
-        }).report_msi(results)
+        }, io).report_msi(results)
 
         client.path.should eq "https://dashboard.stryker-mutator.io/api/reports"
         client.body.should eq({
@@ -25,6 +26,7 @@ module Crytic::Reporter
           "mutationScore"  => 100.0,
           "repositorySlug" => "github.com/hanneskaeufler/crytic",
         })
+        io.to_s.should eq "Mutation score uploaded to stryker dashboard."
       end
     end
   end
