@@ -9,7 +9,7 @@ module Crytic
         filename: nil,
         line_number: 1,
         column_number: 1)))
-      ast.to_s.should eq "-1"
+      ast.to_s.should eq "(-1*1)"
     end
 
     it "only applies to location" do
@@ -19,6 +19,15 @@ module Crytic
         line_number: 100,
         column_number: 100)))
       ast.to_s.should eq "1"
+    end
+
+    it "flips negative numbers" do
+      ast = Crystal::Parser.parse("-1")
+      ast.accept(Mutant::NumberLiteralSignFlip.at(Crystal::Location.new(
+        filename: nil,
+        line_number: 1,
+        column_number: 1)))
+      ast.to_s.should eq "(-1*-1)"
     end
   end
 end

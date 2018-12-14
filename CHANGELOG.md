@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - When the mutated source code fails to compile this is now being noted correctly
+- Negative numbers are now correctly flipped to positive ones (e.g. `-1 => 1` instead of `-1 => --1`)
 
 ## [2.0.0] - 2018-12-06
 
