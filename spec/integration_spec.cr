@@ -1,4 +1,4 @@
-require "../src/crytic/runner"
+require "../src/crytic/sequential_runner"
 require "./fake_reporter"
 require "./spec_helper"
 
@@ -93,11 +93,11 @@ describe Crytic do
   end
 end
 
-describe Crytic::Runner do
+describe Crytic::SequentialRunner do
   describe "#run" do
     it "takes a list of subjects" do
       reporter = FakeReporter.new
-      runner = Crytic::Runner.new(
+      runner = Crytic::SequentialRunner.new(
         threshold: 100.0,
         generator: FakeGenerator.new,
         reporters: [reporter] of Crytic::Reporter::Reporter)
@@ -109,7 +109,7 @@ describe Crytic::Runner do
 
     it "reports events in order" do
       reporter = FakeReporter.new
-      runner = Crytic::Runner.new(
+      runner = Crytic::SequentialRunner.new(
         threshold: 100.0,
         generator: FakeGenerator.new,
         reporters: [reporter] of Crytic::Reporter::Reporter)
