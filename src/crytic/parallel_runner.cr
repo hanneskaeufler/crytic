@@ -9,6 +9,7 @@ module Crytic
   module Runner
     class MutationJob
       include Dispatchable
+
       def perform(mutation, reporters, collector)
         result = mutation.run
         reporters.each(&.report_result(result))
