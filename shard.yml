@@ -21,3 +21,5 @@ development_dependencies:
     version: ~> 0.8.1
   coverage:
     github: anykeyh/crystal-coverage
+  dispatch:
+    github: bmulvihill/dispatch
