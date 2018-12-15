@@ -27,13 +27,19 @@ After `shards install`, this will place the `crytic` executable into the `bin/` 
 
 ## Usage
 
-Crytic will only mutate statements in one file, let's call that our subject, or `--subject` in the command line interface. You must also provide a list of test files to be executed in order to find the defects.
+Running crytic without any arguments will mutate all of the source files found by `src/**/*.cr` and use the test-suite containing `spec/**/*_spec.cr`. Depending on the size of your project and the duration of a full `crystal spec`, this might take quite a bit of time.
+
+```shell
+./bin/crytic
+```
+
+Crytic can also be run to only mutate statements in one file, let's call that our subject, or `--subject` in the command line interface. You can also provide a list of test files to be executed in order to find the defects. This might be helpful to exclude certain long-running integration specs in order to speed up the test suite.
 
 ```shell
 ./bin/crytic --subject src/blog/pages/archive.cr spec/blog_spec.cr spec/blog/pages/archive_spec.cr
 ```
 
-This command determines a list of mutations that can be performed on the source code of `archive.cr` and joins the `blog_spec.cr` and `archive_spec.cr` as a test-suite to find suriving mutants.
+The above command determines a list of mutations that can be performed on the source code of `archive.cr` and joins the `blog_spec.cr` and `archive_spec.cr` as a test-suite to find suriving mutants.
 
 ### CLI options
 
@@ -46,35 +52,44 @@ The rest of the unnamed positional arguments are relative filepaths to the specs
 ### How to read the output
 
 ```shell
+
 ✅ Original test suite passed.
 
-    ✅ ConditionFlip at line 11, column 7
-    ✅ NumberLiteralChange at line 11, column 18
-    ✅ NumberLiteralChange at line 12, column 28
-    ✅ NumberLiteralChange at line 13, column 34
-    ❌ NumberLiteralSignFlip
+    ❌ AndOrSwap
         The following change didn't fail the test-suite:
-        @@ -5,7 +5,7 @@
-        html_snippets = [] of String
-        scanner = StringScanner.new(content)
-        while scanner.skip_until(/RAW_HTML_START(.+?)RAW_HTML_END/m)
-        -      if scanner[1]?
-        +      if scanner[-1]?
-        matches << scanner[0]
-        html_snippets << scanner[1]
-        end
+            @@ -26,7 +26,7 @@
+                     end
+                   end
+                   def ==(other : Chunk)
+            -        ((type == other.type) && (range_a == other.range_a)) && (range_b == other.range_b)
+            +        ((type == other.type) && (range_a == other.range_a)) || (range_b == other.range_b)
+                   end
+                 end
+                 enum Type
 
-    ✅ StringLiteralChange at line 35, column 29
+    ❌ AndOrSwap
+        The following change didn't fail the test-suite:
+            @@ -26,7 +26,7 @@
+                     end
+                   end
+                   def ==(other : Chunk)
+            -        ((type == other.type) && (range_a == other.range_a)) && (range_b == other.range_b)
+            +        ((type == other.type) && (range_a == other.range_a)) || (range_b == other.range_b)
+                   end
+                 end
+                 enum Type
 
-Finished in 36.35 seconds:
-6 mutations, 5 covered, 1 uncovered, 0 errored. Mutation score: 83.33%
+    ✅ AndOrSwap at line 109, column 13
+
+Finished in 14:02 minutes:
+138 mutations, 85 covered, 36 uncovered, 0 errored, 17 timeout. Mutation Score Indicator (MSI): 73.91%
 ```
 
-The first good message here is that the `Original test suite passed`. Crytic ran `crystal spec [all the files you passed]` and that exited with exit code `0`. Any other result on your inital test suite and it would not have made sense to continue. Intentionally breaking source code which is already broken is of no use.
+The first good message here is that the `Original test suite passed`. Crytic ran `crystal spec [with all spec files]` and that exited with exit code `0`. Any other result on your inital test suite and it would not have made sense to continue. Intentionally breaking source code which is already broken is of no use.
 
-Each following occurance of `✅` shows that a mutant has been killed, ergo that the change in the source code was detected by the test suite. The line and column numbers are printed to follow the progress through the subject file.
+Each occurance of `✅` shows that a mutant has been killed, ergo that the change in the source code was detected by the test suite. The line and column numbers are printed to follow the progress through the subject file.
 
-`❌ NumberLiteralSignFlip` is signaling that indeed a mutation was not detected. The diff below shows the change that was made which was not caught by the test suite.
+`❌ AndOrSwap` is signaling that indeed a mutation was not detected. The diff below shows the change that was made which was not caught by the test suite.
 
 ### Mutation Badge
 
