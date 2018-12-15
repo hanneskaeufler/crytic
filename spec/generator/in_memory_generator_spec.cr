@@ -11,7 +11,7 @@ module Crytic
   describe InMemoryMutationsGenerator do
     describe "#mutations_for" do
       it "returns no mutations for no possibilities" do
-        source = "#{DIR}/non_empty_source_file.cr"
+        source = ["#{DIR}/non_empty_source_file.cr"]
         specs = ["some_spec.cr"]
 
         mutations = InMemoryMutationsGenerator
@@ -22,7 +22,7 @@ module Crytic
       end
 
       it "returns no mutations for no possibilities in the source" do
-        source = "#{DIR}/empty_source_file.cr"
+        source = ["#{DIR}/empty_source_file.cr"]
         specs = ["some_spec.cr"]
 
         mutations = InMemoryMutationsGenerator.new.mutations_for(source, specs)
@@ -31,7 +31,7 @@ module Crytic
       end
 
       it "returns a single mutation for the number literal" do
-        source = "#{DIR}/non_empty_source_file.cr"
+        source = ["#{DIR}/non_empty_source_file.cr"]
         specs = ["some_spec.cr"]
 
         mutations = InMemoryMutationsGenerator
@@ -42,7 +42,7 @@ module Crytic
       end
 
       it "doesn't mix mutations for multiple sources" do
-        source = "#{DIR}/non_empty_source_file.cr"
+        source = ["#{DIR}/non_empty_source_file.cr"]
         specs = ["some_spec.cr"]
 
         generator = InMemoryMutationsGenerator

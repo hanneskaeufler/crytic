@@ -23,7 +23,7 @@ module Crytic
 
       return false unless original_result.successful?
 
-      results = mutations(source, specs).map do |mutation|
+      results = @generator.mutations_for(source, specs).map do |mutation|
         result = mutation.run
         @reporters.each(&.report_result(result))
         result
@@ -37,12 +37,6 @@ module Crytic
 
     def run(source : String, specs : Array(String)) : Bool
       run([source], specs)
-    end
-
-    private def mutations(source, specs)
-      source.map do |src|
-        @generator.mutations_for(source: src, specs: specs)
-      end.flatten
     end
 
     private def validate_args!(source, specs)

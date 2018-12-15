@@ -15,7 +15,13 @@ module Crytic
                    ] of Mutant::Possibilities)
     end
 
-    def mutations_for(source : String, specs : Array(String))
+    def mutations_for(sources : Array(String), specs : Array(String))
+      sources.map do |src|
+        mutations_for(source: src, specs: specs)
+      end.flatten
+    end
+
+    private def mutations_for(source : String, specs : Array(String))
       ast = Crystal::Parser.parse(File.read(source))
 
       @possibilities.each(&.reset)
