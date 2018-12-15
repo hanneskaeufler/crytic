@@ -3,6 +3,7 @@ require "./crytic/reporter/http_client"
 require "./crytic/reporter/io_reporter"
 require "./crytic/reporter/file_summary_io_reporter"
 require "./crytic/reporter/stryker_badge_reporter"
+require "./crytic/parallel_runner"
 require "./crytic/runner"
 require "option_parser"
 
@@ -65,7 +66,7 @@ generator = Crytic::InMemoryMutationsGenerator.new(
   Crytic::InMemoryMutationsGenerator::ALL_MUTANTS,
   preamble)
 
-success = Crytic::Runner
+success = Crytic::ParallelRunner
   .new(msi_threshold, reporters, generator)
   .run(subject_source, spec_files)
 
