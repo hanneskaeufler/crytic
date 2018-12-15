@@ -9,9 +9,9 @@ module Crytic
     alias Threshold = Float64
 
     def initialize(
-      @threshold : Threshold = 100.0,
-      @reporters = [Reporter::IoReporter.new(STDOUT)] of Reporter::Reporter,
-      @generator : Generator = InMemoryMutationsGenerator.new
+      @threshold : Threshold,
+      @reporters : Array(Reporter::Reporter),
+      @generator : Generator
     )
     end
 

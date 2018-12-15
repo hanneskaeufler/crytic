@@ -7,22 +7,23 @@ describe Crytic::Runner do
   describe "#run" do
     it "raises for empty specs" do
       expect_raises(ArgumentError) do
-        Crytic::Runner.new.run("", [] of String)
+        runner.run("", [] of String)
       end
     end
 
     it "raises for non-existent files" do
       expect_raises(ArgumentError) do
-        Crytic::Runner.new.run("./nope.cr", ["./nope_spec.cr"])
+        runner.run("./nope.cr", ["./nope_spec.cr"])
       end
       expect_raises(ArgumentError) do
-        Crytic::Runner.new.run("./fixtures/simple/bar.cr", ["./nope_spec.cr"])
+        runner.run("./fixtures/simple/bar.cr", ["./nope_spec.cr"])
       end
     end
 
     it "takes comma separated list of subjects" do
       reporter = FakeReporter.new
       runner = Crytic::Runner.new(
+        threshold: 100.0,
         generator: FakeGenerator.new,
         reporters: [reporter] of Crytic::Reporter::Reporter)
 
@@ -34,6 +35,7 @@ describe Crytic::Runner do
     it "reports events in order" do
       reporter = FakeReporter.new
       runner = Crytic::Runner.new(
+        threshold: 100.0,
         generator: FakeGenerator.new,
         reporters: [reporter] of Crytic::Reporter::Reporter)
 
@@ -42,4 +44,11 @@ describe Crytic::Runner do
       reporter.events.should eq ["report_original_result", "report_summary", "report_msi"]
     end
   end
+end
+
+private def runner
+  Crytic::Runner.new(
+    threshold: 100.0,
+    reporters: [Crytic::Reporter::IoReporter.new(IO::Memory.new)] of Crytic::Reporter::Reporter,
+    generator: FakeGenerator.new)
 end

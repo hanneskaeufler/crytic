@@ -1,3 +1,4 @@
+require "./crytic/generator/in_memory_generator"
 require "./crytic/reporter/http_client"
 require "./crytic/reporter/io_reporter"
 require "./crytic/reporter/stryker_badge_reporter"
@@ -48,7 +49,7 @@ if spec_files.empty?
 end
 
 success = Crytic::Runner
-  .new(threshold: msi_threshold, reporters: reporters)
+  .new(msi_threshold, reporters, Crytic::InMemoryMutationsGenerator.new)
   .run(subject_source, spec_files)
 
 exit(success ? 0 : 1)
