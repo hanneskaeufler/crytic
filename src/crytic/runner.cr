@@ -3,9 +3,12 @@ require "./msi_calculator"
 require "./mutation/no_mutation"
 require "./reporter/**"
 require "./source"
+require "./runner_argument_validator"
 
 module Crytic
   class Runner
+    include RunnerArgumentValidator
+
     alias Threshold = Float64
 
     def initialize(
@@ -37,22 +40,6 @@ module Crytic
 
     def run(source : String, specs : Array(String)) : Bool
       run([source], specs)
-    end
-
-    private def validate_args!(source, specs)
-      if specs.empty?
-        raise ArgumentError.new("No spec files given.")
-      end
-
-      unless source.map { |path| File.exists?(path) }.all?
-        raise ArgumentError.new("Source file for subject doesn't exist.")
-      end
-
-      specs.each do |spec_file|
-        unless File.exists?(spec_file)
-          raise ArgumentError.new("Spec file #{spec_file} doesn't exist.")
-        end
-      end
     end
   end
 end
