@@ -1,7 +1,7 @@
-require "../src/crytic/runner"
-require "./fake_reporter"
-require "./fake_generator"
-require "./spec_helper"
+require "../../src/crytic/runner/sequential_runner"
+require "../fake_reporter"
+require "../fake_generator"
+require "../spec_helper"
 
 describe Crytic::SequentialRunner do
   describe "#run" do

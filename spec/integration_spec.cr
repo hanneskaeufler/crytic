@@ -1,8 +1,8 @@
-require "../src/crytic/sequential_runner"
+require "../src/crytic/runner/sequential_runner"
 require "./fake_reporter"
 require "./spec_helper"
 
-describe Crytic do
+describe "Crytic" do
   describe "--help/-h" do
     it "prints usage info" do
       result = run_crytic("--help")
