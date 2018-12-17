@@ -1,8 +1,8 @@
-require "./generator/generator"
-require "./msi_calculator"
-require "./mutation/no_mutation"
-require "./reporter/reporter"
-require "./runner_argument_validator"
+require "../generator/generator"
+require "../msi_calculator"
+require "../mutation/no_mutation"
+require "../reporter/reporter"
+require "../runner_argument_validator"
 require "dispatch"
 
 module Crytic
@@ -42,6 +42,7 @@ module Crytic
       return false unless run_original(specs).successful?
 
       mutations = generate_mutations(source, specs)
+
       result_collector = start_to_run_mutations(mutations)
       wait_until_all_mutations_exited(mutations)
 
