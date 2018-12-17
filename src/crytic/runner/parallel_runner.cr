@@ -10,15 +10,11 @@ module Crytic
     class MutationJob
       include Dispatchable
 
-      def perform(mutation, reporters, collector)
+      def perform(mutation, reporters, results)
         result = mutation.run
         reporters.each(&.report_result(result))
-        collector.results << result
+        results << result
       end
-    end
-
-    class ResultCollector
-      property results : Array(Crytic::Mutation::Result) = [] of Crytic::Mutation::Result
     end
   end
 
@@ -43,13 +39,13 @@ module Crytic
 
       mutations = generate_mutations(source, specs)
 
-      result_collector = start_to_run_mutations(mutations)
+      results = start_to_run_mutations(mutations)
       wait_until_all_mutations_exited(mutations)
 
-      reporters.each(&.report_summary(result_collector.results))
-      reporters.each(&.report_msi(result_collector.results))
+      reporters.each(&.report_summary(results))
+      reporters.each(&.report_msi(results))
 
-      return msi_passes_threshold?(result_collector)
+      return msi_passes_threshold?(results)
     end
 
     def run(source : String, specs : Array(String)) : Bool
@@ -73,17 +69,17 @@ module Crytic
     end
 
     private def start_to_run_mutations(mutations)
-      result_collector = Runner::ResultCollector.new
+      results = [] of Crytic::Mutation::Result
 
       mutations.map do |mutation|
-        Runner::MutationJob.dispatch(mutation, reporters, result_collector)
+        Runner::MutationJob.dispatch(mutation, reporters, results)
       end
 
-      result_collector
+      results
     end
 
-    private def msi_passes_threshold?(result_collector)
-      MsiCalculator.new(result_collector.results).passes?(@threshold)
+    private def msi_passes_threshold?(results)
+      MsiCalculator.new(results).passes?(@threshold)
     end
   end
 end
