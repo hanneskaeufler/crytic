@@ -1,5 +1,6 @@
 require "../../src/crytic/runner/parallel_runner"
 require "../fake_generator"
+require "../fake_mutation"
 require "../fake_reporter"
 require "../spec_helper"
 
@@ -42,6 +43,22 @@ describe Crytic::ParallelRunner do
       specs = ["./fixtures/simple/bar_spec.cr"]
 
       subject.run(source, specs).should eq true
+    end
+
+    it "blocks until all mutations are run" do
+      reporter = FakeReporter.new
+      mutation = FakeMutation.new
+      generator = FakeGenerator.new([mutation] of Crytic::Mutation::Mutation | FakeMutation)
+      subject = Crytic::ParallelRunner.new(
+        threshold: 100.0,
+        generator: generator,
+        reporters: [reporter] of Crytic::Reporter::Reporter)
+      source = ["./fixtures/simple/bar.cr"]
+      specs = ["./fixtures/simple/bar_spec.cr"]
+
+      subject.run(source, specs)
+
+      reporter.events.should eq ["report_original_result", "report_result", "report_summary", "report_msi"]
     end
   end
 end
