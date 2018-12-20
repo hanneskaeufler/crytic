@@ -1,5 +1,8 @@
 require "../../src/crytic/mutant/bool_literal_flip"
+<<<<<<< HEAD
 require "../../src/crytic/mutation/mutation"
+=======
+>>>>>>> 138f20e... Extract fake mutation
 require "../../src/crytic/mutation/result"
 
 private def irrelevant_mutant
