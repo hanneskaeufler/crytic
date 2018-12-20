@@ -60,6 +60,23 @@ describe Crytic::ParallelRunner do
 
       reporter.events.should eq ["report_original_result", "report_result", "report_summary", "report_msi"]
     end
+
+    it "returns false if the threshold wasnt reached" do
+      Dispatch::SuccessCounter.reset
+      Dispatch::FailureCounter.reset
+
+      reporter = FakeReporter.new
+      mutation = FakeMutation.new
+      generator = FakeGenerator.new([mutation] of Crytic::Mutation::Mutation | FakeMutation)
+      subject = Crytic::ParallelRunner.new(
+        threshold: 100.0,
+        generator: generator,
+        reporters: [reporter] of Crytic::Reporter::Reporter)
+      source = ["./fixtures/simple/bar.cr"]
+      specs = ["./fixtures/simple/bar_spec.cr"]
+
+      subject.run(source, specs).should eq false
+    end
   end
 end
 
