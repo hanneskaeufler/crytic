@@ -3,21 +3,9 @@ require "../msi_calculator"
 require "../mutation/no_mutation"
 require "../reporter/reporter"
 require "../runner_argument_validator"
-require "dispatch"
+require "./mutation_job"
 
 module Crytic
-  module Runner
-    class MutationJob
-      include Dispatchable
-
-      def perform(mutation, reporters, results)
-        result = mutation.run
-        reporters.each(&.report_result(result))
-        results << result
-      end
-    end
-  end
-
   class ParallelRunner
     include RunnerArgumentValidator
 
