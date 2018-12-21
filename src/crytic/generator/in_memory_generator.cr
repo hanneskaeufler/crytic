@@ -7,6 +7,7 @@ module Crytic
   class InMemoryMutationsGenerator < Generator
     def initialize(@possibilities = [
                      Mutant::AndOrSwapPossibilities.new,
+                     Mutant::AnyAllSwapPossibilities.new,
                      Mutant::BoolLiteralFlipPossibilities.new,
                      Mutant::ConditionFlipPossibilities.new,
                      Mutant::NumberLiteralChangePossibilities.new,

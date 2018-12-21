@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Simply running `./bin/crytic` without any arguments will now automatically find all src files and specs
+- Introduce a mutant to swap `[1].all?` for `[1].any?`
 
 ### Fixed
 - When the mutated source code fails to compile this is now being noted correctly

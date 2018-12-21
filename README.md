@@ -165,6 +165,15 @@ This mutation changes literal occurances of string by appending the string `__cr
 + "Welcome__crytic__"
 ```
 
+#### AnyAllSwap
+
+This mutation exchanges calls to [Enumerable#all?](https://crystal-lang.org/api/0.27.0/Enumerable.html#all%3F-instance-method) with calls to [Enumerable#any?](https://crystal-lang.org/api/0.27.0/Enumerable.html#any%3F-instance-method) and vice-versa. A typical mutation is:
+
+```diff
+- [false].all?
++ [false].any?
+```
+
 ## Credits & inspiration
 
 I have to credit the crystal [code-coverage](https://github.com/anykeyh/crystal-coverage) shard which finally helped me create a working mutation testing tool after one or two failed attempts. I took heavy inspirations from its [SourceFile](https://github.com/anykeyh/crystal-coverage/blob/master/src/coverage/inject/source_file.cr) class and actually lifted nearly all the code.
