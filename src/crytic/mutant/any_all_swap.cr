@@ -10,7 +10,7 @@ module Crytic::Mutant
                          node.name_column_number == @location.column_number
       Crystal::Call.new(
         node.obj,
-        "any?",
+        node.name == "any?" ? "all?" : "any?",
         node.args,
         node.block,
         node.block_arg,
@@ -21,4 +21,3 @@ module Crytic::Mutant
     end
   end
 end
-

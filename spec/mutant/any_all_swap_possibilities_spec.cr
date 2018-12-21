@@ -11,12 +11,11 @@ module Crytic
     end
 
     it "returns locations for every possible mutation" do
-      ast = Crystal::Parser.parse("[1, 2].all?")
+      ast = Crystal::Parser.parse("[1, 2].all?; [1].any?;")
       possibilities = Mutant::AnyAllSwapPossibilities.new
       ast.accept(possibilities)
       possibilities.any?.should eq true
-      possibilities.locations.size.should eq 1
+      possibilities.locations.size.should eq 2
     end
   end
 end
-
