@@ -12,10 +12,13 @@ describe Crytic::Runner do
     end
 
     it "raises for non-existent files" do
-      expect_raises(ArgumentError) do
+      expect_raises(ArgumentError, "Source file") do
         runner.run("./nope.cr", ["./nope_spec.cr"])
       end
-      expect_raises(ArgumentError) do
+      expect_raises(ArgumentError, "Source file") do
+        runner.run(["./nope.cr", "./fixtures/simple/bar.cr"], ["./fixtures/simple/bar_spec.cr"])
+      end
+      expect_raises(ArgumentError, "Spec file") do
         runner.run("./fixtures/simple/bar.cr", ["./nope_spec.cr"])
       end
     end
