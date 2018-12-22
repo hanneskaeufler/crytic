@@ -41,14 +41,8 @@ module Crytic::Reporter
         @io << "#{INDENT + INDENT + INDENT}"
         @io << result.diff.lines.join("\n#{INDENT + INDENT + INDENT}")
         @io << "\n"
-      when Mutation::Status::Covered
+      when Mutation::Status::Covered, Mutation::Status::Timeout
         @io << "✅ #{result.mutant_name} at line #{result.location.line_number}, column #{result.location.column_number}"
-      when Mutation::Status::Timeout
-        @io << "❌ #{result.mutant_name}"
-        @io << "\n#{INDENT + INDENT}The following change timed out:\n"
-        @io << "#{INDENT + INDENT + INDENT}"
-        @io << result.diff.lines.join("\n#{INDENT + INDENT + INDENT}")
-        @io << "\n"
       else
         raise "There were mutations of unreported type"
       end

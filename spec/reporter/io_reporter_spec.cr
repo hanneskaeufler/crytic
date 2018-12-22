@@ -85,6 +85,16 @@ module Crytic::Reporter
         io.to_s.should contain("The following change broke the code")
         io.to_s.should contain("diff")
       end
+
+      it "prints timed out mutants" do
+        io = IO::Memory.new
+        result = Mutation::Result.new(
+          status: Mutation::Status::Timeout,
+          mutant: fake_mutant,
+          diff: "diff")
+        IoReporter.new(io).report_result(result)
+        io.to_s.should contain("✅ NumberLiteralChange at line 0, column 0")
+      end
     end
 
     describe "#report_summary" do

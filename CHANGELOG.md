@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - When the mutated source code fails to compile this is now being noted correctly
 - Negative numbers are now correctly flipped to positive ones (e.g. `-1 => 1` instead of `-1 => --1`)
+- Timeouts in mutations are printed as "not found" but are actually found and calculated as "killed". Fixed this so that timeouts are not showing a diff in the console output any more.
 
 ## [2.0.0] - 2018-12-06
 
