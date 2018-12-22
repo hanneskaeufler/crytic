@@ -10,11 +10,17 @@ jobs:
       - run: ./bin/static-analysis
       - run: ./bin/code-style
       - run: SPEC_VERBOSE=1 ./bin/test
-      - run: SPEC_VERBOSE=1 ./bin/test-coverage
   test-crystal-0.27.0:
     <<: *test-template
     docker:
       - image: crystallang/crystal:0.27.0
+  test-coverage:
+    docker:
+      - image: crystallang/crystal:0.27.0
+    steps:
+      - checkout
+      - run: shards
+      - run: SPEC_VERBOSE=1 ./bin/test-coverage || true
   test-mutations:
     docker:
       - image: crystallang/crystal:0.27.0
@@ -29,6 +35,10 @@ workflows:
   ci:
     jobs:
       - test-crystal-0.27.0
+      - test-coverage:
+          filters:
+            branches:
+              only: master
       - test-mutations:
           filters:
             branches:
