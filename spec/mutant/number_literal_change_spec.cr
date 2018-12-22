@@ -1,6 +1,5 @@
 require "../../src/crytic/mutant/number_literal_change"
 require "../spec_helper"
-Spec.override_default_formatter(Spec::VerboseFormatter.new)
 
 module Crytic
   describe Mutant::NumberLiteralChange do
