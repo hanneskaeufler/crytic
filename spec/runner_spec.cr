@@ -44,7 +44,7 @@ describe Crytic::Runner do
 
       runner.run("./fixtures/simple/bar.cr", ["./fixtures/simple/bar_spec.cr"])
 
-      reporter.events.should eq ["report_original_result", "report_summary", "report_msi"]
+      reporter.events.should eq ["report_original_result", "report_mutations", "report_summary", "report_msi"]
     end
   end
 end

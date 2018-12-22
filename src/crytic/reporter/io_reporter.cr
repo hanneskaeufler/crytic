@@ -20,6 +20,12 @@ module Crytic::Reporter
       end
     end
 
+    def report_mutations(mutations)
+      @io << "No mutations to be run." if mutations.empty?
+      @io << "Running 1 mutation." if mutations.size == 1
+      @io << "Running #{mutations.size} mutations." if mutations.size > 1
+    end
+
     def report_result(result)
       @io << "\n#{INDENT}"
       case result.status

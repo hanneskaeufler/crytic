@@ -24,6 +24,9 @@ module Crytic::Reporter
     def report_original_result(original_result)
     end
 
+    def report_mutations(mutations)
+    end
+
     def report_result(result)
     end
 

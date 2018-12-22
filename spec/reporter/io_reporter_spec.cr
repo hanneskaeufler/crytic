@@ -1,6 +1,7 @@
 require "../../src/crytic/mutant/number_literal_change"
 require "../../src/crytic/mutation/original_result"
 require "../../src/crytic/reporter/io_reporter"
+require "../fake_mutation"
 require "../spec_helper"
 
 private def fake_mutant
@@ -25,6 +26,28 @@ module Crytic::Reporter
         IoReporter.new(io).report_original_result(original(1, "failed!!!"))
         io.to_s.should contain("❌ Original test suite failed.")
         io.to_s.should contain("failed!!!")
+      end
+    end
+
+    describe "#report_mutations" do
+      it "prints no mutations if there are none to be run" do
+        io = IO::Memory.new
+        IoReporter.new(io).report_mutations([] of Mutation::Mutation)
+        io.to_s.should eq("No mutations to be run.")
+      end
+
+      it "prints 1 mutation being run" do
+        io = IO::Memory.new
+        mutation = FakeMutation.new
+        IoReporter.new(io).report_mutations([mutation])
+        io.to_s.should eq("Running 1 mutation.")
+      end
+
+      it "prints more than one mutation being run" do
+        io = IO::Memory.new
+        mutation = FakeMutation.new
+        IoReporter.new(io).report_mutations([mutation])
+        io.to_s.should eq("Running 1 mutation.")
       end
     end
 

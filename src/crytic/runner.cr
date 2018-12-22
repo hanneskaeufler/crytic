@@ -26,7 +26,11 @@ module Crytic
 
       return false unless original_result.successful?
 
-      results = @generator.mutations_for(source, specs).map do |mutation|
+      mutations = @generator.mutations_for(source, specs)
+
+      @reporters.each(&.report_mutations(mutations))
+
+      results = mutations.map do |mutation|
         result = mutation.run
         @reporters.each(&.report_result(result))
         result

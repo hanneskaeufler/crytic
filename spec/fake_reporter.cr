@@ -8,6 +8,10 @@ class FakeReporter < Crytic::Reporter::Reporter
     @events << "report_original_result"
   end
 
+  def report_mutations(mutations)
+    @events << "report_mutations"
+  end
+
   def report_result(result)
     @events << "report_result"
   end
