@@ -12,6 +12,10 @@ private def original(exit_code = 0, output = "output")
   Crytic::Mutation::OriginalResult.new(exit_code: exit_code, output: output)
 end
 
+private def result(status)
+  Crytic::Mutation::Result.new(status: status, mutant: fake_mutant, diff: "diff")
+end
+
 module Crytic::Reporter
   describe IoReporter do
     describe "#report_original_result" do
@@ -54,21 +58,13 @@ module Crytic::Reporter
     describe "#report_result" do
       it "prints the passing mutants name and location" do
         io = IO::Memory.new
-        result = Mutation::Result.new(
-          status: Mutation::Status::Covered,
-          mutant: fake_mutant,
-          diff: "")
-        IoReporter.new(io).report_result(result)
+        IoReporter.new(io).report_result(result(Mutation::Status::Covered))
         io.to_s.should contain("✅ NumberLiteralChange at line 0, column 0")
       end
 
       it "prints failing mutants name" do
         io = IO::Memory.new
-        result = Mutation::Result.new(
-          status: Mutation::Status::Uncovered,
-          mutant: fake_mutant,
-          diff: "diff")
-        IoReporter.new(io).report_result(result)
+        IoReporter.new(io).report_result(result(Mutation::Status::Uncovered))
         io.to_s.should contain("❌ NumberLiteralChange")
         io.to_s.should contain("diff")
         io.to_s.should_not contain("nope")
@@ -76,11 +72,7 @@ module Crytic::Reporter
 
       it "prints errored mutant" do
         io = IO::Memory.new
-        result = Mutation::Result.new(
-          status: Mutation::Status::Errored,
-          mutant: fake_mutant,
-          diff: "diff")
-        IoReporter.new(io).report_result(result)
+        IoReporter.new(io).report_result(result(Mutation::Status::Errored))
         io.to_s.should contain("❌ NumberLiteralChange")
         io.to_s.should contain("The following change broke the code")
         io.to_s.should contain("diff")
@@ -101,14 +93,10 @@ module Crytic::Reporter
       it "outputs result counts with a score" do
         io = IO::Memory.new
         results = [
-          Mutation::Result.new(
-            status: Mutation::Status::Uncovered, mutant: fake_mutant, diff: "diff"),
-          Mutation::Result.new(
-            status: Mutation::Status::Covered, mutant: fake_mutant, diff: "diff"),
-          Mutation::Result.new(
-            status: Mutation::Status::Errored, mutant: fake_mutant, diff: "diff"),
-          Mutation::Result.new(
-            status: Mutation::Status::Timeout, mutant: fake_mutant, diff: "diff"),
+          result(Mutation::Status::Uncovered),
+          result(Mutation::Status::Covered),
+          result(Mutation::Status::Errored),
+          result(Mutation::Status::Timeout),
         ]
         IoReporter.new(io).report_summary(results)
         io.to_s.should contain "Finished in"
