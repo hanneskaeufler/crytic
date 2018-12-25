@@ -73,9 +73,7 @@ module Crytic::Reporter
       it "prints errored mutant" do
         io = IO::Memory.new
         IoReporter.new(io).report_result(result(Mutation::Status::Errored))
-        io.to_s.should contain("❌ NumberLiteralChange")
-        io.to_s.should contain("The following change broke the code")
-        io.to_s.should contain("diff")
+        io.to_s.should contain("✅ NumberLiteralChange at line 0, column 0")
       end
 
       it "prints timed out mutants" do
