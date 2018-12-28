@@ -3,5 +3,5 @@ require "./possibilities"
 
 module Crytic::Mutant
   generate_possibilities_subclass(
-    RegexpLiteralChangePossibilities, Crystal::RegexLiteral)
+    RegexLiteralChangePossibilities, Crystal::RegexLiteral)
 end
