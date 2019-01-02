@@ -6,15 +6,14 @@ module Crytic
   describe Mutant::SelectRejectSwap do
     it "switches select calls for reject calls" do
       ast = Crystal::Parser.parse("[1].select(&.nil?)")
-      transformed = ast.transform(Mutant::SelectRejectSwap.at(full_location_at(
-        line: 1, col: 1, name_col: 5)))
+      transformed = ast.transform(Mutant::SelectRejectSwap.at(location_at(
+        line_number: 1, column_number: 1, name_column_number: 5)))
       transformed.to_s.should eq "[1].reject do |__arg0|\n  __arg0.nil?\nend"
     end
 
     it "only applies to location" do
       ast = Crystal::Parser.parse("[1].select(&.nil?)")
-      transformed = ast.transform(Mutant::SelectRejectSwap.at(Crystal::Location.new(
-        filename: nil,
+      transformed = ast.transform(Mutant::SelectRejectSwap.at(location_at(
         line_number: 100,
         column_number: 100)))
       transformed.to_s.should eq "[1].select do |__arg0|\n  __arg0.nil?\nend"
@@ -61,11 +60,4 @@ module Crytic
       CODE
     end
   end
-end
-
-def full_location_at(line, col, name_col)
-  Crytic::Mutant::FullLocation.new(Crystal::Location.new(
-    filename: nil,
-    line_number: line,
-    column_number: col), name_col)
 end

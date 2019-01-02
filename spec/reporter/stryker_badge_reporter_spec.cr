@@ -47,11 +47,6 @@ private class FakeClient < Crytic::Reporter::HttpClient
   end
 end
 
-private def fake_mutant
-  Crytic::Mutant::NumberLiteralChange.at(
-    Crystal::Location.new(filename: nil, line_number: 0, column_number: 0))
-end
-
 private def results
   [Crytic::Mutation::Result.new(
     status: Crytic::Mutation::Status::Covered,

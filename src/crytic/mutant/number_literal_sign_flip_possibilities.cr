@@ -6,7 +6,7 @@ module Crytic::Mutant
       return true if node.value == "0"
       location = node.location
       unless location.nil?
-        @locations << location
+        @locations << FullLocation.new(location)
       end
       true
     end

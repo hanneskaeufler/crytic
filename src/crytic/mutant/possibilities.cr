@@ -1,3 +1,4 @@
+require "./full_location"
 require "compiler/crystal/syntax/*"
 
 module Crytic::Mutant
@@ -9,14 +10,14 @@ module Crytic::Mutant
     end
 
     getter locations
-    @locations = [] of Crystal::Location | Crytic::Mutant::FullLocation
+    @locations = [] of FullLocation
 
     def any?
       @locations.size > 0
     end
 
     def reset
-      @locations = [] of Crystal::Location | Crytic::Mutant::FullLocation
+      @locations = [] of FullLocation
     end
 
     def visit(node : Crystal::ASTNode)
@@ -29,7 +30,7 @@ module Crytic::Mutant
       def visit(node : {{ node }})
         location = node.location
         unless location.nil?
-          @locations << location
+          @locations << FullLocation.new(location)
         end
         true
       end

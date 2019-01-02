@@ -6,8 +6,7 @@ module Crytic
   describe Mutant::AnyAllSwap do
     it "switches all? calls for any? calls" do
       ast = Crystal::Parser.parse("[1].all?")
-      transformed = ast.transform(Mutant::AnyAllSwap.at(Crystal::Location.new(
-        filename: nil,
+      transformed = ast.transform(Mutant::AnyAllSwap.at(location_at(
         line_number: 1,
         column_number: 5)))
       transformed.to_s.should eq "[1].any?"
@@ -15,8 +14,7 @@ module Crytic
 
     it "switches any? calls for all? calls" do
       ast = Crystal::Parser.parse("[1].any?")
-      transformed = ast.transform(Mutant::AnyAllSwap.at(Crystal::Location.new(
-        filename: nil,
+      transformed = ast.transform(Mutant::AnyAllSwap.at(location_at(
         line_number: 1,
         column_number: 5)))
       transformed.to_s.should eq "[1].all?"
@@ -24,8 +22,7 @@ module Crytic
 
     it "only applies to location" do
       ast = Crystal::Parser.parse("[1].all?")
-      transformed = ast.transform(Mutant::AnyAllSwap.at(Crystal::Location.new(
-        filename: nil,
+      transformed = ast.transform(Mutant::AnyAllSwap.at(location_at(
         line_number: 100,
         column_number: 100)))
       transformed.to_s.should eq "[1].all?"

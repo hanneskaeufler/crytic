@@ -11,8 +11,7 @@ module Crytic
                    ] %}
       it "changes anything to zero: {{ mute[:code].id }}" do
         ast = Crystal::Parser.parse({{ mute[:code] }})
-        ast.accept(Mutant::NumberLiteralChange.at(Crystal::Location.new(
-          filename: nil,
+        ast.accept(Mutant::NumberLiteralChange.at(location_at(
           line_number: 1,
           column_number: 4)))
         ast.to_s.should eq {{ mute[:expected] }}
@@ -21,8 +20,7 @@ module Crytic
 
     it "changes zero to 1" do
       ast = Crystal::Parser.parse("0")
-      ast.accept(Mutant::NumberLiteralChange.at(Crystal::Location.new(
-        filename: nil,
+      ast.accept(Mutant::NumberLiteralChange.at(location_at(
         line_number: 1,
         column_number: 1)))
       ast.to_s.should eq "1"
@@ -30,8 +28,7 @@ module Crytic
 
     it "only applies to location" do
       ast = Crystal::Parser.parse("1; 2;")
-      ast.accept(Mutant::NumberLiteralChange.at(Crystal::Location.new(
-        filename: nil,
+      ast.accept(Mutant::NumberLiteralChange.at(location_at(
         line_number: 100,
         column_number: 100)))
       ast.to_s.should eq "1\n2\n"

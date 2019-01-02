@@ -5,8 +5,7 @@ module Crytic
   describe Mutant::BoolLiteralFlip do
     it "flips a boolean" do
       ast = Crystal::Parser.parse("true")
-      ast.accept(Mutant::BoolLiteralFlip.at(Crystal::Location.new(
-        filename: nil,
+      ast.accept(Mutant::BoolLiteralFlip.at(location_at(
         line_number: 1,
         column_number: 1)))
       ast.to_s.should eq "false"
@@ -14,8 +13,7 @@ module Crytic
 
     it "only applies to location" do
       ast = Crystal::Parser.parse("true")
-      ast.accept(Mutant::BoolLiteralFlip.at(Crystal::Location.new(
-        filename: nil,
+      ast.accept(Mutant::BoolLiteralFlip.at(location_at(
         line_number: 100,
         column_number: 100)))
       ast.to_s.should eq "true"
