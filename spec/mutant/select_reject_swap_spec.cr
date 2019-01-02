@@ -6,10 +6,8 @@ module Crytic
   describe Mutant::SelectRejectSwap do
     it "switches select calls for reject calls" do
       ast = Crystal::Parser.parse("[1].select(&.nil?)")
-      transformed = ast.transform(Mutant::SelectRejectSwap.at(Crystal::Location.new(
-        filename: nil,
-        line_number: 1,
-        column_number: 5)))
+      transformed = ast.transform(Mutant::SelectRejectSwap.at(full_location_at(
+        line: 1, col: 1, name_col: 5)))
       transformed.to_s.should eq "[1].reject do |__arg0|\n  __arg0.nil?\nend"
     end
 
@@ -22,7 +20,20 @@ module Crytic
       transformed.to_s.should eq "[1].select do |__arg0|\n  __arg0.nil?\nend"
     end
 
-    pending "works together with the possibility" do
+    it "can cope with additional calls following" do
+      ast = Crystal::Parser.parse("[1, 2, 3, 4].select { |i| i > 4 }.flatten")
+      possibilities = Mutant::SelectRejectSwapPossibilities.new
+      ast.accept(possibilities)
+      mutant = Mutant::SelectRejectSwap.at(possibilities.locations.first)
+      transformed = ast.transform(mutant)
+      transformed.to_s.should eq <<-CODE
+      [1, 2, 3, 4].reject do |i|
+        i > 4
+      end.flatten
+      CODE
+    end
+
+    it "works together with a multi-callsite possibility" do
       ast = Crystal::Parser.parse(<<-CODE
       MUTANT_POSSIBILITIES.map do |inspector|
         ast.accept(inspector)
@@ -50,4 +61,11 @@ module Crytic
       CODE
     end
   end
+end
+
+def full_location_at(line, col, name_col)
+  Crytic::Mutant::FullLocation.new(Crystal::Location.new(
+    filename: nil,
+    line_number: line,
+    column_number: col), name_col)
 end

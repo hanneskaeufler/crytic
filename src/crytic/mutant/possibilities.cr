@@ -9,14 +9,14 @@ module Crytic::Mutant
     end
 
     getter locations
-    @locations = [] of Crystal::Location
+    @locations = [] of Crystal::Location | Crytic::Mutant::FullLocation
 
     def any?
       @locations.size > 0
     end
 
     def reset
-      @locations = [] of Crystal::Location
+      @locations = [] of Crystal::Location | Crytic::Mutant::FullLocation
     end
 
     def visit(node : Crystal::ASTNode)
