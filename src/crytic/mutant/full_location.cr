@@ -4,14 +4,15 @@ module Crytic::Mutant
   record FullLocation, location : Crystal::Location, name_column_number : Int32? = nil do
     delegate line_number, column_number, to: location
 
-    #     def ==(other : Crystal::Location)
-    #       location.line_number == other.line_number &&
-    #         location.column_number == other.column_number
-    #     end
+    def matches?(node)
+      node_location = node.location
+      return false if node_location.nil?
 
-    #     def ==(other : FullLocation)
-    #       location == other.location &&
-    #         name_column_number == other.name_column_number
-    #     end
+      location_is_same = node_location.column_number == location.column_number &&
+             node_location.line_number == location.line_number
+
+      return location_is_same if name_column_number.nil?
+      return location_is_same && node.name_column_number == name_column_number
+    end
   end
 end

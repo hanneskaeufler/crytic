@@ -31,15 +31,6 @@ module Crytic
       transformed.to_s.should eq "[1].all?"
     end
 
-    it "doesn't apply for nil name column" do
-      ast = Crystal::Parser.parse("[1].all?")
-      transformed = ast.transform(Mutant::AnyAllSwap.at(location_at(
-        line_number: 1,
-        column_number: 1,
-        name_column_number: nil)))
-      transformed.to_s.should eq "[1].all?"
-    end
-
     it "doesn't apply for other name column" do
       ast = Crystal::Parser.parse("[1].all?")
       transformed = ast.transform(Mutant::AnyAllSwap.at(location_at(
