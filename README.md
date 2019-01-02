@@ -183,6 +183,15 @@ This mutation modifies any regular expression literal to never match anything. A
 + /a^/
 ```
 
+#### SelectRejectSwap
+
+This mutation exchanges calls to [Enumerable#select](https://crystal-lang.org/api/0.27.0/Enumerable.html#select%28%26block%3AT-%3E%29-instance-method) with calls to [Enumerable#reject](https://crystal-lang.org/api/0.27.0/Enumerable.html#reject%28%26block%3AT-%3E%29-instance-method) and vice-versa. A typical mutation is:
+
+```diff
+- [1].select(&.nil?)
++ [1].reject(&.nil?)
+```
+
 ## Credits & inspiration
 
 I have to credit the crystal [code-coverage](https://github.com/anykeyh/crystal-coverage) shard which finally helped me create a working mutation testing tool after one or two failed attempts. I took heavy inspirations from its [SourceFile](https://github.com/anykeyh/crystal-coverage/blob/master/src/coverage/inject/source_file.cr) class and actually lifted nearly all the code.
