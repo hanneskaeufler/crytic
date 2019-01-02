@@ -2,6 +2,8 @@ require "./full_location"
 require "compiler/crystal/syntax/*"
 
 module Crytic::Mutant
+  # An instance of this marks the possibility of a mutation at a certain
+  # code location.
   abstract class Possibilities < Crystal::Visitor
     macro inherited
       def mutant_class
@@ -12,10 +14,12 @@ module Crytic::Mutant
     getter locations
     @locations = [] of FullLocation
 
+    # True if there are any locations found.
     def any?
       @locations.size > 0
     end
 
+    # Clears the locations in this instance.
     def reset
       @locations = [] of FullLocation
     end
