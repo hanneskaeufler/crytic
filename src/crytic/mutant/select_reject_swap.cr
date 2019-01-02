@@ -4,13 +4,12 @@ require "./mutant"
 module Crytic::Mutant
   class SelectRejectSwap < TransformerMutant
     def transform(node : Crystal::Call)
-      location = node.location
-      return node if location.nil?
-      return node unless location.line_number == @location.line_number &&
-                         node.name_column_number == @location.column_number
+      super
+      return node unless SelectRejectSwapPossibilities::SELECT_REJECT.includes?(node.name) &&
+                         @location.matches?(node)
       Crystal::Call.new(
         node.obj,
-        "reject",
+        node.name == "reject" ? "select" : "reject",
         node.args,
         node.block,
         node.block_arg,

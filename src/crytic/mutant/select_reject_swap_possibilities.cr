@@ -2,11 +2,13 @@ require "./possibilities"
 
 module Crytic::Mutant
   class SelectRejectSwapPossibilities < Possibilities
+    SELECT_REJECT = %w(select reject)
+
     def visit(node : Crystal::Call)
-      return true if node.name != "select"
+      return true unless SELECT_REJECT.includes?(node.name)
       location = node.location
       unless location.nil?
-        @locations << Crystal::Location.new(nil, location.line_number, node.name_column_number)
+        @locations << FullLocation.new(location, node.name_column_number)
       end
       true
     end

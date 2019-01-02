@@ -13,6 +13,7 @@ module Crytic
                      Mutant::NumberLiteralChangePossibilities.new,
                      Mutant::NumberLiteralSignFlipPossibilities.new,
                      Mutant::RegexLiteralChangePossibilities.new,
+                     Mutant::SelectRejectSwapPossibilities.new,
                      Mutant::StringLiteralChangePossibilities.new,
                    ] of Mutant::Possibilities)
     end

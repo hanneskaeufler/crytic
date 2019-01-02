@@ -12,7 +12,7 @@ module Crytic::Mutation
 
     describe ".with" do
       it "can be used with both types of mutations" do
-        transformer_mutant = Crytic::Mutant::AndOrSwap.at(Crystal::Location.new(nil, 0, 0))
+        transformer_mutant = Crytic::Mutant::AndOrSwap.at(location_at(0, 0))
         Mutation.with(
           original: "./bar.cr",
           specs: ["./bar_spec.cr"],
@@ -237,16 +237,14 @@ module Crytic::Mutation
 end
 
 private def mutant
-  Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
-    filename: nil,
+  Crytic::Mutant::BoolLiteralFlip.at(location_at(
     line_number: 2,
     column_number: 6,
   ))
 end
 
 private def mutant_leading_to_compile_error
-  Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
-    filename: nil,
+  Crytic::Mutant::BoolLiteralFlip.at(location_at(
     line_number: 2,
     column_number: 6,
   ))

@@ -4,10 +4,7 @@ require "./mutant"
 module Crytic::Mutant
   class NumberLiteralSignFlip < VisitorMutant
     def visit(node : Crystal::NumberLiteral)
-      location = node.location
-      return if location.nil?
-      if location.line_number == @location.line_number &&
-         location.column_number == @location.column_number
+      if @location.matches?(node)
         node.value = "(-1*#{node.value})"
       end
       true

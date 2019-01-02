@@ -6,18 +6,18 @@ module Crytic::Mutant
   abstract class TransformerMutant < Crystal::Transformer
     getter location
 
-    def self.at(location : Crystal::Location)
+    def self.at(location : FullLocation)
       new(location)
     end
 
-    private def initialize(@location : Crystal::Location)
+    private def initialize(@location : FullLocation)
     end
   end
 
   abstract class VisitorMutant < Crystal::Visitor
     getter location
 
-    def self.at(location : Crystal::Location)
+    def self.at(location : FullLocation)
       new(location)
     end
 
@@ -25,7 +25,7 @@ module Crytic::Mutant
       true
     end
 
-    private def initialize(@location : Crystal::Location)
+    private def initialize(@location : FullLocation)
     end
   end
 end

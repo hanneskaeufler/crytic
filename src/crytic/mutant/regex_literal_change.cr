@@ -4,10 +4,7 @@ require "./mutant"
 module Crytic::Mutant
   class RegexLiteralChange < VisitorMutant
     def visit(node : Crystal::RegexLiteral)
-      location = node.location
-      return if location.nil?
-      if location.line_number == @location.line_number &&
-         location.column_number == @location.column_number
+      if @location.matches?(node)
         node.value = Crystal::StringLiteral.new("a^")
       end
       true

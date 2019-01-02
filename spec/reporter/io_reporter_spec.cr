@@ -4,10 +4,6 @@ require "../../src/crytic/reporter/io_reporter"
 require "../fake_mutation"
 require "../spec_helper"
 
-private def fake_mutant
-  Crytic::Mutant::NumberLiteralChange.at(Crystal::Location.new(filename: nil, line_number: 0, column_number: 0))
-end
-
 private def original(exit_code = 0, output = "output")
   Crytic::Mutation::OriginalResult.new(exit_code: exit_code, output: output)
 end

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Introduce a mutant to swap `[1].all?` for `[1].any?`
 - Report number of mutations being run in console output
 - Introduced a mutant to swap any RegexLiteral for `/a^/` which will never match
+- Enabled the mutant to swap `#reject` for `#select` and vice-versa
 
 ### Fixed
 - When the mutated source code fails to compile this is now being noted correctly
