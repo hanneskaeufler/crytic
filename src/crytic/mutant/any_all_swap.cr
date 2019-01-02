@@ -7,7 +7,8 @@ module Crytic::Mutant
       location = node.location
       return node if location.nil?
       return node unless location.line_number == @location.line_number &&
-                         node.name_column_number == @location.column_number
+                         location.column_number == @location.column_number &&
+                         node.name_column_number == @location.name_column_number
       Crystal::Call.new(
         node.obj,
         node.name == "any?" ? "all?" : "any?",

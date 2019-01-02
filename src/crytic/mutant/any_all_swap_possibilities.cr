@@ -8,7 +8,7 @@ module Crytic::Mutant
       return true unless ANY_ALL.includes?(node.name)
       location = node.location
       unless location.nil?
-        @locations << FullLocation.new(Crystal::Location.new(nil, location.line_number, node.name_column_number))
+        @locations << FullLocation.new(location, node.name_column_number)
       end
       true
     end
