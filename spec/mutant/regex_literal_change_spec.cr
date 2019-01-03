@@ -18,5 +18,12 @@ module Crytic
         column_number: 100)))
       ast.to_s.should eq "/a/"
     end
+
+    it "never matches" do
+      /a^/.match("").should be_nil
+      /a^/.match("lol").should be_nil
+      /a^/.match("1").should be_nil
+      /a^/.match("\n").should be_nil
+    end
   end
 end
