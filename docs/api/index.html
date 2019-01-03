@@ -91,6 +91,16 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AnyAllSwap" data-name="crytic::mutant::anyallswap">
+      <a href="Crytic/Mutant/AnyAllSwap.html">AnyAllSwap</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AnyAllSwapPossibilities" data-name="crytic::mutant::anyallswappossibilities">
+      <a href="Crytic/Mutant/AnyAllSwapPossibilities.html">AnyAllSwapPossibilities</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlip" data-name="crytic::mutant::boolliteralflip">
       <a href="Crytic/Mutant/BoolLiteralFlip.html">BoolLiteralFlip</a>
       
@@ -108,6 +118,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/ConditionFlipPossibilities" data-name="crytic::mutant::conditionflippossibilities">
       <a href="Crytic/Mutant/ConditionFlipPossibilities.html">ConditionFlipPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/FullLocation" data-name="crytic::mutant::fulllocation">
+      <a href="Crytic/Mutant/FullLocation.html">FullLocation</a>
       
     </li>
   
@@ -138,6 +153,16 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/Possibilities" data-name="crytic::mutant::possibilities">
       <a href="Crytic/Mutant/Possibilities.html">Possibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/RegexLiteralChange" data-name="crytic::mutant::regexliteralchange">
+      <a href="Crytic/Mutant/RegexLiteralChange.html">RegexLiteralChange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/RegexLiteralChangePossibilities" data-name="crytic::mutant::regexliteralchangepossibilities">
+      <a href="Crytic/Mutant/RegexLiteralChangePossibilities.html">RegexLiteralChangePossibilities</a>
       
     </li>
   
@@ -276,6 +301,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/RunnerArgumentValidator" data-name="crytic::runnerargumentvalidator">
+      <a href="Crytic/RunnerArgumentValidator.html">RunnerArgumentValidator</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Source" data-name="crytic::source">
       <a href="Crytic/Source.html">Source</a>
       
@@ -319,17 +349,21 @@
 <pre><code class="language-yaml">development_dependencies:
   crytic:
     github: hanneskaeufler/crytic
-    version: ~> 2.0.0</code></pre>
+    version: ~> 3.0.0</code></pre>
 
 <p>After <code>shards install</code>, this will place the <code>crytic</code> executable into the <code>bin/</code> folder inside your project.</p>
 
 <h2>Usage</h2>
 
-<p>Crytic will only mutate statements in one file, let's call that our subject, or <code>--subject</code> in the command line interface. You must also provide a list of test files to be executed in order to find the defects.</p>
+<p>Running crytic without any arguments will mutate all of the source files found by <code><em></em>src/*/.cr</code> and use the test-suite containing <code><em></em>spec/*/_spec.cr</code>. Depending on the size of your project and the duration of a full <code>crystal spec</code>, this might take quite a bit of time.</p>
+
+<pre><code class="language-shell">./bin/crytic</code></pre>
+
+<p>Crytic can also be run to only mutate statements in one file, let's call that our subject, or <code>--subject</code> in the command line interface. You can also provide a list of test files to be executed in order to find the defects. This might be helpful to exclude certain long-running integration specs in order to speed up the test suite.</p>
 
 <pre><code class="language-shell">./bin/crytic --subject src/blog/pages/archive.cr spec/blog_spec.cr spec/blog/pages/archive_spec.cr</code></pre>
 
-<p>This command determines a list of mutations that can be performed on the source code of <code>archive.cr</code> and joins the <code>blog_spec.cr</code> and <code>archive_spec.cr</code> as a test-suite to find suriving mutants.</p>
+<p>The above command determines a list of mutations that can be performed on the source code of <code>archive.cr</code> and joins the <code>blog_spec.cr</code> and <code>archive_spec.cr</code> as a test-suite to find suriving mutants.</p>
 
 <h3>CLI options</h3>
 
@@ -341,34 +375,43 @@
 
 <h3>How to read the output</h3>
 
-<pre><code class="language-shell">✅ Original test suite passed.
+<pre><code class="language-shell">
+✅ Original test suite passed.
 
-    ✅ ConditionFlip at line 11, column 7
-    ✅ NumberLiteralChange at line 11, column 18
-    ✅ NumberLiteralChange at line 12, column 28
-    ✅ NumberLiteralChange at line 13, column 34
-    ❌ NumberLiteralSignFlip
+    ❌ AndOrSwap
         The following change didn't fail the test-suite:
-        @@ -5,7 +5,7 @@
-        html_snippets = [] of String
-        scanner = StringScanner.new(content)
-        while scanner.skip_until(/RAW_HTML_START(.+?)RAW_HTML_END/m)
-        -      if scanner[1]?
-        +      if scanner[-1]?
-        matches &lt;&lt; scanner[0]
-        html_snippets &lt;&lt; scanner[1]
-        end
+            @@ -26,7 +26,7 @@
+                     end
+                   end
+                   def ==(other : Chunk)
+            -        ((type == other.type) && (range_a == other.range_a)) && (range_b == other.range_b)
+            +        ((type == other.type) && (range_a == other.range_a)) || (range_b == other.range_b)
+                   end
+                 end
+                 enum Type
 
-    ✅ StringLiteralChange at line 35, column 29
+    ❌ AndOrSwap
+        The following change didn't fail the test-suite:
+            @@ -26,7 +26,7 @@
+                     end
+                   end
+                   def ==(other : Chunk)
+            -        ((type == other.type) && (range_a == other.range_a)) && (range_b == other.range_b)
+            +        ((type == other.type) && (range_a == other.range_a)) || (range_b == other.range_b)
+                   end
+                 end
+                 enum Type
 
-Finished in 36.35 seconds:
-6 mutations, 5 covered, 1 uncovered, 0 errored. Mutation score: 83.33%</code></pre>
+    ✅ AndOrSwap at line 109, column 13
 
-<p>The first good message here is that the <code>Original test suite passed</code>. Crytic ran <code>crystal spec [all the files you passed]</code> and that exited with exit code <code>0</code>. Any other result on your inital test suite and it would not have made sense to continue. Intentionally breaking source code which is already broken is of no use.</p>
+Finished in 14:02 minutes:
+138 mutations, 85 covered, 36 uncovered, 0 errored, 17 timeout. Mutation Score Indicator (MSI): 73.91%</code></pre>
 
-<p>Each following occurance of <code>✅</code> shows that a mutant has been killed, ergo that the change in the source code was detected by the test suite. The line and column numbers are printed to follow the progress through the subject file.</p>
+<p>The first good message here is that the <code>Original test suite passed</code>. Crytic ran <code>crystal spec [with all spec files]</code> and that exited with exit code <code>0</code>. Any other result on your inital test suite and it would not have made sense to continue. Intentionally breaking source code which is already broken is of no use.</p>
 
-<p><code>❌ NumberLiteralSignFlip</code> is signaling that indeed a mutation was not detected. The diff below shows the change that was made which was not caught by the test suite.</p>
+<p>Each occurance of <code>✅</code> shows that a mutant has been killed, ergo that the change in the source code was detected by the test suite. The line and column numbers are printed to follow the progress through the subject file.</p>
+
+<p><code>❌ AndOrSwap</code> is signaling that indeed a mutation was not detected. The diff below shows the change that was made which was not caught by the test suite.</p>
 
 <h3>Mutation Badge</h3>
 
@@ -430,6 +473,27 @@ Finished in 36.35 seconds:
 
 <pre><code class="language-diff">- "Welcome"
 + "Welcome__crytic__"</code></pre>
+
+<h4>AnyAllSwap</h4>
+
+<p>This mutation exchanges calls to <a href="https://crystal-lang.org/api/0.27.0/Enumerable.html#all%3F-instance-method" target="_blank">Enumerable#all?</a> with calls to <a href="https://crystal-lang.org/api/0.27.0/Enumerable.html#any%3F-instance-method" target="_blank">Enumerable#any?</a> and vice-versa. A typical mutation is:</p>
+
+<pre><code class="language-diff">- [false].all?
++ [false].any?</code></pre>
+
+<h4>RegexpLiteralChange</h4>
+
+<p>This mutation modifies any regular expression literal to never match anything. A typical mutation is:</p>
+
+<pre><code class="language-diff">- /\d+/
++ /a^/</code></pre>
+
+<h4>SelectRejectSwap</h4>
+
+<p>This mutation exchanges calls to <a href="https://crystal-lang.org/api/0.27.0/Enumerable.html#select%28%26block%3AT-%3E%29-instance-method" target="_blank">Enumerable#select</a> with calls to <a href="https://crystal-lang.org/api/0.27.0/Enumerable.html#reject%28%26block%3AT-%3E%29-instance-method" target="_blank">Enumerable#reject</a> and vice-versa. A typical mutation is:</p>
+
+<pre><code class="language-diff">- [1].select(&.nil?)
++ [1].reject(&.nil?)</code></pre>
 
 <h2>Credits & inspiration</h2>
 

@@ -91,6 +91,16 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AnyAllSwap" data-name="crytic::mutant::anyallswap">
+      <a href="../../Crytic/Mutant/AnyAllSwap.html">AnyAllSwap</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AnyAllSwapPossibilities" data-name="crytic::mutant::anyallswappossibilities">
+      <a href="../../Crytic/Mutant/AnyAllSwapPossibilities.html">AnyAllSwapPossibilities</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlip" data-name="crytic::mutant::boolliteralflip">
       <a href="../../Crytic/Mutant/BoolLiteralFlip.html">BoolLiteralFlip</a>
       
@@ -108,6 +118,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/ConditionFlipPossibilities" data-name="crytic::mutant::conditionflippossibilities">
       <a href="../../Crytic/Mutant/ConditionFlipPossibilities.html">ConditionFlipPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/FullLocation" data-name="crytic::mutant::fulllocation">
+      <a href="../../Crytic/Mutant/FullLocation.html">FullLocation</a>
       
     </li>
   
@@ -138,6 +153,16 @@
   
   <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/Possibilities" data-name="crytic::mutant::possibilities">
       <a href="../../Crytic/Mutant/Possibilities.html">Possibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/RegexLiteralChange" data-name="crytic::mutant::regexliteralchange">
+      <a href="../../Crytic/Mutant/RegexLiteralChange.html">RegexLiteralChange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/RegexLiteralChangePossibilities" data-name="crytic::mutant::regexliteralchangepossibilities">
+      <a href="../../Crytic/Mutant/RegexLiteralChangePossibilities.html">RegexLiteralChangePossibilities</a>
       
     </li>
   
@@ -276,6 +301,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/RunnerArgumentValidator" data-name="crytic::runnerargumentvalidator">
+      <a href="../../Crytic/RunnerArgumentValidator.html">RunnerArgumentValidator</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Source" data-name="crytic::source">
       <a href="../../Crytic/Source.html">Source</a>
       
@@ -310,6 +340,11 @@
 
 
 
+  <h2>Overview</h2>
+
+  <p>An instance of this marks the possibility of a mutation at a certain
+code location.</p>
+
 
 
 
@@ -323,6 +358,8 @@
   
     <li class="other-type"><a href="../../Crytic/Mutant/AndOrSwapPossibilities.html">Crytic::Mutant::AndOrSwapPossibilities</a></li>
   
+    <li class="other-type"><a href="../../Crytic/Mutant/AnyAllSwapPossibilities.html">Crytic::Mutant::AnyAllSwapPossibilities</a></li>
+  
     <li class="other-type"><a href="../../Crytic/Mutant/BoolLiteralFlipPossibilities.html">Crytic::Mutant::BoolLiteralFlipPossibilities</a></li>
   
     <li class="other-type"><a href="../../Crytic/Mutant/ConditionFlipPossibilities.html">Crytic::Mutant::ConditionFlipPossibilities</a></li>
@@ -330,6 +367,8 @@
     <li class="other-type"><a href="../../Crytic/Mutant/NumberLiteralChangePossibilities.html">Crytic::Mutant::NumberLiteralChangePossibilities</a></li>
   
     <li class="other-type"><a href="../../Crytic/Mutant/NumberLiteralSignFlipPossibilities.html">Crytic::Mutant::NumberLiteralSignFlipPossibilities</a></li>
+  
+    <li class="other-type"><a href="../../Crytic/Mutant/RegexLiteralChangePossibilities.html">Crytic::Mutant::RegexLiteralChangePossibilities</a></li>
   
     <li class="other-type"><a href="../../Crytic/Mutant/SelectRejectSwapPossibilities.html">Crytic::Mutant::SelectRejectSwapPossibilities</a></li>
   
@@ -345,7 +384,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/mutant/possibilities.cr#L4" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/possibilities.cr#L7" target="_blank">
         crytic/mutant/possibilities.cr
       </a>
     
@@ -366,10 +405,19 @@
       <li class="entry-summary">
         <a href="#any%3F-instance-method" class="signature"><strong>#any?</strong></a>
         
+          <div class="summary"><p>True if there are any locations found.</p></div>
+        
       </li>
     
       <li class="entry-summary">
-        <a href="#locations%3AArray%28Crystal%3A%3ALocation%29-instance-method" class="signature"><strong>#locations</strong> : Array(Crystal::Location)</a>
+        <a href="#locations%3AArray%28Crytic%3A%3AMutant%3A%3AFullLocation%29-instance-method" class="signature"><strong>#locations</strong> : Array(Crytic::Mutant::FullLocation)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#reset-instance-method" class="signature"><strong>#reset</strong></a>
+        
+          <div class="summary"><p>Clears the locations in this instance.</p></div>
         
       </li>
     
@@ -433,26 +481,46 @@
         <a class="method-permalink" href="#any%3F-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>True if there are any locations found.</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/mutant/possibilities.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/possibilities.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="locations:Array(Crystal::Location)-instance-method">
+    <div class="entry-detail" id="locations:Array(Crytic::Mutant::FullLocation)-instance-method">
       <div class="signature">
         
-        def <strong>locations</strong> : Array(Crystal::Location)
+        def <strong>locations</strong> : Array(<a href="../../Crytic/Mutant/FullLocation.html">Crytic::Mutant::FullLocation</a>)
 
-        <a class="method-permalink" href="#locations%3AArray%28Crystal%3A%3ALocation%29-instance-method">#</a>
+        <a class="method-permalink" href="#locations%3AArray%28Crytic%3A%3AMutant%3A%3AFullLocation%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/mutant/possibilities.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/possibilities.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="reset-instance-method">
+      <div class="signature">
+        
+        def <strong>reset</strong>
+
+        <a class="method-permalink" href="#reset-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Clears the locations in this instance.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/possibilities.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -468,7 +536,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/mutant/possibilities.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/possibilities.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>

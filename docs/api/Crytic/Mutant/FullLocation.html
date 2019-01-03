@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutant::BoolLiteralFlipPossibilities - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Mutant::FullLocation - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -106,7 +106,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlipPossibilities" data-name="crytic::mutant::boolliteralflippossibilities">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlipPossibilities" data-name="crytic::mutant::boolliteralflippossibilities">
       <a href="../../Crytic/Mutant/BoolLiteralFlipPossibilities.html">BoolLiteralFlipPossibilities</a>
       
     </li>
@@ -121,7 +121,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/FullLocation" data-name="crytic::mutant::fulllocation">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/FullLocation" data-name="crytic::mutant::fulllocation">
       <a href="../../Crytic/Mutant/FullLocation.html">FullLocation</a>
       
     </li>
@@ -330,12 +330,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Mutant::BoolLiteralFlipPossibilities
+  <span class="kind">struct</span> Crytic::Mutant::FullLocation
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/BoolLiteralFlipPossibilities.html">Crytic::Mutant::BoolLiteralFlipPossibilities</a></li><li class="superclass"><a href="../../Crytic/Mutant/Possibilities.html">Crytic::Mutant::Possibilities</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/FullLocation.html">Crytic::Mutant::FullLocation</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -356,8 +356,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/bool_literal_flip_possibilities.cr#L5" target="_blank">
-        crytic/mutant/bool_literal_flip_possibilities.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/full_location.cr#L4" target="_blank">
+        crytic/mutant/full_location.cr
       </a>
     
     <br/>
@@ -367,6 +367,16 @@
 
 
 
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28location%3ACrystal%3A%3ALocation%2Cname_column_number%3AInt32%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(location : Crystal::Location, name_column_number : Int32? = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+  </ul>
+
 
 
 
@@ -375,12 +385,47 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#mutant_class-instance-method" class="signature"><strong>#mutant_class</strong></a>
+        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#visit%28node%3ACrystal%3A%3ABoolLiteral%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::BoolLiteral)</a>
+        <a href="#column_number%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#column_number</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#column_number%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#column_number</strong>(*args, **options, &block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#copy_with%28location_location%3D%40location%2Cname_column_number_name_column_number%3D%40name_column_number%29-instance-method" class="signature"><strong>#copy_with</strong>(location _location = @location, name_column_number _name_column_number = @name_column_number)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#line_number%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#line_number</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#line_number%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#line_number</strong>(*args, **options, &block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#location%3ACrystal%3A%3ALocation-instance-method" class="signature"><strong>#location</strong> : Crystal::Location</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#matches%3F%28node%29-instance-method" class="signature"><strong>#matches?</strong>(node)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#name_column_number%3AInt32%3F-instance-method" class="signature"><strong>#name_column_number</strong> : Int32?</a>
         
       </li>
     
@@ -391,40 +436,6 @@
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Crytic/Mutant/Possibilities.html">Crytic::Mutant::Possibilities</a></code></h3>
-  
-  
-    <a href="../../Crytic/Mutant/Possibilities.html#any%3F-instance-method" class="tooltip">
-      <span>any?</span>
-    any?</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/Possibilities.html#locations%3AArray%28Crytic%3A%3AMutant%3A%3AFullLocation%29-instance-method" class="tooltip">
-      <span>locations : Array(Crytic::Mutant::FullLocation)</span>
-    locations</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/Possibilities.html#reset-instance-method" class="tooltip">
-      <span>reset</span>
-    reset</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/Possibilities.html#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="tooltip">
-      <span>visit(node : Crystal::ASTNode)</span>
-    visit</a>
-    
-  
-
-
-    
-
-
-    
-
-
   
     
 
@@ -459,18 +470,133 @@
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(location:Crystal::Location,name_column_number:Int32?=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(location : Crystal::Location, name_column_number : Int32? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28location%3ACrystal%3A%3ALocation%2Cname_column_number%3AInt32%3F%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/full_location.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
 
 
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="mutant_class-instance-method">
+    <div class="entry-detail" id="clone-instance-method">
       <div class="signature">
         
-        def <strong>mutant_class</strong>
+        def <strong>clone</strong>
 
-        <a class="method-permalink" href="#mutant_class-instance-method">#</a>
+        <a class="method-permalink" href="#clone-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/full_location.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="column_number(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>column_number</strong>(*args, **options)
+
+        <a class="method-permalink" href="#column_number%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/full_location.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="column_number(*args,**options,&amp;block)-instance-method">
+      <div class="signature">
+        
+        def <strong>column_number</strong>(*args, **options, &block)
+
+        <a class="method-permalink" href="#column_number%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/full_location.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="copy_with(location_location=@location,name_column_number_name_column_number=@name_column_number)-instance-method">
+      <div class="signature">
+        
+        def <strong>copy_with</strong>(location _location = @location, name_column_number _name_column_number = @name_column_number)
+
+        <a class="method-permalink" href="#copy_with%28location_location%3D%40location%2Cname_column_number_name_column_number%3D%40name_column_number%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/full_location.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="line_number(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>line_number</strong>(*args, **options)
+
+        <a class="method-permalink" href="#line_number%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/full_location.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="line_number(*args,**options,&amp;block)-instance-method">
+      <div class="signature">
+        
+        def <strong>line_number</strong>(*args, **options, &block)
+
+        <a class="method-permalink" href="#line_number%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/full_location.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="location:Crystal::Location-instance-method">
+      <div class="signature">
+        
+        def <strong>location</strong> : Crystal::Location
+
+        <a class="method-permalink" href="#location%3ACrystal%3A%3ALocation-instance-method">#</a>
       </div>
       
       <br/>
@@ -479,18 +605,32 @@
       </div>
     </div>
   
-    <div class="entry-detail" id="visit(node:Crystal::BoolLiteral)-instance-method">
+    <div class="entry-detail" id="matches?(node)-instance-method">
       <div class="signature">
         
-        def <strong>visit</strong>(node : Crystal::BoolLiteral)
+        def <strong>matches?</strong>(node)
 
-        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3ABoolLiteral%29-instance-method">#</a>
+        <a class="method-permalink" href="#matches%3F%28node%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/bool_literal_flip_possibilities.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/mutant/full_location.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="name_column_number:Int32?-instance-method">
+      <div class="signature">
+        
+        def <strong>name_column_number</strong> : Int32?
+
+        <a class="method-permalink" href="#name_column_number%3AInt32%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
         
       </div>
     </div>

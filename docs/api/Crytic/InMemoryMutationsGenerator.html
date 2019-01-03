@@ -91,6 +91,16 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AnyAllSwap" data-name="crytic::mutant::anyallswap">
+      <a href="../Crytic/Mutant/AnyAllSwap.html">AnyAllSwap</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AnyAllSwapPossibilities" data-name="crytic::mutant::anyallswappossibilities">
+      <a href="../Crytic/Mutant/AnyAllSwapPossibilities.html">AnyAllSwapPossibilities</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/BoolLiteralFlip" data-name="crytic::mutant::boolliteralflip">
       <a href="../Crytic/Mutant/BoolLiteralFlip.html">BoolLiteralFlip</a>
       
@@ -108,6 +118,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/ConditionFlipPossibilities" data-name="crytic::mutant::conditionflippossibilities">
       <a href="../Crytic/Mutant/ConditionFlipPossibilities.html">ConditionFlipPossibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/FullLocation" data-name="crytic::mutant::fulllocation">
+      <a href="../Crytic/Mutant/FullLocation.html">FullLocation</a>
       
     </li>
   
@@ -138,6 +153,16 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/Possibilities" data-name="crytic::mutant::possibilities">
       <a href="../Crytic/Mutant/Possibilities.html">Possibilities</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/RegexLiteralChange" data-name="crytic::mutant::regexliteralchange">
+      <a href="../Crytic/Mutant/RegexLiteralChange.html">RegexLiteralChange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/RegexLiteralChangePossibilities" data-name="crytic::mutant::regexliteralchangepossibilities">
+      <a href="../Crytic/Mutant/RegexLiteralChangePossibilities.html">RegexLiteralChangePossibilities</a>
       
     </li>
   
@@ -276,6 +301,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/RunnerArgumentValidator" data-name="crytic::runnerargumentvalidator">
+      <a href="../Crytic/RunnerArgumentValidator.html">RunnerArgumentValidator</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Source" data-name="crytic::source">
       <a href="../Crytic/Source.html">Source</a>
       
@@ -326,7 +356,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/generator/in_memory_generator.cr#L4" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/generator/in_memory_generator.cr#L7" target="_blank">
         crytic/generator/in_memory_generator.cr
       </a>
     
@@ -335,19 +365,17 @@
 
 
 
-  
-    <h2>Constant Summary</h2>
-  
-  <dl>
-    
-      <dt class="entry-const" id="MUTANT_POSSIBILITIES">
-        <strong>MUTANT_POSSIBILITIES</strong> = <code>[<span class="t">Mutant</span><span class="t">::</span><span class="t">AndOrSwapPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">BoolLiteralFlipPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">ConditionFlipPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">NumberLiteralChangePossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">NumberLiteralSignFlipPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">StringLiteralChangePossibilities</span>.<span class="k">new</span>]</code>
-      </dt>
-      
-    
-  </dl>
 
 
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28possibilities%3D%5BMutant%3A%3AAndOrSwapPossibilities.new%2CMutant%3A%3AAnyAllSwapPossibilities.new%2CMutant%3A%3ABoolLiteralFlipPossibilities.new%2CMutant%3A%3AConditionFlipPossibilities.new%2CMutant%3A%3ANumberLiteralChangePossibilities.new%2CMutant%3A%3ANumberLiteralSignFlipPossibilities.new%2CMutant%3A%3ARegexLiteralChangePossibilities.new%2CMutant%3A%3ASelectRejectSwapPossibilities.new%2CMutant%3A%3AStringLiteralChangePossibilities.new%5DofMutant%3A%3APossibilities%29-class-method" class="signature"><strong>.new</strong>(possibilities = [<span class="t">Mutant</span><span class="t">::</span><span class="t">AndOrSwapPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">AnyAllSwapPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">BoolLiteralFlipPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">ConditionFlipPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">NumberLiteralChangePossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">NumberLiteralSignFlipPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">RegexLiteralChangePossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">SelectRejectSwapPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">StringLiteralChangePossibilities</span>.<span class="k">new</span>] <span class="k">of</span> <span class="t">Mutant</span><span class="t">::</span><span class="t">Possibilities</span>)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -357,7 +385,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#mutations_for%28source%3AString%2Cspecs%3AArray%28String%29%29-instance-method" class="signature"><strong>#mutations_for</strong>(source : String, specs : Array(String))</a>
+        <a href="#mutations_for%28sources%3AArray%28String%29%2Cspecs%3AArray%28String%29%29-instance-method" class="signature"><strong>#mutations_for</strong>(sources : Array(String), specs : Array(String))</a>
         
       </li>
     
@@ -374,8 +402,8 @@
   <h3>Instance methods inherited from class <code><a href="../Crytic/Generator.html">Crytic::Generator</a></code></h3>
   
   
-    <a href="../Crytic/Generator.html#mutations_for%28source%3AString%2Cspecs%3AArray%28String%29%29-instance-method" class="tooltip">
-      <span>mutations_for(source : String, specs : Array(String))</span>
+    <a href="../Crytic/Generator.html#mutations_for%28source%3AArray%28String%29%2Cspecs%3AArray%28String%29%29-instance-method" class="tooltip">
+      <span>mutations_for(source : Array(String), specs : Array(String))</span>
     mutations_for</a>
     
   
@@ -411,24 +439,43 @@
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(possibilities=[Mutant::AndOrSwapPossibilities.new,Mutant::AnyAllSwapPossibilities.new,Mutant::BoolLiteralFlipPossibilities.new,Mutant::ConditionFlipPossibilities.new,Mutant::NumberLiteralChangePossibilities.new,Mutant::NumberLiteralSignFlipPossibilities.new,Mutant::RegexLiteralChangePossibilities.new,Mutant::SelectRejectSwapPossibilities.new,Mutant::StringLiteralChangePossibilities.new]ofMutant::Possibilities)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(possibilities = [<span class="t">Mutant</span><span class="t">::</span><span class="t">AndOrSwapPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">AnyAllSwapPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">BoolLiteralFlipPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">ConditionFlipPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">NumberLiteralChangePossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">NumberLiteralSignFlipPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">RegexLiteralChangePossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">SelectRejectSwapPossibilities</span>.<span class="k">new</span>, <span class="t">Mutant</span><span class="t">::</span><span class="t">StringLiteralChangePossibilities</span>.<span class="k">new</span>] <span class="k">of</span> <span class="t">Mutant</span><span class="t">::</span><span class="t">Possibilities</span>)
+
+        <a class="method-permalink" href="#new%28possibilities%3D%5BMutant%3A%3AAndOrSwapPossibilities.new%2CMutant%3A%3AAnyAllSwapPossibilities.new%2CMutant%3A%3ABoolLiteralFlipPossibilities.new%2CMutant%3A%3AConditionFlipPossibilities.new%2CMutant%3A%3ANumberLiteralChangePossibilities.new%2CMutant%3A%3ANumberLiteralSignFlipPossibilities.new%2CMutant%3A%3ARegexLiteralChangePossibilities.new%2CMutant%3A%3ASelectRejectSwapPossibilities.new%2CMutant%3A%3AStringLiteralChangePossibilities.new%5DofMutant%3A%3APossibilities%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/generator/in_memory_generator.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
 
 
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="mutations_for(source:String,specs:Array(String))-instance-method">
+    <div class="entry-detail" id="mutations_for(sources:Array(String),specs:Array(String))-instance-method">
       <div class="signature">
         
-        def <strong>mutations_for</strong>(source : String, specs : Array(String))
+        def <strong>mutations_for</strong>(sources : Array(String), specs : Array(String))
 
-        <a class="method-permalink" href="#mutations_for%28source%3AString%2Cspecs%3AArray%28String%29%29-instance-method">#</a>
+        <a class="method-permalink" href="#mutations_for%28sources%3AArray%28String%29%2Cspecs%3AArray%28String%29%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f02e91719b95f0adf14bb060af98ea9628b6aac6/src/crytic/generator/in_memory_generator.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f28810460943edb5999cb8fac8e5132ae10d1b69/src/crytic/generator/in_memory_generator.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
