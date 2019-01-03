@@ -35,11 +35,14 @@ workflows:
   ci:
     jobs:
       - test-crystal-0.27.0
-      - test-coverage:
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
           filters:
             branches:
               only: master
-      - test-mutations:
-          filters:
-            branches:
-              only: master
+    jobs:
+      - test-crystal-0.27.0
+      - test-coverage
+      - test-mutations
