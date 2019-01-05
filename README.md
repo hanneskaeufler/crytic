@@ -1,4 +1,5 @@
-[![GitHub release](https://img.shields.io/github/release/hanneskaeufler/crytic.svg)](https://github.com/hanneskaeufler/crytic/releases) [![CircleCI](https://circleci.com/gh/hanneskaeufler/crytic/tree/master.svg?style=svg)](https://circleci.com/gh/hanneskaeufler/crytic/tree/master) ![Mutation Score](https://badge.stryker-mutator.io/github.com/hanneskaeufler/crytic/master)
+[![Latest Tag](https://img.shields.io/github/tag-date/hanneskaeufler/crytic.svg)
+](https://github.com/hanneskaeufler/crytic/releases) [![CircleCI](https://circleci.com/gh/hanneskaeufler/crytic/tree/master.svg?style=svg)](https://circleci.com/gh/hanneskaeufler/crytic/tree/master) ![Mutation Score](https://badge.stryker-mutator.io/github.com/hanneskaeufler/crytic/master)
 
 # crytic
 
