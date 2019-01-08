@@ -9,16 +9,16 @@ module Crytic
     alias MutationFactory = (Mutant::Mutant, String, Array(String), String) -> Mutation::Mutation
 
     ALL_MUTANTS = [
-          Mutant::AndOrSwapPossibilities.new,
-          Mutant::AnyAllSwapPossibilities.new,
-          Mutant::BoolLiteralFlipPossibilities.new,
-          Mutant::ConditionFlipPossibilities.new,
-          Mutant::NumberLiteralChangePossibilities.new,
-          Mutant::NumberLiteralSignFlipPossibilities.new,
-          Mutant::RegexLiteralChangePossibilities.new,
-          Mutant::SelectRejectSwapPossibilities.new,
-          Mutant::StringLiteralChangePossibilities.new,
-        ] of Mutant::Possibilities
+      Mutant::AndOrSwapPossibilities.new,
+      Mutant::AnyAllSwapPossibilities.new,
+      Mutant::BoolLiteralFlipPossibilities.new,
+      Mutant::ConditionFlipPossibilities.new,
+      Mutant::NumberLiteralChangePossibilities.new,
+      Mutant::NumberLiteralSignFlipPossibilities.new,
+      Mutant::RegexLiteralChangePossibilities.new,
+      Mutant::SelectRejectSwapPossibilities.new,
+      Mutant::StringLiteralChangePossibilities.new,
+    ] of Mutant::Possibilities
 
     DEFAULT_PREAMBLE = <<-CODE
     require "spec"
