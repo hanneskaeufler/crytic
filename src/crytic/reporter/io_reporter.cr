@@ -17,6 +17,7 @@ module Crytic::Reporter
         @io << original_result.output
       else
         @io << "✅ Original test suite passed.\n"
+        @io << original_result.output
       end
     end
 
@@ -39,6 +40,7 @@ module Crytic::Reporter
       when Mutation::Status::Covered, Mutation::Status::Timeout, Mutation::Status::Errored
         @io << "✅ #{result.mutant_name}"
         @io << "\n#{INDENT + INDENT}in #{result.location.location}"
+        @io << result.diff.lines.join("\n#{INDENT + INDENT + INDENT}")
       else
         raise "There were mutations of unreported type"
       end
