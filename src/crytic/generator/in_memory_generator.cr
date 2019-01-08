@@ -27,8 +27,8 @@ module Crytic
     private def mutations_for(source : String, specs : Array(String))
       ast = Crystal::Parser.parse(File.read(source))
 
-      @possibilities.each(&.reset)
       @possibilities
+        .map(&.reset)
         .map do |inspector|
           ast.accept(inspector)
           inspector
