@@ -17,7 +17,7 @@ module Crytic::Mutation
           original: "./bar.cr",
           specs: ["./bar_spec.cr"],
           mutant: transformer_mutant,
-          preamble: "").should be_a(Crytic::Mutation::Mutation)
+          preamble: no_preamble).should be_a(Crytic::Mutation::Mutation)
       end
     end
 
@@ -27,7 +27,7 @@ module Crytic::Mutation
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_spec.cr"],
-          "")
+          no_preamble)
 
         fake = FakeProcessRunner.new
         mutation.process_runner = fake
@@ -61,7 +61,7 @@ module Crytic::Mutation
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_spec.cr"],
-          "")
+          no_preamble)
 
         fake = FakeProcessRunner.new
         fake.exit_code = [0, 1]
@@ -78,7 +78,7 @@ module Crytic::Mutation
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_spec.cr"],
-          "")
+          no_preamble)
 
         fake = FakeProcessRunner.new
         fake.exit_code = [0, 0]
@@ -94,7 +94,7 @@ module Crytic::Mutation
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_spec.cr"],
-          "")
+          no_preamble)
 
         fake = FakeProcessRunner.new
         fake.exit_code = [0, 0]
@@ -112,7 +112,7 @@ module Crytic::Mutation
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_with_helper_spec.cr"],
-          "")
+          no_preamble)
 
         fake = FakeProcessRunner.new
         fake.exit_code = [0, 0]
@@ -148,7 +148,7 @@ module Crytic::Mutation
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_with_helper_spec.cr", "./fixtures/simple/bar_additional_spec.cr"],
-          "")
+          no_preamble)
 
         fake = FakeProcessRunner.new
         mutation.process_runner = fake
@@ -192,7 +192,7 @@ module Crytic::Mutation
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_with_helper_spec.cr"],
-          "")
+          no_preamble)
 
         fake = FakeProcessRunner.new
         fake.exit_code = [1]
@@ -209,7 +209,7 @@ module Crytic::Mutation
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_with_helper_spec.cr"],
-          "")
+          no_preamble)
 
         fake = FakeProcessRunner.new
         fake.exit_code = [0, 28]
@@ -226,7 +226,7 @@ module Crytic::Mutation
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_with_helper_spec.cr"],
-          "")
+          no_preamble)
 
         fake = FakeProcessRunner.new
         fake.exit_code = [1]
@@ -286,4 +286,8 @@ private class FakeFile
     @@tempfiles_created << filename
     "/tmp/#{filename}"
   end
+end
+
+private def no_preamble
+  ""
 end
