@@ -9,7 +9,7 @@ module Crytic
         source = fixture_source("non_empty_source_file.cr")
 
         mutations = InMemoryMutationsGenerator
-          .new([] of Mutant::Possibilities)
+          .new([] of Mutant::Possibilities, preamble)
           .mutations_for(source, specs)
 
         mutations.should be_empty
@@ -18,7 +18,9 @@ module Crytic
       it "returns no mutations for no possibilities in the source" do
         source = fixture_source("empty_source_file.cr")
 
-        mutations = InMemoryMutationsGenerator.new.mutations_for(source, specs)
+        mutations = InMemoryMutationsGenerator
+          .new(InMemoryMutationsGenerator::ALL_MUTANTS, preamble)
+          .mutations_for(source, specs)
 
         mutations.should be_empty
       end
@@ -27,7 +29,7 @@ module Crytic
         source = fixture_source("non_empty_source_file.cr")
 
         mutations = InMemoryMutationsGenerator
-          .new([Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities)
+          .new([Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities, preamble)
           .mutations_for(source, specs)
 
         mutations.size.should eq 1
@@ -37,7 +39,7 @@ module Crytic
         source = fixture_source("non_empty_source_file.cr")
 
         generator = InMemoryMutationsGenerator
-          .new([Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities)
+          .new([Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities, preamble)
 
         generator.mutations_for(source, specs)
         mutations = generator.mutations_for(source, specs)
@@ -59,4 +61,8 @@ end
 
 private def specs
   ["some_spec.cr"]
+end
+
+private def preamble
+  ""
 end

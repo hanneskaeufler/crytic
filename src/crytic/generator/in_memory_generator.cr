@@ -6,23 +6,25 @@ require "compiler/crystal/syntax/*"
 module Crytic
   # Determines all possible mutations for the given source files.
   class InMemoryMutationsGenerator < Generator
-    private PREAMBLE = <<-CODE
+    ALL_MUTANTS = [
+          Mutant::AndOrSwapPossibilities.new,
+          Mutant::AnyAllSwapPossibilities.new,
+          Mutant::BoolLiteralFlipPossibilities.new,
+          Mutant::ConditionFlipPossibilities.new,
+          Mutant::NumberLiteralChangePossibilities.new,
+          Mutant::NumberLiteralSignFlipPossibilities.new,
+          Mutant::RegexLiteralChangePossibilities.new,
+          Mutant::SelectRejectSwapPossibilities.new,
+          Mutant::StringLiteralChangePossibilities.new,
+        ] of Mutant::Possibilities
+
+    DEFAULT_PREAMBLE = <<-CODE
     require "spec"
     Spec.fail_fast = true
 
     CODE
 
-    def initialize(@possibilities = [
-                     Mutant::AndOrSwapPossibilities.new,
-                     Mutant::AnyAllSwapPossibilities.new,
-                     Mutant::BoolLiteralFlipPossibilities.new,
-                     Mutant::ConditionFlipPossibilities.new,
-                     Mutant::NumberLiteralChangePossibilities.new,
-                     Mutant::NumberLiteralSignFlipPossibilities.new,
-                     Mutant::RegexLiteralChangePossibilities.new,
-                     Mutant::SelectRejectSwapPossibilities.new,
-                     Mutant::StringLiteralChangePossibilities.new,
-                   ] of Mutant::Possibilities)
+    def initialize(@possibilities : Array(Mutant::Possibilities), @preamble : String)
     end
 
     def mutations_for(sources : Array(String), specs : Array(String))
@@ -43,8 +45,11 @@ module Crytic
         .select(&.any?)
         .map do |inspector|
           inspector.locations.map do |location|
-            Mutation::Mutation
-              .with(inspector.mutant_class.at(location), source, specs, PREAMBLE)
+            Mutation::Mutation.with(
+              mutant: inspector.mutant_class.at(location),
+              original: source,
+              specs: specs,
+              preamble: DEFAULT_PREAMBLE)
           end
         end
         .flatten
