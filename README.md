@@ -219,3 +219,4 @@ Although not having tested it myself yet, the [mull](https://github.com/mull-pro
 ## Contributors
 
 - [hanneskaeufler](https://github.com/hanneskaeufler) Hannes Käufler - creator, maintainer
+- [anicholson](https://github.com/anicholson) Andy Nicholson - contributor

@@ -17,7 +17,10 @@ OptionParser.parse! do |parser|
   parser.on("-m", "--min-msi=THRESHOLD", "Crytic will exit with zero if this threshold is reached.") do |threshold|
     msi_threshold = threshold.to_f
   end
-  parser.on("-h", "--help", "Show this help") { puts parser }
+  parser.on("-h", "--help", "Show this help") do
+    puts parser
+    exit(0)
+  end
   parser.unknown_args { |args| spec_files = args }
   parser.invalid_option do |flag|
     STDERR.puts "ERROR: #{flag} is not a valid option."
