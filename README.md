@@ -48,6 +48,8 @@ The above command determines a list of mutations that can be performed on the so
 
 `--min-msi`/`-m` specifies a threshold as to when to exit the program with 0 even when mutants survived. MSI is the Mutation Score Indicator.
 
+`--preamble`/`-p` specifies some source code to prepended to the combination of mutated source and specs. By default this will inject a bit of code to enable the "fail fast" mode of crystal (spec)[https://crystal-lang.org/api/0.27.0/Spec.html]. This can be used to disable the fail fast behaviour or avoid errors if you don't use crystal spec.
+
 The rest of the unnamed positional arguments are relative filepaths to the specs to be run.
 
 ### How to read the output
