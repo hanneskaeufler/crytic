@@ -4,7 +4,14 @@ require "./generator"
 require "compiler/crystal/syntax/*"
 
 module Crytic
+  # Determines all possible mutations for the given source files.
   class InMemoryMutationsGenerator < Generator
+    private PREAMBLE = <<-CODE
+    require "spec"
+    Spec.fail_fast = true
+
+    CODE
+
     def initialize(@possibilities = [
                      Mutant::AndOrSwapPossibilities.new,
                      Mutant::AnyAllSwapPossibilities.new,
@@ -37,7 +44,7 @@ module Crytic
         .map do |inspector|
           inspector.locations.map do |location|
             Mutation::Mutation
-              .with(inspector.mutant_class.at(location), source, specs)
+              .with(inspector.mutant_class.at(location), source, specs, PREAMBLE)
           end
         end
         .flatten
