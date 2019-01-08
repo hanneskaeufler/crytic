@@ -13,6 +13,13 @@ describe Crytic do
     end
   end
 
+  describe "--preamble/-p" do
+    it "injects custom preamble" do
+      result = run_crytic("-s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/fully_covered_spec.cr -p STDERR.puts(\"MY CUSTOM PREAMBLE\")")
+      result.output.should contain("MY CUSTOM PREAMBLE")
+    end
+  end
+
   describe "with a fully covered subject" do
     it "passes the mutation specs" do
       result = run_crytic("-s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/fully_covered_spec.cr")
