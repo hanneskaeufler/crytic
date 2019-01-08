@@ -25,5 +25,13 @@ module Crytic
       possibilities.any?.should eq false
       possibilities.locations.size.should eq 0
     end
+
+    it "doesn't consider unsigned integer types" do
+      ast = Crystal::Parser.parse("1_u8; 1_u16; 1_u32; 1_u64;")
+      possibilities = Mutant::NumberLiteralSignFlipPossibilities.new
+      ast.accept(possibilities)
+      possibilities.any?.should eq false
+      possibilities.locations.size.should eq 0
+    end
   end
 end
