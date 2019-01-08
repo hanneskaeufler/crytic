@@ -20,6 +20,7 @@ module Crytic::Mutation
       subject = Subject.from_filepath(@subject_file_path)
       process_result = run(subject.mutate_source!(@mutant))
       success_messages_in_output = /Finished/ =~ process_result[:output]
+      puts process_result[:output]
       status = if process_result[:exit_code] == ProcessRunner::SUCCESS
                  Status::Uncovered
                elsif process_result[:exit_code] == ProcessRunner::TIMEOUT
