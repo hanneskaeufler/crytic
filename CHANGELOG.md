@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
+### Fixed
+
+- Exit after printing usage information, thanks [@anicholson](https://github.com/anicholson)
+
 ## [3.0.0] - 2019-01-03
 
 ### Added
