@@ -2,6 +2,17 @@ require "../src/crytic/runner"
 require "./spec_helper"
 
 describe Crytic do
+  describe "--help/-h" do
+    it "prints usage info" do
+      result = run_crytic("--help")
+      result.output.should contain("Usage: crytic [arguments]")
+      result.exit_code.should eq 0
+      result = run_crytic("-h")
+      result.output.should contain("Usage: crytic [arguments]")
+      result.exit_code.should eq 0
+    end
+  end
+
   describe "with a fully covered subject" do
     it "passes the mutation specs" do
       result = run_crytic("-s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/fully_covered_spec.cr")
