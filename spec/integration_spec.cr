@@ -73,7 +73,7 @@ describe Crytic do
     end
   end
 
-  describe "a subject that is be mutated into an endless loop" do
+  describe "a subject that is mutated into an endless loop" do
     it "finishes and reports a timed out spec" do
       result = run_crytic("-s ./fixtures/timeout/timeout.cr ./fixtures/timeout/timeout_spec.cr")
       result.output.should contain "✅ Original test suite passed.\n"
