@@ -46,6 +46,23 @@ module Crytic
 
         mutations.size.should eq 1
       end
+
+      it "passes along the preamble" do
+        last_preamble = ""
+        factory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
+          last_preamble = preamble
+          Mutation::Mutation.with(mutant, original, specs, preamble)
+        }
+        source = fixture_source("non_empty_source_file.cr")
+
+        generator = InMemoryMutationsGenerator
+          .new([Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities, "preamble")
+        generator.mutation_factory = factory
+
+        generator.mutations_for(source, specs)
+
+        last_preamble.should eq "preamble"
+      end
     end
   end
 end

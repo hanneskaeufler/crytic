@@ -6,6 +6,8 @@ require "compiler/crystal/syntax/*"
 module Crytic
   # Determines all possible mutations for the given source files.
   class InMemoryMutationsGenerator < Generator
+    alias MutationFactory = (Mutant::Mutant, String, Array(String), String) -> Mutation::Mutation
+
     ALL_MUTANTS = [
           Mutant::AndOrSwapPossibilities.new,
           Mutant::AnyAllSwapPossibilities.new,
@@ -23,6 +25,10 @@ module Crytic
     Spec.fail_fast = true
 
     CODE
+
+    property mutation_factory : MutationFactory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
+      Mutation::Mutation.with(mutant, original, specs, preamble)
+    }
 
     def initialize(@possibilities : Array(Mutant::Possibilities), @preamble : String)
     end
@@ -45,11 +51,8 @@ module Crytic
         .select(&.any?)
         .map do |inspector|
           inspector.locations.map do |location|
-            Mutation::Mutation.with(
-              mutant: inspector.mutant_class.at(location),
-              original: source,
-              specs: specs,
-              preamble: DEFAULT_PREAMBLE)
+            mutation_factory.call(
+              inspector.mutant_class.at(location), source, specs, @preamble)
           end
         end
         .flatten
