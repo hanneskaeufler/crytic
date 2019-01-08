@@ -8,12 +8,18 @@ require "option_parser"
 subject_source = ""
 msi_threshold = 100.0
 spec_files = [] of String
+preamble = Crytic::InMemoryMutationsGenerator::DEFAULT_PREAMBLE
 
 OptionParser.parse! do |parser|
   parser.banner = "Usage: crytic [arguments]"
   parser.on("-s SOURCE", "--subject=SOURCE", "Specifies the source file for the subject") do |source|
     subject_source = source
   end
+
+  parser.on("-p PREAMBLE", "--preamble=PREAMBLE", "Specifies the source code that is prepended to every full mutation source code. Will enable the fail_fast option of crystal spec by default.") do |code|
+    preamble = code
+  end
+
   parser.on("-m", "--min-msi=THRESHOLD", "Crytic will exit with zero if this threshold is reached.") do |threshold|
     msi_threshold = threshold.to_f
   end
@@ -51,8 +57,12 @@ if spec_files.empty?
   spec_files = Dir["./spec/**/*_spec.cr"]
 end
 
+generator = Crytic::InMemoryMutationsGenerator.new(
+  Crytic::InMemoryMutationsGenerator::ALL_MUTANTS,
+  preamble)
+
 success = Crytic::Runner
-  .new(msi_threshold, reporters, Crytic::InMemoryMutationsGenerator.new)
+  .new(msi_threshold, reporters, generator)
   .run(subject_source, spec_files)
 
 exit(success ? 0 : 1)
