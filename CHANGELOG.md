@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Exit after printing usage information, thanks [@anicholson](https://github.com/anicholson)
+- Don't mutate unsigned integer literals like `1_u16` with the `NumberLiteralSignFlip`
 
 ## [3.0.0] - 2019-01-03
 
