@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
+## [3.1.1] - 2019-01-09
+
 ### Added
 
 - Add `--preamble` cli option to pass code that is prepended. Helpful to allow usage together with e.g. (minitest.cr)[https://github.com/ysbaddaden/minitest.cr]
