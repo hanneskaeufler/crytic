@@ -13,6 +13,16 @@ describe Crytic do
     end
   end
 
+  describe "--preamble/-p" do
+    it "injects the given custom preamble, failing=covering all mutants that would otherwise be uncovered" do
+      result = run_crytic("-s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr -p 'exit 1'")
+      puts result.output
+      result.output.should contain("✅ ConditionFlip")
+      result.output.should contain("✅ BoolLiteralFlip")
+      result.exit_code.should eq 0
+    end
+  end
+
   describe "with a fully covered subject" do
     it "passes the mutation specs" do
       result = run_crytic("-s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/fully_covered_spec.cr")
@@ -73,7 +83,7 @@ describe Crytic do
     end
   end
 
-  describe "a subject that is be mutated into an endless loop" do
+  describe "a subject that is mutated into an endless loop" do
     it "finishes and reports a timed out spec" do
       result = run_crytic("-s ./fixtures/timeout/timeout.cr ./fixtures/timeout/timeout_spec.cr")
       result.output.should contain "✅ Original test suite passed.\n"

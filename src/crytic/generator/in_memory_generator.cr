@@ -4,18 +4,33 @@ require "./generator"
 require "compiler/crystal/syntax/*"
 
 module Crytic
+  # Determines all possible mutations for the given source files.
   class InMemoryMutationsGenerator < Generator
-    def initialize(@possibilities = [
-                     Mutant::AndOrSwapPossibilities.new,
-                     Mutant::AnyAllSwapPossibilities.new,
-                     Mutant::BoolLiteralFlipPossibilities.new,
-                     Mutant::ConditionFlipPossibilities.new,
-                     Mutant::NumberLiteralChangePossibilities.new,
-                     Mutant::NumberLiteralSignFlipPossibilities.new,
-                     Mutant::RegexLiteralChangePossibilities.new,
-                     Mutant::SelectRejectSwapPossibilities.new,
-                     Mutant::StringLiteralChangePossibilities.new,
-                   ] of Mutant::Possibilities)
+    alias MutationFactory = (Mutant::Mutant, String, Array(String), String) -> Mutation::Mutation
+
+    ALL_MUTANTS = [
+      Mutant::AndOrSwapPossibilities.new,
+      Mutant::AnyAllSwapPossibilities.new,
+      Mutant::BoolLiteralFlipPossibilities.new,
+      Mutant::ConditionFlipPossibilities.new,
+      Mutant::NumberLiteralChangePossibilities.new,
+      Mutant::NumberLiteralSignFlipPossibilities.new,
+      Mutant::RegexLiteralChangePossibilities.new,
+      Mutant::SelectRejectSwapPossibilities.new,
+      Mutant::StringLiteralChangePossibilities.new,
+    ] of Mutant::Possibilities
+
+    DEFAULT_PREAMBLE = <<-CODE
+    require "spec"
+    Spec.fail_fast = true
+
+    CODE
+
+    property mutation_factory : MutationFactory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
+      Mutation::Mutation.with(mutant, original, specs, preamble)
+    }
+
+    def initialize(@possibilities : Array(Mutant::Possibilities), @preamble : String)
     end
 
     def mutations_for(sources : Array(String), specs : Array(String))
@@ -27,8 +42,8 @@ module Crytic
     private def mutations_for(source : String, specs : Array(String))
       ast = Crystal::Parser.parse(File.read(source))
 
-      @possibilities.each(&.reset)
       @possibilities
+        .map(&.reset)
         .map do |inspector|
           ast.accept(inspector)
           inspector
@@ -36,8 +51,8 @@ module Crytic
         .select(&.any?)
         .map do |inspector|
           inspector.locations.map do |location|
-            Mutation::Mutation
-              .with(inspector.mutant_class.at(location), source, specs)
+            mutation_factory.call(
+              inspector.mutant_class.at(location), source, specs, @preamble)
           end
         end
         .flatten

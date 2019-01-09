@@ -22,6 +22,7 @@ module Crytic::Mutant
     # Clears the locations in this instance.
     def reset
       @locations = [] of FullLocation
+      self
     end
 
     def visit(node : Crystal::ASTNode)

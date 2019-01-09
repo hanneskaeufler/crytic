@@ -9,12 +9,14 @@ require "./result"
 module Crytic::Mutation
   # Represents a single mutation to a single source file
   class Mutation
-    private PREAMBLE = "require \"spec\"\nSpec.fail_fast = true\n"
+    alias Preamble = String
 
     property process_runner : Crytic::ProcessRunner
     property file_remover : (String -> Void)
     property tempfile_writer : (String, String, String) -> String
 
+    # Compiles the mutated source code into a binary and runs this binary,
+    # recording exit code, stderr and stdout output.
     def run
       subject_source = File.read(@subject_file_path)
       source = Source.new(subject_source)
@@ -36,14 +38,20 @@ module Crytic::Mutation
       Result.new(status, @mutant, source_diff)
     end
 
-    def self.with(mutant : Mutant::Mutant, original : String, specs : Array(String))
-      new(mutant, original, specs)
+    def self.with(
+      mutant : Mutant::Mutant,
+      original : String,
+      specs : Array(String),
+      preamble : Preamble
+    )
+      new(mutant, original, specs, preamble)
     end
 
     private def initialize(
       @mutant : Crytic::Mutant::Mutant,
       @subject_file_path : String,
-      @specs_file_paths : Array(String)
+      @specs_file_paths : Array(String),
+      @preamble : String
     )
       @process_runner = ProcessProcessRunner.new
       @file_remover = ->File.delete(String)
@@ -70,7 +78,7 @@ module Crytic::Mutation
     end
 
     private def write_full_source_into_tempfile(mutated_source)
-      full_source = PREAMBLE + mutated_specs_source(mutated_source)
+      full_source = @preamble + mutated_specs_source(mutated_source)
       @tempfile_writer.call("crytic", ".cr", full_source)
     end
 
