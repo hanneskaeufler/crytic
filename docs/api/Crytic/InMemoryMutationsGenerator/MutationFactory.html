@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutant::VisitorMutant - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::InMemoryMutationsGenerator::MutationFactory - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -66,12 +66,12 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/InMemoryMutationsGenerator" data-name="crytic::inmemorymutationsgenerator">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/InMemoryMutationsGenerator" data-name="crytic::inmemorymutationsgenerator">
       <a href="../../Crytic/InMemoryMutationsGenerator.html">InMemoryMutationsGenerator</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/InMemoryMutationsGenerator/MutationFactory" data-name="crytic::inmemorymutationsgenerator::mutationfactory">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/InMemoryMutationsGenerator/MutationFactory" data-name="crytic::inmemorymutationsgenerator::mutationfactory">
       <a href="../../Crytic/InMemoryMutationsGenerator/MutationFactory.html">MutationFactory</a>
       
     </li>
@@ -86,7 +86,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
       <a href="../../Crytic/Mutant.html">Mutant</a>
       
         <ul>
@@ -201,7 +201,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/VisitorMutant" data-name="crytic::mutant::visitormutant">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/VisitorMutant" data-name="crytic::mutant::visitormutant">
       <a href="../../Crytic/Mutant/VisitorMutant.html">VisitorMutant</a>
       
     </li>
@@ -350,40 +350,24 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">abstract class</span> Crytic::Mutant::VisitorMutant
+  <span class="kind">alias</span> Crytic::InMemoryMutationsGenerator::MutationFactory
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+  <h2>Alias Definition</h2>
+  <code><a href="../../Crytic/Mutant/TransformerMutant.html">Crytic::Mutant::TransformerMutant</a> | <a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a>, String, Array(String), String -> <a href="../../Crytic/Mutation/Mutation.html">Crytic::Mutation::Mutation</a></code>
 
 
 
 
 
 
-
-
-
-
-
-
-  <h2>Direct Known Subclasses</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/BoolLiteralFlip.html">Crytic::Mutant::BoolLiteralFlip</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/ConditionFlip.html">Crytic::Mutant::ConditionFlip</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/NumberLiteralChange.html">Crytic::Mutant::NumberLiteralChange</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/NumberLiteralSignFlip.html">Crytic::Mutant::NumberLiteralSignFlip</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/RegexLiteralChange.html">Crytic::Mutant::RegexLiteralChange</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/StringLiteralChange.html">Crytic::Mutant::StringLiteralChange</a></li>
-  
-  </ul>
 
 
 
@@ -393,8 +377,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/4737dcfe0798620e4e81a4d7faab296bbc2abb32/src/crytic/mutant/mutant.cr#L17" target="_blank">
-        crytic/mutant/mutant.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/4737dcfe0798620e4e81a4d7faab296bbc2abb32/src/crytic/generator/in_memory_generator.cr#L9" target="_blank">
+        crytic/generator/in_memory_generator.cr
       </a>
     
     <br/>
@@ -406,32 +390,7 @@
 
 
 
-  <h2>Class Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#at%28location%3AFullLocation%29-class-method" class="signature"><strong>.at</strong>(location : FullLocation)</a>
-        
-      </li>
-    
-  </ul>
 
-
-
-  <h2>Instance Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#location%3ACrytic%3A%3AMutant%3A%3AFullLocation-instance-method" class="signature"><strong>#location</strong> : Crytic::Mutant::FullLocation</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::ASTNode)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -439,96 +398,12 @@
 
 <div class="methods-inherited">
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
 
 
-  <h2>Class Method Detail</h2>
-  
-    <div class="entry-detail" id="at(location:FullLocation)-class-method">
-      <div class="signature">
-        
-        def self.<strong>at</strong>(location : <a href="../../Crytic/Mutant/FullLocation.html">FullLocation</a>)
 
-        <a class="method-permalink" href="#at%28location%3AFullLocation%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/4737dcfe0798620e4e81a4d7faab296bbc2abb32/src/crytic/mutant/mutant.cr#L20" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-
-
-
-  <h2>Instance Method Detail</h2>
-  
-    <div class="entry-detail" id="location:Crytic::Mutant::FullLocation-instance-method">
-      <div class="signature">
-        
-        def <strong>location</strong> : <a href="../../Crytic/Mutant/FullLocation.html">Crytic::Mutant::FullLocation</a>
-
-        <a class="method-permalink" href="#location%3ACrytic%3A%3AMutant%3A%3AFullLocation-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/4737dcfe0798620e4e81a4d7faab296bbc2abb32/src/crytic/mutant/mutant.cr#L18" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="visit(node:Crystal::ASTNode)-instance-method">
-      <div class="signature">
-        
-        def <strong>visit</strong>(node : Crystal::ASTNode)
-
-        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/4737dcfe0798620e4e81a4d7faab296bbc2abb32/src/crytic/mutant/mutant.cr#L24" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 

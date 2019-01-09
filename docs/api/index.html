@@ -66,8 +66,18 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/InMemoryMutationsGenerator" data-name="crytic::inmemorymutationsgenerator">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/InMemoryMutationsGenerator" data-name="crytic::inmemorymutationsgenerator">
       <a href="Crytic/InMemoryMutationsGenerator.html">InMemoryMutationsGenerator</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/InMemoryMutationsGenerator/MutationFactory" data-name="crytic::inmemorymutationsgenerator::mutationfactory">
+      <a href="Crytic/InMemoryMutationsGenerator/MutationFactory.html">MutationFactory</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -211,8 +221,18 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
       <a href="Crytic/Mutation/Mutation.html">Mutation</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation/Preamble" data-name="crytic::mutation::mutation::preamble">
+      <a href="Crytic/Mutation/Mutation/Preamble.html">Preamble</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -350,7 +370,7 @@
 <pre><code class="language-yaml">development_dependencies:
   crytic:
     github: hanneskaeufler/crytic
-    version: ~> 3.0.1</code></pre>
+    version: ~> 3.1.1</code></pre>
 
 <p>After <code>shards install</code>, this will place the <code>crytic</code> executable into the <code>bin/</code> folder inside your project.</p>
 
@@ -371,6 +391,8 @@
 <p><code>--subject</code>/<code>-s</code> specifies a relative filepath to the sourcecode being mutated.</p>
 
 <p><code>--min-msi</code>/<code>-m</code> specifies a threshold as to when to exit the program with 0 even when mutants survived. MSI is the Mutation Score Indicator.</p>
+
+<p><code>--preamble</code>/<code>-p</code> specifies some source code to prepended to the combination of mutated source and specs. By default this will inject a bit of code to enable the "fail fast" mode of crystal (spec)[https://crystal-lang.org/api/0.27.0/Spec.html]. This can be used to disable the fail fast behaviour or avoid errors if you don't use crystal spec.</p>
 
 <p>The rest of the unnamed positional arguments are relative filepaths to the specs to be run.</p>
 
