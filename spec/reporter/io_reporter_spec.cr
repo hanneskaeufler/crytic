@@ -84,13 +84,15 @@ module Crytic::Reporter
         io = IO::Memory.new
         results = [
           result(Mutation::Status::Uncovered),
+          result(Mutation::Status::Uncovered),
+          result(Mutation::Status::Covered),
           result(Mutation::Status::Covered),
           result(Mutation::Status::Errored),
           result(Mutation::Status::Timeout),
         ]
         IoReporter.new(io).report_summary(results)
         io.to_s.should contain "Finished in"
-        io.to_s.should contain "4 mutations, 1 covered, 1 uncovered, 1 errored, 1 timeout. Mutation Score Indicator (MSI): 75.0%"
+        io.to_s.should contain "6 mutations, 2 covered, 2 uncovered, 1 errored, 1 timeout. Mutation Score Indicator (MSI): 66.67%"
       end
 
       it "has a N/A score for 0 results" do

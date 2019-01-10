@@ -1,7 +1,7 @@
 require "./mutation/result"
 
 module Crytic
-  # calculates a score based on
+  # Calculates a score based on
   # https://infection.github.io/guide/#Mutation-Score-Indicator-MSI
   class MsiCalculator
     private getter results : Array(Mutation::Result)
