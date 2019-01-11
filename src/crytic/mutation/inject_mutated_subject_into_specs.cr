@@ -80,13 +80,13 @@ module Crytic::Mutation
         file_list = @@require_expanders[expansion_id]
 
         if file_list.any?
-          io = String::Builder.new(capacity: STR_CAPACITY)
-          file_list.each do |file|
-            io << "#" << " require of `" << file.path
-            io << "` from `" << self.path << ":#{file.required_at}" << "`" << "\n"
-            io << file.to_covered_source
+          String.build do |io|
+            file_list.each do |file|
+              io << "#" << " require of `" << file.path
+              io << "` from `" << self.path << ":#{file.required_at}" << "`" << "\n"
+              io << file.to_covered_source
+            end
           end
-          io.to_s
         else
           ""
         end
