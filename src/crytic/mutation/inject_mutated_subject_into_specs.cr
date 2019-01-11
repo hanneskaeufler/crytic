@@ -65,12 +65,10 @@ module Crytic::Mutation
         # injection of cover head dependencies
         process
 
-        io = String.build do |io|
+        @enriched_source = String.build do |io|
           # Inject the location of the zero line of current file
           io << unfold_required(astree.to_s)
         end
-
-        @enriched_source = io.to_s
       else
         @enriched_source.not_nil!
       end
