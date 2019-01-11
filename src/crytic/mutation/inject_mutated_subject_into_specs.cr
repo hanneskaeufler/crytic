@@ -27,9 +27,9 @@ module Crytic::Mutation
     getter path : String
     getter source : String
 
-    def self.register_file(f)
-      @@already_covered_file_name.add(f.path)
-      @@file_list << f
+    def self.register_file(file)
+      @@already_covered_file_name.add(file.path)
+      @@file_list << file
       @@file_list.size - 1
     end
 
@@ -65,10 +65,7 @@ module Crytic::Mutation
         # injection of cover head dependencies
         process
 
-        @enriched_source = String.build do |io|
-          # Inject the location of the zero line of current file
-          io << unfold_required(astree.to_s)
-        end
+        @enriched_source = unfold_required(astree.to_s)
       else
         @enriched_source.not_nil!
       end
