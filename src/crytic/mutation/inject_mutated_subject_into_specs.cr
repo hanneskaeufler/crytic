@@ -4,8 +4,6 @@ require "file_utils"
 
 module Crytic::Mutation
   class InjectMutatedSubjectIntoSpecs < Crystal::Visitor
-    STR_CAPACITY = 2 ** 20
-
     def self.reset
       @@already_covered_file_name = Set(String).new
       @@file_list = [] of InjectMutatedSubjectIntoSpecs
