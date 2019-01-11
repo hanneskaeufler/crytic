@@ -61,14 +61,14 @@ module Crytic::Mutation
 
     def to_covered_source
       if @enriched_source.nil?
-        io = String::Builder.new(capacity: 32_768)
-
         # call process to enrich AST before
         # injection of cover head dependencies
         process
 
-        # Inject the location of the zero line of current file
-        io << unfold_required(astree.to_s)
+        io = String.build do |io|
+          # Inject the location of the zero line of current file
+          io << unfold_required(astree.to_s)
+        end
 
         @enriched_source = io.to_s
       else
