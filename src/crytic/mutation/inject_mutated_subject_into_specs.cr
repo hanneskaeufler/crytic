@@ -23,7 +23,6 @@ module Crytic::Mutation
     getter! enriched_source : String
 
     getter id : Int32 = 0
-    getter md5_signature : String
     getter path : String
     getter source : String
 
@@ -47,7 +46,6 @@ module Crytic::Mutation
 
     def initialize(@path, @source, @subject_path : String, @mutated_subject_source : String)
       @path = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.expand_path(@path, "."))
-      @md5_signature = Digest::MD5.hexdigest(@source)
       @id = InjectMutatedSubjectIntoSpecs.register_file(self)
     end
 
