@@ -22,14 +22,12 @@ module Crytic::Mutation
     getter! astree : Crystal::ASTNode
     getter! enriched_source : String
 
-    getter id : Int32 = 0
     getter path : String
     getter source : String
 
     def self.register_file(file)
       @@already_covered_file_name.add(file.path)
       @@file_list << file
-      @@file_list.size - 1
     end
 
     def self.relative_path_to_project(path)
@@ -46,7 +44,7 @@ module Crytic::Mutation
 
     def initialize(@path, @source, @subject_path : String, @mutated_subject_source : String)
       @path = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.expand_path(@path, "."))
-      @id = InjectMutatedSubjectIntoSpecs.register_file(self)
+      InjectMutatedSubjectIntoSpecs.register_file(self)
     end
 
     # Inject in AST tree if required.
