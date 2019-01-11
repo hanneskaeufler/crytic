@@ -18,7 +18,7 @@ module Crytic::Mutation
         mutated_subject_source: "puts \"mutated source\"")
         .to_covered_source
         .should eq <<-CODE
-        # require of `fixtures/simple/bar.cr` from `fixtures/simple/bar_spec.cr:1`
+        # require of `fixtures/simple/bar.cr` from `fixtures/simple/bar_spec.cr`
         puts("mutated source")
         require "spec"
         describe("bar") do
@@ -40,9 +40,9 @@ module Crytic::Mutation
         mutated_subject_source: "puts \"mutated source\"")
         .to_covered_source
         .should eq <<-CODE
-        # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr:1`
+        # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr`
         require "http"
-        # require of `fixtures/simple/bar.cr` from `fixtures/simple/spec_helper.cr:2`
+        # require of `fixtures/simple/bar.cr` from `fixtures/simple/spec_helper.cr`
         puts("mutated source")
 
         require "spec"
@@ -66,10 +66,10 @@ module Crytic::Mutation
         mutated_subject_source: File.read(subject_file))
         .to_covered_source
         .should eq <<-CODE
-        # require of `fixtures/require_order/blog.cr` from `fixtures/require_order/blog_spec.cr:1`
-        # require of `fixtures/require_order/pages/main_layout.cr` from `fixtures/require_order/blog.cr:1`
+        # require of `fixtures/require_order/blog.cr` from `fixtures/require_order/blog_spec.cr`
+        # require of `fixtures/require_order/pages/main_layout.cr` from `fixtures/require_order/blog.cr`
         abstract class MainLayout
-        end# require of `fixtures/require_order/pages/blog/archive.cr` from `fixtures/require_order/blog.cr:1`
+        end# require of `fixtures/require_order/pages/blog/archive.cr` from `fixtures/require_order/blog.cr`
         class Archive < MainLayout
           def render
             "welcome page"

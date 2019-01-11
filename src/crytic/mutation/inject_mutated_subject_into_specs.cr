@@ -25,7 +25,6 @@ module Crytic::Mutation
     getter id : Int32 = 0
     getter md5_signature : String
     getter path : String
-    getter required_at : Int32
     getter source : String
 
     def self.register_file(f)
@@ -46,7 +45,7 @@ module Crytic::Mutation
       end
     end
 
-    def initialize(@path, @source, @subject_path : String, @mutated_subject_source : String, @required_at = 0)
+    def initialize(@path, @source, @subject_path : String, @mutated_subject_source : String)
       @path = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.expand_path(@path, "."))
       @md5_signature = Digest::MD5.hexdigest(@source)
       @id = InjectMutatedSubjectIntoSpecs.register_file(self)
@@ -84,7 +83,7 @@ module Crytic::Mutation
           String.build do |io|
             file_list.each do |file|
               io << "#" << " require of `" << file.path
-              io << "` from `" << self.path << ":#{file.required_at}" << "`" << "\n"
+              io << "` from `" << self.path << "`" << "\n"
               io << file.to_covered_source
             end
           end
@@ -128,8 +127,7 @@ module Crytic::Mutation
             path: file_load,
             source: the_source,
             mutated_subject_source: @mutated_subject_source,
-            subject_path: @subject_path,
-            required_at: line_number)
+            subject_path: @subject_path)
 
           required_file.process # Process on load, since it can change the requirement order
 
