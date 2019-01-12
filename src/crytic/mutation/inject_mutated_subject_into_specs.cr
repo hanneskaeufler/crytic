@@ -3,25 +3,7 @@ require "digest"
 require "file_utils"
 
 module Crytic::Mutation
-  class ArbitrarySourceCodeFile
-    def initialize(@path : String, @mutated_subject_source : String, @subject_path : String)
-    end
-
-    def source
-      if @path == relative_path
-        @mutated_subject_source
-      else
-        File.read(@path)
-      end
-    end
-
-    private def relative_path
-      File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@subject_path))
-    end
-  end
-
   class InjectMutatedSubjectIntoSpecs < Crystal::Visitor
-
     # Because the class is used and instantiated multiple times, but these are
     # class vars, they need to be resetted :(
     def self.reset
@@ -122,8 +104,6 @@ module Crytic::Mutation
       InjectMutatedSubjectIntoSpecs.require_expanders << list_of_required_file
 
       new_files_to_load.each do |file_to_load|
-        next if file_to_load !~ /\.cr$/
-
         InjectMutatedSubjectIntoSpecs.cover_file(file_to_load) do
           the_source = ArbitrarySourceCodeFile.new(
             file_to_load,
@@ -248,6 +228,25 @@ module Crytic::Mutation
     private def make_relative_unless_absolute(filename)
       filename = "#{Dir.current}/#{filename}" unless filename.starts_with?('/')
       File.expand_path(filename)
+    end
+  end
+
+  # This is a weird concept and I wonder if this can be replaced by Crytic::Source
+  # somehow.
+  class ArbitrarySourceCodeFile
+    def initialize(@path : String, @mutated_subject_source : String, @subject_path : String)
+    end
+
+    def source
+      if @path == relative_path
+        @mutated_subject_source
+      else
+        File.read(@path)
+      end
+    end
+
+    private def relative_path
+      File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@subject_path))
     end
   end
 end
