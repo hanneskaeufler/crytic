@@ -4,33 +4,29 @@ require "file_utils"
 
 module Crytic::Mutation
   class InjectMutatedSubjectIntoSpecs < Crystal::Visitor
-    STR_CAPACITY = 2 ** 20
-
+    # Because the class is used and instantiated multiple times, but these are
+    # class vars, they need to be reset :(
     def self.reset
-      @@already_covered_file_name = Set(String).new
+      @@already_parsed_file_name = Set(String).new
       @@file_list = [] of InjectMutatedSubjectIntoSpecs
       @@project_path = nil
       @@require_expanders = [] of Array(InjectMutatedSubjectIntoSpecs)
     end
 
+    class_getter already_parsed_file_name = Set(String).new
     class_getter file_list = [] of InjectMutatedSubjectIntoSpecs
-    class_getter already_covered_file_name = Set(String).new
-    class_getter! project_path : String
     class_getter require_expanders = [] of Array(InjectMutatedSubjectIntoSpecs)
+    class_getter! project_path : String
 
     getter! astree : Crystal::ASTNode
-    getter id : Int32 = 0
-    getter path : String
-    getter md5_signature : String
-
-    getter source : String
     getter! enriched_source : String
-    getter required_at : Int32
 
-    def self.register_file(f)
-      @@already_covered_file_name.add(f.path)
-      @@file_list << f
-      @@file_list.size - 1
+    getter path : String
+    getter source : String
+
+    def self.register_file(file)
+      @@already_parsed_file_name.add(file.path)
+      @@file_list << file
     end
 
     def self.relative_path_to_project(path)
@@ -38,39 +34,33 @@ module Crytic::Mutation
       path.gsub(/^#{InjectMutatedSubjectIntoSpecs.project_path}\//, "")
     end
 
-    def self.cover_file(file)
-      unless already_covered_file_name.includes?(relative_path_to_project(file))
-        already_covered_file_name.add(relative_path_to_project(file))
+    def self.parse_file(file)
+      unless already_parsed_file_name.includes?(relative_path_to_project(file))
+        already_parsed_file_name.add(relative_path_to_project(file))
         yield
       end
     end
 
-    def initialize(@path, @source, @subject_path : String, @mutated_subject_source : String, @required_at = 0)
+    def initialize(@path, @source, @subject_path : String, @mutated_subject_source : String)
       @path = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.expand_path(@path, "."))
-      @md5_signature = Digest::MD5.hexdigest(@source)
-      @id = InjectMutatedSubjectIntoSpecs.register_file(self)
+      InjectMutatedSubjectIntoSpecs.register_file(self)
     end
 
     # Inject in AST tree if required.
     def process
       unless @astree
-        @astree = Crystal::Parser.parse(self.source)
+        @astree = Crystal::Parser.parse(source)
         astree.accept(self)
       end
     end
 
-    def to_covered_source
+    def to_mutated_source
       if @enriched_source.nil?
-        io = String::Builder.new(capacity: 32_768)
-
         # call process to enrich AST before
         # injection of cover head dependencies
         process
 
-        # Inject the location of the zero line of current file
-        io << unfold_required(astree.to_s)
-
-        @enriched_source = io.to_s
+        @enriched_source = unfold_required(astree.to_s)
       else
         @enriched_source.not_nil!
       end
@@ -79,16 +69,16 @@ module Crytic::Mutation
     private def unfold_required(output)
       output.gsub(/require[ \t]+\"\$([0-9]+)\"/) do |_str, matcher|
         expansion_id = matcher[1].to_i
-        file_list = @@require_expanders[expansion_id]
+        file_list = InjectMutatedSubjectIntoSpecs.require_expanders[expansion_id]
 
         if file_list.any?
-          io = String::Builder.new(capacity: STR_CAPACITY)
-          file_list.each do |file|
-            io << "#" << " require of `" << file.path
-            io << "` from `" << self.path << ":#{file.required_at}" << "`" << "\n"
-            io << file.to_covered_source
+          String.build do |io|
+            file_list.each do |file|
+              io << "#" << " require of `" << file.path
+              io << "` from `" << self.path << "`" << "\n"
+              io << file.to_mutated_source
+            end
           end
-          io.to_s
         else
           ""
         end
@@ -101,40 +91,35 @@ module Crytic::Mutation
     # Then on finalization, we replace each require "xxx" by the proper file.
     def visit(node : Crystal::Require)
       file = node.string
-      # we cover only files which are relative to current file
-      if file[0] == '.'
-        current_directory = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.dirname(@path))
-        new_files_to_load = find_in_path_relative_to_dir(file, current_directory)
-        return if new_files_to_load.nil?
-        new_files_to_load = [new_files_to_load] if new_files_to_load.is_a?(String)
+      return false unless file[0] == '.'
 
-        idx = InjectMutatedSubjectIntoSpecs.require_expanders.size
-        list_of_required_file = [] of InjectMutatedSubjectIntoSpecs
-        InjectMutatedSubjectIntoSpecs.require_expanders << list_of_required_file
+      current_directory = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.dirname(@path))
+      new_files_to_load = find_in_path_relative_to_dir(file, current_directory)
 
-        new_files_to_load.each do |file_load|
-          next if file_load !~ /\.cr$/
+      return if new_files_to_load.nil?
+      new_files_to_load = [new_files_to_load] if new_files_to_load.is_a?(String)
 
-          InjectMutatedSubjectIntoSpecs.cover_file(file_load) do
-            line_number = node.location.not_nil!.line_number
+      idx = InjectMutatedSubjectIntoSpecs.require_expanders.size
+      list_of_required_file = [] of InjectMutatedSubjectIntoSpecs
+      InjectMutatedSubjectIntoSpecs.require_expanders << list_of_required_file
 
-            if file_load == File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@subject_path))
-              the_source = @mutated_subject_source
-            else
-              the_source = File.read(file_load)
-            end
+      new_files_to_load.each do |file_to_load|
+        InjectMutatedSubjectIntoSpecs.parse_file(file_to_load) do
+          the_source = ArbitrarySourceCodeFile.new(
+            file_to_load,
+            @mutated_subject_source,
+            @subject_path
+          ).source
 
-            required_file = InjectMutatedSubjectIntoSpecs.new(
-              path: file_load,
-              source: the_source,
-              mutated_subject_source: @mutated_subject_source,
-              subject_path: @subject_path,
-              required_at: line_number)
+          required_file = InjectMutatedSubjectIntoSpecs.new(
+            path: file_to_load,
+            source: the_source,
+            mutated_subject_source: @mutated_subject_source,
+            subject_path: @subject_path)
 
-            required_file.process # Process on load, since it can change the requirement order
+          required_file.process # Process on load, since it can change the requirement order
 
-            list_of_required_file << required_file
-          end
+          list_of_required_file << required_file
         end
 
         node.string = "$#{idx}"
@@ -243,6 +228,25 @@ module Crytic::Mutation
     private def make_relative_unless_absolute(filename)
       filename = "#{Dir.current}/#{filename}" unless filename.starts_with?('/')
       File.expand_path(filename)
+    end
+  end
+
+  # This is a weird concept and I wonder if this can be replaced by Crytic::Source
+  # somehow.
+  class ArbitrarySourceCodeFile
+    def initialize(@path : String, @mutated_subject_source : String, @subject_path : String)
+    end
+
+    def source
+      if @path == relative_path
+        @mutated_subject_source
+      else
+        File.read(@path)
+      end
+    end
+
+    private def relative_path
+      File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@subject_path))
     end
   end
 end

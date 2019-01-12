@@ -1,8 +1,7 @@
-require "../diff"
 require "../mutant/mutant"
 require "../process_process_runner"
 require "../process_runner"
-require "../source"
+require "../subject"
 require "./inject_mutated_subject_into_specs"
 require "./result"
 
@@ -18,12 +17,8 @@ module Crytic::Mutation
     # Compiles the mutated source code into a binary and runs this binary,
     # recording exit code, stderr and stdout output.
     def run
-      subject_source = File.read(@subject_file_path)
-      source = Source.new(subject_source)
-      mutated_source = source.mutated_source(@mutant)
-      source_diff = Crytic::Diff.unified_diff(source.original_source, mutated_source).to_s
-
-      process_result = run_mutation(mutated_source)
+      subject = Subject.from_filepath(@subject_file_path)
+      process_result = run_mutation(subject.mutate_source!(@mutant))
       success_messages_in_output = /Finished/ =~ process_result[:output]
       status = if process_result[:exit_code] == ProcessRunner::SUCCESS
                  Status::Uncovered
@@ -35,7 +30,7 @@ module Crytic::Mutation
                  Status::Covered
                end
 
-      Result.new(status, @mutant, source_diff)
+      Result.new(status, @mutant, subject.diff)
     end
 
     def self.with(
@@ -112,7 +107,7 @@ module Crytic::Mutation
           mutated_subject_source: mutated_source,
           path: spec_file,
           source: File.read(spec_file))
-          .to_covered_source
+          .to_mutated_source
       end.join("\n")
     end
   end
