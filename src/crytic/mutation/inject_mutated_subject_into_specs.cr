@@ -5,15 +5,15 @@ require "file_utils"
 module Crytic::Mutation
   class InjectMutatedSubjectIntoSpecs < Crystal::Visitor
     # Because the class is used and instantiated multiple times, but these are
-    # class vars, they need to be resetted :(
+    # class vars, they need to be reset :(
     def self.reset
-      @@already_covered_file_name = Set(String).new
+      @@already_parsed_file_name = Set(String).new
       @@file_list = [] of InjectMutatedSubjectIntoSpecs
       @@project_path = nil
       @@require_expanders = [] of Array(InjectMutatedSubjectIntoSpecs)
     end
 
-    class_getter already_covered_file_name = Set(String).new
+    class_getter already_parsed_file_name = Set(String).new
     class_getter file_list = [] of InjectMutatedSubjectIntoSpecs
     class_getter require_expanders = [] of Array(InjectMutatedSubjectIntoSpecs)
     class_getter! project_path : String
@@ -25,7 +25,7 @@ module Crytic::Mutation
     getter source : String
 
     def self.register_file(file)
-      @@already_covered_file_name.add(file.path)
+      @@already_parsed_file_name.add(file.path)
       @@file_list << file
     end
 
@@ -34,9 +34,9 @@ module Crytic::Mutation
       path.gsub(/^#{InjectMutatedSubjectIntoSpecs.project_path}\//, "")
     end
 
-    def self.cover_file(file)
-      unless already_covered_file_name.includes?(relative_path_to_project(file))
-        already_covered_file_name.add(relative_path_to_project(file))
+    def self.parse_file(file)
+      unless already_parsed_file_name.includes?(relative_path_to_project(file))
+        already_parsed_file_name.add(relative_path_to_project(file))
         yield
       end
     end
@@ -104,7 +104,7 @@ module Crytic::Mutation
       InjectMutatedSubjectIntoSpecs.require_expanders << list_of_required_file
 
       new_files_to_load.each do |file_to_load|
-        InjectMutatedSubjectIntoSpecs.cover_file(file_to_load) do
+        InjectMutatedSubjectIntoSpecs.parse_file(file_to_load) do
           the_source = ArbitrarySourceCodeFile.new(
             file_to_load,
             @mutated_subject_source,
