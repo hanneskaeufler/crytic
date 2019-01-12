@@ -19,7 +19,8 @@ module Crytic
           column_number: 1))
 
         source = Subject.new(source: "1 && 2")
-        source.mutated_source(mutant).should eq "1 || 2"
+        source.mutate_source!(mutant).should eq "1 || 2"
+        source.mutated_source.should eq "1 || 2"
       end
 
       it "returns the mutated source code for visitor mutants" do
@@ -28,7 +29,8 @@ module Crytic
           column_number: 1))
 
         source = Subject.new(source: "1")
-        source.mutated_source(mutant).should eq "0"
+        source.mutate_source!(mutant).should eq "0"
+        source.mutated_source.should eq "0"
       end
     end
   end

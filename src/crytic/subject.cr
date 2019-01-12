@@ -16,11 +16,11 @@ module Crytic
       @original_source = @ast.to_s
     end
 
-    def mutated_source(mutant : Crystal::Transformer)
+    def mutate_source!(mutant : Crystal::Transformer)
       @mutated_source ||= @ast.transform(mutant).to_s
     end
 
-    def mutated_source(mutant : Crystal::Visitor)
+    def mutate_source!(mutant : Crystal::Visitor)
       @ast.accept(mutant)
       @mutated_source ||= @ast.to_s
     end
