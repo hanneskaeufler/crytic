@@ -3,6 +3,23 @@ require "digest"
 require "file_utils"
 
 module Crytic::Mutation
+  class ArbitrarySourceCodeFile
+    def initialize(@path : String, @mutated_subject_source : String, @subject_path : String)
+    end
+
+    def source
+      if @path == relative_path
+        @mutated_subject_source
+      else
+        File.read(@path)
+      end
+    end
+
+    private def relative_path
+      File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@subject_path))
+    end
+  end
+
   class InjectMutatedSubjectIntoSpecs < Crystal::Visitor
 
     # Because the class is used and instantiated multiple times, but these are
@@ -104,18 +121,18 @@ module Crytic::Mutation
       list_of_required_file = [] of InjectMutatedSubjectIntoSpecs
       InjectMutatedSubjectIntoSpecs.require_expanders << list_of_required_file
 
-      new_files_to_load.each do |file_load|
-        next if file_load !~ /\.cr$/
+      new_files_to_load.each do |file_to_load|
+        next if file_to_load !~ /\.cr$/
 
-        InjectMutatedSubjectIntoSpecs.cover_file(file_load) do
-          if file_load == File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@subject_path))
-            the_source = @mutated_subject_source
-          else
-            the_source = File.read(file_load)
-          end
+        InjectMutatedSubjectIntoSpecs.cover_file(file_to_load) do
+          the_source = ArbitrarySourceCodeFile.new(
+            file_to_load,
+            @mutated_subject_source,
+            @subject_path
+          ).source
 
           required_file = InjectMutatedSubjectIntoSpecs.new(
-            path: file_load,
+            path: file_to_load,
             source: the_source,
             mutated_subject_source: @mutated_subject_source,
             subject_path: @subject_path)
