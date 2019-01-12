@@ -1,13 +1,13 @@
 require "../src/crytic/mutant/and_or_swap"
 require "../src/crytic/mutant/number_literal_change"
-require "../src/crytic/source"
+require "../src/crytic/subject"
 require "./spec_helper"
 
 module Crytic
-  describe Source do
+  describe Subject do
     describe "#original_source" do
       it "returns the original, but parsed source" do
-        source = Source.new(source: "puts \"hi\"")
+        source = Subject.new(source: "puts \"hi\"")
         source.original_source.should eq "puts(\"hi\")"
       end
     end
@@ -18,7 +18,7 @@ module Crytic
           line_number: 1,
           column_number: 1))
 
-        source = Source.new(source: "1 && 2")
+        source = Subject.new(source: "1 && 2")
         source.mutated_source(mutant).should eq "1 || 2"
       end
 
@@ -27,7 +27,7 @@ module Crytic
           line_number: 1,
           column_number: 1))
 
-        source = Source.new(source: "1")
+        source = Subject.new(source: "1")
         source.mutated_source(mutant).should eq "0"
       end
     end
