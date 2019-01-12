@@ -54,7 +54,7 @@ module Crytic::Mutation
       end
     end
 
-    def to_covered_source
+    def to_mutated_source
       if @enriched_source.nil?
         # call process to enrich AST before
         # injection of cover head dependencies
@@ -76,7 +76,7 @@ module Crytic::Mutation
             file_list.each do |file|
               io << "#" << " require of `" << file.path
               io << "` from `" << self.path << "`" << "\n"
-              io << file.to_covered_source
+              io << file.to_mutated_source
             end
           end
         else

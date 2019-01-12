@@ -16,7 +16,7 @@ module Crytic::Mutation
         source: File.read(spec_file),
         subject_path: "./fixtures/simple/bar.cr",
         mutated_subject_source: "puts \"mutated source\"")
-        .to_covered_source
+        .to_mutated_source
         .should eq <<-CODE
         # require of `fixtures/simple/bar.cr` from `fixtures/simple/bar_spec.cr`
         puts("mutated source")
@@ -38,7 +38,7 @@ module Crytic::Mutation
         source: File.read(spec_file),
         subject_path: "./fixtures/simple/bar.cr",
         mutated_subject_source: "puts \"mutated source\"")
-        .to_covered_source
+        .to_mutated_source
         .should eq <<-CODE
         # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr`
         require "http"
@@ -64,7 +64,7 @@ module Crytic::Mutation
         source: File.read(spec_file),
         subject_path: subject_file,
         mutated_subject_source: File.read(subject_file))
-        .to_covered_source
+        .to_mutated_source
         .should eq <<-CODE
         # require of `fixtures/require_order/blog.cr` from `fixtures/require_order/blog_spec.cr`
         # require of `fixtures/require_order/pages/main_layout.cr` from `fixtures/require_order/blog.cr`

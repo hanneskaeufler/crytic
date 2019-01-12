@@ -112,7 +112,7 @@ module Crytic::Mutation
           mutated_subject_source: mutated_source,
           path: spec_file,
           source: File.read(spec_file))
-          .to_covered_source
+          .to_mutated_source
       end.join("\n")
     end
   end
