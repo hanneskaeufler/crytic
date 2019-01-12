@@ -50,7 +50,7 @@ module Crytic::Mutation
     # Inject in AST tree if required.
     def process
       unless @astree
-        @astree = Crystal::Parser.parse(self.source)
+        @astree = Crystal::Parser.parse(source)
         astree.accept(self)
       end
     end
@@ -70,7 +70,7 @@ module Crytic::Mutation
     private def unfold_required(output)
       output.gsub(/require[ \t]+\"\$([0-9]+)\"/) do |_str, matcher|
         expansion_id = matcher[1].to_i
-        file_list = @@require_expanders[expansion_id]
+        file_list = InjectMutatedSubjectIntoSpecs.require_expanders[expansion_id]
 
         if file_list.any?
           String.build do |io|
