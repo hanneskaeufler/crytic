@@ -1,4 +1,5 @@
 require "../src/crytic/runner"
+require "./fake_reporter"
 require "./spec_helper"
 
 describe Crytic do
@@ -88,6 +89,34 @@ describe Crytic do
       result.output.should contain "✅ Original test suite passed.\n"
       result.output.should contain "1 timeout"
       result.exit_code.should be > 0
+    end
+  end
+end
+
+describe Crytic::Runner do
+  describe "#run" do
+    it "takes a list of subjects" do
+      reporter = FakeReporter.new
+      runner = Crytic::Runner.new(
+        threshold: 100.0,
+        generator: FakeGenerator.new,
+        reporters: [reporter] of Crytic::Reporter::Reporter)
+
+      runner.run(
+        ["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"],
+        ["./fixtures/simple/bar_spec.cr"]).should eq true
+    end
+
+    it "reports events in order" do
+      reporter = FakeReporter.new
+      runner = Crytic::Runner.new(
+        threshold: 100.0,
+        generator: FakeGenerator.new,
+        reporters: [reporter] of Crytic::Reporter::Reporter)
+
+      runner.run("./fixtures/simple/bar.cr", ["./fixtures/simple/bar_spec.cr"])
+
+      reporter.events.should eq ["report_original_result", "report_mutations", "report_summary", "report_msi"]
     end
   end
 end
