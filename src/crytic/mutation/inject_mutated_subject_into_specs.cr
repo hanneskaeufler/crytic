@@ -108,8 +108,6 @@ module Crytic::Mutation
         next if file_load !~ /\.cr$/
 
         InjectMutatedSubjectIntoSpecs.cover_file(file_load) do
-          line_number = node.location.not_nil!.line_number
-
           if file_load == File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@subject_path))
             the_source = @mutated_subject_source
           else
