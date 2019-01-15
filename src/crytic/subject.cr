@@ -12,7 +12,7 @@ module Crytic
 
     def self.from_filepath(subject_file_path : String)
       new(source: File.read(subject_file_path),
-          subject_file_path: subject_file_path)
+        subject_file_path: subject_file_path)
     end
 
     def initialize(@source : SourceCode, subject_file_path : String)
