@@ -63,6 +63,23 @@ module Crytic
 
         last_preamble.should eq "preamble"
       end
+
+      it "passes along the source filename" do
+        source = fixture_source("non_empty_source_file.cr")
+        last_mutant : Mutant::Mutant? = nil
+        factory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
+          last_mutant = mutant
+          Mutation::Mutation.with(mutant, original, specs, preamble)
+        }
+
+        generator = InMemoryMutationsGenerator
+          .new([Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities, preamble)
+        generator.mutation_factory = factory
+
+        generator.mutations_for(source, specs)
+
+        last_mutant.try(&.location.location).to_s.should contain "#{source.first}"
+      end
     end
   end
 end

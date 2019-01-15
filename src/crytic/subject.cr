@@ -16,10 +16,7 @@ module Crytic
     end
 
     def initialize(@source : SourceCode, subject_file_path : String)
-      @ast = Crystal::Parser
-        .new(@source)
-        .tap { |p| p.filename = subject_file_path }
-        .parse
+      @ast = Crystal::Parser.parse(@source)
       @original_source = ast.to_s
     end
 
