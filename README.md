@@ -48,7 +48,7 @@ The above command determines a list of mutations that can be performed on the so
 
 `--min-msi`/`-m` specifies a threshold as to when to exit the program with 0 even when mutants survived. MSI is the Mutation Score Indicator.
 
-`--preamble`/`-p` specifies some source code to prepended to the combination of mutated source and specs. By default this will inject a bit of code to enable the "fail fast" mode of crystal (spec)[https://crystal-lang.org/api/0.27.0/Spec.html]. This can be used to disable the fail fast behaviour or avoid errors if you don't use crystal spec.
+`--preamble`/`-p` specifies some source code to prepended to the combination of mutated source and specs. By default this will inject a bit of code to enable the "fail fast" mode of crystal [spec](https://crystal-lang.org/api/0.27.0/Spec.html). This can be used to disable the fail fast behaviour or avoid errors if you don't use crystal spec.
 
 The rest of the unnamed positional arguments are relative filepaths to the specs to be run.
 
@@ -57,8 +57,10 @@ The rest of the unnamed positional arguments are relative filepaths to the specs
 ```shell
 
 ✅ Original test suite passed.
+Running 138 mutations.
 
     ❌ AndOrSwap
+        in source.cr:26:7
         The following change didn't fail the test-suite:
             @@ -26,7 +26,7 @@
                      end
@@ -70,19 +72,8 @@ The rest of the unnamed positional arguments are relative filepaths to the specs
                  end
                  enum Type
 
-    ❌ AndOrSwap
-        The following change didn't fail the test-suite:
-            @@ -26,7 +26,7 @@
-                     end
-                   end
-                   def ==(other : Chunk)
-            -        ((type == other.type) && (range_a == other.range_a)) && (range_b == other.range_b)
-            +        ((type == other.type) && (range_a == other.range_a)) || (range_b == other.range_b)
-                   end
-                 end
-                 enum Type
-
-    ✅ AndOrSwap at line 109, column 13
+    ✅ AndOrSwap
+        in source.cr:109:13
 
 Finished in 14:02 minutes:
 138 mutations, 85 covered, 36 uncovered, 0 errored, 17 timeout. Mutation Score Indicator (MSI): 73.91%
