@@ -40,7 +40,7 @@ module Crytic
     end
 
     private def mutations_for(source : String, specs : Array(String))
-      ast = Crystal::Parser.parse(File.read(source))
+      ast = ast_for(source: source)
 
       @possibilities
         .map(&.reset)
@@ -56,6 +56,13 @@ module Crytic
           end
         end
         .flatten
+    end
+
+    private def ast_for(source)
+      Crystal::Parser
+        .new(File.read(source))
+        .tap { |parser| parser.filename = source }
+        .parse
     end
   end
 end
