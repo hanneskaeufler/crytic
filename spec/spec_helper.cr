@@ -12,3 +12,7 @@ end
 def fake_mutant
   Crytic::Mutant::NumberLiteralChange.at(location_at(0, 0))
 end
+
+def ast_from(code)
+  Crystal::Parser.parse(code)
+end
