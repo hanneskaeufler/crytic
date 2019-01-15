@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Show filename (and line and col numbers) for both killed and surviving mutants in the console output
 
+### Fixed
+
+- Mutants `AnyAllSwap` and `AndOrSwap` could skip possible mutations
+
 ## [3.1.1] - 2019-01-09
 
 ### Added

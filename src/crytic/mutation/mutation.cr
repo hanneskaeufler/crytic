@@ -18,7 +18,7 @@ module Crytic::Mutation
     # recording exit code, stderr and stdout output.
     def run
       subject = Subject.from_filepath(@subject_file_path)
-      process_result = run_mutation(subject.mutate_source!(@mutant))
+      process_result = run(subject.mutate_source!(@mutant))
       success_messages_in_output = /Finished/ =~ process_result[:output]
       status = if process_result[:exit_code] == ProcessRunner::SUCCESS
                  Status::Uncovered
@@ -55,7 +55,7 @@ module Crytic::Mutation
       }
     end
 
-    private def run_mutation(mutated_source)
+    private def run(mutated_source : SourceCode)
       io = IO::Memory.new
       tempfile_path = write_full_source_into_tempfile(mutated_source)
       res = compile_tempfile_into_binary(tempfile_path)

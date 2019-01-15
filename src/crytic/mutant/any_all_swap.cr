@@ -4,6 +4,7 @@ require "./mutant"
 module Crytic::Mutant
   class AnyAllSwap < TransformerMutant
     def transform(node : Crystal::Call)
+      super
       return node unless @location.matches?(node)
       Crystal::Call.new(
         node.obj,
