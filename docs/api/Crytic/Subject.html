@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutation - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Subject - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -211,7 +211,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../Crytic/Mutation.html">Mutation</a>
       
         <ul>
@@ -336,7 +336,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Subject" data-name="crytic::subject">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Subject" data-name="crytic::subject">
       <a href="../Crytic/Subject.html">Subject</a>
       
     </li>
@@ -360,10 +360,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Crytic::Mutation
+  <span class="kind">class</span> Crytic::Subject
 
 </h1>
 
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Crytic/Subject.html">Crytic::Subject</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -384,36 +386,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L5" target="_blank">
-        crytic/mutation/inject_mutated_subject_into_specs.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/mutation/result.cr#L3" target="_blank">
-        crytic/mutation/result.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/mutation/mutation.cr#L8" target="_blank">
-        crytic/mutation/mutation.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/mutation/original_result.cr#L1" target="_blank">
-        crytic/mutation/original_result.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/mutation/no_mutation.cr#L5" target="_blank">
-        crytic/mutation/no_mutation.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/subject.cr#L8" target="_blank">
+        crytic/subject.cr
       </a>
     
     <br/>
@@ -423,9 +397,64 @@
 
 
 
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28source%3ASourceCode%2Csubject_file_path%3AString%29-class-method" class="signature"><strong>.new</strong>(source : SourceCode, subject_file_path : String)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#from_filepath%28subject_file_path%3AString%29-class-method" class="signature"><strong>.from_filepath</strong>(subject_file_path : String)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#diff-instance-method" class="signature"><strong>#diff</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mutate_source%21%28mutant%3ACrystal%3A%3ATransformer%29%3ASourceCode-instance-method" class="signature"><strong>#mutate_source!</strong>(mutant : Crystal::Transformer) : SourceCode</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mutate_source%21%28mutant%3ACrystal%3A%3AVisitor%29%3ASourceCode-instance-method" class="signature"><strong>#mutate_source!</strong>(mutant : Crystal::Visitor) : SourceCode</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mutated_source-instance-method" class="signature"><strong>#mutated_source</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mutated_source%3F%3AString%3F-instance-method" class="signature"><strong>#mutated_source?</strong> : String?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#original_source%3ASourceCode-instance-method" class="signature"><strong>#original_source</strong> : SourceCode</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -433,12 +462,169 @@
 
 <div class="methods-inherited">
   
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(source:SourceCode,subject_file_path:String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(source : <a href="../Crytic/SourceCode.html">SourceCode</a>, subject_file_path : String)
+
+        <a class="method-permalink" href="#new%28source%3ASourceCode%2Csubject_file_path%3AString%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/subject.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="from_filepath(subject_file_path:String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>from_filepath</strong>(subject_file_path : String)
+
+        <a class="method-permalink" href="#from_filepath%28subject_file_path%3AString%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/subject.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="diff-instance-method">
+      <div class="signature">
+        
+        def <strong>diff</strong>
+
+        <a class="method-permalink" href="#diff-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/subject.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mutate_source!(mutant:Crystal::Transformer):SourceCode-instance-method">
+      <div class="signature">
+        
+        def <strong>mutate_source!</strong>(mutant : Crystal::Transformer) : <a href="../Crytic/SourceCode.html">SourceCode</a>
+
+        <a class="method-permalink" href="#mutate_source%21%28mutant%3ACrystal%3A%3ATransformer%29%3ASourceCode-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/subject.cr#L26" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mutate_source!(mutant:Crystal::Visitor):SourceCode-instance-method">
+      <div class="signature">
+        
+        def <strong>mutate_source!</strong>(mutant : Crystal::Visitor) : <a href="../Crytic/SourceCode.html">SourceCode</a>
+
+        <a class="method-permalink" href="#mutate_source%21%28mutant%3ACrystal%3A%3AVisitor%29%3ASourceCode-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/subject.cr#L30" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mutated_source-instance-method">
+      <div class="signature">
+        
+        def <strong>mutated_source</strong>
+
+        <a class="method-permalink" href="#mutated_source-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/subject.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mutated_source?:String?-instance-method">
+      <div class="signature">
+        
+        def <strong>mutated_source?</strong> : String?
+
+        <a class="method-permalink" href="#mutated_source%3F%3AString%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/subject.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="original_source:SourceCode-instance-method">
+      <div class="signature">
+        
+        def <strong>original_source</strong> : <a href="../Crytic/SourceCode.html">SourceCode</a>
+
+        <a class="method-permalink" href="#original_source%3ASourceCode-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/dd654d88e2c95f9f13d7344202f3ff8fccfbf0b8/src/crytic/subject.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

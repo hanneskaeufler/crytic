@@ -216,6 +216,11 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/ArbitrarySourceCodeFile" data-name="crytic::mutation::arbitrarysourcecodefile">
+      <a href="Crytic/Mutation/ArbitrarySourceCodeFile.html">ArbitrarySourceCodeFile</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/InjectMutatedSubjectIntoSpecs" data-name="crytic::mutation::injectmutatedsubjectintospecs">
       <a href="Crytic/Mutation/InjectMutatedSubjectIntoSpecs.html">InjectMutatedSubjectIntoSpecs</a>
       
@@ -326,8 +331,13 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Source" data-name="crytic::source">
-      <a href="Crytic/Source.html">Source</a>
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/SourceCode" data-name="crytic::sourcecode">
+      <a href="Crytic/SourceCode.html">SourceCode</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Subject" data-name="crytic::subject">
+      <a href="Crytic/Subject.html">Subject</a>
       
     </li>
   
@@ -370,7 +380,7 @@
 <pre><code class="language-yaml">development_dependencies:
   crytic:
     github: hanneskaeufler/crytic
-    version: ~> 3.1.1</code></pre>
+    version: ~> 3.2.0</code></pre>
 
 <p>After <code>shards install</code>, this will place the <code>crytic</code> executable into the <code>bin/</code> folder inside your project.</p>
 
@@ -392,7 +402,7 @@
 
 <p><code>--min-msi</code>/<code>-m</code> specifies a threshold as to when to exit the program with 0 even when mutants survived. MSI is the Mutation Score Indicator.</p>
 
-<p><code>--preamble</code>/<code>-p</code> specifies some source code to prepended to the combination of mutated source and specs. By default this will inject a bit of code to enable the "fail fast" mode of crystal (spec)[https://crystal-lang.org/api/0.27.0/Spec.html]. This can be used to disable the fail fast behaviour or avoid errors if you don't use crystal spec.</p>
+<p><code>--preamble</code>/<code>-p</code> specifies some source code to prepended to the combination of mutated source and specs. By default this will inject a bit of code to enable the "fail fast" mode of crystal <a href="https://crystal-lang.org/api/0.27.0/Spec.html" target="_blank">spec</a>. This can be used to disable the fail fast behaviour or avoid errors if you don't use crystal spec.</p>
 
 <p>The rest of the unnamed positional arguments are relative filepaths to the specs to be run.</p>
 
@@ -400,8 +410,10 @@
 
 <pre><code class="language-shell">
 ✅ Original test suite passed.
+Running 138 mutations.
 
     ❌ AndOrSwap
+        in source.cr:26:7
         The following change didn't fail the test-suite:
             @@ -26,7 +26,7 @@
                      end
@@ -413,19 +425,8 @@
                  end
                  enum Type
 
-    ❌ AndOrSwap
-        The following change didn't fail the test-suite:
-            @@ -26,7 +26,7 @@
-                     end
-                   end
-                   def ==(other : Chunk)
-            -        ((type == other.type) && (range_a == other.range_a)) && (range_b == other.range_b)
-            +        ((type == other.type) && (range_a == other.range_a)) || (range_b == other.range_b)
-                   end
-                 end
-                 enum Type
-
-    ✅ AndOrSwap at line 109, column 13
+    ✅ AndOrSwap
+        in source.cr:109:13
 
 Finished in 14:02 minutes:
 138 mutations, 85 covered, 36 uncovered, 0 errored, 17 timeout. Mutation Score Indicator (MSI): 73.91%</code></pre>

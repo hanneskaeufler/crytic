@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
+## [3.2.0] - 2019-01-15
+
 ### Added
 
 - Show filename (and line and col numbers) for both killed and surviving mutants in the console output
