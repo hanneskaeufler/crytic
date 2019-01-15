@@ -55,27 +55,29 @@ module Crytic::Reporter
       it "prints the passing mutants name and location" do
         io = IO::Memory.new
         IoReporter.new(io).report_result(result(Mutation::Status::Covered))
-        io.to_s.should contain("✅ NumberLiteralChange at line 0, column 0")
+        io.to_s.lines[1].should eq("    ✅ NumberLiteralChange")
+        io.to_s.lines[2].should eq("        in some_filename.cr:0:0")
       end
 
       it "prints failing mutants name" do
         io = IO::Memory.new
         IoReporter.new(io).report_result(result(Mutation::Status::Uncovered))
-        io.to_s.should contain("❌ NumberLiteralChange")
-        io.to_s.should contain("diff")
-        io.to_s.should_not contain("nope")
+        io.to_s.lines[1].should eq("    ❌ NumberLiteralChange")
+        io.to_s.lines[2].should eq("        in some_filename.cr:0:0")
+        io.to_s.lines[3].should eq("        The following change didn't fail the test-suite:")
+        io.to_s.lines[4].should eq("            diff")
       end
 
       it "prints errored mutant" do
         io = IO::Memory.new
         IoReporter.new(io).report_result(result(Mutation::Status::Errored))
-        io.to_s.should contain("✅ NumberLiteralChange at line 0, column 0")
+        io.to_s.should contain("✅ NumberLiteralChange")
       end
 
       it "prints timed out mutants" do
         io = IO::Memory.new
         IoReporter.new(io).report_result(result(Mutation::Status::Timeout))
-        io.to_s.should contain("✅ NumberLiteralChange at line 0, column 0")
+        io.to_s.should contain("✅ NumberLiteralChange")
       end
     end
 
