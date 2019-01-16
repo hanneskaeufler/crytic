@@ -6,12 +6,6 @@ module Crytic::Mutation
     Errored
     Timeout
     Uncovered
-
-    {% for method in ["Uncovered", "Errored", "Covered", "Timeout"] %}
-      def {{ method.downcase.id }}?
-        self == {{ method.id }}
-      end
-    {% end %}
   end
 
   record Result, status : Status, mutant : Mutant::Mutant, diff : String do
