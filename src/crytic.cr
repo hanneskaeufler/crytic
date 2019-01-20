@@ -38,7 +38,8 @@ end
 
 reporters = [
   Crytic::Reporter::IoReporter.new(STDOUT),
-  Crytic::Reporter::FileSummaryIoReporter.new(STDOUT)] of Crytic::Reporter::Reporter
+  Crytic::Reporter::FileSummaryIoReporter.new(STDOUT),
+] of Crytic::Reporter::Reporter
 
 if ENV["STRYKER_DASHBOARD_API_KEY"]?
   client = Crytic::Reporter::DefaultHttpClient.new
