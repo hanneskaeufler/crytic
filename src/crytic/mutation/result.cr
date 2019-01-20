@@ -13,8 +13,8 @@ module Crytic::Mutation
       mutant.class.to_s.split("::").last
     end
 
-    def location
-      mutant.location
+    def location : Crystal::Location
+      mutant.location.location
     end
   end
 end

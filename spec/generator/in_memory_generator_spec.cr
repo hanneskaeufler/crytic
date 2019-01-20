@@ -78,7 +78,7 @@ module Crytic
 
         generator.mutations_for(source, specs)
 
-        last_mutant.try(&.location.location).to_s.should contain "#{source.first}"
+        last_mutant.try(&.location).to_s.should contain "#{source.first}"
       end
     end
   end
