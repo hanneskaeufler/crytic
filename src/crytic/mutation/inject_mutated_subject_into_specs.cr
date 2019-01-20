@@ -121,9 +121,9 @@ module Crytic::Mutation
 
           list_of_required_file << required_file
         end
-
-        node.string = "$#{idx}"
       end
+
+      node.string = "$#{idx}"
 
       false
     end
