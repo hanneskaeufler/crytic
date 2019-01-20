@@ -17,8 +17,8 @@ module Crytic::Mutation
       mutant.location
     end
 
-    def mutated_file
-      mutant.location.location.filename
+    def mutated_file : String
+      mutant.location.location.filename.to_s || ""
     end
   end
 end
