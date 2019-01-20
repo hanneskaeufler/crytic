@@ -1,8 +1,19 @@
+require "./reporter"
+
 module Crytic::Reporter
-  class FileSummaryIoReporter
+  class FileSummaryIoReporter < Reporter
     private MUTANTS = "Mutants"
 
     def initialize(@io : IO)
+    end
+
+    def report_original_result(original_result)
+    end
+
+    def report_mutations(mutations)
+    end
+
+    def report_result(result)
     end
 
     def report_summary(results)
@@ -18,6 +29,9 @@ module Crytic::Reporter
         @io.puts "| #{filename.ljust(width)} | #{results.size.to_s.rjust(MUTANTS.size)} |"
         end
       @io.puts "-".rjust(header.size, '-')
+    end
+
+    def report_msi(results)
     end
 
     private def header(width)
