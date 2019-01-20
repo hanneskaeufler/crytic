@@ -5,14 +5,14 @@ require "../spec_helper"
 module Crytic::Reporter
   describe FileSummaryIoReporter do
     describe "#report_summary" do
-      it "outputs a table header" do
+      it "outputs a table header and footer" do
         io = IO::Memory.new
         subject = FileSummaryIoReporter.new(io)
         results = [] of Mutation::Result
 
         subject.report_summary(results)
 
-        io.to_s.should eq "| File | Mutants |\n"
+        io.to_s.should eq "| File | Mutants |\n-----------\n"
       end
 
       it "outputs a row for each mutated file" do
@@ -26,7 +26,7 @@ module Crytic::Reporter
 
         subject.report_summary(results)
 
-        io.to_s.lines.size.should eq results.size + 1
+        io.to_s.lines.size.should eq results.size + 2
         io.to_s.lines[1].should eq "| subject.cr | 10 |"
       end
     end

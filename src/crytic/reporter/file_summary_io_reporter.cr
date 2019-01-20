@@ -8,6 +8,7 @@ module Crytic::Reporter
       results.each do |result|
         @io.puts "| #{result.mutated_file} | 10 |"
       end
+      @io.puts "-----------"
     end
   end
 end
