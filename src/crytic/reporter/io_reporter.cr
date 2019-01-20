@@ -31,14 +31,14 @@ module Crytic::Reporter
       case result.status
       when Mutation::Status::Uncovered
         @io << "❌ #{result.mutant_name}"
-        @io << "\n#{INDENT + INDENT}in #{result.location.location}"
+        @io << "\n#{INDENT + INDENT}in #{result.location}"
         @io << "\n#{INDENT + INDENT}The following change didn't fail the test-suite:"
         @io << "\n#{INDENT + INDENT + INDENT}"
         @io << result.diff.lines.join("\n#{INDENT + INDENT + INDENT}")
         @io << "\n"
       when Mutation::Status::Covered, Mutation::Status::Timeout, Mutation::Status::Errored
         @io << "✅ #{result.mutant_name}"
-        @io << "\n#{INDENT + INDENT}in #{result.location.location}"
+        @io << "\n#{INDENT + INDENT}in #{result.location}"
       else
         raise "There were mutations of unreported type"
       end
