@@ -22,8 +22,8 @@ module Crytic::Reporter
 
         subject.report_summary(results)
 
-        io.to_s.lines.size.should eq results.size + 3
-        io.to_s.lines[2].should match /^\|\s+subject\.cr\s+\|\s+\d+\s+\|$/
+        io.to_s.lines.size.should eq results.size + 4
+        io.to_s.lines[3].should match /^\|\s+subject\.cr\s+\|\s+\d+\s+\|$/
       end
 
       it "groups table lines by filename" do
@@ -36,7 +36,7 @@ module Crytic::Reporter
 
         subject.report_summary(results)
 
-        io.to_s.lines.size.should eq 1 + 3
+        io.to_s.lines.size.should eq 1 + 4
       end
 
       it "counts number of mutations per file" do
@@ -61,7 +61,7 @@ module Crytic::Reporter
         ] of Mutation::Result
 
         subject.report_summary(results)
-        io.to_s.lines.map(&.size).should eq [41, 41, 41, 41, 41]
+        io.to_s.lines.map(&.size).should eq [41, 41, 41, 41, 41, 41]
       end
     end
   end

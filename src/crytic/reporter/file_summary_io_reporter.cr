@@ -38,7 +38,7 @@ module Crytic::Reporter
 
     private def header(longest_filename_width)
       column_names = column_names(longest_filename_width)
-      # @io.puts ruler(column_names.size)
+      @io.puts ruler(column_names.size)
       @io.puts column_names
       @io.puts ruler(column_names.size)
       column_names.size
