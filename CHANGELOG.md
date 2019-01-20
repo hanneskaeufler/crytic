@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
+### Fixed
+
+- Due to a regression introduced in 5a02821cce6bd27361bc84d5b073b21dc2fa55f0, require statements that don't yield any files could be left in the mutated code, leading to compile errors which looked like killed mutants
+
 ## [3.2.1] - 2019-01-15
 
 ### Fixed
