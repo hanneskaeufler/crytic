@@ -22,8 +22,8 @@ module Crytic::Reporter
 
       results
         .group_by(&.mutated_file)
-        .each do |filename, results|
-          @io.puts "| #{filename.ljust(longest_width)} | #{results.size.to_s.rjust(MUTANTS.size)} |"
+        .each do |filename, by_filename|
+          @io.puts "| #{filename.ljust(longest_width)} | #{by_filename.size.to_s.rjust(MUTANTS.size)} |"
         end
 
       footer(total_width)
