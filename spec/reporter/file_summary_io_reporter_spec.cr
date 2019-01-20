@@ -29,6 +29,24 @@ module Crytic::Reporter
         io.to_s.lines.size.should eq results.size + 2
         io.to_s.lines[1].should eq "| subject.cr | 10 |"
       end
+
+      it "groups table lines by filename" do
+        io = IO::Memory.new
+        subject = FileSummaryIoReporter.new(io)
+        results = [
+          Mutation::Result.new(
+            status: Crytic::Mutation::Status::Covered,
+            mutant: fake_mutant(filename: "subject.cr"), diff: "diff"),
+          Mutation::Result.new(
+            status: Crytic::Mutation::Status::Covered,
+            mutant: fake_mutant(filename: "subject.cr"), diff: "diff"),
+        ] of Mutation::Result
+
+        subject.report_summary(results)
+
+        io.to_s.lines.size.should eq 1 + 2
+        io.to_s.lines[1].should eq "| subject.cr | 10 |"
+      end
     end
   end
 end
