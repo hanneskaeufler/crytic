@@ -16,5 +16,9 @@ module Crytic::Mutation
     def location
       mutant.location
     end
+
+    def mutated_file
+      mutant.location.location.filename
+    end
   end
 end

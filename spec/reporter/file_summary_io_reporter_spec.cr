@@ -27,7 +27,7 @@ module Crytic::Reporter
         subject.report_summary(results)
 
         io.to_s.lines.size.should eq results.size + 1
-        io.to_s.lines[1].should eq "| file.cr | 10 |"
+        io.to_s.lines[1].should eq "| some_filename.cr | 10 |"
       end
     end
   end
