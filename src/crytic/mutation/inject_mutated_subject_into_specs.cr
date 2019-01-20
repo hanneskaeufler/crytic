@@ -91,7 +91,7 @@ module Crytic::Mutation
     # Then on finalization, we replace each require "xxx" by the proper file.
     def visit(node : Crystal::Require)
       file = node.string
-      return false unless file[0] == '.'
+      return false unless file.starts_with?(".")
 
       current_directory = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.dirname(@path))
       new_files_to_load = find_in_path_relative_to_dir(file, current_directory)
@@ -121,9 +121,9 @@ module Crytic::Mutation
 
           list_of_required_file << required_file
         end
-
-        node.string = "$#{idx}"
       end
+
+      node.string = "$#{idx}"
 
       false
     end

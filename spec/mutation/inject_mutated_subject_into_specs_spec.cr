@@ -90,5 +90,31 @@ module Crytic::Mutation
 
         CODE
     end
+
+    it "replaces requires that don't yield any files" do
+      spec_file = "./fixtures/require_wildcards/foo_spec.cr"
+      subject_file = "./fixtures/require_wildcards/foo.cr"
+      InjectMutatedSubjectIntoSpecs
+        .new(
+        path: spec_file,
+        source: File.read(spec_file),
+        subject_path: subject_file,
+        mutated_subject_source: File.read(subject_file))
+        .to_mutated_source
+        .should eq <<-CODE
+        # require of `fixtures/require_wildcards/foo.cr` from `fixtures/require_wildcards/foo_spec.cr`
+        # require of `fixtures/require_wildcards/app.cr` from `fixtures/require_wildcards/foo.cr`
+
+        puts("hi")
+
+        require "spec"
+        describe("foo") do
+          it("always passes") do
+            true.should(eq(true))
+          end
+        end
+
+        CODE
+    end
   end
 end
