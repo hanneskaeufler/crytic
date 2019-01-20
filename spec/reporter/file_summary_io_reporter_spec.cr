@@ -18,11 +18,7 @@ module Crytic::Reporter
       it "outputs a row for each mutated file" do
         io = IO::Memory.new
         subject = FileSummaryIoReporter.new(io)
-        results = [
-          Mutation::Result.new(
-            status: Crytic::Mutation::Status::Covered,
-            mutant: fake_mutant(mutated_file: "subject.cr"), diff: "diff"),
-        ] of Mutation::Result
+        results = [result(filename: "subject.cr")] of Mutation::Result
 
         subject.report_summary(results)
 
@@ -34,12 +30,8 @@ module Crytic::Reporter
         io = IO::Memory.new
         subject = FileSummaryIoReporter.new(io)
         results = [
-          Mutation::Result.new(
-            status: Crytic::Mutation::Status::Covered,
-            mutant: fake_mutant(mutated_file: "subject.cr"), diff: "diff"),
-          Mutation::Result.new(
-            status: Crytic::Mutation::Status::Covered,
-            mutant: fake_mutant(mutated_file: "subject.cr"), diff: "diff"),
+          result(filename: "subject.cr"),
+          result(filename: "subject.cr"),
         ] of Mutation::Result
 
         subject.report_summary(results)
@@ -51,12 +43,8 @@ module Crytic::Reporter
         io = IO::Memory.new
         subject = FileSummaryIoReporter.new(io)
         results = [
-          Mutation::Result.new(
-            status: Crytic::Mutation::Status::Covered,
-            mutant: fake_mutant(mutated_file: "subject.cr"), diff: "diff"),
-          Mutation::Result.new(
-            status: Crytic::Mutation::Status::Covered,
-            mutant: fake_mutant(mutated_file: "subject.cr"), diff: "diff"),
+          result(filename: "subject.cr"),
+          result(filename: "subject.cr"),
         ] of Mutation::Result
 
         subject.report_summary(results)
