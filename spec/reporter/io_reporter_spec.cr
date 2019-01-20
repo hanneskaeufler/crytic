@@ -1,4 +1,3 @@
-require "../../src/crytic/mutant/number_literal_change"
 require "../../src/crytic/mutation/original_result"
 require "../../src/crytic/reporter/io_reporter"
 require "../fake_mutation"

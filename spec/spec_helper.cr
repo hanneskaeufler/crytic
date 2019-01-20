@@ -1,3 +1,4 @@
+require "../../src/crytic/mutant/number_literal_change"
 require "../src/crytic/mutant/full_location"
 require "compiler/crystal/syntax/*"
 require "spec"
