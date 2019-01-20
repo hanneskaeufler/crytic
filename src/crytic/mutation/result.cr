@@ -16,5 +16,9 @@ module Crytic::Mutation
     def location : Crystal::Location
       mutant.location.location
     end
+
+    def mutated_file : String
+      mutant.location.location.filename.to_s || ""
+    end
   end
 end

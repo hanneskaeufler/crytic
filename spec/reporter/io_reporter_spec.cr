@@ -1,4 +1,3 @@
-require "../../src/crytic/mutant/number_literal_change"
 require "../../src/crytic/mutation/original_result"
 require "../../src/crytic/reporter/io_reporter"
 require "../fake_mutation"
@@ -6,10 +5,6 @@ require "../spec_helper"
 
 private def original(exit_code = 0, output = "output")
   Crytic::Mutation::OriginalResult.new(exit_code: exit_code, output: output)
-end
-
-private def result(status)
-  Crytic::Mutation::Result.new(status: status, mutant: fake_mutant, diff: "diff")
 end
 
 module Crytic::Reporter

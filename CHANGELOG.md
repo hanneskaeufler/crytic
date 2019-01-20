@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
+### Added
+
+- New "File Summary" reporter that list the covered subjects and the number of mutations that were performed on each of those files respectively.
+
 ## [3.2.2] - 2019-01-20
 
 ### Fixed
