@@ -3,7 +3,7 @@ require "./crytic/reporter/http_client"
 require "./crytic/reporter/io_reporter"
 require "./crytic/reporter/file_summary_io_reporter"
 require "./crytic/reporter/stryker_badge_reporter"
-require "./crytic/runner/sequential_runner"
+require "./crytic/runner/parallel_runner"
 require "option_parser"
 
 subject_source = ""
