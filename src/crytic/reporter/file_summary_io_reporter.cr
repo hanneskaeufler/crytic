@@ -3,6 +3,7 @@ require "./reporter"
 module Crytic::Reporter
   class FileSummaryIoReporter < Reporter
     private MUTANTS = "Mutants"
+    private KILLED = "Killed"
 
     def initialize(@io : IO)
     end
@@ -23,13 +24,20 @@ module Crytic::Reporter
       results
         .group_by(&.mutated_file)
         .each do |filename, by_filename|
-          @io.puts "| #{filename.ljust(longest_width)} | #{by_filename.size.to_s.rjust(MUTANTS.size)} |"
+          table_row(filename, by_filename, longest_width)
         end
 
       footer(total_width)
     end
 
     def report_msi(results)
+    end
+
+    private def table_row(filename, by_filename, longest_width)
+      file = filename.ljust(longest_width)
+      total = by_filename.size.to_s.rjust(MUTANTS.size)
+      covered = by_filename.select(&.status.covered?).size.to_s.rjust(KILLED.size)
+      @io.puts "| #{file} | #{total} | #{covered} |"
     end
 
     private def longest_filename_width(results)
@@ -53,7 +61,7 @@ module Crytic::Reporter
     end
 
     private def column_names(width)
-      "|#{" File ".ljust(width + 2)}| #{MUTANTS} |"
+      "|#{" File ".ljust(width + 2)}| #{MUTANTS} | #{KILLED} |"
     end
   end
 end
