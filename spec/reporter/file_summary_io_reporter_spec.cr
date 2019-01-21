@@ -91,7 +91,7 @@ module Crytic::Reporter
 
         subject.report_summary(results)
         line_widths = io.to_s.lines.map(&.size)
-        line_widths.all? { |width| width == line_widths.first }.should eq true
+        line_widths.max.should eq line_widths.min
       end
     end
   end
