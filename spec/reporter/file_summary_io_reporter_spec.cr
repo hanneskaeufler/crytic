@@ -13,7 +13,7 @@ module Crytic::Reporter
 
         subject.report_summary([] of Mutation::Result)
 
-        io.to_s.should match /^\| File \| Mutants \| Killed \|\n-+\n-+\n$/m
+        io.to_s.should match /^\| File \| Mutants \| Killed \| Timeout \| Errored \| Uncovered \|\n-+\n-+\n$/m
       end
 
       it "outputs a row for each mutated file" do
@@ -40,19 +40,30 @@ module Crytic::Reporter
         io.to_s.lines.size.should eq 1 + HEADER_AND_FOOTER_ROW_COUNT
       end
 
-      it "counts number of total and killed mutations per file" do
+      it "counts number of mutations per file" do
         io = IO::Memory.new
         subject = FileSummaryIoReporter.new(io)
         results = [
+          result(status: Mutation::Status::Covered, filename: "subject.cr"),
+          result(status: Mutation::Status::Timeout, filename: "subject.cr"),
+          result(status: Mutation::Status::Timeout, filename: "subject.cr"),
+          result(status: Mutation::Status::Errored, filename: "subject.cr"),
+          result(status: Mutation::Status::Errored, filename: "subject.cr"),
+          result(status: Mutation::Status::Errored, filename: "subject.cr"),
           result(status: Mutation::Status::Uncovered, filename: "subject.cr"),
-          result(status: Mutation::Status::Covered, filename: "subject.cr"),
-          result(status: Mutation::Status::Covered, filename: "subject.cr"),
+          result(status: Mutation::Status::Uncovered, filename: "subject.cr"),
+          result(status: Mutation::Status::Uncovered, filename: "subject.cr"),
+          result(status: Mutation::Status::Uncovered, filename: "subject.cr"),
         ]
 
         subject.report_summary(results)
-        number_of_mutations = /(\d+) \|\s+(\d+) \|$/m.match(io.to_s)
-        number_of_mutations.try(&.[1]).should eq "3"
-        number_of_mutations.try(&.[2]).should eq "2"
+
+        number_of_mutations = io.to_s.lines[3].gsub(" ", "").split("|")[2..-2]
+        number_of_mutations[0].should eq "10"
+        number_of_mutations[1].should eq "1"
+        number_of_mutations[2].should eq "2"
+        number_of_mutations[3].should eq "3"
+        number_of_mutations[4].should eq "4"
       end
 
       it "pads to the max width" do

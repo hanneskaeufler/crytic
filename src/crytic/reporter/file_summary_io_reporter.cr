@@ -4,6 +4,9 @@ module Crytic::Reporter
   class FileSummaryIoReporter < Reporter
     private MUTANTS = "Mutants"
     private KILLED = "Killed"
+    private TIMEOUT = "Timeout"
+    private ERRORED = "Errored"
+    private UNCOVERED = "Uncovered"
 
     def initialize(@io : IO)
     end
@@ -37,7 +40,10 @@ module Crytic::Reporter
       file = filename.ljust(longest_width)
       total = by_filename.size.to_s.rjust(MUTANTS.size)
       covered = by_filename.select(&.status.covered?).size.to_s.rjust(KILLED.size)
-      @io.puts "| #{file} | #{total} | #{covered} |"
+      timeout = by_filename.select(&.status.timeout?).size.to_s.rjust(TIMEOUT.size)
+      errored = by_filename.select(&.status.errored?).size.to_s.rjust(ERRORED.size)
+      uncovered = by_filename.select(&.status.uncovered?).size.to_s.rjust(UNCOVERED.size)
+      @io.puts "| #{file} | #{total} | #{covered} | #{timeout} | #{errored} | #{uncovered} |"
     end
 
     private def longest_filename_width(results)
@@ -61,7 +67,8 @@ module Crytic::Reporter
     end
 
     private def column_names(width)
-      "|#{" File ".ljust(width + 2)}| #{MUTANTS} | #{KILLED} |"
+      "|#{" File ".ljust(width + 2)}| " +
+      [MUTANTS, KILLED, TIMEOUT, ERRORED, UNCOVERED].join(" | ") + " |"
     end
   end
 end
