@@ -42,10 +42,10 @@ module Crytic::Reporter
       file = filename.ljust(longest_width)
       total = by_filename.size.to_s.rjust(MUTANTS.size)
       msi = "#{MsiCalculator.new(by_filename).msi} %".rjust(MSI.size)
-      covered = by_filename.select(&.status.covered?).size.to_s.rjust(KILLED.size)
-      timeout = by_filename.select(&.status.timeout?).size.to_s.rjust(TIMEOUT.size)
-      errored = by_filename.select(&.status.errored?).size.to_s.rjust(ERRORED.size)
-      uncovered = by_filename.select(&.status.uncovered?).size.to_s.rjust(UNCOVERED.size)
+      covered = by_filename.count(&.status.covered?).to_s.rjust(KILLED.size)
+      timeout = by_filename.count(&.status.timeout?).to_s.rjust(TIMEOUT.size)
+      errored = by_filename.count(&.status.errored?).to_s.rjust(ERRORED.size)
+      uncovered = by_filename.count(&.status.uncovered?).to_s.rjust(UNCOVERED.size)
       @io.puts "| #{file} | #{msi} | #{total} | #{covered} | #{timeout} | #{errored} | #{uncovered} |"
     end
 
