@@ -9,6 +9,8 @@ module Crytic
     def initialize(@results)
     end
 
+    # Returns the mutation score indicator for the mutation results of this
+    # instance
     def msi
       return 100.0 if results.empty?
       total = results.size
@@ -20,6 +22,8 @@ module Crytic
       msi.round(2)
     end
 
+    # Returns true or false depending on whether the msi is higher than or
+    # equal to the given threshold
     def passes?(threshold)
       msi >= threshold
     end
