@@ -10,8 +10,10 @@ module Crytic
       end
     end
 
-    def >=(other : Float64)
-      value >= other
+    # Returns true or false depending on whether the msi is higher than or
+    # equal to the given threshold
+    def passes?(threshold)
+      value >= threshold
     end
   end
 
@@ -33,12 +35,6 @@ module Crytic
       total_defeated = killed + timed_out + errored
       msi = total_defeated.to_f / total * 100
       MutationScoreIndicator.new(msi.round(2))
-    end
-
-    # Returns true or false depending on whether the msi is higher than or
-    # equal to the given threshold
-    def passes?(threshold)
-      msi >= threshold
     end
   end
 end

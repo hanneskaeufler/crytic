@@ -1,4 +1,5 @@
 require "../src/crytic/runner"
+require "./fake_generator"
 require "./fake_reporter"
 require "./spec_helper"
 
@@ -104,7 +105,7 @@ describe Crytic::Runner do
 
       runner.run(
         ["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"],
-        ["./fixtures/simple/bar_spec.cr"]).should eq true
+        ["./fixtures/simple/bar_spec.cr"]).should eq false
     end
 
     it "reports events in order" do
