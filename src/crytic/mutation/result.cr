@@ -9,6 +9,8 @@ module Crytic::Mutation
   end
 
   record Result, status : Status, mutant : Mutant::Mutant, diff : String do
+    delegate uncovered?, covered?, errored?, timeout?, to: status
+
     def mutant_name
       mutant.class.to_s.split("::").last
     end

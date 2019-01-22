@@ -12,9 +12,9 @@ module Crytic
     def msi
       return 100.0 if results.empty?
       total = results.size
-      killed = results.count(&.status.covered?)
-      timed_out = results.count(&.status.timeout?)
-      errored = results.count(&.status.errored?)
+      killed = results.count(&.covered?)
+      timed_out = results.count(&.timeout?)
+      errored = results.count(&.errored?)
       total_defeated = killed + timed_out + errored
       msi = total_defeated.to_f / total * 100
       msi.round(2)
