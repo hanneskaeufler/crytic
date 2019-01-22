@@ -28,7 +28,7 @@ module Crytic::Reporter
       results
         .grouped_by_mutated_file
         .each do |filename, by_filename|
-        table_row(filename, by_filename, results.longest_mutated_filename_length)
+          table_row(filename, by_filename, results.longest_mutated_filename_length)
         end
 
       footer(total_width)
