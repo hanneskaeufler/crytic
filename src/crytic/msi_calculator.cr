@@ -13,7 +13,11 @@ module Crytic
     # Returns true or false depending on whether the msi is higher than or
     # equal to the given threshold
     def passes?(threshold)
-      value >= threshold
+      if value.finite?
+        value >= threshold
+      else
+        true
+      end
     end
   end
 

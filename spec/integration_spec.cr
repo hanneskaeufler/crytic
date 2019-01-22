@@ -105,7 +105,7 @@ describe Crytic::Runner do
 
       runner.run(
         ["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"],
-        ["./fixtures/simple/bar_spec.cr"]).should eq false
+        ["./fixtures/simple/bar_spec.cr"]).should eq true
     end
 
     it "reports events in order" do
