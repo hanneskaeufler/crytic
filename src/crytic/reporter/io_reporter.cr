@@ -61,8 +61,7 @@ module Crytic::Reporter
     end
 
     private def score_in_percent(results)
-      return "N/A" if results.empty?
-      "#{MsiCalculator.new(results).msi}%"
+      MsiCalculator.new(results).msi.to_s
     end
 
     private def elapsed_time

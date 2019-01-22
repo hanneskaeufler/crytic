@@ -77,7 +77,7 @@ module Crytic::Reporter
 
         subject.report_summary(results)
 
-        msi = /(\d+\.\d+) %/.match(io.to_s.lines[3]).try(&.[1])
+        msi = /(\d+\.\d+)%/.match(io.to_s.lines[3]).try(&.[1])
         msi.should eq "66.67"
       end
 

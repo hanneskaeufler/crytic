@@ -37,7 +37,7 @@ module Crytic::Mutation
     {% end %}
 
     def all_covered?
-      results.all?(&.covered?)
+      @results.all?(&.covered?)
     end
 
     def grouped_by_mutated_file
