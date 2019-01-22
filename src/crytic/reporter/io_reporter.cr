@@ -53,7 +53,7 @@ module Crytic::Reporter
       summary += "#{results.count(&.timeout?)} timeout."
       summary += " Mutation Score Indicator (MSI): #{score_in_percent(results)}"
       summary += "\n"
-      @io << summary.colorize(results.map(&.status.covered?).all? ? :green : :red).to_s
+      @io << summary.colorize(results.all?(&.covered?) ? :green : :red).to_s
     end
 
     # intentional noop
