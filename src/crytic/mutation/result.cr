@@ -25,7 +25,11 @@ module Crytic::Mutation
   end
 
   class ResultSet
-    delegate size, empty?, to: @results
+    delegate empty?, to: @results
+
+    def total_count
+      @results.size
+    end
 
     def initialize(@results = [] of Result)
     end

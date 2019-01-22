@@ -4,7 +4,7 @@ module Crytic
   record MutationScoreIndicator, value : Float64 do
     def to_s
       if value.finite?
-        "#{value}%"
+        "#{value.round(2)}%"
       else
         "N/A"
       end
@@ -32,13 +32,8 @@ module Crytic
     # Returns the mutation score indicator for the mutation results of this
     # instance
     def msi : MutationScoreIndicator
-      total = results.size
-      killed = results.covered_count
-      timed_out = results.timeout_count
-      errored = results.errored_count
-      total_defeated = killed + timed_out + errored
-      msi = total_defeated.to_f / total * 100
-      MutationScoreIndicator.new(msi.round(2))
+      total_defeated = results.covered_count + results.timeout_count + results.errored_count
+      MutationScoreIndicator.new(total_defeated.to_f / results.total_count * 100)
     end
   end
 end

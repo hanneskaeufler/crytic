@@ -46,7 +46,7 @@ module Crytic::Reporter
 
     def report_summary(results : Mutation::ResultSet)
       @io << "\n\nFinished in #{Spec.to_human(elapsed_time)}:\n"
-      summary = "#{results.size} mutations, "
+      summary = "#{results.total_count} mutations, "
       summary += "#{results.covered_count} covered, "
       summary += "#{results.uncovered_count} uncovered, "
       summary += "#{results.errored_count} errored, "

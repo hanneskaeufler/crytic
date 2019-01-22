@@ -39,7 +39,7 @@ module Crytic::Reporter
 
     private def table_row(filename, by_filename, longest_width)
       file = filename.ljust(longest_width)
-      total = by_filename.size.to_s.rjust(MUTANTS.size)
+      total = by_filename.total_count.to_s.rjust(MUTANTS.size)
       msi = MsiCalculator.new(by_filename).msi.to_s.rjust(MSI.size)
       covered = by_filename.covered_count.to_s.rjust(KILLED.size)
       timeout = by_filename.timeout_count.to_s.rjust(TIMEOUT.size)

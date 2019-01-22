@@ -23,7 +23,7 @@ module Crytic::Reporter
 
         subject.report_summary(results)
 
-        io.to_s.lines.size.should eq results.size + HEADER_AND_FOOTER_ROW_COUNT
+        io.to_s.lines.size.should eq results.total_count + HEADER_AND_FOOTER_ROW_COUNT
         io.to_s.lines[3].should match /^\|\s+subject\.cr\s+\|/
       end
 
