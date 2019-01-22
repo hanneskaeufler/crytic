@@ -48,8 +48,8 @@ private class FakeClient < Crytic::Reporter::HttpClient
 end
 
 private def results
-  [Crytic::Mutation::Result.new(
+  Crytic::Mutation::ResultSet.new([Crytic::Mutation::Result.new(
     status: Crytic::Mutation::Status::Covered,
     mutant: fake_mutant,
-    diff: "")]
+    diff: "")])
 end

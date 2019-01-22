@@ -1,4 +1,5 @@
 require "../src/crytic/runner"
+require "./fake_generator"
 require "./fake_reporter"
 require "./spec_helper"
 

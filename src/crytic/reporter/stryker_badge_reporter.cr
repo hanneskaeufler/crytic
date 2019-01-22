@@ -38,7 +38,7 @@ module Crytic::Reporter
     end
 
     private def score(results)
-      MsiCalculator.new(results).msi
+      MsiCalculator.new(results).msi.value
     end
   end
 end
