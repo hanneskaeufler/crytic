@@ -127,7 +127,8 @@ def run_crytic_in_dir(dir : String)
   result = Process.run("cd #{dir} && crystal run ../../src/crytic.cr",
     output: io,
     error: io,
-    shell: true)
+    shell: true,
+    env: clean_env)
   CryticResult.new(exit_code: result.exit_code, output: io.to_s)
 end
 
@@ -136,8 +137,17 @@ def run_crytic(args : String)
   result = Process.run("crystal run src/crytic.cr -- #{args}",
     output: io,
     error: io,
-    shell: true)
+    shell: true,
+    env: clean_env)
   CryticResult.new(exit_code: result.exit_code, output: io.to_s)
+end
+
+# Because our own CI sets the stryker dashboard api key and then runs those specs,
+# this would lead to a wrong mutation score being submitted when running the integration
+# specs. However, only the actual _mutation-test_ job must submit the score.
+# Pass an empty api key to avoid overriding.
+def clean_env
+  {"STRYKER_DASHBOARD_API_KEY" => ""}
 end
 
 record CryticResult, exit_code : Int32, output : String
