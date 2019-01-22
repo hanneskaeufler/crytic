@@ -44,13 +44,13 @@ module Crytic::Reporter
       end
     end
 
-    def report_summary(results)
+    def report_summary(results : Mutation::ResultSet)
       @io << "\n\nFinished in #{Spec.to_human(elapsed_time)}:\n"
       summary = "#{results.size} mutations, "
-      summary += "#{results.count(&.covered?)} covered, "
-      summary += "#{results.count(&.uncovered?)} uncovered, "
-      summary += "#{results.count(&.errored?)} errored, "
-      summary += "#{results.count(&.timeout?)} timeout."
+      summary += "#{results.covered_count} covered, "
+      summary += "#{results.uncovered_count} uncovered, "
+      summary += "#{results.errored_count} errored, "
+      summary += "#{results.timeout_count} timeout."
       summary += " Mutation Score Indicator (MSI): #{score_in_percent(results)}"
       summary += "\n"
       @io << summary.colorize(results.all?(&.covered?) ? :green : :red).to_s

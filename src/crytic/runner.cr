@@ -1,6 +1,7 @@
 require "./generator/**"
 require "./msi_calculator"
 require "./mutation/no_mutation"
+require "./mutation/result"
 require "./reporter/**"
 require "./runner_argument_validator"
 require "./subject"
@@ -30,11 +31,11 @@ module Crytic
 
       @reporters.each(&.report_mutations(mutations))
 
-      results = mutations.map do |mutation|
+      results = Mutation::ResultSet.new(mutations.map do |mutation|
         result = mutation.run
         @reporters.each(&.report_result(result))
         result
-      end
+      end)
 
       @reporters.each(&.report_summary(results))
       @reporters.each(&.report_msi(results))
