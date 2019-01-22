@@ -25,7 +25,7 @@ module Crytic::Mutation
   end
 
   class ResultSet
-    delegate size, empty?, all?, to: @results
+    delegate size, empty?, to: @results
 
     def initialize(@results = [] of Result)
     end
@@ -35,6 +35,10 @@ module Crytic::Mutation
         @results.count(&.{{ status.id }}?)
       end
     {% end %}
+
+    def all_covered?
+      results.all?(&.covered?)
+    end
 
     def grouped_by_mutated_file
       @results
