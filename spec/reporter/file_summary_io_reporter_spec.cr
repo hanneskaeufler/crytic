@@ -13,7 +13,7 @@ module Crytic::Reporter
 
         subject.report_summary([] of Mutation::Result)
 
-        io.to_s.should match /^\| File \| Mutants \|\n-+\n-+\n$/m
+        io.to_s.should match /^\| File \|    MSI    \| Mutants \| Killed \| Timeout \| Errored \| Uncovered \|\n-+\n-+\n$/m
       end
 
       it "outputs a row for each mutated file" do
@@ -24,7 +24,7 @@ module Crytic::Reporter
         subject.report_summary(results)
 
         io.to_s.lines.size.should eq results.size + HEADER_AND_FOOTER_ROW_COUNT
-        io.to_s.lines[3].should match /^\|\s+subject\.cr\s+\|\s+\d+\s+\|$/
+        io.to_s.lines[3].should match /^\|\s+subject\.cr\s+\|/
       end
 
       it "groups table lines by filename" do
@@ -44,13 +44,41 @@ module Crytic::Reporter
         io = IO::Memory.new
         subject = FileSummaryIoReporter.new(io)
         results = [
-          result(filename: "subject.cr"),
-          result(filename: "subject.cr"),
+          result(status: Mutation::Status::Covered, filename: "subject.cr"),
+          result(status: Mutation::Status::Timeout, filename: "subject.cr"),
+          result(status: Mutation::Status::Timeout, filename: "subject.cr"),
+          result(status: Mutation::Status::Errored, filename: "subject.cr"),
+          result(status: Mutation::Status::Errored, filename: "subject.cr"),
+          result(status: Mutation::Status::Errored, filename: "subject.cr"),
+          result(status: Mutation::Status::Uncovered, filename: "subject.cr"),
+          result(status: Mutation::Status::Uncovered, filename: "subject.cr"),
+          result(status: Mutation::Status::Uncovered, filename: "subject.cr"),
+          result(status: Mutation::Status::Uncovered, filename: "subject.cr"),
         ]
 
         subject.report_summary(results)
-        number_of_mutations = /(\d+) \|$/m.match(io.to_s).try(&.[1])
-        number_of_mutations.should eq "2"
+
+        number_of_mutations = io.to_s.lines[3].gsub(" ", "").split("|")[3..-2]
+        number_of_mutations[0].should eq "10"
+        number_of_mutations[1].should eq "1"
+        number_of_mutations[2].should eq "2"
+        number_of_mutations[3].should eq "3"
+        number_of_mutations[4].should eq "4"
+      end
+
+      it "shows the mutation score indicator per file" do
+        io = IO::Memory.new
+        subject = FileSummaryIoReporter.new(io)
+        results = [
+          result(status: Mutation::Status::Covered, filename: "subject.cr"),
+          result(status: Mutation::Status::Timeout, filename: "subject.cr"),
+          result(status: Mutation::Status::Uncovered, filename: "subject.cr"),
+        ]
+
+        subject.report_summary(results)
+
+        msi = /(\d+\.\d+) %/.match(io.to_s.lines[3]).try(&.[1])
+        msi.should eq "66.67"
       end
 
       it "pads to the max width" do
@@ -59,10 +87,11 @@ module Crytic::Reporter
         results = [
           result(filename: "subject.cr"),
           result(filename: "./some/long/friggin/path.cr"),
-        ] of Mutation::Result
+        ]
 
         subject.report_summary(results)
-        io.to_s.lines.map(&.size).should eq [41, 41, 41, 41, 41, 41]
+        line_widths = io.to_s.lines.map(&.size)
+        line_widths.max.should eq line_widths.min
       end
     end
   end

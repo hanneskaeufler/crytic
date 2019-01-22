@@ -1,8 +1,14 @@
 require "./reporter"
+require "../msi_calculator"
 
 module Crytic::Reporter
   class FileSummaryIoReporter < Reporter
-    private MUTANTS = "Mutants"
+    private ERRORED   = "Errored"
+    private KILLED    = "Killed"
+    private MSI       = "   MSI   "
+    private MUTANTS   = "Mutants"
+    private TIMEOUT   = "Timeout"
+    private UNCOVERED = "Uncovered"
 
     def initialize(@io : IO)
     end
@@ -23,13 +29,24 @@ module Crytic::Reporter
       results
         .group_by(&.mutated_file)
         .each do |filename, by_filename|
-          @io.puts "| #{filename.ljust(longest_width)} | #{by_filename.size.to_s.rjust(MUTANTS.size)} |"
+          table_row(filename, by_filename, longest_width)
         end
 
       footer(total_width)
     end
 
     def report_msi(results)
+    end
+
+    private def table_row(filename, by_filename, longest_width)
+      file = filename.ljust(longest_width)
+      total = by_filename.size.to_s.rjust(MUTANTS.size)
+      msi = "#{MsiCalculator.new(by_filename).msi} %".rjust(MSI.size)
+      covered = by_filename.count(&.covered?).to_s.rjust(KILLED.size)
+      timeout = by_filename.count(&.timeout?).to_s.rjust(TIMEOUT.size)
+      errored = by_filename.count(&.errored?).to_s.rjust(ERRORED.size)
+      uncovered = by_filename.count(&.uncovered?).to_s.rjust(UNCOVERED.size)
+      @io.puts "| #{file} | #{msi} | #{total} | #{covered} | #{timeout} | #{errored} | #{uncovered} |"
     end
 
     private def longest_filename_width(results)
@@ -53,7 +70,8 @@ module Crytic::Reporter
     end
 
     private def column_names(width)
-      "|#{" File ".ljust(width + 2)}| #{MUTANTS} |"
+      "|#{" File ".ljust(width + 2)}| " +
+        [MSI, MUTANTS, KILLED, TIMEOUT, ERRORED, UNCOVERED].join(" | ") + " |"
     end
   end
 end
