@@ -19,6 +19,7 @@ jobs:
       - image: crystallang/crystal:0.27.0
     steps:
       - checkout
+      - run: apt-get update && apt-get -y install curl
       - run: shards
       - run: SPEC_VERBOSE=1 ./bin/test-coverage
   test-mutations:
