@@ -12,7 +12,7 @@ module Crytic::Mutant
                          node_location.line_number == location.line_number
 
       return location_is_same if name_column_number.nil?
-      return location_is_same && node.name_column_number == name_column_number
+      location_is_same && node.name_column_number == name_column_number
     end
   end
 end

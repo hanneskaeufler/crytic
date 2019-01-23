@@ -18,6 +18,6 @@ scripts:
 development_dependencies:
   ameba:
     github: veelenga/ameba
-    version: ~> 0.8.1
+    version: ~> 0.9
   coverage:
     github: anykeyh/crystal-coverage
