@@ -18,5 +18,13 @@ module Crytic
         column_number: 100)))
       transformed.to_s.should eq "1 && 2"
     end
+
+    it "only flips one at a time" do
+      ast = Crystal::Parser.parse("1 && 2 && 3")
+      transformed = ast.transform(Mutant::AndOrSwap.at(location_at(
+        line_number: 1,
+        column_number: 1)))
+      transformed.to_s.should eq "(1 || 2) && 3"
+    end
   end
 end
