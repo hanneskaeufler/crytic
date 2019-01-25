@@ -2,15 +2,12 @@ require "./possibilities"
 
 module Crytic::Mutant
   class NoopPossibilities < Possibilities
-    private getter dummy_location : Crystal::Location? = nil
-
     def visit(node : Crystal::ASTNode)
-      @dummy_location = node.location
       false
     end
 
     def locations
-      [FullLocation.new(dummy_location.not_nil!)]
+      [FullLocation.new(Crystal::Location.new(nil, 0, 0))]
     end
 
     def any?

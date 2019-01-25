@@ -5,10 +5,7 @@ require "../spec_helper"
 module Crytic::Mutant
   describe NoopPossibilities do
     it "returns 1 possibility per subject" do
-      ast = Crystal::Parser
-        .new("1")
-        .tap { |parser| parser.filename = "hi.cr" }
-        .parse
+      ast = Crystal::Parser.parse("1")
       subject = NoopPossibilities.new
 
       ast.accept(subject)
