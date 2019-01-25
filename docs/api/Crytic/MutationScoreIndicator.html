@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutation - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::MutationScoreIndicator - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -211,7 +211,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../Crytic/Mutation.html">Mutation</a>
       
         <ul>
@@ -271,7 +271,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutationScoreIndicator" data-name="crytic::mutationscoreindicator">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/MutationScoreIndicator" data-name="crytic::mutationscoreindicator">
       <a href="../Crytic/MutationScoreIndicator.html">MutationScoreIndicator</a>
       
     </li>
@@ -375,10 +375,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Crytic::Mutation
+  <span class="kind">struct</span> Crytic::MutationScoreIndicator
 
 </h1>
 
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Crytic/MutationScoreIndicator.html">Crytic::MutationScoreIndicator</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -399,36 +401,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L5" target="_blank">
-        crytic/mutation/inject_mutated_subject_into_specs.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L3" target="_blank">
-        crytic/mutation/result.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/mutation.cr#L8" target="_blank">
-        crytic/mutation/mutation.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/original_result.cr#L1" target="_blank">
-        crytic/mutation/original_result.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/no_mutation.cr#L5" target="_blank">
-        crytic/mutation/no_mutation.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/msi_calculator.cr#L4" target="_blank">
+        crytic/msi_calculator.cr
       </a>
     
     <br/>
@@ -438,9 +412,51 @@
 
 
 
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28value%3AFloat64%29-class-method" class="signature"><strong>.new</strong>(value : Float64)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#copy_with%28value_value%3D%40value%29-instance-method" class="signature"><strong>#copy_with</strong>(value _value = @value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#passes%3F%28threshold%29-instance-method" class="signature"><strong>#passes?</strong>(threshold)</a>
+        
+          <div class="summary"><p>Returns true or false depending on whether the msi is higher than or equal to the given threshold</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_s-instance-method" class="signature"><strong>#to_s</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#value%3AFloat64-instance-method" class="signature"><strong>#value</strong> : Float64</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -448,12 +464,145 @@
 
 <div class="methods-inherited">
   
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(value:Float64)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(value : Float64)
+
+        <a class="method-permalink" href="#new%28value%3AFloat64%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/msi_calculator.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="clone-instance-method">
+      <div class="signature">
+        
+        def <strong>clone</strong>
+
+        <a class="method-permalink" href="#clone-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/msi_calculator.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="copy_with(value_value=@value)-instance-method">
+      <div class="signature">
+        
+        def <strong>copy_with</strong>(value _value = @value)
+
+        <a class="method-permalink" href="#copy_with%28value_value%3D%40value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/msi_calculator.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="passes?(threshold)-instance-method">
+      <div class="signature">
+        
+        def <strong>passes?</strong>(threshold)
+
+        <a class="method-permalink" href="#passes%3F%28threshold%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns true or false depending on whether the msi is higher than or
+equal to the given threshold</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/msi_calculator.cr#L15" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_s-instance-method">
+      <div class="signature">
+        
+        def <strong>to_s</strong>
+
+        <a class="method-permalink" href="#to_s-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/msi_calculator.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="value:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>value</strong> : Float64
+
+        <a class="method-permalink" href="#value%3AFloat64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
 
 
 

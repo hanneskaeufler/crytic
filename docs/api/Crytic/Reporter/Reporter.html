@@ -256,6 +256,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/ResultSet" data-name="crytic::mutation::resultset">
+      <a href="../../Crytic/Mutation/ResultSet.html">ResultSet</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Status" data-name="crytic::mutation::status">
       <a href="../../Crytic/Mutation/Status.html">Status</a>
       
@@ -263,6 +268,11 @@
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutationScoreIndicator" data-name="crytic::mutationscoreindicator">
+      <a href="../../Crytic/MutationScoreIndicator.html">MutationScoreIndicator</a>
       
     </li>
   
@@ -283,6 +293,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/DefaultHttpClient" data-name="crytic::reporter::defaulthttpclient">
       <a href="../../Crytic/Reporter/DefaultHttpClient.html">DefaultHttpClient</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/FileSummaryIoReporter" data-name="crytic::reporter::filesummaryioreporter">
+      <a href="../../Crytic/Reporter/FileSummaryIoReporter.html">FileSummaryIoReporter</a>
       
     </li>
   
@@ -381,6 +396,8 @@
   <h2>Direct Known Subclasses</h2>
   <ul class="other-types-list">
   
+    <li class="other-type"><a href="../../Crytic/Reporter/FileSummaryIoReporter.html">Crytic::Reporter::FileSummaryIoReporter</a></li>
+  
     <li class="other-type"><a href="../../Crytic/Reporter/IoReporter.html">Crytic::Reporter::IoReporter</a></li>
   
     <li class="other-type"><a href="../../Crytic/Reporter/StrykerBadgeReporter.html">Crytic::Reporter::StrykerBadgeReporter</a></li>
@@ -395,7 +412,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/reporter/reporter.cr#L2" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/reporter/reporter.cr#L4" target="_blank">
         crytic/reporter/reporter.cr
       </a>
     
@@ -414,7 +431,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#report_msi%28results%29-instance-method" class="signature"><strong>#report_msi</strong>(results)</a>
+        <a href="#report_msi%28results%3AMutation%3A%3AResultSet%29-instance-method" class="signature"><strong>#report_msi</strong>(results : Mutation::ResultSet)</a>
         
       </li>
     
@@ -434,7 +451,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#report_summary%28results%29-instance-method" class="signature"><strong>#report_summary</strong>(results)</a>
+        <a href="#report_summary%28results%3AMutation%3A%3AResultSet%29-instance-method" class="signature"><strong>#report_summary</strong>(results : Mutation::ResultSet)</a>
         
       </li>
     
@@ -475,18 +492,18 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="report_msi(results)-instance-method">
+    <div class="entry-detail" id="report_msi(results:Mutation::ResultSet)-instance-method">
       <div class="signature">
         abstract 
-        def <strong>report_msi</strong>(results)
+        def <strong>report_msi</strong>(results : <a href="../../Crytic/Mutation/ResultSet.html">Mutation::ResultSet</a>)
 
-        <a class="method-permalink" href="#report_msi%28results%29-instance-method">#</a>
+        <a class="method-permalink" href="#report_msi%28results%3AMutation%3A%3AResultSet%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/reporter/reporter.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/reporter/reporter.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -502,7 +519,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/reporter/reporter.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/reporter/reporter.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -518,7 +535,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/reporter/reporter.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/reporter/reporter.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -534,23 +551,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/reporter/reporter.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/reporter/reporter.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="report_summary(results)-instance-method">
+    <div class="entry-detail" id="report_summary(results:Mutation::ResultSet)-instance-method">
       <div class="signature">
         abstract 
-        def <strong>report_summary</strong>(results)
+        def <strong>report_summary</strong>(results : <a href="../../Crytic/Mutation/ResultSet.html">Mutation::ResultSet</a>)
 
-        <a class="method-permalink" href="#report_summary%28results%29-instance-method">#</a>
+        <a class="method-permalink" href="#report_summary%28results%3AMutation%3A%3AResultSet%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/reporter/reporter.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/reporter/reporter.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>

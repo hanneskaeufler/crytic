@@ -256,6 +256,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/ResultSet" data-name="crytic::mutation::resultset">
+      <a href="../../Crytic/Mutation/ResultSet.html">ResultSet</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Status" data-name="crytic::mutation::status">
       <a href="../../Crytic/Mutation/Status.html">Status</a>
       
@@ -263,6 +268,11 @@
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutationScoreIndicator" data-name="crytic::mutationscoreindicator">
+      <a href="../../Crytic/MutationScoreIndicator.html">MutationScoreIndicator</a>
       
     </li>
   
@@ -283,6 +293,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/DefaultHttpClient" data-name="crytic::reporter::defaulthttpclient">
       <a href="../../Crytic/Reporter/DefaultHttpClient.html">DefaultHttpClient</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/FileSummaryIoReporter" data-name="crytic::reporter::filesummaryioreporter">
+      <a href="../../Crytic/Reporter/FileSummaryIoReporter.html">FileSummaryIoReporter</a>
       
     </li>
   
@@ -370,6 +385,11 @@
 
 
 
+  <h2>Overview</h2>
+
+  <p>The name_column_number is relevant for Crystal::Call occurrences, while the
+end_location is used for Crystal::And.</p>
+
 
 
 
@@ -386,7 +406,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutant/full_location.cr#L4" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L6" target="_blank">
         crytic/mutant/full_location.cr
       </a>
     
@@ -401,7 +421,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28location%3ACrystal%3A%3ALocation%2Cname_column_number%3AInt32%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(location : Crystal::Location, name_column_number : Int32? = <span class="n">nil</span>)</a>
+        <a href="#new%28location%3ACrystal%3A%3ALocation%2Cname_column_number%3AInt32%3F%3Dnil%2Cend_location%3ACrystal%3A%3ALocation%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(location : Crystal::Location, name_column_number : Int32? = <span class="n">nil</span>, end_location : Crystal::Location? = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -430,7 +450,12 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#copy_with%28location_location%3D%40location%2Cname_column_number_name_column_number%3D%40name_column_number%29-instance-method" class="signature"><strong>#copy_with</strong>(location _location = @location, name_column_number _name_column_number = @name_column_number)</a>
+        <a href="#copy_with%28location_location%3D%40location%2Cname_column_number_name_column_number%3D%40name_column_number%2Cend_location_end_location%3D%40end_location%29-instance-method" class="signature"><strong>#copy_with</strong>(location _location = @location, name_column_number _name_column_number = @name_column_number, end_location _end_location = @end_location)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#end_location%3ACrystal%3A%3ALocation%3F-instance-method" class="signature"><strong>#end_location</strong> : Crystal::Location?</a>
         
       </li>
     
@@ -502,18 +527,18 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(location:Crystal::Location,name_column_number:Int32?=nil)-class-method">
+    <div class="entry-detail" id="new(location:Crystal::Location,name_column_number:Int32?=nil,end_location:Crystal::Location?=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(location : Crystal::Location, name_column_number : Int32? = <span class="n">nil</span>)
+        def self.<strong>new</strong>(location : Crystal::Location, name_column_number : Int32? = <span class="n">nil</span>, end_location : Crystal::Location? = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28location%3ACrystal%3A%3ALocation%2Cname_column_number%3AInt32%3F%3Dnil%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28location%3ACrystal%3A%3ALocation%2Cname_column_number%3AInt32%3F%3Dnil%2Cend_location%3ACrystal%3A%3ALocation%3F%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutant/full_location.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -536,7 +561,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutant/full_location.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -552,7 +577,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutant/full_location.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -568,23 +593,37 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutant/full_location.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="copy_with(location_location=@location,name_column_number_name_column_number=@name_column_number)-instance-method">
+    <div class="entry-detail" id="copy_with(location_location=@location,name_column_number_name_column_number=@name_column_number,end_location_end_location=@end_location)-instance-method">
       <div class="signature">
         
-        def <strong>copy_with</strong>(location _location = @location, name_column_number _name_column_number = @name_column_number)
+        def <strong>copy_with</strong>(location _location = @location, name_column_number _name_column_number = @name_column_number, end_location _end_location = @end_location)
 
-        <a class="method-permalink" href="#copy_with%28location_location%3D%40location%2Cname_column_number_name_column_number%3D%40name_column_number%29-instance-method">#</a>
+        <a class="method-permalink" href="#copy_with%28location_location%3D%40location%2Cname_column_number_name_column_number%3D%40name_column_number%2Cend_location_end_location%3D%40end_location%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutant/full_location.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L6" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="end_location:Crystal::Location?-instance-method">
+      <div class="signature">
+        
+        def <strong>end_location</strong> : Crystal::Location?
+
+        <a class="method-permalink" href="#end_location%3ACrystal%3A%3ALocation%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
         
       </div>
     </div>
@@ -600,7 +639,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutant/full_location.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -616,7 +655,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutant/full_location.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -646,7 +685,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutant/full_location.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>

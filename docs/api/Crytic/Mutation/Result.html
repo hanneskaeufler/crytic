@@ -256,6 +256,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/ResultSet" data-name="crytic::mutation::resultset">
+      <a href="../../Crytic/Mutation/ResultSet.html">ResultSet</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Status" data-name="crytic::mutation::status">
       <a href="../../Crytic/Mutation/Status.html">Status</a>
       
@@ -263,6 +268,11 @@
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutationScoreIndicator" data-name="crytic::mutationscoreindicator">
+      <a href="../../Crytic/MutationScoreIndicator.html">MutationScoreIndicator</a>
       
     </li>
   
@@ -283,6 +293,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/DefaultHttpClient" data-name="crytic::reporter::defaulthttpclient">
       <a href="../../Crytic/Reporter/DefaultHttpClient.html">DefaultHttpClient</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/FileSummaryIoReporter" data-name="crytic::reporter::filesummaryioreporter">
+      <a href="../../Crytic/Reporter/FileSummaryIoReporter.html">FileSummaryIoReporter</a>
       
     </li>
   
@@ -386,7 +401,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutation/result.cr#L11" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L11" target="_blank">
         crytic/mutation/result.cr
       </a>
     
@@ -425,12 +440,32 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#covered%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#covered?</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#covered%3F%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#covered?</strong>(*args, **options, &block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#diff%3AString-instance-method" class="signature"><strong>#diff</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#location-instance-method" class="signature"><strong>#location</strong></a>
+        <a href="#errored%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#errored?</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#errored%3F%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#errored?</strong>(*args, **options, &block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#location%3ACrystal%3A%3ALocation-instance-method" class="signature"><strong>#location</strong> : Crystal::Location</a>
         
       </li>
     
@@ -445,7 +480,32 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#mutated_file%3AString-instance-method" class="signature"><strong>#mutated_file</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#status%3AStatus-instance-method" class="signature"><strong>#status</strong> : Status</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#timeout%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#timeout?</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#timeout%3F%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#timeout?</strong>(*args, **options, &block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#uncovered%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#uncovered?</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#uncovered%3F%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#uncovered?</strong>(*args, **options, &block)</a>
         
       </li>
     
@@ -503,7 +563,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutation/result.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -526,7 +586,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutation/result.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -542,7 +602,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutation/result.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="covered?(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>covered?</strong>(*args, **options)
+
+        <a class="method-permalink" href="#covered%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="covered?(*args,**options,&amp;block)-instance-method">
+      <div class="signature">
+        
+        def <strong>covered?</strong>(*args, **options, &block)
+
+        <a class="method-permalink" href="#covered%3F%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -561,18 +653,50 @@
       </div>
     </div>
   
-    <div class="entry-detail" id="location-instance-method">
+    <div class="entry-detail" id="errored?(*args,**options)-instance-method">
       <div class="signature">
         
-        def <strong>location</strong>
+        def <strong>errored?</strong>(*args, **options)
 
-        <a class="method-permalink" href="#location-instance-method">#</a>
+        <a class="method-permalink" href="#errored%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutation/result.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="errored?(*args,**options,&amp;block)-instance-method">
+      <div class="signature">
+        
+        def <strong>errored?</strong>(*args, **options, &block)
+
+        <a class="method-permalink" href="#errored%3F%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="location:Crystal::Location-instance-method">
+      <div class="signature">
+        
+        def <strong>location</strong> : Crystal::Location
+
+        <a class="method-permalink" href="#location%3ACrystal%3A%3ALocation-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -602,7 +726,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/mutation/result.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mutated_file:String-instance-method">
+      <div class="signature">
+        
+        def <strong>mutated_file</strong> : String
+
+        <a class="method-permalink" href="#mutated_file%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -617,6 +757,70 @@
       
       <br/>
       <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="timeout?(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>timeout?</strong>(*args, **options)
+
+        <a class="method-permalink" href="#timeout%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="timeout?(*args,**options,&amp;block)-instance-method">
+      <div class="signature">
+        
+        def <strong>timeout?</strong>(*args, **options, &block)
+
+        <a class="method-permalink" href="#timeout%3F%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="uncovered?(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>uncovered?</strong>(*args, **options)
+
+        <a class="method-permalink" href="#uncovered%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="uncovered?(*args,**options,&amp;block)-instance-method">
+      <div class="signature">
+        
+        def <strong>uncovered?</strong>(*args, **options, &block)
+
+        <a class="method-permalink" href="#uncovered%3F%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>

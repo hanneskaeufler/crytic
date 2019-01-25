@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutant::NumberLiteralChangePossibilities - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Mutation::ResultSet - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -86,7 +86,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
       <a href="../../Crytic/Mutant.html">Mutant</a>
       
         <ul>
@@ -146,7 +146,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChangePossibilities" data-name="crytic::mutant::numberliteralchangepossibilities">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChangePossibilities" data-name="crytic::mutant::numberliteralchangepossibilities">
       <a href="../../Crytic/Mutant/NumberLiteralChangePossibilities.html">NumberLiteralChangePossibilities</a>
       
     </li>
@@ -211,7 +211,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../../Crytic/Mutation.html">Mutation</a>
       
         <ul>
@@ -256,7 +256,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/ResultSet" data-name="crytic::mutation::resultset">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/ResultSet" data-name="crytic::mutation::resultset">
       <a href="../../Crytic/Mutation/ResultSet.html">ResultSet</a>
       
     </li>
@@ -375,12 +375,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Mutant::NumberLiteralChangePossibilities
+  <span class="kind">class</span> Crytic::Mutation::ResultSet
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/NumberLiteralChangePossibilities.html">Crytic::Mutant::NumberLiteralChangePossibilities</a></li><li class="superclass"><a href="../../Crytic/Mutant/Possibilities.html">Crytic::Mutant::Possibilities</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutation/ResultSet.html">Crytic::Mutation::ResultSet</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -401,8 +401,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/number_literal_change_possibilities.cr#L5" target="_blank">
-        crytic/mutant/number_literal_change_possibilities.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L27" target="_blank">
+        crytic/mutation/result.cr
       </a>
     
     <br/>
@@ -412,6 +412,16 @@
 
 
 
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28results%3D%5B%5DofResult%29-class-method" class="signature"><strong>.new</strong>(results = <span class="o">[]</span> <span class="k">of</span> <span class="t">Result</span>)</a>
+        
+      </li>
+    
+  </ul>
+
 
 
 
@@ -420,12 +430,52 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#mutant_class-instance-method" class="signature"><strong>#mutant_class</strong></a>
+        <a href="#all_covered%3F-instance-method" class="signature"><strong>#all_covered?</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#visit%28node%3ACrystal%3A%3ANumberLiteral%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::NumberLiteral)</a>
+        <a href="#covered_count-instance-method" class="signature"><strong>#covered_count</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#empty%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#empty?</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#empty%3F%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#empty?</strong>(*args, **options, &block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#errored_count-instance-method" class="signature"><strong>#errored_count</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#grouped_by_mutated_file-instance-method" class="signature"><strong>#grouped_by_mutated_file</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#longest_mutated_filename_length-instance-method" class="signature"><strong>#longest_mutated_filename_length</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#timeout_count-instance-method" class="signature"><strong>#timeout_count</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#total_count-instance-method" class="signature"><strong>#total_count</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#uncovered_count-instance-method" class="signature"><strong>#uncovered_count</strong></a>
         
       </li>
     
@@ -436,50 +486,6 @@
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Crytic/Mutant/Possibilities.html">Crytic::Mutant::Possibilities</a></code></h3>
-  
-  
-    <a href="../../Crytic/Mutant/Possibilities.html#any%3F-instance-method" class="tooltip">
-      <span>any?</span>
-    any?</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/Possibilities.html#locations%3AArray%28Crytic%3A%3AMutant%3A%3AFullLocation%29-instance-method" class="tooltip">
-      <span>locations : Array(Crytic::Mutant::FullLocation)</span>
-    locations</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/Possibilities.html#reset-instance-method" class="tooltip">
-      <span>reset</span>
-    reset</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/Possibilities.html#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="tooltip">
-      <span>visit(node : Crystal::ASTNode)</span>
-    visit</a>
-    
-  
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
   
     
 
@@ -504,38 +510,187 @@
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(results=[]ofResult)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(results = <span class="o">[]</span> <span class="k">of</span> <span class="t">Result</span>)
+
+        <a class="method-permalink" href="#new%28results%3D%5B%5DofResult%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L34" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
 
 
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="mutant_class-instance-method">
+    <div class="entry-detail" id="all_covered?-instance-method">
       <div class="signature">
         
-        def <strong>mutant_class</strong>
+        def <strong>all_covered?</strong>
 
-        <a class="method-permalink" href="#mutant_class-instance-method">#</a>
+        <a class="method-permalink" href="#all_covered%3F-instance-method">#</a>
       </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="visit(node:Crystal::NumberLiteral)-instance-method">
+    <div class="entry-detail" id="covered_count-instance-method">
       <div class="signature">
         
-        def <strong>visit</strong>(node : Crystal::NumberLiteral)
+        def <strong>covered_count</strong>
 
-        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3ANumberLiteral%29-instance-method">#</a>
+        <a class="method-permalink" href="#covered_count-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/number_literal_change_possibilities.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="empty?(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>empty?</strong>(*args, **options)
+
+        <a class="method-permalink" href="#empty%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L28" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="empty?(*args,**options,&amp;block)-instance-method">
+      <div class="signature">
+        
+        def <strong>empty?</strong>(*args, **options, &block)
+
+        <a class="method-permalink" href="#empty%3F%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L28" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="errored_count-instance-method">
+      <div class="signature">
+        
+        def <strong>errored_count</strong>
+
+        <a class="method-permalink" href="#errored_count-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="grouped_by_mutated_file-instance-method">
+      <div class="signature">
+        
+        def <strong>grouped_by_mutated_file</strong>
+
+        <a class="method-permalink" href="#grouped_by_mutated_file-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L47" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="longest_mutated_filename_length-instance-method">
+      <div class="signature">
+        
+        def <strong>longest_mutated_filename_length</strong>
+
+        <a class="method-permalink" href="#longest_mutated_filename_length-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L53" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="timeout_count-instance-method">
+      <div class="signature">
+        
+        def <strong>timeout_count</strong>
+
+        <a class="method-permalink" href="#timeout_count-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="total_count-instance-method">
+      <div class="signature">
+        
+        def <strong>total_count</strong>
+
+        <a class="method-permalink" href="#total_count-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L30" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="uncovered_count-instance-method">
+      <div class="signature">
+        
+        def <strong>uncovered_count</strong>
+
+        <a class="method-permalink" href="#uncovered_count-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutation/result.cr#L37" target="_blank">View source</a>]
         
       </div>
     </div>

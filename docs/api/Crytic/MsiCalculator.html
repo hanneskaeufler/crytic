@@ -256,6 +256,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/ResultSet" data-name="crytic::mutation::resultset">
+      <a href="../Crytic/Mutation/ResultSet.html">ResultSet</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Status" data-name="crytic::mutation::status">
       <a href="../Crytic/Mutation/Status.html">Status</a>
       
@@ -263,6 +268,11 @@
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutationScoreIndicator" data-name="crytic::mutationscoreindicator">
+      <a href="../Crytic/MutationScoreIndicator.html">MutationScoreIndicator</a>
       
     </li>
   
@@ -283,6 +293,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/DefaultHttpClient" data-name="crytic::reporter::defaulthttpclient">
       <a href="../Crytic/Reporter/DefaultHttpClient.html">DefaultHttpClient</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/FileSummaryIoReporter" data-name="crytic::reporter::filesummaryioreporter">
+      <a href="../Crytic/Reporter/FileSummaryIoReporter.html">FileSummaryIoReporter</a>
       
     </li>
   
@@ -391,7 +406,7 @@ https://infection.github.io/guide/#Mutation-Score-Indicator-MSI</p>
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/msi_calculator.cr#L6" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/msi_calculator.cr#L26" target="_blank">
         crytic/msi_calculator.cr
       </a>
     
@@ -420,12 +435,9 @@ https://infection.github.io/guide/#Mutation-Score-Indicator-MSI</p>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#msi-instance-method" class="signature"><strong>#msi</strong></a>
+        <a href="#msi%3AMutationScoreIndicator-instance-method" class="signature"><strong>#msi</strong> : MutationScoreIndicator</a>
         
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#passes%3F%28threshold%29-instance-method" class="signature"><strong>#passes?</strong>(threshold)</a>
+          <div class="summary"><p>Returns the mutation score indicator for the mutation results of this instance</p></div>
         
       </li>
     
@@ -473,7 +485,7 @@ https://infection.github.io/guide/#Mutation-Score-Indicator-MSI</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/msi_calculator.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/msi_calculator.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -485,34 +497,21 @@ https://infection.github.io/guide/#Mutation-Score-Indicator-MSI</p>
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="msi-instance-method">
+    <div class="entry-detail" id="msi:MutationScoreIndicator-instance-method">
       <div class="signature">
         
-        def <strong>msi</strong>
+        def <strong>msi</strong> : <a href="../Crytic/MutationScoreIndicator.html">MutationScoreIndicator</a>
 
-        <a class="method-permalink" href="#msi-instance-method">#</a>
+        <a class="method-permalink" href="#msi%3AMutationScoreIndicator-instance-method">#</a>
       </div>
+      
+        <div class="doc"><p>Returns the mutation score indicator for the mutation results of this
+instance</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/msi_calculator.cr#L12" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="passes?(threshold)-instance-method">
-      <div class="signature">
-        
-        def <strong>passes?</strong>(threshold)
-
-        <a class="method-permalink" href="#passes%3F%28threshold%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8952257fc27949e2ab7e30ab47938b2a5b9b2d9c/src/crytic/msi_calculator.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/msi_calculator.cr#L34" target="_blank">View source</a>]
         
       </div>
     </div>
