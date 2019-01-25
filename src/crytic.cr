@@ -1,7 +1,6 @@
 require "./crytic/generator/in_memory_generator"
 require "./crytic/reporter/http_client"
 require "./crytic/reporter/io_reporter"
-require "./crytic/reporter/file_summary_io_reporter"
 require "./crytic/reporter/stryker_badge_reporter"
 require "./crytic/runner"
 require "option_parser"
