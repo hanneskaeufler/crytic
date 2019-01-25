@@ -36,10 +36,7 @@ OptionParser.parse! do |parser|
   end
 end
 
-reporters = [
-  Crytic::Reporter::IoReporter.new(STDOUT),
-  Crytic::Reporter::FileSummaryIoReporter.new(STDOUT),
-] of Crytic::Reporter::Reporter
+reporters = [Crytic::Reporter::IoReporter.new(STDOUT)] of Crytic::Reporter::Reporter
 
 if (key = ENV["STRYKER_DASHBOARD_API_KEY"]?) && !key.empty?
   client = Crytic::Reporter::DefaultHttpClient.new
