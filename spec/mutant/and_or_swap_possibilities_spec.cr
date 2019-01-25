@@ -17,5 +17,14 @@ module Crytic
       possibilities.any?.should eq true
       possibilities.locations.size.should eq 2
     end
+
+    it "treats a compound conditional as multiple possibilities" do
+      ast = Crystal::Parser.parse("1 && 2 && 3")
+      possibilities = Mutant::AndOrSwapPossibilities.new
+      ast.accept(possibilities)
+      possibilities.any?.should eq true
+      possibilities.locations.size.should eq 2
+      pp possibilities.locations
+    end
   end
 end
