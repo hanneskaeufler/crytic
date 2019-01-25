@@ -1,6 +1,13 @@
 require "./possibilities"
 
 module Crytic::Mutant
-  generate_possibilities_subclass(
-    AndOrSwapPossibilities, Crystal::And)
+  class AndOrSwapPossibilities < Possibilities
+    def visit(node : Crystal::And)
+      location = node.location
+      unless location.nil?
+        @locations << FullLocation.new(location, end_location: node.end_location)
+      end
+      true
+    end
+  end
 end
