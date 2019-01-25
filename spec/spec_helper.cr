@@ -3,11 +3,14 @@ require "../src/crytic/mutant/full_location"
 require "compiler/crystal/syntax/*"
 require "spec"
 
-def location_at(line_number, column_number, name_column_number : Int32? = nil, filename = "some_filename.cr")
+def location_at(line_number, column_number,
+                name_column_number : Int32? = nil,
+                end_location : Crystal::Location? = nil,
+                filename = "some_filename.cr")
   Crytic::Mutant::FullLocation.new(Crystal::Location.new(
     filename: filename,
     line_number: line_number,
-    column_number: column_number), name_column_number)
+    column_number: column_number), name_column_number, end_location)
 end
 
 def fake_mutant(mutated_file : String = "some_filename.cr")
