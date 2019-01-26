@@ -13,7 +13,6 @@ module Crytic
       Mutant::AnyAllSwapPossibilities.new,
       Mutant::BoolLiteralFlipPossibilities.new,
       Mutant::ConditionFlipPossibilities.new,
-      Mutant::NoopPossibilities.new,
       Mutant::NumberLiteralChangePossibilities.new,
       Mutant::NumberLiteralSignFlipPossibilities.new,
       Mutant::RegexLiteralChangePossibilities.new,
@@ -35,9 +34,19 @@ module Crytic
     end
 
     def mutations_for(sources : Array(String), specs : Array(String))
-      sources.map do |src|
-        mutations_for(source: src, specs: specs)
-      end.flatten
+      sources
+        .map { |src| {src: src, mutations: mutations_for(source: src, specs: specs)} }
+        .reject(&.[:mutations].empty?)
+        .map { |things| [noop_mutation_for(things[:src], specs)] + things[:mutations] }
+        .flatten
+    end
+
+    private def noop_mutation_for(src, specs)
+      mutation_factory.call(noop_mutant_for(src), src, specs, @preamble)
+    end
+
+    private def noop_mutant_for(src)
+      Mutant::Noop.at(Mutant::FullLocation.new(Crystal::Location.new(src, 0, 0)))
     end
 
     private def mutations_for(source : String, specs : Array(String))
