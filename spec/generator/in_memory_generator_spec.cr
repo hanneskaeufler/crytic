@@ -25,14 +25,14 @@ module Crytic
         mutations.should be_empty
       end
 
-      it "returns a noop + number literal mutation for the number literal" do
+      it "returns a number literal mutation for the number literal" do
         source = fixture_source("non_empty_source_file.cr")
 
         mutations = InMemoryMutationsGenerator
           .new([Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities, preamble)
           .mutations_for(source, specs)
 
-        mutations.size.should eq 2
+        mutations.size.should eq 1
       end
 
       it "doesn't mix mutations for multiple sources" do
@@ -44,7 +44,7 @@ module Crytic
         generator.mutations_for(source, specs)
         mutations = generator.mutations_for(source, specs)
 
-        mutations.size.should eq 2
+        mutations.size.should eq 1
       end
 
       it "passes along the preamble" do

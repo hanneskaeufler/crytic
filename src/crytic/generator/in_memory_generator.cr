@@ -35,10 +35,13 @@ module Crytic
 
     def mutations_for(sources : Array(String), specs : Array(String))
       sources
-        .map { |src| {src: src, mutations: mutations_for(source: src, specs: specs)} }
-        .reject(&.[:mutations].empty?)
-        .map { |things| [noop_mutation_for(things[:src], specs)] + things[:mutations] }
-        .flatten
+        .map do |src|
+          MutationSet.new(
+            neutral: noop_mutation_for(src, specs),
+            mutated: mutations_for(src, specs)
+          )
+        end
+        .reject(&.mutated.empty?)
     end
 
     private def noop_mutation_for(src, specs)
