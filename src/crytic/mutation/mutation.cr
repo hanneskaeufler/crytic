@@ -6,8 +6,12 @@ require "./inject_mutated_subject_into_specs"
 require "./result"
 
 module Crytic::Mutation
+  abstract class MutationInterface
+    abstract def run : Result
+  end
+
   # Represents a single mutation to a single source file
-  class Mutation
+  class Mutation < MutationInterface
     alias Preamble = String
 
     property process_runner : Crytic::ProcessRunner

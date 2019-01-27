@@ -26,6 +26,10 @@ module Crytic::Reporter
       @io << "Running #{mutations.size} mutations." if mutations.size > 1
     end
 
+    def report_neutral_result(result)
+      @io << "Dude that failed"
+    end
+
     def report_result(result)
       @io << "\n#{INDENT}"
       case result.status

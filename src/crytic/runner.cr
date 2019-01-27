@@ -37,12 +37,17 @@ module Crytic
 
       results = Mutation::ResultSet.new(mutations.map do |mutation_set|
         neutral_result = mutation_set.neutral.run
-        raise Exception.new("dude that failed") if neutral_result.errored?
 
-        mutation_set.mutated.map do |mutation|
-          result = mutation.run
-          @reporters.each(&.report_result(result))
-          result
+        @reporters.each(&.report_neutral_result(neutral_result))
+
+        if neutral_result.errored?
+          [] of Mutation::Result
+        else
+          mutation_set.mutated.map do |mutation|
+            result = mutation.run
+            @reporters.each(&.report_result(result))
+            result
+          end
         end
       end.flatten)
 

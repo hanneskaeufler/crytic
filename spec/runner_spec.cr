@@ -53,17 +53,38 @@ describe Crytic::Runner do
         ["./fixtures/simple/bar_spec.cr"]).should eq false
     end
 
-    it "reports events in order" do
+    it "skips the mutations if the neutral result errored" do
       reporter = FakeReporter.new
       runner = Crytic::Runner.new(
         threshold: 100.0,
-        generator: FakeGenerator.new,
+        generator: FakeGenerator.new(
+          neutral: FakeMutation
+            .new(reported_status: Crytic::Mutation::Status::Errored)
+            .as(Crytic::Mutation::MutationInterface),
+          mutations: [
+          FakeMutation
+            .new(reported_status: Crytic::Mutation::Status::Errored)
+            .as(Crytic::Mutation::MutationInterface)
+        ]),
         reporters: [reporter] of Crytic::Reporter::Reporter,
         no_mutation_factory: fake_no_mutation_factory)
 
       runner.run("./fixtures/simple/bar.cr", ["./fixtures/simple/bar_spec.cr"])
 
-      reporter.events.should eq ["report_original_result", "report_mutations", "report_summary", "report_msi"]
+      reporter.events.should_not contain("report_result")
+    end
+
+    it "reports events in order" do
+      reporter = FakeReporter.new
+      runner = Crytic::Runner.new(
+        threshold: 100.0,
+        generator: FakeGenerator.new([FakeMutation.new.as(Crytic::Mutation::MutationInterface)]),
+        reporters: [reporter] of Crytic::Reporter::Reporter,
+        no_mutation_factory: fake_no_mutation_factory)
+
+      runner.run("./fixtures/simple/bar.cr", ["./fixtures/simple/bar_spec.cr"])
+
+      reporter.events.should eq ["report_original_result", "report_mutations", "report_neutral_result", "report_result", "report_summary", "report_msi"]
     end
   end
 end

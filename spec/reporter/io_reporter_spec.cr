@@ -46,6 +46,16 @@ module Crytic::Reporter
       end
     end
 
+    describe "#report_neutral_result" do
+      it "prints a helpful message indicating that the mutant injecting setup seems to have broken the suite" do
+        io = IO::Memory.new
+
+        IoReporter.new(io).report_neutral_result(result)
+
+        io.to_s.should eq "Dude that failed"
+      end
+    end
+
     describe "#report_result" do
       it "prints the passing mutants name and location" do
         io = IO::Memory.new
