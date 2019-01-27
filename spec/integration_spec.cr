@@ -17,11 +17,10 @@ describe Crytic do
   end
 
   describe "--preamble/-p" do
-    it "injects the given custom preamble, failing=covering all mutants that would otherwise be uncovered" do
+    it "injects the given custom preamble, failing the neutral mutant" do
       result = run_crytic("-s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr -p 'exit 1'")
-      result.output.should contain("✅ ConditionFlip")
-      result.output.should contain("✅ BoolLiteralFlip")
-      result.exit_code.should eq 0
+      result.output.should contain("dude that failed")
+      result.exit_code.should eq 1
     end
   end
 
