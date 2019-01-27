@@ -27,9 +27,7 @@ module Crytic
     CODE
 
     property mutation_factory : MutationFactory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
-      Mutation::Mutation
-        .with(mutant, original, specs, preamble)
-        .as(Mutation::MutationInterface)
+      Mutation::Mutation.with(mutant, original, specs, preamble).as(Mutation::MutationInterface)
     }
 
     def initialize(@possibilities : Array(Mutant::Possibilities), @preamble : String)
