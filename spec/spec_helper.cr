@@ -33,9 +33,9 @@ def result(status = Crytic::Mutation::Status::Covered, filename = "some_filename
 end
 
 def erroring_mutation
-  FakeMutation.new(reported_status: Crytic::Mutation::Status::Errored).as(Crytic::Mutation::MutationInterface)
+  FakeMutation.new(reported_status: Crytic::Mutation::Status::Errored).as(Crytic::Mutation::Mutation)
 end
 
 def fake_mutation
-  FakeMutation.new.as(Crytic::Mutation::MutationInterface)
+  FakeMutation.new.as(Crytic::Mutation::Mutation)
 end

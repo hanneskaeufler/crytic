@@ -10,7 +10,7 @@ private def irrelevant_mutant
   )))
 end
 
-class FakeMutation < Crytic::Mutation::MutationInterface
+class FakeMutation < Crytic::Mutation::Mutation
   property run_call_count = 0
 
   def initialize(@reported_status = Crytic::Mutation::Status::Uncovered)

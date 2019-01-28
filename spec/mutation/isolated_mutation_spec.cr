@@ -13,7 +13,7 @@ module Crytic::Mutation
     describe ".with" do
       it "can be used with both types of mutations" do
         transformer_mutant = Crytic::Mutant::AndOrSwap.at(location_at(0, 0))
-        Mutation.with(
+        IsolatedMutation.with(
           original: "./bar.cr",
           specs: ["./bar_spec.cr"],
           mutant: transformer_mutant,
@@ -23,7 +23,7 @@ module Crytic::Mutation
 
     describe "#run" do
       it "shoves the code into a tempfile, compiles the binary and executes the binary" do
-        mutation = Mutation.with(
+        mutation = IsolatedMutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_spec.cr"],
@@ -57,7 +57,7 @@ module Crytic::Mutation
       end
 
       it "considers a mutant covered if the process fails" do
-        mutation = Mutation.with(
+        mutation = IsolatedMutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_spec.cr"],
@@ -74,7 +74,7 @@ module Crytic::Mutation
       end
 
       it "considers a mutant uncovered if the process succeeds" do
-        mutation = Mutation.with(
+        mutation = IsolatedMutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_spec.cr"],
@@ -90,7 +90,7 @@ module Crytic::Mutation
       end
 
       it "returns a colored diff of the changes" do
-        mutation = Mutation.with(
+        mutation = IsolatedMutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_spec.cr"],
@@ -108,7 +108,7 @@ module Crytic::Mutation
       end
 
       it "resolves nested requires" do
-        mutation = Mutation.with(
+        mutation = IsolatedMutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_with_helper_spec.cr"],
@@ -144,7 +144,7 @@ module Crytic::Mutation
       end
 
       it "only requires/includes the subject once for multiple spec files" do
-        mutation = Mutation.with(
+        mutation = IsolatedMutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_with_helper_spec.cr", "./fixtures/simple/bar_additional_spec.cr"],
@@ -188,7 +188,7 @@ module Crytic::Mutation
       end
 
       it "considers errors/failed to compile as not covered" do
-        mutation = Mutation.with(
+        mutation = IsolatedMutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_with_helper_spec.cr"],
@@ -205,7 +205,7 @@ module Crytic::Mutation
       end
 
       it "reports timed out mutations" do
-        mutation = Mutation.with(
+        mutation = IsolatedMutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_with_helper_spec.cr"],
@@ -222,7 +222,7 @@ module Crytic::Mutation
       end
 
       it "can handle compilation errors" do
-        mutation = Mutation.with(
+        mutation = IsolatedMutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_with_helper_spec.cr"],
@@ -243,7 +243,7 @@ module Crytic::Mutation
         Spec.fail_fast = true
         CODE
 
-        mutation = Mutation.with(
+        mutation = IsolatedMutation.with(
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_spec.cr"],
