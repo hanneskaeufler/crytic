@@ -58,14 +58,8 @@ describe Crytic::Runner do
       runner = Crytic::Runner.new(
         threshold: 100.0,
         generator: FakeGenerator.new(
-          neutral: FakeMutation
-            .new(reported_status: Crytic::Mutation::Status::Errored)
-            .as(Crytic::Mutation::MutationInterface),
-          mutations: [
-          FakeMutation
-            .new(reported_status: Crytic::Mutation::Status::Errored)
-            .as(Crytic::Mutation::MutationInterface)
-        ]),
+          neutral: [erroring_mutation],
+          mutations: [fake_mutation]),
         reporters: [reporter] of Crytic::Reporter::Reporter,
         no_mutation_factory: fake_no_mutation_factory)
 
@@ -78,7 +72,7 @@ describe Crytic::Runner do
       reporter = FakeReporter.new
       runner = Crytic::Runner.new(
         threshold: 100.0,
-        generator: FakeGenerator.new([FakeMutation.new.as(Crytic::Mutation::MutationInterface)]),
+        generator: FakeGenerator.new([fake_mutation]),
         reporters: [reporter] of Crytic::Reporter::Reporter,
         no_mutation_factory: fake_no_mutation_factory)
 
