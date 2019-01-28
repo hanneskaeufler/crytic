@@ -55,17 +55,19 @@ describe Crytic::Runner do
 
     it "skips the mutations if the neutral result errored" do
       reporter = FakeReporter.new
+      mutation = fake_mutation
       runner = Crytic::Runner.new(
         threshold: 100.0,
         generator: FakeGenerator.new(
-          neutral: [erroring_mutation],
-          mutations: [fake_mutation]),
+          neutral: erroring_mutation,
+          mutations: [mutation]),
         reporters: [reporter] of Crytic::Reporter::Reporter,
         no_mutation_factory: fake_no_mutation_factory)
 
       runner.run("./fixtures/simple/bar.cr", ["./fixtures/simple/bar_spec.cr"])
 
       reporter.events.should_not contain("report_result")
+      mutation.as(FakeMutation).run_call_count.should eq 0
     end
 
     it "reports events in order" do
