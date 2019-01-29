@@ -1,6 +1,5 @@
 require "../../src/crytic/mutation/original_result"
 require "../../src/crytic/reporter/io_reporter"
-require "../fake_mutation"
 require "../spec_helper"
 
 private def original(exit_code = 0, output = "output")

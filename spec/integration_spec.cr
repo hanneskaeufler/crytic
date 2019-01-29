@@ -1,7 +1,4 @@
 require "../src/crytic/runner"
-require "./fake_generator"
-require "./fake_mutation"
-require "./fake_reporter"
 require "./spec_helper"
 
 {% unless flag?("skip-integration") %}
