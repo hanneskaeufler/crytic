@@ -1,6 +1,6 @@
 require "../../src/crytic/mutant/and_or_swap"
 require "../../src/crytic/mutant/bool_literal_flip"
-require "../../src/crytic/mutation/mutation"
+require "../../src/crytic/mutation/isolated_mutation"
 require "../spec_helper"
 
 module Crytic::Mutation
