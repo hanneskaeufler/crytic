@@ -3,11 +3,11 @@ require "../../src/crytic/mutation/mutation"
 require "../../src/crytic/mutation/result"
 
 private def irrelevant_mutant
-  Crytic::Mutant::BoolLiteralFlip.at(Crytic::Mutant::FullLocation.new(Crystal::Location.new(
+  Crytic::Mutant::BoolLiteralFlip.at(Crytic::Mutant::FullLocation.at(
     filename: nil,
     line_number: 2,
     column_number: 6,
-  )))
+  ))
 end
 
 class FakeMutation < Crytic::Mutation::Mutation

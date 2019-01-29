@@ -13,8 +13,7 @@ module Crytic::Mutant
 
     describe "#name_column_number" do
       it "is nil by default" do
-        location = Crystal::Location.new(nil, 1, 2)
-        full = FullLocation.new(location)
+        full = FullLocation.at(nil, 1, 2)
 
         full.name_column_number.should be_nil
       end

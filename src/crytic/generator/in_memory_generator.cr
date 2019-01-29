@@ -49,7 +49,7 @@ module Crytic
     end
 
     private def noop_mutant_for(src)
-      Mutant::Noop.at(Mutant::FullLocation.new(Crystal::Location.new(src, 0, 0)))
+      Mutant::Noop.at(Mutant::FullLocation.at(src, 0, 0))
     end
 
     private def mutations_for(source : String, specs : Array(String)) : Array(Mutation::Mutation)

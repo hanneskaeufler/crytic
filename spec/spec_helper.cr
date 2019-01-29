@@ -11,10 +11,12 @@ def location_at(line_number, column_number,
                 name_column_number : Int32? = nil,
                 end_location : Crystal::Location? = nil,
                 filename = "some_filename.cr")
-  Crytic::Mutant::FullLocation.new(Crystal::Location.new(
+  Crytic::Mutant::FullLocation.at(
     filename: filename,
     line_number: line_number,
-    column_number: column_number), name_column_number, end_location)
+    column_number: column_number,
+    name_column_number: name_column_number,
+    end_location: end_location)
 end
 
 def fake_mutant(mutated_file : String = "some_filename.cr")
