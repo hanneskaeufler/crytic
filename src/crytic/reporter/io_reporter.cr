@@ -27,7 +27,11 @@ module Crytic::Reporter
     end
 
     def report_neutral_result(result)
-      @io << "Dude that failed"
+      if result.errored?
+        @io << <<-HELP
+        #{INDENT + INDENT + INDENT}🚧 There was an error running the test-suite using crytic's infrastructure with the unmodified subject. This is very likely a bug in crytic, please go ahead and file an issue at https://github.com/hanneskaeufler/crytic/issues. There are a number of known limitations already which could be the reason for the error, see https://github.com/hanneskaeufler/crytic/issues/19.
+        HELP
+      end
     end
 
     def report_result(result)
