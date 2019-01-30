@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
 echo "require \"./spec/**\"" > run_tests.cr
-docker run --rm -it --security-opt seccomp=unconfined -w /app -v $(pwd):/app hanneskaeufler/crystal-kcov:latest ls -ll
+# docker run --rm -it --security-opt seccomp=unconfined -w /app -v $(pwd):/app hanneskaeufler/crystal-kcov:latest ls -ll
+docker create -v /app --name runner hanneskaeufler/crystal-kcov:latest /bin/true
+docker cp $(pwd) runner:/app
+docker run --volumes-from runner hanneskaeufler/crystal-kcov:latest ls /app/crytic
