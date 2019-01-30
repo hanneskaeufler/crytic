@@ -18,6 +18,7 @@ jobs:
     docker:
       - image: crystallang/crystal:0.27.0
     steps:
+      - run: apt-get update && apt-get -y install curl
       - setup_remote_docker
       - run:
           name: Install Docker client
