@@ -3,6 +3,7 @@ require "./fake_generator"
 require "./fake_reporter"
 require "./spec_helper"
 
+{% unless flag?("skip-integration") %}
 describe Crytic do
   describe "--help/-h" do
     it "prints usage info" do
@@ -121,6 +122,7 @@ describe Crytic::Runner do
     end
   end
 end
+{% end %}
 
 def run_crytic_in_dir(dir : String)
   io = IO::Memory.new
