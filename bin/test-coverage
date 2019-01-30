@@ -4,5 +4,5 @@ echo "require \"./spec/**\"" > run_tests.cr
 # docker run --rm -it --security-opt seccomp=unconfined -w /app -v $(pwd):/app hanneskaeufler/crystal-kcov:latest ls -ll
 docker create -v /app --name runner hanneskaeufler/crystal-kcov:latest /bin/true
 echo $(pwd)
-docker cp $(pwd)/ runner:/app
-docker run --volumes-from runner hanneskaeufler/crystal-kcov:latest ls /app
+docker cp $(pwd) runner:/app
+docker run --volumes-from -w /app runner hanneskaeufler/crystal-kcov:latest /bin/bash -c "ls && crystal build run_tests.cr -D skip-integration"
