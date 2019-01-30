@@ -4,3 +4,4 @@ bin/ameba
 bin/crystal-coverage
 coverage/
 bin/crytic
+run_tests*

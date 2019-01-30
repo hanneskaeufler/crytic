@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-list=(`find spec -name '*_spec.cr' -and -not -name 'integration_spec.cr'`)
-printf '%s\n' "${list[@]}" | sort
-./bin/crystal-coverage -p "${list[@]}" | crystal eval
+echo "require \"./spec/**\"" > run_tests.cr && \
+    crystal build run_tests.cr -D skip-integration && \
+    ~/Projects/forks/kcov/build/src/Release/kcov --clean --include-path=~/Projects/personal/crytic/src/ ~/Projects/personal/crytic/coverage ./run_tests
