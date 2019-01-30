@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-if [ -z "${CI}"]; then
+if [ -z "${CI}" ]; then
     echo "require \"./spec/**\"" > run_tests.cr && \
         crystal build run_tests.cr -D skip-integration && \
         ~/Projects/forks/kcov/build/src/Release/kcov --clean --include-path=~/Projects/personal/crytic/src/ ~/Projects/personal/crytic/coverage ./run_tests
 else
-    echo "require \"./spec/**\"" > run_tests.cr && \
-        crystal build run_tests.cr -D skip-integration && \
-        docker run --rm -it -v $(pwd):/app kcov/kcov:v36 kcov --clean --include-path=/app/src/ /app/coverage ./app/run_tests
+    docker run --rm -it --security-opt seccomp=unconfined -v $(pwd):/app crystal-kcov:latest \
+        /bin/bash -c "cd /app && crystal build run_tests.cr -D skip-integration && kcov --clean --include-path=/app/src/ /app/coverage ./run_tests"
 fi
