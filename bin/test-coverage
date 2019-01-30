@@ -5,4 +5,4 @@ echo "require \"./spec/**\"" > run_tests.cr
 docker create -v /app --name runner hanneskaeufler/crystal-kcov:latest /bin/true
 echo $(pwd)
 docker cp $(pwd) runner:/app
-docker run -w /app --volumes-from runner hanneskaeufler/crystal-kcov:latest /bin/bash -c "ls && crystal build run_tests.cr -D skip-integration"
+docker run -w /app/project --volumes-from runner hanneskaeufler/crystal-kcov:latest /bin/bash -c "ls && crystal build run_tests.cr -D skip-integration"
