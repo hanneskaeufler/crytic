@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
 
 echo "require \"./spec/**\"" > run_tests.cr
-echo $(pwd)
-ls
-cat run_tests.cr
-docker run --rm -it --security-opt seccomp=unconfined -w /app -v /root/project:/app hanneskaeufler/crystal-kcov:latest ls
+docker run --rm -it --security-opt seccomp=unconfined -w /app -v $(pwd):/app hanneskaeufler/crystal-kcov:latest ls -ll
