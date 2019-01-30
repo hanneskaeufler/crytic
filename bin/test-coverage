@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
 echo "require \"./spec/**\"" > run_tests.cr
-# docker run --rm -it --security-opt seccomp=unconfined -w /app -v $(pwd):/app hanneskaeufler/crystal-kcov:latest ls -ll
 docker create -v /app --name runner hanneskaeufler/crystal-kcov:latest /bin/true
-echo $(pwd)
 docker cp $(pwd) runner:/app
-docker run -w /app/project --rm --security-opt seccomp=unconfined --volumes-from runner hanneskaeufler/crystal-kcov:latest /bin/bash -c "ls && crystal build run_tests.cr -D skip-integration && kcov --clean --include-path=/app/project/src /coverage ./run_tests"
+docker run \
+    -w /app/project \
+    --rm \
+    --security-opt seccomp=unconfined \
+    --volumes-from runner \
+    --coveralls-id="$COVERALLS_REPO_TOKEN"
+    hanneskaeufler/crystal-kcov:latest \
+    /bin/bash -c "crystal build run_tests.cr -D skip-integration && kcov --clean --include-path=/app/project/src /coverage ./run_tests"
