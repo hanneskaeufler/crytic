@@ -18,10 +18,18 @@ jobs:
     docker:
       - image: crystallang/crystal:0.27.0
     steps:
+      - setup_remote_docker
+      - run:
+        name: Install Docker client
+        command: |
+          set -x
+          VER="17.03.0-ce"
+          curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+          tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+          mv /tmp/docker/* /usr/bin
       - checkout
-      - run: apt-get update && apt-get -y install curl
       - run: shards
-      - run: SPEC_VERBOSE=1 ./bin/test-coverage
+      - run: ./bin/test-coverage
   test-mutations:
     docker:
       - image: crystallang/crystal:0.27.0
