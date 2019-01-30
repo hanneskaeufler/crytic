@@ -4,5 +4,4 @@ echo "require \"./spec/**\"" > run_tests.cr
 echo $(pwd)
 ls
 cat run_tests.cr
-docker run --rm -it --security-opt seccomp=unconfined -w /app -v $(pwd):/app hanneskaeufler/crystal-kcov:latest \
-    /bin/bash -c "ls && crystal build --debug run_tests.cr -D skip-integration && ls && kcov --clean --include-path=/app/src/ /app/coverage ./run_tests"
+docker run --rm -it --security-opt seccomp=unconfined -w /app -v $(pwd):/app hanneskaeufler/crystal-kcov:latest /bin/bash -c "ls && crystal build --debug run_tests.cr -D skip-integration && ls && kcov --clean --include-path=/app/src/ /app/coverage ./run_tests"
