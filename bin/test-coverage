@@ -6,5 +6,5 @@ if [ -z "${CI}" ]; then
         ~/Projects/forks/kcov/build/src/Release/kcov --clean --include-path=~/Projects/personal/crytic/src/ ~/Projects/personal/crytic/coverage ./run_tests
 else
     docker run --rm -it --security-opt seccomp=unconfined -v $(pwd):/app hanneskaeufler/crystal-kcov:latest \
-        /bin/bash -c "cd /app && echo 'require \"./spec/**\"' > run_tests.cr && crystal build run_tests.cr -D skip-integration && kcov --clean --include-path=/app/src/ /app/coverage ./run_tests"
+        /bin/bash -c "cd /app && echo 'require \"./spec/**\"' > run_tests.cr && crystal build --debug run_tests.cr -D skip-integration && ls && kcov --clean --include-path=/app/src/ /app/coverage ./run_tests"
 fi
