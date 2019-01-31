@@ -11,8 +11,8 @@ See [CHANGELOG.md](CHANGELOG.md) for changes between releases.
 
 ### Blog posts
 
-[Introducing crytic - mutation testing in crystal-lang](https://hannes.kaeufler.net/posts/introducing-crytic---mutation-testing-in-crystal-lang)
-[Building a mutation test framework in crystal - Part 1](http://hannes.kaeufler.net/posts/building-a-mutation-test-framework-in-crystal---part-1)
+* [Introducing crytic - mutation testing in crystal-lang](https://hannes.kaeufler.net/posts/introducing-crytic---mutation-testing-in-crystal-lang)
+* [Building a mutation test framework in crystal - Part 1](http://hannes.kaeufler.net/posts/building-a-mutation-test-framework-in-crystal---part-1)
 
 ## Installation
 
