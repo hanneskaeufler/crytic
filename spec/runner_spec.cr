@@ -34,6 +34,25 @@ describe Crytic::Runner do
         ["./fixtures/simple/bar_spec.cr"]).should eq true
     end
 
+    it "doesn't execute mutations if the initial suite run fails" do
+      reporter = FakeReporter.new
+      runner = Crytic::Runner.new(
+        threshold: 100.0,
+        generator: FakeGenerator.new,
+        reporters: [reporter] of Crytic::Reporter::Reporter,
+        no_mutation_factory: ->(specs : Array(String)) {
+          no_mutation = Crytic::Mutation::NoMutation.with(specs)
+          process_runner = Crytic::FakeProcessRunner.new
+          no_mutation.process_runner = process_runner
+          process_runner.exit_code = [1, 0]
+          no_mutation
+        })
+
+      runner.run(
+        ["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"],
+        ["./fixtures/simple/bar_spec.cr"]).should eq false
+    end
+
     it "reports events in order" do
       reporter = FakeReporter.new
       runner = Crytic::Runner.new(
