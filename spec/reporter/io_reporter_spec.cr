@@ -51,6 +51,8 @@ module Crytic::Reporter
 
         IoReporter.new(io).report_neutral_result(result(Mutation::Status::Errored))
 
+        io.to_s.should contain "NumberLiteralChange"
+        io.to_s.should contain "some_filename.cr\n"
         io.to_s.should contain "There was an error"
       end
 
