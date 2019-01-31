@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
 
-echo "require \"./spec/**\"" > run_tests.cr
-docker create -v /app --name runner hanneskaeufler/crystal-kcov:latest /bin/true
-docker cp $(pwd) runner:/app
-ci_env=`bash <(curl -s https://codecov.io/env)`
-docker run $ci_env \
-    -w /app/project \
-    --rm \
-    --security-opt seccomp=unconfined \
-    --volumes-from runner \
-    hanneskaeufler/crystal-kcov:latest \
-    /bin/bash -c "crystal build run_tests.cr -D skip-integration && kcov --clean --include-path=/app/project/src /coverage ./run_tests && bash <(curl -s https://codecov.io/bash) -s /coverage"
+echo "require \"./spec/**\"" > run_tests.cr && \
+crystal build run_tests.cr -D skip-integration && \
+kcov --clean --include-path=$(pwd)/src $(pwd)/coverage ./run_tests && \
+bash <(curl -s https://codecov.io/bash) -s $(pwd)/coverage

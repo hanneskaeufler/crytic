@@ -16,18 +16,8 @@ jobs:
       - image: crystallang/crystal:0.27.0
   test-coverage:
     docker:
-      - image: crystallang/crystal:0.27.0
+      - image: hanneskaeufler/crystal-kcov:0.27.0-v36
     steps:
-      - run: apt-get update && apt-get -y install curl
-      - setup_remote_docker
-      - run:
-          name: Install Docker client
-          command: |
-            set -x
-            VER="17.03.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
       - checkout
       - run: ./bin/test-coverage
   test-mutations:
