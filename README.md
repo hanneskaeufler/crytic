@@ -105,7 +105,7 @@ There are many ways a code-base can be modified to introduce arbitrary failures.
 
 #### AndOrSwap
 
-This mutant replaces the `&&` operator by the `||` operator. A typical mutation is:
+This mutant replaces the `&&` operator by the `||` operator and vice-versa. A typical mutation is:
 
 ```diff
 - if cool && nice
