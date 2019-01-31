@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 
-list=(`find spec -name '*_spec.cr' -and -not -name 'integration_spec.cr'`)
-crystal spec "${list[@]}"
+crystal spec -D skip-integration
