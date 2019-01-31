@@ -7,15 +7,26 @@ module Crytic
       ast = Crystal::Parser.parse("1 && 2")
       transformed = ast.transform(Mutant::AndOrSwap.at(location_at(
         line_number: 1,
-        column_number: 1)))
+        column_number: 1,
+        end_location: Crystal::Location.new(nil, 1, 6))))
       transformed.to_s.should eq "1 || 2"
+    end
+
+    it "swaps or for and" do
+      ast = Crystal::Parser.parse("1 || 2")
+      transformed = ast.transform(Mutant::AndOrSwap.at(location_at(
+        line_number: 1,
+        column_number: 1,
+        end_location: Crystal::Location.new(nil, 1, 6))))
+      transformed.to_s.should eq "1 && 2"
     end
 
     it "only applies to location" do
       ast = Crystal::Parser.parse("1 && 2")
       transformed = ast.transform(Mutant::AndOrSwap.at(location_at(
         line_number: 100,
-        column_number: 100)))
+        column_number: 100,
+        end_location: Crystal::Location.new(nil, 1, 6))))
       transformed.to_s.should eq "1 && 2"
     end
 

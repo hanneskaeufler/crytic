@@ -27,5 +27,14 @@ module Crytic
       possibilities.locations.first.end_location.should_not be_nil
       possibilities.locations.last.end_location.should_not be_nil
     end
+
+    it "finds || as well" do
+      ast = Crystal::Parser.parse("1 || 2")
+      possibilities = Mutant::AndOrSwapPossibilities.new
+      ast.accept(possibilities)
+      possibilities.any?.should eq true
+      possibilities.locations.size.should eq 1
+      possibilities.locations.first.end_location.should_not be_nil
+    end
   end
 end
