@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New "File Summary" reporter that list the covered subjects and the number of mutations that were performed on each of those files respectively
+
+## [4.0.0] - 2019-01-31
+
+### Added
+
 - Run a "neutral" mutation before each subjects real mutations. This is [@mjb](https://github.com/mbj)'s idea to validate the infrastructure of injecting mutations. Currently a "noop"-mutation is run, which simply doesn't mutate the subject at all.
 
 ### Changed

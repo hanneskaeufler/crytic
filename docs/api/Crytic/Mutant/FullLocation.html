@@ -141,6 +141,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/Noop" data-name="crytic::mutant::noop">
+      <a href="../../Crytic/Mutant/Noop.html">Noop</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChange" data-name="crytic::mutant::numberliteralchange">
       <a href="../../Crytic/Mutant/NumberLiteralChange.html">NumberLiteralChange</a>
       
@@ -226,18 +231,23 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
-      <a href="../../Crytic/Mutation/Mutation.html">Mutation</a>
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/IsolatedMutation" data-name="crytic::mutation::isolatedmutation">
+      <a href="../../Crytic/Mutation/IsolatedMutation.html">IsolatedMutation</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation/Preamble" data-name="crytic::mutation::mutation::preamble">
-      <a href="../../Crytic/Mutation/Mutation/Preamble.html">Preamble</a>
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/IsolatedMutation/Preamble" data-name="crytic::mutation::isolatedmutation::preamble">
+      <a href="../../Crytic/Mutation/IsolatedMutation/Preamble.html">Preamble</a>
       
     </li>
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
+      <a href="../../Crytic/Mutation/Mutation.html">Mutation</a>
       
     </li>
   
@@ -273,6 +283,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutationScoreIndicator" data-name="crytic::mutationscoreindicator">
       <a href="../../Crytic/MutationScoreIndicator.html">MutationScoreIndicator</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutationSet" data-name="crytic::mutationset">
+      <a href="../../Crytic/MutationSet.html">MutationSet</a>
       
     </li>
   
@@ -330,6 +345,11 @@
       <a href="../../Crytic/Runner.html">Runner</a>
       
         <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/NoMutationFactory" data-name="crytic::runner::nomutationfactory">
+      <a href="../../Crytic/Runner/NoMutationFactory.html">NoMutationFactory</a>
+      
+    </li>
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Threshold" data-name="crytic::runner::threshold">
       <a href="../../Crytic/Runner/Threshold.html">Threshold</a>
@@ -406,7 +426,7 @@ end_location is used for Crystal::And.</p>
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L6" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/full_location.cr#L6" target="_blank">
         crytic/mutant/full_location.cr
       </a>
     
@@ -428,6 +448,16 @@ end_location is used for Crystal::And.</p>
   </ul>
 
 
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#at%28filename%2Cline_number%2Ccolumn_number%2Cname_column_number%3Dnil%2Cend_location%3Dnil%29-class-method" class="signature"><strong>.at</strong>(filename, line_number, column_number, name_column_number = <span class="n">nil</span>, end_location = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -538,13 +568,32 @@ end_location is used for Crystal::And.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/full_location.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="at(filename,line_number,column_number,name_column_number=nil,end_location=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>at</strong>(filename, line_number, column_number, name_column_number = <span class="n">nil</span>, end_location = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#at%28filename%2Cline_number%2Ccolumn_number%2Cname_column_number%3Dnil%2Cend_location%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/full_location.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
@@ -561,7 +610,7 @@ end_location is used for Crystal::And.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/full_location.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -577,7 +626,7 @@ end_location is used for Crystal::And.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/full_location.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -593,7 +642,7 @@ end_location is used for Crystal::And.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/full_location.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -609,7 +658,7 @@ end_location is used for Crystal::And.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/full_location.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -639,7 +688,7 @@ end_location is used for Crystal::And.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/full_location.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -655,7 +704,7 @@ end_location is used for Crystal::And.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/full_location.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -685,7 +734,7 @@ end_location is used for Crystal::And.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/mutant/full_location.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/full_location.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>

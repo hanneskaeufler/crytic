@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutant::AndOrSwapPossibilities - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Runner::NoMutationFactory - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -86,7 +86,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
       <a href="../../Crytic/Mutant.html">Mutant</a>
       
         <ul>
@@ -96,7 +96,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AndOrSwapPossibilities" data-name="crytic::mutant::andorswappossibilities">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/AndOrSwapPossibilities" data-name="crytic::mutant::andorswappossibilities">
       <a href="../../Crytic/Mutant/AndOrSwapPossibilities.html">AndOrSwapPossibilities</a>
       
     </li>
@@ -341,12 +341,12 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
       <a href="../../Crytic/Runner.html">Runner</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/NoMutationFactory" data-name="crytic::runner::nomutationfactory">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/NoMutationFactory" data-name="crytic::runner::nomutationfactory">
       <a href="../../Crytic/Runner/NoMutationFactory.html">NoMutationFactory</a>
       
     </li>
@@ -395,17 +395,18 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Mutant::AndOrSwapPossibilities
+  <span class="kind">alias</span> Crytic::Runner::NoMutationFactory
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/AndOrSwapPossibilities.html">Crytic::Mutant::AndOrSwapPossibilities</a></li><li class="superclass"><a href="../../Crytic/Mutant/Possibilities.html">Crytic::Mutant::Possibilities</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
 
+  <h2>Alias Definition</h2>
+  <code>Array(String) -> <a href="../../Crytic/Mutation/NoMutation.html">Crytic::Mutation::NoMutation</a></code>
 
 
 
@@ -421,8 +422,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/and_or_swap_possibilities.cr#L4" target="_blank">
-        crytic/mutant/and_or_swap_possibilities.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/runner.cr#L14" target="_blank">
+        crytic/runner.cr
       </a>
     
     <br/>
@@ -436,90 +437,11 @@
 
 
 
-  <h2>Instance Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#mutant_class-instance-method" class="signature"><strong>#mutant_class</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#visit%28node%3ACrystal%3A%3AAnd%7CCrystal%3A%3AOr%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::And | Crystal::Or)</a>
-        
-      </li>
-    
-  </ul>
-
 
 
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Crytic/Mutant/Possibilities.html">Crytic::Mutant::Possibilities</a></code></h3>
-  
-  
-    <a href="../../Crytic/Mutant/Possibilities.html#any%3F-instance-method" class="tooltip">
-      <span>any?</span>
-    any?</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/Possibilities.html#locations%3AArray%28Crytic%3A%3AMutant%3A%3AFullLocation%29-instance-method" class="tooltip">
-      <span>locations : Array(Crytic::Mutant::FullLocation)</span>
-    locations</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/Possibilities.html#reset-instance-method" class="tooltip">
-      <span>reset</span>
-    reset</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/Possibilities.html#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="tooltip">
-      <span>visit(node : Crystal::ASTNode)</span>
-    visit</a>
-    
-  
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
   
 </div>
 
@@ -527,41 +449,6 @@
 
 
 
-
-  <h2>Instance Method Detail</h2>
-  
-    <div class="entry-detail" id="mutant_class-instance-method">
-      <div class="signature">
-        
-        def <strong>mutant_class</strong>
-
-        <a class="method-permalink" href="#mutant_class-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/and_or_swap_possibilities.cr#L4" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="visit(node:Crystal::And|Crystal::Or)-instance-method">
-      <div class="signature">
-        
-        def <strong>visit</strong>(node : Crystal::And | Crystal::Or)
-
-        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3AAnd%7CCrystal%3A%3AOr%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/mutant/and_or_swap_possibilities.cr#L5" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 

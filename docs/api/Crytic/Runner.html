@@ -141,6 +141,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/Noop" data-name="crytic::mutant::noop">
+      <a href="../Crytic/Mutant/Noop.html">Noop</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/NumberLiteralChange" data-name="crytic::mutant::numberliteralchange">
       <a href="../Crytic/Mutant/NumberLiteralChange.html">NumberLiteralChange</a>
       
@@ -226,18 +231,23 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
-      <a href="../Crytic/Mutation/Mutation.html">Mutation</a>
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/IsolatedMutation" data-name="crytic::mutation::isolatedmutation">
+      <a href="../Crytic/Mutation/IsolatedMutation.html">IsolatedMutation</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation/Preamble" data-name="crytic::mutation::mutation::preamble">
-      <a href="../Crytic/Mutation/Mutation/Preamble.html">Preamble</a>
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/IsolatedMutation/Preamble" data-name="crytic::mutation::isolatedmutation::preamble">
+      <a href="../Crytic/Mutation/IsolatedMutation/Preamble.html">Preamble</a>
       
     </li>
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
+      <a href="../Crytic/Mutation/Mutation.html">Mutation</a>
       
     </li>
   
@@ -273,6 +283,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutationScoreIndicator" data-name="crytic::mutationscoreindicator">
       <a href="../Crytic/MutationScoreIndicator.html">MutationScoreIndicator</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutationSet" data-name="crytic::mutationset">
+      <a href="../Crytic/MutationSet.html">MutationSet</a>
       
     </li>
   
@@ -330,6 +345,11 @@
       <a href="../Crytic/Runner.html">Runner</a>
       
         <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/NoMutationFactory" data-name="crytic::runner::nomutationfactory">
+      <a href="../Crytic/Runner/NoMutationFactory.html">NoMutationFactory</a>
+      
+    </li>
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Threshold" data-name="crytic::runner::threshold">
       <a href="../Crytic/Runner/Threshold.html">Threshold</a>
@@ -408,7 +428,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/runner.cr#L10" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/runner.cr#L10" target="_blank">
         crytic/runner.cr
       </a>
     
@@ -423,7 +443,9 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28threshold%3AThreshold%2Creporters%3AArray%28Reporter%3A%3AReporter%29%2Cgenerator%3AGenerator%29-class-method" class="signature"><strong>.new</strong>(threshold : Threshold, reporters : Array(Reporter::Reporter), generator : Generator)</a>
+        <a href="#new%28threshold%3AThreshold%2Creporters%3AArray%28Reporter%3A%3AReporter%29%2Cgenerator%3AGenerator%2Cno_mutation_factory%3ANoMutationFactory%3D-%3E%28specs%3AArray%28String%29%29do%0AMutation%3A%3ANoMutation.with%28specs%29%0Aend%29-class-method" class="signature"><strong>.new</strong>(threshold : Threshold, reporters : Array(Reporter::Reporter), generator : Generator, no_mutation_factory : NoMutationFactory = ->(specs : <span class="t">Array</span>(<span class="t">String</span>)) <span class="k">do</span>
+  <span class="t">Mutation</span><span class="t">::</span><span class="t">NoMutation</span>.<span class="k">with</span>(specs)
+<span class="k">end</span>)</a>
         
       </li>
     
@@ -489,18 +511,22 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(threshold:Threshold,reporters:Array(Reporter::Reporter),generator:Generator)-class-method">
+    <div class="entry-detail" id="new(threshold:Threshold,reporters:Array(Reporter::Reporter),generator:Generator,no_mutation_factory:NoMutationFactory=-&gt;(specs:Array(String))do
+Mutation::NoMutation.with(specs)
+end)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(threshold : <a href="../Crytic/Runner/Threshold.html">Threshold</a>, reporters : Array(<a href="../Crytic/Reporter/Reporter.html">Reporter::Reporter</a>), generator : <a href="../Crytic/Generator.html">Generator</a>)
+        def self.<strong>new</strong>(threshold : <a href="../Crytic/Runner/Threshold.html">Threshold</a>, reporters : Array(<a href="../Crytic/Reporter/Reporter.html">Reporter::Reporter</a>), generator : <a href="../Crytic/Generator.html">Generator</a>, no_mutation_factory : <a href="../Crytic/Runner/NoMutationFactory.html">NoMutationFactory</a> = ->(specs : <span class="t">Array</span>(<span class="t">String</span>)) <span class="k">do</span>
+  <span class="t">Mutation</span><span class="t">::</span><span class="t">NoMutation</span>.<span class="k">with</span>(specs)
+<span class="k">end</span>)
 
-        <a class="method-permalink" href="#new%28threshold%3AThreshold%2Creporters%3AArray%28Reporter%3A%3AReporter%29%2Cgenerator%3AGenerator%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28threshold%3AThreshold%2Creporters%3AArray%28Reporter%3A%3AReporter%29%2Cgenerator%3AGenerator%2Cno_mutation_factory%3ANoMutationFactory%3D-%3E%28specs%3AArray%28String%29%29do%0AMutation%3A%3ANoMutation.with%28specs%29%0Aend%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/runner.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/runner.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -523,7 +549,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/runner.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/runner.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -539,7 +565,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/06b78346e6f3ee4cde63c25dc126f1183c34cdd9/src/crytic/runner.cr#L46" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/fc2039903cbd4b540f485df5ee0ea37b563a8434/src/crytic/runner.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
