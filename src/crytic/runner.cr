@@ -11,18 +11,22 @@ module Crytic
     include RunnerArgumentValidator
 
     alias Threshold = Float64
+    alias NoMutationFactory = (Array(String)) -> Mutation::NoMutation
 
     def initialize(
       @threshold : Threshold,
       @reporters : Array(Reporter::Reporter),
-      @generator : Generator
+      @generator : Generator,
+      @no_mutation_factory : NoMutationFactory = ->(specs : Array(String)) {
+        Mutation::NoMutation.with(specs)
+      }
     )
     end
 
     def run(source : Array(String), specs : Array(String)) : Bool
       validate_args!(source, specs)
 
-      original_result = Mutation::NoMutation.with(specs).run
+      original_result = @no_mutation_factory.call(specs).run
       @reporters.each(&.report_original_result(original_result))
 
       return false unless original_result.successful?
