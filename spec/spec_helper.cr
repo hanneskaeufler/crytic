@@ -1,5 +1,8 @@
 require "../../src/crytic/mutant/number_literal_change"
 require "../src/crytic/mutant/full_location"
+require "./fake_generator"
+require "./fake_reporter"
+require "./mutation/fake_process_runner"
 require "compiler/crystal/syntax/*"
 require "spec"
 
