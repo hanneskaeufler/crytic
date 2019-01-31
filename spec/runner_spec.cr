@@ -1,3 +1,4 @@
+require "../src/crytic/mutation/no_mutation"
 require "../src/crytic/runner"
 require "./spec_helper"
 
@@ -57,13 +58,30 @@ describe Crytic::Runner do
       reporter = FakeReporter.new
       runner = Crytic::Runner.new(
         threshold: 100.0,
-        generator: FakeGenerator.new,
+        generator: FakeGenerator.new([fake_mutation]),
         reporters: [reporter] of Crytic::Reporter::Reporter,
         no_mutation_factory: fake_no_mutation_factory)
 
       runner.run("./fixtures/simple/bar.cr", ["./fixtures/simple/bar_spec.cr"])
 
-      reporter.events.should eq ["report_original_result", "report_mutations", "report_summary", "report_msi"]
+      reporter.events.should eq ["report_original_result", "report_mutations", "report_neutral_result", "report_result", "report_summary", "report_msi"]
+    end
+
+    it "skips the mutations if the neutral result errored" do
+      reporter = FakeReporter.new
+      mutation = fake_mutation
+      runner = Crytic::Runner.new(
+        threshold: 100.0,
+        generator: FakeGenerator.new(
+          neutral: erroring_mutation,
+          mutations: [mutation]),
+        reporters: [reporter] of Crytic::Reporter::Reporter,
+        no_mutation_factory: fake_no_mutation_factory)
+
+      runner.run("./fixtures/simple/bar.cr", ["./fixtures/simple/bar_spec.cr"])
+
+      reporter.events.should_not contain("report_result")
+      mutation.as(FakeMutation).run_call_count.should eq 0
     end
   end
 end

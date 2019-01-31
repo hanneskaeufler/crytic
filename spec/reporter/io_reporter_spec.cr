@@ -1,6 +1,5 @@
 require "../../src/crytic/mutation/original_result"
 require "../../src/crytic/reporter/io_reporter"
-require "../fake_mutation"
 require "../spec_helper"
 
 private def original(exit_code = 0, output = "output")
@@ -43,6 +42,26 @@ module Crytic::Reporter
         mutation = FakeMutation.new
         IoReporter.new(io).report_mutations([mutation])
         io.to_s.should eq("Running 1 mutation.")
+      end
+    end
+
+    describe "#report_neutral_result" do
+      it "prints a helpful message indicating that the mutant injecting setup seems to have broken the suite" do
+        io = IO::Memory.new
+
+        IoReporter.new(io).report_neutral_result(result(Mutation::Status::Errored))
+
+        io.to_s.should contain "NumberLiteralChange"
+        io.to_s.should contain "some_filename.cr\n"
+        io.to_s.should contain "There was an error"
+      end
+
+      it "is silent for a neutral mutation that didnt error" do
+        io = IO::Memory.new
+
+        IoReporter.new(io).report_neutral_result(result)
+
+        io.to_s.should be_empty
       end
     end
 

@@ -9,6 +9,10 @@ module Crytic::Mutant
     end_location : Crystal::Location? = nil do
     delegate line_number, column_number, to: location
 
+    def self.at(filename, line_number, column_number, name_column_number = nil, end_location = nil)
+      new(Crystal::Location.new(filename, line_number, column_number), name_column_number, end_location)
+    end
+
     def matches?(node)
       node_location = node.location
       return false if node_location.nil?

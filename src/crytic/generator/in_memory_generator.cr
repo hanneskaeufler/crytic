@@ -1,5 +1,5 @@
 require "../mutant/**"
-require "../mutation/mutation"
+require "../mutation/isolated_mutation"
 require "./generator"
 require "compiler/crystal/syntax/*"
 
@@ -27,19 +27,32 @@ module Crytic
     CODE
 
     property mutation_factory : MutationFactory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
-      Mutation::Mutation.with(mutant, original, specs, preamble)
+      Mutation::IsolatedMutation.with(mutant, original, specs, preamble).as(Mutation::Mutation)
     }
 
     def initialize(@possibilities : Array(Mutant::Possibilities), @preamble : String)
     end
 
     def mutations_for(sources : Array(String), specs : Array(String))
-      sources.map do |src|
-        mutations_for(source: src, specs: specs)
-      end.flatten
+      sources
+        .map do |src|
+          MutationSet.new(
+            neutral: noop_mutation_for(src, specs),
+            mutated: mutations_for(src, specs)
+          )
+        end
+        .reject(&.mutated.empty?)
     end
 
-    private def mutations_for(source : String, specs : Array(String))
+    private def noop_mutation_for(src, specs) : Mutation::Mutation
+      mutation_factory.call(noop_mutant_for(src), src, specs, @preamble)
+    end
+
+    private def noop_mutant_for(src)
+      Mutant::Noop.at(Mutant::FullLocation.at(src, 0, 0))
+    end
+
+    private def mutations_for(source : String, specs : Array(String)) : Array(Mutation::Mutation)
       ast = ast_for(source: source)
 
       @possibilities

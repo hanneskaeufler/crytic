@@ -1,4 +1,4 @@
-require "../../src/crytic/process_runner"
+require "../src/crytic/process_runner"
 
 module Crytic
   class FakeProcessRunner < ProcessRunner

@@ -1,6 +1,4 @@
 require "../src/crytic/runner"
-require "./fake_generator"
-require "./fake_reporter"
 require "./spec_helper"
 
 {% unless flag?("skip-integration") %}
@@ -17,10 +15,10 @@ describe Crytic do
   end
 
   describe "--preamble/-p" do
-    it "injects the given custom preamble, failing=covering all mutants that would otherwise be uncovered" do
+    it "injects the given custom preamble, failing the neutral mutant" do
       result = run_crytic("-s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr -p 'exit 1'")
-      result.output.should contain("✅ ConditionFlip")
-      result.output.should contain("✅ BoolLiteralFlip")
+      result.output.should contain("unmodified subject")
+      result.output.should_not contain("ConditionFlip")
       result.exit_code.should eq 0
     end
   end

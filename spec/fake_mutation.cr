@@ -3,18 +3,21 @@ require "../../src/crytic/mutation/mutation"
 require "../../src/crytic/mutation/result"
 
 private def irrelevant_mutant
-  Crytic::Mutant::BoolLiteralFlip.at(Crystal::Location.new(
+  Crytic::Mutant::BoolLiteralFlip.at(Crytic::Mutant::FullLocation.at(
     filename: nil,
     line_number: 2,
     column_number: 6,
   ))
 end
 
-class FakeMutation
+class FakeMutation < Crytic::Mutation::Mutation
   property run_call_count = 0
+
+  def initialize(@reported_status = Crytic::Mutation::Status::Uncovered)
+  end
 
   def run
     @run_call_count += 1
-    Crytic::Mutation::Result.new(Crytic::Mutation::Status::Uncovered, irrelevant_mutant, "")
+    Crytic::Mutation::Result.new(@reported_status, irrelevant_mutant, "")
   end
 end

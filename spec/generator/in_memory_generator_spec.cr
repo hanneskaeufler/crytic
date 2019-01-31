@@ -25,7 +25,7 @@ module Crytic
         mutations.should be_empty
       end
 
-      it "returns a single mutation for the number literal" do
+      it "returns a number literal mutation for the number literal" do
         source = fixture_source("non_empty_source_file.cr")
 
         mutations = InMemoryMutationsGenerator
@@ -51,7 +51,7 @@ module Crytic
         last_preamble = ""
         factory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
           last_preamble = preamble
-          Mutation::Mutation.with(mutant, original, specs, preamble)
+          Mutation::IsolatedMutation.with(mutant, original, specs, preamble).as(Mutation::Mutation)
         }
         source = fixture_source("non_empty_source_file.cr")
 
@@ -69,7 +69,7 @@ module Crytic
         last_mutant : Mutant::Mutant? = nil
         factory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
           last_mutant = mutant
-          Mutation::Mutation.with(mutant, original, specs, preamble)
+          Mutation::IsolatedMutation.with(mutant, original, specs, preamble).as(Mutation::Mutation)
         }
 
         generator = InMemoryMutationsGenerator
