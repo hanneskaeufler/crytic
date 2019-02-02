@@ -1,4 +1,5 @@
 require "./mutation/result"
+require "./mutation/result_set"
 
 module Crytic
   record MutationScoreIndicator, value : Float64 do
