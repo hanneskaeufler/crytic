@@ -3,7 +3,7 @@ require "../mutation/isolated_mutation"
 require "./generator"
 require "compiler/crystal/syntax/*"
 
-module Crytic
+module Crytic::Generator
   # Determines all possible mutations for the given source files.
   class InMemoryMutationsGenerator < Generator
     alias MutationFactory = (Mutant::Mutant, String, Array(String), String) -> Mutation::Mutation

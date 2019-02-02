@@ -2,6 +2,7 @@ require "./generator/**"
 require "./msi_calculator"
 require "./mutation/no_mutation"
 require "./mutation/result"
+require "./mutation/result_set"
 require "./reporter/**"
 require "./runner_argument_validator"
 require "./subject"
@@ -16,7 +17,7 @@ module Crytic
     def initialize(
       @threshold : Threshold,
       @reporters : Array(Reporter::Reporter),
-      @generator : Generator,
+      @generator : Generator::Generator,
       @no_mutation_factory : NoMutationFactory = ->(specs : Array(String)) {
         Mutation::NoMutation.with(specs)
       }

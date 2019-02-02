@@ -8,7 +8,7 @@ require "option_parser"
 subject_source = ""
 msi_threshold = 100.0
 spec_files = [] of String
-preamble = Crytic::InMemoryMutationsGenerator::DEFAULT_PREAMBLE
+preamble = Crytic::Generator::InMemoryMutationsGenerator::DEFAULT_PREAMBLE
 
 OptionParser.parse! do |parser|
   parser.banner = "Usage: crytic [arguments]"
@@ -57,8 +57,8 @@ if spec_files.empty?
   spec_files = Dir["./spec/**/*_spec.cr"]
 end
 
-generator = Crytic::InMemoryMutationsGenerator.new(
-  Crytic::InMemoryMutationsGenerator::ALL_MUTANTS,
+generator = Crytic::Generator::InMemoryMutationsGenerator.new(
+  Crytic::Generator::InMemoryMutationsGenerator::ALL_MUTANTS,
   preamble)
 
 success = Crytic::Runner
