@@ -2,7 +2,7 @@ require "../../src/crytic/generator/in_memory_generator"
 require "../spec_helper"
 require "compiler/crystal/syntax/*"
 
-module Crytic
+module Crytic::Generator
   describe InMemoryMutationsGenerator do
     describe "#mutations_for" do
       it "returns no mutations for no possibilities" do

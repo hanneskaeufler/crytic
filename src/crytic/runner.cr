@@ -17,7 +17,7 @@ module Crytic
     def initialize(
       @threshold : Threshold,
       @reporters : Array(Reporter::Reporter),
-      @generator : Generator,
+      @generator : Generator::Generator,
       @no_mutation_factory : NoMutationFactory = ->(specs : Array(String)) {
         Mutation::NoMutation.with(specs)
       }

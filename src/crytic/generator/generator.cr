@@ -1,6 +1,6 @@
 require "../mutation/mutation"
 
-module Crytic
+module Crytic::Generator
   record MutationSet, neutral : Mutation::Mutation, mutated : Array(Mutation::Mutation)
 
   abstract class Generator
