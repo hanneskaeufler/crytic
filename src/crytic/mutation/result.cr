@@ -20,7 +20,7 @@ module Crytic::Mutation
     end
 
     def mutated_file : String
-      location.filename.to_s || ""
+      location.filename.to_s
     end
   end
 end
