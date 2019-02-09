@@ -1,12 +1,13 @@
+[![Latest Tag](https://img.shields.io/github/tag-date/hanneskaeufler/crytic.svg)](https://github.com/hanneskaeufler/crytic/releases) [![CircleCI](https://circleci.com/gh/hanneskaeufler/crytic/tree/master.svg?style=svg)](https://circleci.com/gh/hanneskaeufler/crytic/tree/master) [![codecov](https://codecov.io/gh/hanneskaeufler/crytic/branch/master/graph/badge.svg)](https://codecov.io/gh/hanneskaeufler/crytic) ![Mutation Score](https://badge.stryker-mutator.io/github.com/hanneskaeufler/crytic/master)
+
+# Crytic
+
 <p align="center">
-    [![Latest Tag](https://img.shields.io/github/tag-date/hanneskaeufler/crytic.svg)](https://github.com/hanneskaeufler/crytic/releases) [![CircleCI](https://circleci.com/gh/hanneskaeufler/crytic/tree/master.svg?style=svg)](https://circleci.com/gh/hanneskaeufler/crytic/tree/master) [![codecov](https://codecov.io/gh/hanneskaeufler/crytic/branch/master/graph/badge.svg)](https://codecov.io/gh/hanneskaeufler/crytic) ![Mutation Score](https://badge.stryker-mutator.io/github.com/hanneskaeufler/crytic/master)
-</p>
-<p align="center">
+    <a href="#installation">Installation</a> &bull;
+    <a href="#usage">Usage</a> &bull;
     <a href="CHANGELOG.md">Changelog</a> &bull;
     <a href="#credits--inspiration">Credits</a>
 </p>
-
-# Crytic
 
 Crytic, pronounced /ˈkrɪtɪk/, is a mutation testing framework for the crystal programming language. Mutation testing is a type of software testing where specific statements in the code are changed to determine if test cases find this defect.
 
