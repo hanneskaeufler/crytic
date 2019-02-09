@@ -8,7 +8,7 @@ class FakeGenerator < Crytic::Generator::Generator
 
   def mutations_for(source : Array(String), specs : Array(String))
     [Crytic::Generator::MutationSet.new(
-      neutral: @neutral,
-      mutated: @mutations)]
+       neutral: @neutral,
+       mutated: @mutations)]
   end
 end
