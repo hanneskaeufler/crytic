@@ -1,13 +1,16 @@
 [![Latest Tag](https://img.shields.io/github/tag-date/hanneskaeufler/crytic.svg)
 ](https://github.com/hanneskaeufler/crytic/releases) [![CircleCI](https://circleci.com/gh/hanneskaeufler/crytic/tree/master.svg?style=svg)](https://circleci.com/gh/hanneskaeufler/crytic/tree/master) [![codecov](https://codecov.io/gh/hanneskaeufler/crytic/branch/master/graph/badge.svg)](https://codecov.io/gh/hanneskaeufler/crytic) ![Mutation Score](https://badge.stryker-mutator.io/github.com/hanneskaeufler/crytic/master)
 
-# crytic
+# Crytic
 
 Crytic, pronounced /ˈkrɪtɪk/, is a mutation testing framework for the crystal programming language. Mutation testing is a type of software testing where specific statements in the code are changed to determine if test cases find this defect.
 
 > Crytic is in a very early state of development. It is not very clever, making it slow as well.
 
-See [CHANGELOG.md](CHANGELOG.md) for changes between releases.
+<p align="center">
+    <a href="CHANGELOG.md">Changelog</a> &bull;
+    <a href="#credits--inspiration">Credits</a>
+</p>
 
 ### Blog posts
 
@@ -84,11 +87,11 @@ The first good message here is that the `Original test suite passed`. Crytic ran
 
 Each occurance of `✅` shows that a mutant has been killed, ergo that the change in the source code was detected by the test suite. The line and column numbers are printed to follow the progress through the subject file.
 
-`❌ AndOrSwap` is signaling that indeed a mutation was not detected. The diff below shows the change that was made which was not caught by the test suite.
+`❌ AndOrSwap` is signaling that indeed a mutant, an intentional change in the subject, was not detected. The diff below shows the change that was made which was not caught by the test suite.
 
 ### Mutation Badge
 
-To show a badge about your mutation testing efforts like at the top of this readme you can make use of the [dashboard](https://dashboard.stryker-mutator.io) of stryker by letting crytic post  the msi score to the stryker api. To do that, make sure to have the following env vars set:
+To show a badge about your mutation testing efforts like at the top of this readme you can make use of the [dashboard](https://dashboard.stryker-mutator.io) of stryker by letting crytic post  the msi score to the stryker API. To do that, make sure to have the following env vars set:
 
 ```
 CIRCLE_BRANCH             => "master",
@@ -101,7 +104,7 @@ It is currently limited to work with Circle CI and assumes your project is hoste
 
 ### Available mutants
 
-There are many ways a code-base can be modified to introduce arbitrary failures. Crytic only provides mutators which keep the code compiling (at least in theory).
+There are many ways a code-base can be modified to introduce arbitrary failures. Crytic only provides mutators which keep the code compiling (at least in theory). Currently, available mutators are:
 
 #### AndOrSwap
 
@@ -135,7 +138,7 @@ This mutant flips the `if` and `else` branch in conditions. It will create an `e
 
 #### NumberLiteralChange
 
-This mutation changes literal occurances of numbers by replacing them with "0". "0" gets replaces by "1". A typical mutation is:
+This mutant changes literal occurances of numbers by replacing them with "0". "0" gets replaces by "1". A typical mutation is:
 
 ```diff
 -  0
@@ -144,7 +147,7 @@ This mutation changes literal occurances of numbers by replacing them with "0". 
 
 #### NumberLiteralSignChange
 
-This mutation changes the sign of literal numbers. It ignores literal "0". A typical mutation is:
+This mutant changes the sign of literal numbers. It ignores literal "0". A typical mutation is:
 
 ```diff
 - 5
@@ -153,7 +156,7 @@ This mutation changes the sign of literal numbers. It ignores literal "0". A typ
 
 #### StringLiteralChange
 
-This mutation changes literal occurances of string by appending the string `__crytic__`. A typical mutation is:
+This mutant changes literal occurances of string by appending the string `__crytic__`. A typical mutation is:
 
 ```diff
 - "Welcome"
@@ -162,7 +165,7 @@ This mutation changes literal occurances of string by appending the string `__cr
 
 #### AnyAllSwap
 
-This mutation exchanges calls to [Enumerable#all?](https://crystal-lang.org/api/0.27.0/Enumerable.html#all%3F-instance-method) with calls to [Enumerable#any?](https://crystal-lang.org/api/0.27.0/Enumerable.html#any%3F-instance-method) and vice-versa. A typical mutation is:
+This mutant exchanges calls to [Enumerable#all?](https://crystal-lang.org/api/0.27.0/Enumerable.html#all%3F-instance-method) with calls to [Enumerable#any?](https://crystal-lang.org/api/0.27.0/Enumerable.html#any%3F-instance-method) and vice-versa. A typical mutation is:
 
 ```diff
 - [false].all?
@@ -171,7 +174,7 @@ This mutation exchanges calls to [Enumerable#all?](https://crystal-lang.org/api/
 
 #### RegexpLiteralChange
 
-This mutation modifies any regular expression literal to never match anything. A typical mutation is:
+This mutant modifies any regular expression literal to never match anything. A typical mutation is:
 
 ```diff
 - /\d+/
@@ -180,7 +183,7 @@ This mutation modifies any regular expression literal to never match anything. A
 
 #### SelectRejectSwap
 
-This mutation exchanges calls to [Enumerable#select](https://crystal-lang.org/api/0.27.0/Enumerable.html#select%28%26block%3AT-%3E%29-instance-method) with calls to [Enumerable#reject](https://crystal-lang.org/api/0.27.0/Enumerable.html#reject%28%26block%3AT-%3E%29-instance-method) and vice-versa. A typical mutation is:
+This mutant exchanges calls to [Enumerable#select](https://crystal-lang.org/api/0.27.0/Enumerable.html#select%28%26block%3AT-%3E%29-instance-method) with calls to [Enumerable#reject](https://crystal-lang.org/api/0.27.0/Enumerable.html#reject%28%26block%3AT-%3E%29-instance-method) and vice-versa. A typical mutation is:
 
 ```diff
 - [1].select(&.nil?)
