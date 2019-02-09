@@ -134,6 +134,8 @@ module Crytic::Mutation
 
     # All of the below code is stolen from crystal itself
     # https://github.com/crystal-lang/crystal/blob/master/src/compiler/crystal/crystal_path.cr
+    # Because we are caring about relative requires "./foo/bar" exclusively, a lot of code
+    # was removed from this method.
     private def find_in_path_relative_to_dir(filename, relative_to)
       if relative_to.is_a?(String)
         # Check if it's a wildcard.
@@ -152,42 +154,9 @@ module Crytic::Mutation
 
           # Check if .cr file exists.
           relative_filename_cr = relative_filename.ends_with?(".cr") ? relative_filename : "#{relative_filename}.cr"
+
           if File.exists?(relative_filename_cr)
             return make_relative_unless_absolute relative_filename_cr
-          end
-
-          if filename.index('/')
-            # If it's "foo/bar/baz", check if "foo/src/bar/baz.cr" exists (for a shard, non-namespaced structure)
-            before_slash, after_slash = filename.split('/', 2)
-            absolute_filename = make_relative_unless_absolute("#{relative_to}/#{before_slash}/src/#{after_slash}.cr")
-            return absolute_filename if File.exists?(absolute_filename)
-
-            # Then check if "foo/src/foo/bar/baz.cr" exists (for a shard, namespaced structure)
-            absolute_filename = make_relative_unless_absolute("#{relative_to}/#{before_slash}/src/#{before_slash}/#{after_slash}.cr")
-            return absolute_filename if File.exists?(absolute_filename)
-
-            # If it's "foo/bar/baz", check if "foo/bar/baz/baz.cr" exists (std, nested)
-            basename = File.basename(relative_filename)
-            absolute_filename = make_relative_unless_absolute("#{relative_to}/#{filename}/#{basename}.cr")
-            return absolute_filename if File.exists?(absolute_filename)
-
-            # If it's "foo/bar/baz", check if "foo/src/foo/bar/baz/baz.cr" exists (shard, non-namespaced, nested)
-            absolute_filename = make_relative_unless_absolute("#{relative_to}/#{before_slash}/src/#{after_slash}/#{after_slash}.cr")
-            return absolute_filename if File.exists?(absolute_filename)
-
-            # If it's "foo/bar/baz", check if "foo/src/foo/bar/baz/baz.cr" exists (shard, namespaced, nested)
-            absolute_filename = make_relative_unless_absolute("#{relative_to}/#{before_slash}/src/#{before_slash}/#{after_slash}/#{after_slash}.cr")
-            return absolute_filename if File.exists?(absolute_filename)
-          else
-            basename = File.basename(relative_filename)
-
-            # If it's "foo", check if "foo/foo.cr" exists (for the std, nested)
-            absolute_filename = make_relative_unless_absolute("#{relative_filename}/#{basename}.cr")
-            return absolute_filename if File.exists?(absolute_filename)
-
-            # If it's "foo", check if "foo/src/foo.cr" exists (for a shard)
-            absolute_filename = make_relative_unless_absolute("#{relative_filename}/src/#{basename}.cr")
-            return absolute_filename if File.exists?(absolute_filename)
           end
         end
       end
@@ -233,7 +202,7 @@ module Crytic::Mutation
 
   # This is a weird concept and I wonder if this can be replaced by Crytic::Source
   # somehow.
-  class ArbitrarySourceCodeFile
+  private class ArbitrarySourceCodeFile
     def initialize(@path : String, @mutated_subject_source : String, @subject_path : String)
     end
 
