@@ -2,7 +2,7 @@
 
 <h1 align="center">Crytic</h1>
 
-<img alt="Crytic logo" src="searching-1.png" align="center" />
+<img alt="Crytic logo" height="300" src="searching-1.png" align="center" />
 
 <p align="center">
     <a href="#installation">Installation</a> &bull;
