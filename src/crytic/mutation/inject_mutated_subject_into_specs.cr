@@ -105,15 +105,9 @@ module Crytic::Mutation
 
       new_files_to_load.each do |file_to_load|
         InjectMutatedSubjectIntoSpecs.parse_file(file_to_load) do
-          the_source = ArbitrarySourceCodeFile.new(
-            file_to_load,
-            @mutated_subject_source,
-            @subject_path
-          ).source
-
           required_file = InjectMutatedSubjectIntoSpecs.new(
             path: file_to_load,
-            source: the_source,
+            source: fetch_source(file_to_load),
             mutated_subject_source: @mutated_subject_source,
             subject_path: @subject_path)
 
@@ -130,6 +124,14 @@ module Crytic::Mutation
 
     def visit(node : Crystal::ASTNode)
       true
+    end
+
+    private def fetch_source(some_path : String)
+      if some_path == File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@subject_path))
+        @mutated_subject_source
+      else
+        File.read(some_path)
+      end
     end
 
     # All of the below code is stolen from crystal itself
@@ -197,25 +199,6 @@ module Crytic::Mutation
     private def make_relative_unless_absolute(filename)
       filename = "#{Dir.current}/#{filename}" unless filename.starts_with?('/')
       File.expand_path(filename)
-    end
-  end
-
-  # This is a weird concept and I wonder if this can be replaced by Crytic::Source
-  # somehow.
-  private class ArbitrarySourceCodeFile
-    def initialize(@path : String, @mutated_subject_source : String, @subject_path : String)
-    end
-
-    def source
-      if @path == relative_path
-        @mutated_subject_source
-      else
-        File.read(@path)
-      end
-    end
-
-    private def relative_path
-      File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@subject_path))
     end
   end
 end
