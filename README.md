@@ -1,6 +1,8 @@
 [![Latest Tag](https://img.shields.io/github/tag-date/hanneskaeufler/crytic.svg)](https://github.com/hanneskaeufler/crytic/releases) [![CircleCI](https://circleci.com/gh/hanneskaeufler/crytic/tree/master.svg?style=svg)](https://circleci.com/gh/hanneskaeufler/crytic/tree/master) [![codecov](https://codecov.io/gh/hanneskaeufler/crytic/branch/master/graph/badge.svg)](https://codecov.io/gh/hanneskaeufler/crytic) ![Mutation Score](https://badge.stryker-mutator.io/github.com/hanneskaeufler/crytic/master)
 
-# Crytic
+<h1 align="center">Crytic</h1>
+
+<img alt="Crytic logo" src="searching-1.png" align="center" />
 
 <p align="center">
     <a href="#installation">Installation</a> &bull;
@@ -200,6 +202,8 @@ One of the more difficult parts of crytic was the resolving of `require` stateme
 In order to avoid dependencies for tiny amounts of savings I rather copied/adapted a bit of code from [timeout.cr](https://github.com/hugoabonizio/timeout.cr) and [crystal-diff](https://github.com/MakeNowJust/crystal-diff).
 
 Obviously I didn't invent mutation testing. While I cannot remember where I have read about it initially, my first recollection is the [mutant](https://github.com/mbj/mutant) gem for ruby. [Markus Shirp](https://github.com/mbj), author of mutant is also the one who explained the notion of a "neutral" mutant to me in private chat. I took his idea and implemented it in crytic as well. Thanks!
+
+The logo above is free from [icons8.com](https://icons8.com/ouch/illustration/searching-1#).
 
 ### Alternatives
 
