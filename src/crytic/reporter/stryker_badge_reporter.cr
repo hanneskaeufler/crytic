@@ -12,6 +12,11 @@ module Crytic::Reporter
     end
 
     def report_msi(results)
+      if results.empty?
+        @io << "Mutation score wasn't uploaded to stryker dashboard. No results found."
+        return
+      end
+
       @client.post(DASHBOARD_URL, {
         "apiKey"         => @env["STRYKER_DASHBOARD_API_KEY"],
         "repositorySlug" => slug,

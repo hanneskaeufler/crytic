@@ -1,6 +1,5 @@
 require "../../src/crytic/mutant/number_literal_change"
 require "../../src/crytic/mutation/result"
-require "../../src/crytic/reporter/http_client"
 require "../../src/crytic/reporter/stryker_badge_reporter"
 require "../spec_helper"
 require "json"
@@ -9,7 +8,7 @@ module Crytic::Reporter
   describe StrykerBadgeReporter do
     describe "#report_msi" do
       it "posts to the stryker dashboard" do
-        client = FakeClient.new
+        client = FakeHttpClient.new
         io = IO::Memory.new
 
         StrykerBadgeReporter.new(client, {
@@ -28,23 +27,28 @@ module Crytic::Reporter
         })
         io.to_s.should eq "Mutation score uploaded to stryker dashboard."
       end
+
+      it "reports NaN score as " do
+        client = FakeHttpClient.new
+        io = IO::Memory.new
+        subject = StrykerBadgeReporter.new(client, fake_env, io)
+
+        subject.report_msi(Mutation::ResultSet.new([] of Mutation::Result))
+
+        io.to_s.should eq "Mutation score wasn't uploaded to stryker dashboard. No results found."
+        client.path.should be_nil
+      end
     end
   end
 end
 
-private class FakeClient < Crytic::Reporter::HttpClient
-  def post(url : String, bbody : Hash(String, String | Float64))
-    @path = url
-    @body = bbody
-  end
-
-  def path
-    @path
-  end
-
-  def body
-    @body
-  end
+private def fake_env
+  {
+    "CIRCLE_BRANCH"             => "master",
+    "CIRCLE_PROJECT_REPONAME"   => "crytic",
+    "CIRCLE_PROJECT_USERNAME"   => "hanneskaeufler",
+    "STRYKER_DASHBOARD_API_KEY" => "apikey",
+  }
 end
 
 private def results
