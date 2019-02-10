@@ -1,9 +1,7 @@
-[![Latest Tag](https://img.shields.io/github/tag-date/hanneskaeufler/crytic.svg)](https://github.com/hanneskaeufler/crytic/releases) [![CircleCI](https://circleci.com/gh/hanneskaeufler/crytic/tree/master.svg?style=svg)](https://circleci.com/gh/hanneskaeufler/crytic/tree/master) [![codecov](https://codecov.io/gh/hanneskaeufler/crytic/branch/master/graph/badge.svg)](https://codecov.io/gh/hanneskaeufler/crytic) ![Mutation Score](https://badge.stryker-mutator.io/github.com/hanneskaeufler/crytic/master)
-
 <h1 align="center">Crytic</h1>
 
 <p align="center">
-    <img alt="Crytic logo" height="300" src="searching-1.png" align="center" />
+    <img alt="Crytic logo" height="250" src="searching-1.png" align="center" />
 </p>
 
 <p align="center">
@@ -16,6 +14,8 @@
 Crytic, pronounced /ˈkrɪtɪk/, is a mutation testing framework for the crystal programming language. Mutation testing is a type of software testing where specific statements in the code are changed to determine if test cases find this defect.
 
 > Crytic is in a very early state of development. It is not very clever, making it slow as well.
+
+[![Latest Tag](https://img.shields.io/github/tag-date/hanneskaeufler/crytic.svg)](https://github.com/hanneskaeufler/crytic/releases) [![CircleCI](https://circleci.com/gh/hanneskaeufler/crytic/tree/master.svg?style=svg)](https://circleci.com/gh/hanneskaeufler/crytic/tree/master) [![codecov](https://codecov.io/gh/hanneskaeufler/crytic/branch/master/graph/badge.svg)](https://codecov.io/gh/hanneskaeufler/crytic) ![Mutation Score](https://badge.stryker-mutator.io/github.com/hanneskaeufler/crytic/master)
 
 ### Blog posts
 
