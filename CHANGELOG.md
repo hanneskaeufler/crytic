@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - New "File Summary" reporter that list the covered subjects and the number of mutations that were performed on each of those files respectively
 
+### Fixed
+
+- Don't crash in the stryker dashboard reporter when zero mutations were run
+
 ## [4.0.0] - 2019-01-31
 
 ### Added
