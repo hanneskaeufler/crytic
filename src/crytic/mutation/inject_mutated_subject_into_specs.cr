@@ -138,28 +138,29 @@ module Crytic::Mutation
     # https://github.com/crystal-lang/crystal/blob/master/src/compiler/crystal/crystal_path.cr
     # Because we are caring about relative requires "./foo/bar" exclusively, a lot of code
     # was removed from this method.
-    private def find_in_path_relative_to_dir(filename, relative_to)
-      if relative_to.is_a?(String)
-        # Check if it's a wildcard.
-        recursive = filename.ends_with?("/**")
-        if filename.ends_with?("/*") || recursive
-          filename_dir_index = filename.rindex('/').not_nil!
-          filename_dir = filename[0..filename_dir_index]
-          relative_dir = "#{relative_to}/#{filename_dir}"
-          if File.exists?(relative_dir)
-            files = [] of String
-            gather_dir_files(relative_dir, files, recursive)
-            return files
-          end
-        else
-          relative_filename = "#{relative_to}/#{filename}"
+    private def find_in_path_relative_to_dir(filename, relative_to) : Array(String) | String | Nil
+      # Check if it's a wildcard.
+      recursive = filename.ends_with?("/**")
 
-          # Check if .cr file exists.
-          relative_filename_cr = relative_filename.ends_with?(".cr") ? relative_filename : "#{relative_filename}.cr"
+      if filename.ends_with?("/*") || recursive
+        filename_dir_index = filename.rindex('/').not_nil!
+        filename_dir = filename[0..filename_dir_index]
+        relative_dir = "#{relative_to}/#{filename_dir}"
 
-          if File.exists?(relative_filename_cr)
-            return make_relative_unless_absolute relative_filename_cr
-          end
+        if File.exists?(relative_dir)
+          files = [] of String
+          gather_dir_files(relative_dir, files, recursive)
+          return files
+        end
+      else
+        relative_filename = "#{relative_to}/#{filename}"
+
+        # Check if .cr file exists.
+        relative_filename_cr = relative_filename.ends_with?(".cr") ?
+          relative_filename : "#{relative_filename}.cr"
+
+        if File.exists?(relative_filename_cr)
+          return make_relative_unless_absolute relative_filename_cr
         end
       end
 
