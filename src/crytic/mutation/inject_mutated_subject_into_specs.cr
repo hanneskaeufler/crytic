@@ -156,8 +156,7 @@ module Crytic::Mutation
         relative_filename = "#{relative_to}/#{filename}"
 
         # Check if .cr file exists.
-        relative_filename_cr = relative_filename.ends_with?(".cr") ?
-          relative_filename : "#{relative_filename}.cr"
+        relative_filename_cr = relative_filename.ends_with?(".cr") ? relative_filename : "#{relative_filename}.cr"
 
         if File.exists?(relative_filename_cr)
           return make_relative_unless_absolute relative_filename_cr

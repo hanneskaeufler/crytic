@@ -1,6 +1,6 @@
-require "../../src/crytic/mutant/bool_literal_flip"
-require "../../src/crytic/mutation/mutation"
-require "../../src/crytic/mutation/result"
+require "../src/crytic/mutant/bool_literal_flip"
+require "../src/crytic/mutation/mutation"
+require "../src/crytic/mutation/result"
 
 private def irrelevant_mutant
   Crytic::Mutant::BoolLiteralFlip.at(Crytic::Mutant::FullLocation.at(
