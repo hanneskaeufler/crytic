@@ -1,5 +1,5 @@
-require "../../src/crytic/mutant/number_literal_change"
 require "../src/crytic/mutant/full_location"
+require "../src/crytic/mutant/number_literal_change"
 require "./fake_generator"
 require "./fake_mutation"
 require "./fake_process_runner"
