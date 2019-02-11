@@ -18,5 +18,13 @@ module Crytic::Mutation
         ]).all_covered?.should eq false
       end
     end
+
+    describe "#longest_mutated_filename_length" do
+      it "returns 0 if there are no mutated files" do
+        ResultSet.new([] of Result)
+          .longest_mutated_filename_length
+          .should eq 0
+      end
+    end
   end
 end
