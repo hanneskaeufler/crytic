@@ -12,13 +12,13 @@ module Crytic::Reporter
       it "prints the original passing suites status" do
         io = IO::Memory.new
         IoReporter.new(io).report_original_result(original)
-        io.to_s.should contain("✅ Original test suite passed.\n")
+        io.to_s.should eq("✅ Original test suite passed.\n")
       end
 
       it "prints the original suites failing status" do
         io = IO::Memory.new
         IoReporter.new(io).report_original_result(original(1, "failed!!!"))
-        io.to_s.should contain("❌ Original test suite failed.")
+        io.to_s.lines.first.should eq("❌ Original test suite failed.")
         io.to_s.should contain("failed!!!")
       end
     end
