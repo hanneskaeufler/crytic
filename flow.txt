@@ -1,0 +1,13 @@
+graph TD
+BIN>User invokes ./bin/crytic] --> |Check arguments| RUNNER(Start runner)
+RUNNER -->INITIAL("Initial test run with 'crystal spec'")
+INITIAL -->INIT_PASS{Passes?}
+INIT_PASS-->|Yes| POSSIBILITIES(Find mutation possibilities)
+POSSIBILITIES-->|For each subject| NEUTRAL(Run neutral mutation)
+INIT_PASS-->|No| ABORT(Abort crytic)
+NEUTRAL-->NEUTRAL_PASS{Passes?}
+NEUTRAL_PASS-->|Yes| RUN_MUTATIONS(Run mutations)
+RUN_MUTATIONS--> |Next subject| NEUTRAL
+NEUTRAL_PASS-->|No| SKIP_SUBJECT(Skip subject)
+SKIP_SUBJECT--> |Next subject| NEUTRAL
+RUN_MUTATIONS-->FINISHED>Finished]

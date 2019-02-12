@@ -211,6 +211,12 @@ The logo above is free from [icons8.com](https://icons8.com/ouch/illustration/se
 
 Although not having tested it myself yet, the [mull](https://github.com/mull-project/mull) libray is supposed to work for any llvm based language, which I believe crystal is.
 
+## Execution flow
+
+The following diagram shows a rough sequence of how crytic works. It was generated in [mermaidjs.github.io](https://mermaidjs.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZ3JhcGggVERcbkJJTj5Vc2VyIGludm9rZXMgLi9iaW4vY3J5dGljXSAtLT4gfENoZWNrIGFyZ3VtZW50c3wgUlVOTkVSKFN0YXJ0IHJ1bm5lcilcblJVTk5FUiAtLT5JTklUSUFMKFwiSW5pdGlhbCB0ZXN0IHJ1biB3aXRoICdjcnlzdGFsIHNwZWMnXCIpXG5JTklUSUFMIC0tPklOSVRfUEFTU3tQYXNzZXM_fVxuSU5JVF9QQVNTLS0-fFllc3wgUE9TU0lCSUxJVElFUyhGaW5kIG11dGF0aW9uIHBvc3NpYmlsaXRpZXMpXG5QT1NTSUJJTElUSUVTLS0-fEZvciBlYWNoIHN1YmplY3R8IE5FVVRSQUwoUnVuIG5ldXRyYWwgbXV0YXRpb24pXG5JTklUX1BBU1MtLT58Tm98IEFCT1JUKEFib3J0IGNyeXRpYylcbk5FVVRSQUwtLT5ORVVUUkFMX1BBU1N7UGFzc2VzP31cbk5FVVRSQUxfUEFTUy0tPnxZZXN8IFJVTl9NVVRBVElPTlMoUnVuIG11dGF0aW9ucylcblJVTl9NVVRBVElPTlMtLT4gfE5leHQgc3ViamVjdHwgTkVVVFJBTFxuTkVVVFJBTF9QQVNTLS0-fE5vfCBTS0lQX1NVQkpFQ1QoU2tpcCBzdWJqZWN0KVxuU0tJUF9TVUJKRUNULS0-IHxOZXh0IHN1YmplY3R8IE5FVVRSQUxcblJVTl9NVVRBVElPTlMtLT5GSU5JU0hFRD5GaW5pc2hlZF1cbiIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19).
+
+![Sequence flow](flow.svg)
+
 ## Contributing
 
 1. Fork it (<https://github.com/hanneskaeufler/crytic/fork>)
