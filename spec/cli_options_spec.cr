@@ -7,6 +7,7 @@ module Crytic
   class CliOptions
 
     getter spec_files = [] of String
+    @subject = [] of String
 
     def initialize(@std_out : IO, @exit_fun : (Int32)->)
     end
@@ -20,12 +21,22 @@ module Crytic
           @exit_fun.call(0)
         end
 
+        parser.on("-s SOURCE", "--subject=SOURCE", "Specifies the source file for the subject") do |source|
+          @subject = [source]
+        end
+
         parser.unknown_args do |args|
           @spec_files = args
         end
       end
 
       self
+    end
+
+    def subject : Array(String)
+      return Dir["./src/**/*.cr"] if @subject.empty?
+
+      @subject
     end
   end
 end
@@ -72,6 +83,24 @@ module Crytic
           .parse(["a_file.cr", "another_file.cr"])
 
         opts.spec_files.should eq ["a_file.cr", "another_file.cr"]
+      end
+
+      {% for flag in ["-s", "--subject"] %}
+      it "accepts a subject with {{ flag.id }}" do
+        opts = CliOptions
+          .new(IO::Memory.new, noop_exit_fun)
+          .parse([{{ flag }}, "subject.cr"])
+
+        opts.subject.should eq ["subject.cr"]
+      end
+      {% end %}
+
+      it "defaults to a glob in src for the subject" do
+        opts = CliOptions
+          .new(IO::Memory.new, noop_exit_fun)
+          .parse([] of String)
+
+        opts.subject.should eq Dir["./src/**/*.cr"]
       end
     end
   end
