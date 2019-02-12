@@ -43,7 +43,7 @@ module Crytic
         exit_code : Int32? = nil
 
         CliOptions
-          .new(IO::Memory.new, IO::Memory.new, ->(code : Int32){ exit_code = code })
+          .new(IO::Memory.new, IO::Memory.new, ->(code : Int32) { exit_code = code })
           .parse(["--help"])
 
         exit_code.should eq 0
@@ -105,7 +105,7 @@ module Crytic
 end
 
 private def noop_exit_fun
-  ->(code : Int32) { }
+  ->(code : Int32) {}
 end
 
 private def cli_options_parser

@@ -3,13 +3,12 @@ require "option_parser"
 
 module Crytic
   class CliOptions
-
     getter preamble = Crytic::Generator::Generator::DEFAULT_PREAMBLE
     getter msi_threshold = 100.0
     @spec_files = [] of String
     @subject = [] of String
 
-    def initialize(@std_out : IO, @std_err : IO,  @exit_fun : (Int32)->)
+    def initialize(@std_out : IO, @std_err : IO, @exit_fun : (Int32) ->)
     end
 
     def parse(args)
@@ -60,4 +59,3 @@ module Crytic
     end
   end
 end
-
