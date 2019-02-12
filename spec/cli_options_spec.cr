@@ -6,6 +6,7 @@ module Crytic
   class CliOptions
 
     getter preamble = Crytic::Generator::Generator::DEFAULT_PREAMBLE
+    getter msi_threshold = 100.0
     @spec_files = [] of String
     @subject = [] of String
 
@@ -19,6 +20,10 @@ module Crytic
         parser.on("-h", "--help", "Show this help") do
           @std_out.puts parser
           @exit_fun.call(0)
+        end
+
+        parser.on("-m", "--min-msi=THRESHOLD", "Crytic will exit with zero if this threshold is reached.") do |threshold|
+          @msi_threshold = threshold.to_f
         end
 
         parser.on("-p PREAMBLE", "--preamble=PREAMBLE", "Specifies the source code that is prepended to every full mutation source code. Will enable the fail_fast option of crystal spec by default.") do |code|
@@ -133,9 +138,7 @@ module Crytic
 
       {% for flag in ["-p", "--preamble"] %}
       it "accepts a preamble with {{ flag.id }}" do
-        opts = cli_options_parser.parse([] of String)
-
-        opts.parse([{{ flag }}, "custom"])
+        opts = cli_options_parser.parse([{{ flag }}, "custom"])
 
         opts.preamble.should eq "custom"
       end
@@ -145,6 +148,18 @@ module Crytic
         opts = cli_options_parser.parse([] of String)
 
         opts.preamble.should eq Generator::Generator::DEFAULT_PREAMBLE
+      end
+
+      {% for flag in ["-m", "--min-msi"] %}
+      it "accepts a msi threshold with {{ flag.id }}" do
+        opts = cli_options_parser.parse([{{ flag }}, "12.0"])
+
+        opts.msi_threshold.should eq 12.0
+      end
+      {% end %}
+
+      it "defaults to a threshold of 100.0" do
+        cli_options_parser.msi_threshold.should eq 100.0
       end
     end
   end
