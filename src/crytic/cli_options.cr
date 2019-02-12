@@ -32,8 +32,8 @@ module Crytic
           @subject = [source]
         end
 
-        parser.unknown_args do |args|
-          @spec_files = args
+        parser.unknown_args do |unknown|
+          @spec_files = unknown
         end
 
         parser.invalid_option do |flag|
