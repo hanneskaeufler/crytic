@@ -6,7 +6,7 @@ noop_exit_fun = ->(code : Int32) { }
 module Crytic
   class CliOptions
 
-    getter spec_files = [] of String
+    @spec_files = [] of String
     @subject = [] of String
 
     def initialize(@std_out : IO, @exit_fun : (Int32)->)
@@ -31,6 +31,12 @@ module Crytic
       end
 
       self
+    end
+
+    def spec_files : Array(String)
+      return Dir["./spec/**/*_spec.cr"] if @spec_files.empty?
+
+      @spec_files
     end
 
     def subject : Array(String)
@@ -83,6 +89,14 @@ module Crytic
           .parse(["a_file.cr", "another_file.cr"])
 
         opts.spec_files.should eq ["a_file.cr", "another_file.cr"]
+      end
+
+      it "defaults to a glob in spec for the spec files" do
+        opts = CliOptions
+          .new(IO::Memory.new, noop_exit_fun)
+          .parse([] of String)
+
+        opts.spec_files.should eq Dir["./spec/**/*_spec.cr"]
       end
 
       {% for flag in ["-s", "--subject"] %}
