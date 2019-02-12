@@ -105,7 +105,7 @@ module Crytic
 end
 
 private def noop_exit_fun
-  ->(code : Int32) {}
+  ->(_code : Int32) {}
 end
 
 private def cli_options_parser
