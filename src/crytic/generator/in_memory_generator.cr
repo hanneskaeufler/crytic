@@ -20,12 +20,6 @@ module Crytic::Generator
       Mutant::StringLiteralChangePossibilities.new,
     ] of Mutant::Possibilities
 
-    DEFAULT_PREAMBLE = <<-CODE
-    require "spec"
-    Spec.fail_fast = true
-
-    CODE
-
     property mutation_factory : MutationFactory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
       Mutation::IsolatedMutation.with(mutant, original, specs, preamble).as(Mutation::Mutation)
     }

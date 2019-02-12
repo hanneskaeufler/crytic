@@ -1,9 +1,11 @@
+require "../src/crytic/generator"
 require "./spec_helper"
 require "option_parser"
 
 module Crytic
   class CliOptions
 
+    getter preamble = Crytic::Generator::Generator::DEFAULT_PREAMBLE
     @spec_files = [] of String
     @subject = [] of String
 
@@ -17,6 +19,10 @@ module Crytic
         parser.on("-h", "--help", "Show this help") do
           @std_out.puts parser
           @exit_fun.call(0)
+        end
+
+        parser.on("-p PREAMBLE", "--preamble=PREAMBLE", "Specifies the source code that is prepended to every full mutation source code. Will enable the fail_fast option of crystal spec by default.") do |code|
+          @preamble = code
         end
 
         parser.on("-s SOURCE", "--subject=SOURCE", "Specifies the source file for the subject") do |source|
@@ -123,6 +129,22 @@ module Crytic
         opts = cli_options_parser.parse([] of String)
 
         opts.subject.should eq Dir["./src/**/*.cr"]
+      end
+
+      {% for flag in ["-p", "--preamble"] %}
+      it "accepts a preamble with {{ flag.id }}" do
+        opts = cli_options_parser.parse([] of String)
+
+        opts.parse([{{ flag }}, "custom"])
+
+        opts.preamble.should eq "custom"
+      end
+      {% end %}
+
+      it "defaults to a fail fast preamble" do
+        opts = cli_options_parser.parse([] of String)
+
+        opts.preamble.should eq Generator::Generator::DEFAULT_PREAMBLE
       end
     end
   end

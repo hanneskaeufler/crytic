@@ -8,7 +8,7 @@ require "option_parser"
 subject_source = ""
 msi_threshold = 100.0
 spec_files = [] of String
-preamble = Crytic::Generator::InMemoryMutationsGenerator::DEFAULT_PREAMBLE
+preamble = Crytic::Generator::Generator::DEFAULT_PREAMBLE
 
 OptionParser.parse! do |parser|
   parser.banner = "Usage: crytic [arguments]"
