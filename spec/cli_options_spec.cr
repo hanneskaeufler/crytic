@@ -3,16 +3,18 @@ require "option_parser"
 
 noop_exit_fun = ->(code : Int32) { }
 
-class CliOptions
-  def initialize(@std_out : IO, @exit_fun : (Int32)->)
-  end
+module Crytic
+  class CliOptions
+    def initialize(@std_out : IO, @exit_fun : (Int32)->)
+    end
 
-  def parse(args)
-    OptionParser.parse(args) do |parser|
-      parser.banner = "Usage: crytic [arguments]"
-      parser.on("-h", "--help", "Show this help") do
-        @std_out.puts parser
-        @exit_fun.call(0)
+    def parse(args)
+      OptionParser.parse(args) do |parser|
+        parser.banner = "Usage: crytic [arguments]"
+        parser.on("-h", "--help", "Show this help") do
+          @std_out.puts parser
+          @exit_fun.call(0)
+        end
       end
     end
   end
