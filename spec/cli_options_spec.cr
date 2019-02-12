@@ -1,8 +1,6 @@
 require "./spec_helper"
 require "option_parser"
 
-noop_exit_fun = ->(code : Int32) { }
-
 module Crytic
   class CliOptions
 
@@ -102,35 +100,27 @@ module Crytic
       end
 
       it "adds every positional argument as a spec file" do
-        opts = CliOptions
-          .new(IO::Memory.new, IO::Memory.new, noop_exit_fun)
-          .parse(["a_file.cr", "another_file.cr"])
+        opts = cli_options_parser.parse(["a_file.cr", "another_file.cr"])
 
         opts.spec_files.should eq ["a_file.cr", "another_file.cr"]
       end
 
       it "defaults to a glob in spec for the spec files" do
-        opts = CliOptions
-          .new(IO::Memory.new, IO::Memory.new, noop_exit_fun)
-          .parse([] of String)
+        opts = cli_options_parser.parse([] of String)
 
         opts.spec_files.should eq Dir["./spec/**/*_spec.cr"]
       end
 
       {% for flag in ["-s", "--subject"] %}
       it "accepts a subject with {{ flag.id }}" do
-        opts = CliOptions
-          .new(IO::Memory.new, IO::Memory.new, noop_exit_fun)
-          .parse([{{ flag }}, "subject.cr"])
+        opts = cli_options_parser.parse([{{ flag }}, "subject.cr"])
 
         opts.subject.should eq ["subject.cr"]
       end
       {% end %}
 
       it "defaults to a glob in src for the subject" do
-        opts = CliOptions
-          .new(IO::Memory.new, IO::Memory.new, noop_exit_fun)
-          .parse([] of String)
+        opts = cli_options_parser.parse([] of String)
 
         opts.subject.should eq Dir["./src/**/*.cr"]
       end
@@ -138,3 +128,10 @@ module Crytic
   end
 end
 
+private def noop_exit_fun
+  ->(code : Int32) { }
+end
+
+private def cli_options_parser
+  Crytic::CliOptions.new(IO::Memory.new, IO::Memory.new, noop_exit_fun)
+end
