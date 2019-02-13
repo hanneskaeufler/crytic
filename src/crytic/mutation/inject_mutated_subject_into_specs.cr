@@ -71,16 +71,12 @@ module Crytic::Mutation
         expansion_id = matcher[1].to_i
         file_list = InjectMutatedSubjectIntoSpecs.require_expanders[expansion_id]
 
-        if file_list.any?
-          String.build do |io|
-            file_list.each do |file|
-              io << "#" << " require of `" << file.path
-              io << "` from `" << self.path << "`" << "\n"
-              io << file.to_mutated_source
-            end
+        String.build do |io|
+          file_list.each do |file|
+            io << "#" << " require of `" << file.path
+            io << "` from `" << self.path << "`" << "\n"
+            io << file.to_mutated_source
           end
-        else
-          ""
         end
       end
     end
