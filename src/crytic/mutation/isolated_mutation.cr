@@ -11,9 +11,9 @@ module Crytic::Mutation
   class IsolatedMutation < Mutation
     alias Preamble = String
 
-    property process_runner : Crytic::ProcessRunner
-    property file_remover : (String -> Void)
-    property tempfile_writer : (String, String, String) -> String
+    private getter process_runner : Crytic::ProcessRunner
+    private getter file_remover : (String -> Void)
+    private getter tempfile_writer : (String, String, String) -> String
 
     # Compiles the mutated source code into a binary and runs this binary,
     # recording exit code, stderr and stdout output.
@@ -38,22 +38,23 @@ module Crytic::Mutation
       mutant : Mutant::Mutant,
       original : String,
       specs : Array(String),
-      preamble : Preamble
+      preamble : Preamble,
+      process_runner,
+      file_remover,
+      tempfile_writer
     )
-      new(mutant, original, specs, preamble)
+      new(mutant, original, specs, preamble, process_runner, file_remover, tempfile_writer)
     end
 
     private def initialize(
       @mutant : Crytic::Mutant::Mutant,
       @subject_file_path : String,
       @specs_file_paths : Array(String),
-      @preamble : String
+      @preamble : String,
+      @process_runner,
+      @file_remover,
+      @tempfile_writer
     )
-      @process_runner = ProcessProcessRunner.new
-      @file_remover = ->File.delete(String)
-      @tempfile_writer = ->(name : String, extension : String, content : String) {
-        File.tempfile(name, extension) { |file| file.print(content) }.path
-      }
     end
 
     private def run(mutated_source : SourceCode)

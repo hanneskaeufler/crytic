@@ -21,7 +21,16 @@ module Crytic::Generator
     ] of Mutant::Possibilities
 
     property mutation_factory : MutationFactory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
-      Mutation::IsolatedMutation.with(mutant, original, specs, preamble).as(Mutation::Mutation)
+      Mutation::IsolatedMutation.with(
+        mutant,
+        original,
+        specs,
+        preamble,
+        ProcessProcessRunner.new,
+        ->File.delete(String),
+        ->(name : String, extension : String, content : String) {
+          File.tempfile(name, extension) { |file| file.print(content) }.path
+        }).as(Mutation::Mutation)
     }
 
     def initialize(@possibilities : Array(Mutant::Possibilities), @preamble : String)

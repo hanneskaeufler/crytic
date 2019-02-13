@@ -51,7 +51,7 @@ module Crytic::Generator
         last_preamble = ""
         factory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
           last_preamble = preamble
-          Mutation::IsolatedMutation.with(mutant, original, specs, preamble).as(Mutation::Mutation)
+          FakeMutation.new.as(Mutation::Mutation)
         }
         source = fixture_source("non_empty_source_file.cr")
 
@@ -69,7 +69,7 @@ module Crytic::Generator
         last_mutant : Mutant::Mutant? = nil
         factory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
           last_mutant = mutant
-          Mutation::IsolatedMutation.with(mutant, original, specs, preamble).as(Mutation::Mutation)
+          FakeMutation.new.as(Mutation::Mutation)
         }
 
         generator = InMemoryMutationsGenerator
