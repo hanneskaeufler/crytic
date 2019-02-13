@@ -12,11 +12,10 @@ module Crytic::Mutation
     describe ".with" do
       it "can be used with both types of mutations" do
         transformer_mutant = Crytic::Mutant::AndOrSwap.at(location_at(0, 0))
-        IsolatedMutation.with(
+        IsolatedMutation.with(config(
           original: "./bar.cr",
           specs: ["./bar_spec.cr"],
-          mutant: transformer_mutant,
-          preamble: no_preamble,
+          mutant: transformer_mutant),
           process_runner: FakeProcessRunner.new,
           file_remover: ->FakeFile.delete(String),
           tempfile_writer: ->FakeFile.tempfile(String, String, String))
@@ -27,11 +26,11 @@ module Crytic::Mutation
     describe "#run" do
       it "shoves the code into a tempfile, compiles the binary and executes the binary" do
         fake = FakeProcessRunner.new
-        mutation = IsolatedMutation.with(
+        mutation = IsolatedMutation.with(Config.new(
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_spec.cr"],
-          no_preamble,
+          no_preamble),
           fake,
           ->FakeFile.delete(String),
           ->FakeFile.tempfile(String, String, String))
@@ -63,11 +62,10 @@ module Crytic::Mutation
         fake.exit_code = [0, 1]
         fake.fill_output_with("Finished")
 
-        mutation = IsolatedMutation.with(
+        mutation = IsolatedMutation.with(config(
           mutant,
           "./fixtures/simple/bar.cr",
-          ["./fixtures/simple/bar_spec.cr"],
-          no_preamble,
+          ["./fixtures/simple/bar_spec.cr"]),
           fake,
           ->FakeFile.delete(String),
           ->FakeFile.tempfile(String, String, String))
@@ -78,11 +76,10 @@ module Crytic::Mutation
       it "considers a mutant uncovered if the process succeeds" do
         fake = FakeProcessRunner.new
         fake.exit_code = [0, 0]
-        mutation = IsolatedMutation.with(
+        mutation = IsolatedMutation.with(config(
           mutant,
           "./fixtures/simple/bar.cr",
-          ["./fixtures/simple/bar_spec.cr"],
-          no_preamble,
+          ["./fixtures/simple/bar_spec.cr"]),
           FakeProcessRunner.new,
           ->FakeFile.delete(String),
           ->FakeFile.tempfile(String, String, String))
@@ -93,11 +90,10 @@ module Crytic::Mutation
       it "returns a colored diff of the changes" do
         fake = FakeProcessRunner.new
         fake.exit_code = [0, 0]
-        mutation = IsolatedMutation.with(
+        mutation = IsolatedMutation.with(config(
           mutant,
           "./fixtures/simple/bar.cr",
-          ["./fixtures/simple/bar_spec.cr"],
-          no_preamble,
+          ["./fixtures/simple/bar_spec.cr"]),
           FakeProcessRunner.new,
           ->FakeFile.delete(String),
           ->FakeFile.tempfile(String, String, String))
@@ -110,11 +106,10 @@ module Crytic::Mutation
       it "resolves nested requires" do
         fake = FakeProcessRunner.new
         fake.exit_code = [0, 0]
-        mutation = IsolatedMutation.with(
+        mutation = IsolatedMutation.with(config(
           mutant,
           "./fixtures/simple/bar.cr",
-          ["./fixtures/simple/bar_with_helper_spec.cr"],
-          no_preamble,
+          ["./fixtures/simple/bar_with_helper_spec.cr"]),
           FakeProcessRunner.new,
           ->FakeFile.delete(String),
           ->FakeFile.tempfile(String, String, String))
@@ -143,11 +138,10 @@ module Crytic::Mutation
       end
 
       it "only requires/includes the subject once for multiple spec files" do
-        mutation = IsolatedMutation.with(
+        mutation = IsolatedMutation.with(config(
           mutant,
           "./fixtures/simple/bar.cr",
-          ["./fixtures/simple/bar_with_helper_spec.cr", "./fixtures/simple/bar_additional_spec.cr"],
-          no_preamble,
+          ["./fixtures/simple/bar_with_helper_spec.cr", "./fixtures/simple/bar_additional_spec.cr"]),
           FakeProcessRunner.new,
           ->FakeFile.delete(String),
           ->FakeFile.tempfile(String, String, String))
@@ -188,11 +182,10 @@ module Crytic::Mutation
         fake = FakeProcessRunner.new
         fake.exit_code = [1]
         fake.fill_output_with("compiler error/ no specs have run")
-        mutation = IsolatedMutation.with(
+        mutation = IsolatedMutation.with(config(
           mutant,
           "./fixtures/simple/bar.cr",
-          ["./fixtures/simple/bar_with_helper_spec.cr"],
-          no_preamble,
+          ["./fixtures/simple/bar_with_helper_spec.cr"]),
           fake,
           ->FakeFile.delete(String),
           ->FakeFile.tempfile(String, String, String))
@@ -203,11 +196,10 @@ module Crytic::Mutation
       it "reports timed out mutations" do
         fake = FakeProcessRunner.new
         fake.exit_code = [0, 28]
-        mutation = IsolatedMutation.with(
+        mutation = IsolatedMutation.with(config(
           mutant,
           "./fixtures/simple/bar.cr",
-          ["./fixtures/simple/bar_with_helper_spec.cr"],
-          no_preamble,
+          ["./fixtures/simple/bar_with_helper_spec.cr"]),
           fake,
           ->FakeFile.delete(String),
           ->FakeFile.tempfile(String, String, String))
@@ -219,11 +211,10 @@ module Crytic::Mutation
       it "can handle compilation errors" do
         fake = FakeProcessRunner.new
         fake.exit_code = [1]
-        mutation = IsolatedMutation.with(
+        mutation = IsolatedMutation.with(config(
           mutant,
           "./fixtures/simple/bar.cr",
-          ["./fixtures/simple/bar_with_helper_spec.cr"],
-          no_preamble,
+          ["./fixtures/simple/bar_with_helper_spec.cr"]),
           fake,
           ->FakeFile.delete(String),
           ->FakeFile.tempfile(String, String, String))
@@ -237,11 +228,11 @@ module Crytic::Mutation
         Spec.fail_fast = true
         CODE
 
-        mutation = IsolatedMutation.with(
+        mutation = IsolatedMutation.with(config(
           mutant,
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_spec.cr"],
-          preamble,
+          preamble: preamble),
           FakeProcessRunner.new,
           ->FakeFile.delete(String),
           ->FakeFile.tempfile(String, String, String))
@@ -282,4 +273,8 @@ end
 
 private def no_preamble
   ""
+end
+
+private def config(mutant, original, specs, preamble = "")
+  Crytic::Mutation::Config.new(mutant, original, specs, preamble)
 end

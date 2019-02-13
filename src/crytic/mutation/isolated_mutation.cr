@@ -2,6 +2,7 @@ require "../mutant/mutant"
 require "../process_process_runner"
 require "../process_runner"
 require "../subject"
+require "./config"
 require "./inject_mutated_subject_into_specs"
 require "./mutation"
 require "./result"
@@ -18,8 +19,8 @@ module Crytic::Mutation
     # Compiles the mutated source code into a binary and runs this binary,
     # recording exit code, stderr and stdout output.
     def run
-      subject = Subject.from_filepath(@subject_file_path)
-      process_result = run(subject.mutate_source!(@mutant))
+      subject = Subject.from_filepath(@config.original)
+      process_result = run(subject.mutate_source!(@config.mutant))
       success_messages_in_output = /Finished/ =~ process_result[:output]
       status = if process_result[:exit_code] == ProcessRunner::SUCCESS
                  Status::Uncovered
@@ -31,26 +32,15 @@ module Crytic::Mutation
                  Status::Covered
                end
 
-      Result.new(status, @mutant, subject.diff)
+      Result.new(status, @config.mutant, subject.diff)
     end
 
-    def self.with(
-      mutant : Mutant::Mutant,
-      original : String,
-      specs : Array(String),
-      preamble : Preamble,
-      process_runner,
-      file_remover,
-      tempfile_writer
-    )
-      new(mutant, original, specs, preamble, process_runner, file_remover, tempfile_writer)
+    def self.with(config, process_runner, file_remover, tempfile_writer)
+      new(config, process_runner, file_remover, tempfile_writer)
     end
 
     private def initialize(
-      @mutant : Crytic::Mutant::Mutant,
-      @subject_file_path : String,
-      @specs_file_paths : Array(String),
-      @preamble : String,
+      @config : Config,
       @process_runner,
       @file_remover,
       @tempfile_writer
@@ -75,7 +65,7 @@ module Crytic::Mutation
     end
 
     private def write_full_source_into_tempfile(mutated_source)
-      full_source = @preamble + mutated_specs_source(mutated_source)
+      full_source = @config.preamble + mutated_specs_source(mutated_source)
       @tempfile_writer.call("crytic", ".cr", full_source)
     end
 
@@ -102,10 +92,10 @@ module Crytic::Mutation
 
     private def mutated_specs_source(mutated_source)
       InjectMutatedSubjectIntoSpecs.reset
-      @specs_file_paths.map do |spec_file|
+      @config.specs.map do |spec_file|
         InjectMutatedSubjectIntoSpecs
           .new(
-          subject_path: @subject_file_path,
+          subject_path: @config.original,
           mutated_subject_source: mutated_source,
           path: spec_file,
           source: File.read(spec_file))

@@ -1,4 +1,5 @@
 require "../mutant/**"
+require "../mutation/config"
 require "../mutation/isolated_mutation"
 require "./generator"
 require "compiler/crystal/syntax/*"
@@ -6,7 +7,7 @@ require "compiler/crystal/syntax/*"
 module Crytic::Generator
   # Determines all possible mutations for the given source files.
   class InMemoryMutationsGenerator < Generator
-    alias MutationFactory = (Mutant::Mutant, String, Array(String), String) -> Mutation::Mutation
+    alias MutationFactory = (Mutation::Config) -> Mutation::Mutation
 
     ALL_MUTANTS = [
       Mutant::AndOrSwapPossibilities.new,
@@ -20,12 +21,9 @@ module Crytic::Generator
       Mutant::StringLiteralChangePossibilities.new,
     ] of Mutant::Possibilities
 
-    property mutation_factory : MutationFactory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
+    property mutation_factory : MutationFactory = ->(config : Mutation::Config) {
       Mutation::IsolatedMutation.with(
-        mutant,
-        original,
-        specs,
-        preamble,
+        config,
         ProcessProcessRunner.new,
         ->File.delete(String),
         ->(name : String, extension : String, content : String) {
@@ -48,7 +46,7 @@ module Crytic::Generator
     end
 
     private def noop_mutation_for(src, specs) : Mutation::Mutation
-      mutation_factory.call(noop_mutant_for(src), src, specs, @preamble)
+      mutation_factory.call(Mutation::Config.new(noop_mutant_for(src), src, specs, @preamble))
     end
 
     private def noop_mutant_for(src)
@@ -67,8 +65,8 @@ module Crytic::Generator
         .select(&.any?)
         .map do |inspector|
           inspector.locations.map do |location|
-            mutation_factory.call(
-              inspector.mutant_class.at(location), source, specs, @preamble)
+            mutation_factory.call(Mutation::Config.new(
+              inspector.mutant_class.at(location), source, specs, @preamble))
           end
         end
         .flatten

@@ -49,8 +49,8 @@ module Crytic::Generator
 
       it "passes along the preamble" do
         last_preamble = ""
-        factory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
-          last_preamble = preamble
+        factory = ->(config : Mutation::Config) {
+          last_preamble = config.preamble
           FakeMutation.new.as(Mutation::Mutation)
         }
         source = fixture_source("non_empty_source_file.cr")
@@ -67,8 +67,8 @@ module Crytic::Generator
       it "passes along the source filename" do
         source = fixture_source("non_empty_source_file.cr")
         last_mutant : Mutant::Mutant? = nil
-        factory = ->(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String) {
-          last_mutant = mutant
+        factory = ->(config : Mutation::Config) {
+          last_mutant = config.mutant
           FakeMutation.new.as(Mutation::Mutation)
         }
 
