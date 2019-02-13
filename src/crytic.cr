@@ -31,4 +31,4 @@ success = Crytic::Runner
   .new(options.msi_threshold, reporters, generator)
   .run(options.subject, options.spec_files)
 
-exit(success ? 0 : 1)
+exit(success.to_unsafe)
