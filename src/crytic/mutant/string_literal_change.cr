@@ -5,7 +5,11 @@ module Crytic::Mutant
   class StringLiteralChange < VisitorMutant
     def visit(node : Crystal::StringLiteral)
       if @location.matches?(node)
-        node.value = "#{node.value}__crytic__"
+        node.value = if node.value.empty?
+                       "__crytic__"
+                     else
+                       ""
+                     end
       end
       true
     end

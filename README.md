@@ -161,11 +161,11 @@ This mutant changes the sign of literal numbers. It ignores literal "0". A typic
 
 #### StringLiteralChange
 
-This mutant changes literal occurances of string by appending the string `__crytic__`. A typical mutation is:
+This mutant changes literal occurances of string by replacing empty strings with `__crytic__` and all other strings with the empty string. Typical mutations are:
 
 ```diff
 - "Welcome"
-+ "Welcome__crytic__"
++ ""
 ```
 
 #### AnyAllSwap

@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - When no mutations were run, crytic now exits with 1 instead of 0
+- The `StringLiteralChange` mutant now performs more efficient replacements
 
 ### Fixed
 
