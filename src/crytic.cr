@@ -27,7 +27,7 @@ generator = Crytic::Generator::InMemoryMutationsGenerator.new(
   Crytic::Generator::InMemoryMutationsGenerator::ALL_MUTANTS,
   options.preamble)
 
-success = Crytic::Runner
+success = !Crytic::Runner
   .new(options.msi_threshold, reporters, generator)
   .run(options.subject, options.spec_files)
 
