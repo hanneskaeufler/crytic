@@ -19,7 +19,7 @@ module Crytic
       @reporters : Array(Reporter::Reporter),
       @generator : Generator::Generator,
       @no_mutation_factory : NoMutationFactory = ->(specs : Array(String)) {
-        Mutation::NoMutation.with(specs)
+        Mutation::NoMutation.with(specs, ProcessProcessRunner.new)
       }
     )
     end

@@ -42,9 +42,8 @@ describe Crytic::Runner do
         generator: FakeGenerator.new,
         reporters: [reporter] of Crytic::Reporter::Reporter,
         no_mutation_factory: ->(specs : Array(String)) {
-          no_mutation = Crytic::Mutation::NoMutation.with(specs)
           process_runner = Crytic::FakeProcessRunner.new
-          no_mutation.process_runner = process_runner
+          no_mutation = Crytic::Mutation::NoMutation.with(specs, process_runner)
           process_runner.exit_code = [1, 0]
           no_mutation
         })
@@ -95,8 +94,6 @@ end
 
 private def fake_no_mutation_factory
   ->(specs : Array(String)) {
-    no_mutation = Crytic::Mutation::NoMutation.with(specs)
-    no_mutation.process_runner = Crytic::FakeProcessRunner.new
-    no_mutation
+    Crytic::Mutation::NoMutation.with(specs, Crytic::FakeProcessRunner.new)
   }
 end
