@@ -2,7 +2,7 @@ require "../mutant/mutant"
 require "../process_process_runner"
 require "../process_runner"
 require "../subject"
-require "./config"
+require "./environment"
 require "./inject_mutated_subject_into_specs"
 require "./mutation"
 require "./result"
@@ -12,15 +12,11 @@ module Crytic::Mutation
   class IsolatedMutation < Mutation
     alias Preamble = String
 
-    private getter process_runner : Crytic::ProcessRunner
-    private getter file_remover : (String -> Void)
-    private getter tempfile_writer : (String, String, String) -> String
-
     # Compiles the mutated source code into a binary and runs this binary,
     # recording exit code, stderr and stdout output.
     def run
-      subject = Subject.from_filepath(@config.original)
-      process_result = run(subject.mutate_source!(@config.mutant))
+      subject = @environment.subject
+      process_result = run(subject.mutate_source!(@environment.mutant))
       success_messages_in_output = /Finished/ =~ process_result[:output]
       status = if process_result[:exit_code] == ProcessRunner::SUCCESS
                  Status::Uncovered
@@ -32,19 +28,14 @@ module Crytic::Mutation
                  Status::Covered
                end
 
-      Result.new(status, @config.mutant, subject.diff)
+      Result.new(status, @environment.mutant, subject.diff)
     end
 
-    def self.with(config, process_runner, file_remover, tempfile_writer)
-      new(config, process_runner, file_remover, tempfile_writer)
+    def self.with(environment)
+      new(environment)
     end
 
-    private def initialize(
-      @config : Config,
-      @process_runner,
-      @file_remover,
-      @tempfile_writer
-    )
+    private def initialize(@environment : Environment)
     end
 
     private def run(mutated_source : SourceCode)
@@ -53,7 +44,7 @@ module Crytic::Mutation
       res = compile_tempfile_into_binary(tempfile_path)
 
       if res[:exit_code] != 0
-        @file_remover.call(tempfile_path)
+        @environment.remove_file(tempfile_path)
         return {exit_code: res[:exit_code], output: res[:output]}
       end
 
@@ -65,14 +56,14 @@ module Crytic::Mutation
     end
 
     private def write_full_source_into_tempfile(mutated_source)
-      full_source = @config.preamble + mutated_specs_source(mutated_source)
-      @tempfile_writer.call("crytic", ".cr", full_source)
+      full_source = @environment.preamble + mutated_specs_source(mutated_source)
+      @environment.write_tempfile("crytic", ".cr", full_source)
     end
 
     private def compile_tempfile_into_binary(tempfile_path)
       io = IO::Memory.new
       binary = "#{File.dirname(tempfile_path)}/#{File.basename(tempfile_path, ".cr")}"
-      exit_code = process_runner.run(
+      exit_code = @environment.execute(
         "crystal",
         ["build", "-o", binary, "--no-debug", tempfile_path],
         output: io,
@@ -81,21 +72,21 @@ module Crytic::Mutation
     end
 
     private def execute_binary(binary, io)
-      process_runner
-        .run(binary, [] of String, output: io, error: STDERR, timeout: 10.seconds)
+      @environment
+        .execute(binary, [] of String, output: io, error: STDERR, timeout: 10.seconds)
     end
 
     private def remove_artifacts(tempfile_path, binary)
-      @file_remover.call(tempfile_path)
-      @file_remover.call(binary)
+      @environment.remove_file(tempfile_path)
+      @environment.remove_file(binary)
     end
 
     private def mutated_specs_source(mutated_source)
       InjectMutatedSubjectIntoSpecs.reset
-      @config.specs.map do |spec_file|
+      @environment.spec_file_paths.map do |spec_file|
         InjectMutatedSubjectIntoSpecs
           .new(
-          subject_path: @config.original,
+          subject_path: @environment.subject_path,
           mutated_subject_source: mutated_source,
           path: spec_file,
           source: File.read(spec_file))
