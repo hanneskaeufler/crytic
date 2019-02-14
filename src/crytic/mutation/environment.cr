@@ -7,7 +7,6 @@ module Crytic::Mutation
     process_runner : Crytic::ProcessRunner,
     file_remover : (String -> Void),
     tempfile_writer : (String, String, String) -> String do
-
     delegate :mutant, :preamble, to: config
 
     def subject_path
