@@ -37,7 +37,7 @@ module Crytic
       @reporters.each(&.report_summary(results))
       @reporters.each(&.report_msi(results))
 
-      MsiCalculator.new(results).msi.passes?(@threshold)
+      !results.empty? && MsiCalculator.new(results).msi.passes?(@threshold)
     end
 
     def run(source : String, specs : Array(String)) : Bool
