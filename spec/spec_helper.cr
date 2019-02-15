@@ -29,11 +29,12 @@ def ast_from(code)
   Crystal::Parser.parse(code)
 end
 
-def result(status = Crytic::Mutation::Status::Covered, filename = "some_filename.cr")
+def result(status = Crytic::Mutation::Status::Covered, filename = "some_filename.cr", output = "")
   Crytic::Mutation::Result.new(
     status: status,
     mutant: fake_mutant(filename),
-    diff: "diff")
+    diff: "diff",
+    output: output)
 end
 
 def erroring_mutation

@@ -28,7 +28,7 @@ module Crytic::Mutation
                  Status::Covered
                end
 
-      Result.new(status, @environment.mutant, subject.diff)
+      Result.new(status, @environment.mutant, subject.diff, process_result[:output])
     end
 
     def self.with(environment)
@@ -39,7 +39,6 @@ module Crytic::Mutation
     end
 
     private def run(mutated_source : SourceCode)
-      io = IO::Memory.new
       tempfile_path = write_full_source_into_tempfile(mutated_source)
       res = compile_tempfile_into_binary(tempfile_path)
 
@@ -49,6 +48,7 @@ module Crytic::Mutation
       end
 
       binary = res[:binary]
+      io = IO::Memory.new
       exit_code = execute_binary(binary, io)
       remove_artifacts(tempfile_path, binary)
 
@@ -73,7 +73,7 @@ module Crytic::Mutation
 
     private def execute_binary(binary, io)
       @environment
-        .execute(binary, [] of String, output: io, error: STDERR, timeout: 10.seconds)
+        .execute(binary, [] of String, output: io, error: io, timeout: 10.seconds)
     end
 
     private def remove_artifacts(tempfile_path, binary)

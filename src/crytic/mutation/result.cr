@@ -8,7 +8,11 @@ module Crytic::Mutation
     Uncovered
   end
 
-  record Result, status : Status, mutant : Mutant::Mutant, diff : String do
+  record Result,
+    status : Status,
+    mutant : Mutant::Mutant,
+    diff : String,
+    output : String do
     delegate uncovered?, covered?, errored?, timeout?, to: status
 
     def mutant_name
