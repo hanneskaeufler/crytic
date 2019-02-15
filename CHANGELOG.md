@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Don't crash in the stryker dashboard reporter when zero mutations were run
+- Fixed reporting of the number of mutations being run
 
 ## [4.0.0] - 2019-01-31
 
