@@ -52,8 +52,5 @@ private def fake_env
 end
 
 private def results
-  Crytic::Mutation::ResultSet.new([Crytic::Mutation::Result.new(
-                                     status: Crytic::Mutation::Status::Covered,
-                                     mutant: fake_mutant,
-                                     diff: "")])
+  Crytic::Mutation::ResultSet.new([result])
 end

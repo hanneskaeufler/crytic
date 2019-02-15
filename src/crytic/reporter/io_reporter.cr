@@ -32,8 +32,9 @@ module Crytic::Reporter
         @io << "\n#{INDENT}🚧 #{result.mutant_name}"
         @io << "\n#{INDENT + INDENT}in #{result.location.filename}"
         @io << <<-HELP
-        \n#{INDENT + INDENT}There was an error running the test-suite using crytic's infrastructure with the unmodified subject.\n#{INDENT + INDENT}This is very likely a bug in crytic, please go ahead and file an\n#{INDENT + INDENT}issue at https://github.com/hanneskaeufler/crytic/issues. There are a number of known limitations already which\n#{INDENT + INDENT}could be the reason for the error, see https://github.com/hanneskaeufler/crytic/issues/19.
+        \n#{INDENT + INDENT}There was an error running the test-suite using crytic's infrastructure with the unmodified subject.\n#{INDENT + INDENT}This is very likely a bug in crytic, please go ahead and file an\n#{INDENT + INDENT}issue at https://github.com/hanneskaeufler/crytic/issues. There are a number of known limitations already which\n#{INDENT + INDENT}could be the reason for the error, see https://github.com/hanneskaeufler/crytic/issues/19.\n
         HELP
+        @io << "#{INDENT + INDENT + INDENT} #{result.output}"
       end
     end
 

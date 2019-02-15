@@ -63,11 +63,12 @@ module Crytic::Reporter
       it "prints a helpful message indicating that the mutant injecting setup seems to have broken the suite" do
         io = IO::Memory.new
 
-        IoReporter.new(io).report_neutral_result(result(Mutation::Status::Errored))
+        IoReporter.new(io).report_neutral_result(result(Mutation::Status::Errored, output: "the actual error"))
 
         io.to_s.should contain "NumberLiteralChange"
         io.to_s.should contain "some_filename.cr\n"
         io.to_s.should contain "There was an error"
+        io.to_s.should contain "the actual error"
       end
 
       it "is silent for a neutral mutation that didnt error" do

@@ -4,6 +4,7 @@ module Crytic
   class FakeProcessRunner < ProcessRunner
     property exit_code : Array(Int32) = [0, 0]
     property timeout = [] of Time::Span
+    property errors = [] of IO
     @cmd = [] of String
     @args = [] of String
     @output_io = IO::Memory.new
@@ -16,6 +17,7 @@ module Crytic
       @cmd << cmd
       @args << args.join(" ")
       output << @output_io.to_s
+      errors << error
       exit_code.shift
     end
 

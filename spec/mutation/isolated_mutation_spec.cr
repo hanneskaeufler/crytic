@@ -207,6 +207,33 @@ module Crytic::Mutation
         mutation.run
         FakeFile.tempfile_contents.last.should start_with(preamble)
       end
+
+      it "saves the error output when binary compilation failed" do
+        fake = FakeProcessRunner.new
+        fake.exit_code = [1]
+        fake.fill_output_with "this is the error"
+        mutation = IsolatedMutation.with(environment(config(
+          mutant,
+          "./fixtures/simple/bar.cr",
+          ["./fixtures/simple/bar_with_helper_spec.cr"]),
+          process_runner: fake))
+
+        mutation.run.output.should eq "this is the error"
+      end
+
+      it "saves the error output when binary execution failed" do
+        fake = FakeProcessRunner.new
+        fake.exit_code = [0, 1]
+        fake.fill_output_with "this is the error"
+        mutation = IsolatedMutation.with(environment(config(
+          mutant,
+          "./fixtures/simple/bar.cr",
+          ["./fixtures/simple/bar_with_helper_spec.cr"]),
+          process_runner: fake))
+
+        mutation.run.output.should eq "this is the error"
+        fake.errors.last.to_s.should eq "this is the error"
+      end
     end
   end
 end
