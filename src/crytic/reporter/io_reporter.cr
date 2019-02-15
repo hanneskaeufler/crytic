@@ -20,10 +20,11 @@ module Crytic::Reporter
       end
     end
 
-    def report_mutations(mutations)
-      @io << "No mutations to be run." if mutations.empty?
-      @io << "Running 1 mutation." if mutations.size == 1
-      @io << "Running #{mutations.size} mutations." if mutations.size > 1
+    def report_mutations(mutations : Array(Generator::MutationSet))
+      number_of_mutations = mutations.sum(&.number_of_mutations)
+      @io << "No mutations to be run." if number_of_mutations == 0
+      @io << "Running 1 mutation." if number_of_mutations == 1
+      @io << "Running #{number_of_mutations} mutations." if number_of_mutations > 1
     end
 
     def report_neutral_result(result)

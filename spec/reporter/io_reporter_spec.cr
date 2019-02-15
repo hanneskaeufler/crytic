@@ -26,22 +26,36 @@ module Crytic::Reporter
     describe "#report_mutations" do
       it "prints no mutations if there are none to be run" do
         io = IO::Memory.new
-        IoReporter.new(io).report_mutations([] of Mutation::Mutation)
+        IoReporter.new(io).report_mutations([] of Generator::MutationSet)
         io.to_s.should eq("No mutations to be run.")
       end
 
       it "prints 1 mutation being run" do
         io = IO::Memory.new
-        mutation = FakeMutation.new
-        IoReporter.new(io).report_mutations([mutation])
+        mutation = FakeMutation.new.as(Mutation::Mutation)
+        IoReporter.new(io).report_mutations([
+          Generator::MutationSet.new(neutral: mutation, mutated: [mutation]),
+        ])
         io.to_s.should eq("Running 1 mutation.")
       end
 
-      it "prints more than one mutation being run" do
+      it "prints more than one mutation being run for a subject" do
         io = IO::Memory.new
-        mutation = FakeMutation.new
-        IoReporter.new(io).report_mutations([mutation])
-        io.to_s.should eq("Running 1 mutation.")
+        mutation = FakeMutation.new.as(Mutation::Mutation)
+        IoReporter.new(io).report_mutations([
+          Generator::MutationSet.new(neutral: mutation, mutated: [mutation, mutation]),
+        ])
+        io.to_s.should eq("Running 2 mutations.")
+      end
+
+      it "prints more than one mutation being run for two subjects" do
+        io = IO::Memory.new
+        mutation = FakeMutation.new.as(Mutation::Mutation)
+        IoReporter.new(io).report_mutations([
+          Generator::MutationSet.new(neutral: mutation, mutated: [mutation]),
+          Generator::MutationSet.new(neutral: mutation, mutated: [mutation, mutation]),
+        ])
+        io.to_s.should eq("Running 3 mutations.")
       end
     end
 
