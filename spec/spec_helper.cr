@@ -1,5 +1,6 @@
 require "../src/crytic/mutant/full_location"
 require "../src/crytic/mutant/number_literal_change"
+require "./fake_file"
 require "./fake_generator"
 require "./fake_http_client"
 require "./fake_mutation"
@@ -41,4 +42,17 @@ end
 
 def fake_mutation
   FakeMutation.new.as(Crytic::Mutation::Mutation)
+end
+
+def config(mutant, original, specs, preamble = "")
+  Crytic::Mutation::Config.new(mutant, original, specs, preamble)
+end
+
+def environment(
+  config,
+  process_runner = Crytic::FakeProcessRunner.new,
+  file_remover = ->FakeFile.delete(String),
+  tempfile_writer = ->FakeFile.tempfile(String, String, String)
+)
+  Crytic::Mutation::Environment.new(config, process_runner, file_remover, tempfile_writer)
 end

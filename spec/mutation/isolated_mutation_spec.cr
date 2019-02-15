@@ -217,36 +217,3 @@ private def mutant
     column_number: 6,
   ))
 end
-
-private class FakeFile
-  @@files_deleted = [] of String
-  @@tempfiles_created = [] of String
-  @@tempfile_contents = [] of String
-
-  def self.tempfile_contents
-    @@tempfile_contents
-  end
-
-  def self.delete(filename : String)
-  end
-
-  def self.tempfile(name, extension, content) : String
-    filename = "#{name}.RANDOM#{extension}"
-    @@tempfile_contents << content
-    @@tempfiles_created << filename
-    "/tmp/#{filename}"
-  end
-end
-
-private def config(mutant, original, specs, preamble = "")
-  Crytic::Mutation::Config.new(mutant, original, specs, preamble)
-end
-
-private def environment(
-  config,
-  process_runner = Crytic::FakeProcessRunner.new,
-  file_remover = ->FakeFile.delete(String),
-  tempfile_writer = ->FakeFile.tempfile(String, String, String)
-)
-  Crytic::Mutation::Environment.new(config, process_runner, file_remover, tempfile_writer)
-end
