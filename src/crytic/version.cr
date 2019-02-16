@@ -1,3 +1,3 @@
 module Crytic
-  VERSION = "4.0.0"
+  VERSION = {{ `shards version`.chomp.stringify }}
 end
