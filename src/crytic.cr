@@ -3,7 +3,7 @@ require "./crytic/generator/in_memory_generator"
 require "./crytic/reporter/http_client"
 require "./crytic/reporter/io_reporter"
 require "./crytic/reporter/stryker_badge_reporter"
-require "./crytic/runner"
+require "./crytic/runner/sequential"
 
 options = Crytic::CliOptions
   .new(STDOUT, STDERR, ->(code : Int32) { exit(code) })
@@ -27,7 +27,7 @@ generator = Crytic::Generator::InMemoryMutationsGenerator.new(
   Crytic::Generator::InMemoryMutationsGenerator::ALL_MUTANTS,
   options.preamble)
 
-success = !Crytic::Runner
+success = !Crytic::Runner::Sequential
   .new(options.msi_threshold, reporters, generator)
   .run(options.subject, options.spec_files)
 

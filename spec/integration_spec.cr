@@ -1,4 +1,3 @@
-require "../src/crytic/runner"
 require "./spec_helper"
 
 {% unless flag?("skip-integration") %}

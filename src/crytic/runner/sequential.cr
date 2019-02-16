@@ -1,14 +1,14 @@
-require "./generator/**"
-require "./msi_calculator"
-require "./mutation/no_mutation"
-require "./mutation/result"
-require "./mutation/result_set"
-require "./reporter/**"
-require "./runner_argument_validator"
-require "./subject"
+require "../generator/**"
+require "../msi_calculator"
+require "../mutation/no_mutation"
+require "../mutation/result"
+require "../mutation/result_set"
+require "../reporter/**"
+require "../runner_argument_validator"
+require "../subject"
 
-module Crytic
-  class Runner
+module Crytic::Runner
+  class Sequential
     include RunnerArgumentValidator
 
     alias Threshold = Float64
