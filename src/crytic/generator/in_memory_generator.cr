@@ -75,7 +75,7 @@ module Crytic::Generator
     private def ast_for(source)
       Crystal::Parser
         .new(File.read(source))
-        .tap { |parser| parser.filename = source }
+        .tap(&.filename = source)
         .parse
     end
   end
