@@ -3,6 +3,9 @@ require "../spec_helper"
 require "compiler/crystal/syntax/*"
 
 module Crytic::Generator
+  specs = ["some_spec.cr"]
+  preamble = ""
+
   describe InMemoryMutationsGenerator do
     describe "#mutations_for" do
       it "returns no mutations for no possibilities" do
@@ -91,12 +94,4 @@ DIR = "./spec/generator"
 
 private def fixture_source(filename)
   ["#{DIR}/#{filename}"]
-end
-
-private def specs
-  ["some_spec.cr"]
-end
-
-private def preamble
-  ""
 end
