@@ -1,6 +1,5 @@
 require "../../src/crytic/generator/in_memory_generator"
 require "../spec_helper"
-require "compiler/crystal/syntax/*"
 
 module Crytic::Generator
   specs = ["some_spec.cr"]
@@ -12,7 +11,7 @@ module Crytic::Generator
         source = fixture_source("non_empty_source_file.cr")
 
         mutations = InMemoryMutationsGenerator
-          .new([] of Mutant::Possibilities, preamble)
+          .new([] of Mutant::Possibilities, preamble, fake_mutation_factory)
           .mutations_for(source, specs)
 
         mutations.should be_empty
@@ -22,7 +21,7 @@ module Crytic::Generator
         source = fixture_source("empty_source_file.cr")
 
         mutations = InMemoryMutationsGenerator
-          .new(InMemoryMutationsGenerator::ALL_MUTANTS, preamble)
+          .new(InMemoryMutationsGenerator::ALL_MUTANTS, preamble, fake_mutation_factory)
           .mutations_for(source, specs)
 
         mutations.should be_empty
@@ -31,8 +30,10 @@ module Crytic::Generator
       it "returns a number literal mutation for the number literal" do
         source = fixture_source("non_empty_source_file.cr")
 
-        mutations = InMemoryMutationsGenerator
-          .new([Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities, preamble)
+        mutations = InMemoryMutationsGenerator.new(
+          [Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities,
+          preamble,
+          fake_mutation_factory)
           .mutations_for(source, specs)
 
         mutations.size.should eq 1
@@ -41,8 +42,10 @@ module Crytic::Generator
       it "doesn't mix mutations for multiple sources" do
         source = fixture_source("non_empty_source_file.cr")
 
-        generator = InMemoryMutationsGenerator
-          .new([Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities, preamble)
+        generator = InMemoryMutationsGenerator.new(
+          [Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities,
+          preamble,
+          fake_mutation_factory)
 
         generator.mutations_for(source, specs)
         mutations = generator.mutations_for(source, specs)
@@ -58,9 +61,10 @@ module Crytic::Generator
         }
         source = fixture_source("non_empty_source_file.cr")
 
-        generator = InMemoryMutationsGenerator
-          .new([Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities, "preamble")
-        generator.mutation_factory = factory
+        generator = InMemoryMutationsGenerator.new(
+          [Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities,
+          "preamble",
+          factory)
 
         generator.mutations_for(source, specs)
 
@@ -75,9 +79,10 @@ module Crytic::Generator
           FakeMutation.new.as(Mutation::Mutation)
         }
 
-        generator = InMemoryMutationsGenerator
-          .new([Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities, preamble)
-        generator.mutation_factory = factory
+        generator = InMemoryMutationsGenerator.new(
+          [Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities,
+          preamble,
+          factory)
 
         generator.mutations_for(source, specs)
 

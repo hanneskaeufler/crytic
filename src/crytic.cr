@@ -1,5 +1,6 @@
 require "./crytic/cli_options"
 require "./crytic/generator/in_memory_generator"
+require "./crytic/generator/isolated_mutation_factory"
 require "./crytic/reporter/http_client"
 require "./crytic/reporter/io_reporter"
 require "./crytic/reporter/stryker_badge_reporter"
@@ -25,7 +26,8 @@ end
 
 generator = Crytic::Generator::InMemoryMutationsGenerator.new(
   Crytic::Generator::InMemoryMutationsGenerator::ALL_MUTANTS,
-  options.preamble)
+  options.preamble,
+  ->Crytic::Generator.isolated_mutation_factory(Crytic::Mutation::Config))
 
 success = !Crytic::Runner::Sequential
   .new(options.msi_threshold, reporters, generator)

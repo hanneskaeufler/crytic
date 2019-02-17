@@ -58,6 +58,6 @@ def environment(
   Crytic::Mutation::Environment.new(config, process_runner, file_remover, tempfile_writer)
 end
 
-def fake_mutation_factory(config : Crytic::Mutation::Config)
-  fake_mutation
+def fake_mutation_factory
+  ->(_config : Crytic::Mutation::Config) { fake_mutation }
 end
