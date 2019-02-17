@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutant::ConditionFlip - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Generator::MutationSet - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -66,7 +66,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Generator" data-name="crytic::generator">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Generator" data-name="crytic::generator">
       <a href="../../Crytic/Generator.html">Generator</a>
       
         <ul>
@@ -91,7 +91,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Generator/MutationSet" data-name="crytic::generator::mutationset">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Generator/MutationSet" data-name="crytic::generator::mutationset">
       <a href="../../Crytic/Generator/MutationSet.html">MutationSet</a>
       
     </li>
@@ -106,7 +106,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
       <a href="../../Crytic/Mutant.html">Mutant</a>
       
         <ul>
@@ -141,7 +141,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/ConditionFlip" data-name="crytic::mutant::conditionflip">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/ConditionFlip" data-name="crytic::mutant::conditionflip">
       <a href="../../Crytic/Mutant/ConditionFlip.html">ConditionFlip</a>
       
     </li>
@@ -425,12 +425,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Mutant::ConditionFlip
+  <span class="kind">struct</span> Crytic::Generator::MutationSet
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/ConditionFlip.html">Crytic::Mutant::ConditionFlip</a></li><li class="superclass"><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Generator/MutationSet.html">Crytic::Generator::MutationSet</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -451,8 +451,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutant/condition_flip.cr#L5" target="_blank">
-        crytic/mutant/condition_flip.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/generator/generator.cr#L5" target="_blank">
+        crytic/generator/generator.cr
       </a>
     
     <br/>
@@ -462,6 +462,16 @@
 
 
 
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28neutral%3AMutation%3A%3AMutation%2Cmutated%3AArray%28Mutation%3A%3AMutation%29%29-class-method" class="signature"><strong>.new</strong>(neutral : Mutation::Mutation, mutated : Array(Mutation::Mutation))</a>
+        
+      </li>
+    
+  </ul>
+
 
 
 
@@ -470,7 +480,27 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#visit%28node%3ACrystal%3A%3AIf%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::If)</a>
+        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#copy_with%28neutral_neutral%3D%40neutral%2Cmutated_mutated%3D%40mutated%29-instance-method" class="signature"><strong>#copy_with</strong>(neutral _neutral = @neutral, mutated _mutated = @mutated)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mutated%3AArray%28Mutation%3A%3AMutation%29-instance-method" class="signature"><strong>#mutated</strong> : Array(Mutation::Mutation)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#neutral%3AMutation%3A%3AMutation-instance-method" class="signature"><strong>#neutral</strong> : Mutation::Mutation</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#number_of_mutations-instance-method" class="signature"><strong>#number_of_mutations</strong></a>
         
       </li>
     
@@ -481,39 +511,6 @@
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></code></h3>
-  
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#location%3ACrytic%3A%3AMutant%3A%3AFullLocation-instance-method" class="tooltip">
-      <span>location : Crytic::Mutant::FullLocation</span>
-    location</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="tooltip">
-      <span>visit(node : Crystal::ASTNode)</span>
-    visit</a>
-    
-  
-
-
-    
-
-
-    
-
-  <h3>Class methods inherited from class <code><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></code></h3>
-  
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#at%28location%3AFullLocation%29-class-method" class="tooltip">
-      <span>at(location : FullLocation)</span>
-    at</a>
-    
-  
-
-
   
     
 
@@ -548,24 +545,103 @@
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(neutral:Mutation::Mutation,mutated:Array(Mutation::Mutation))-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(neutral : <a href="../../Crytic/Mutation/Mutation.html">Mutation::Mutation</a>, mutated : Array(<a href="../../Crytic/Mutation/Mutation.html">Mutation::Mutation</a>))
+
+        <a class="method-permalink" href="#new%28neutral%3AMutation%3A%3AMutation%2Cmutated%3AArray%28Mutation%3A%3AMutation%29%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/generator/generator.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
 
 
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="visit(node:Crystal::If)-instance-method">
+    <div class="entry-detail" id="clone-instance-method">
       <div class="signature">
         
-        def <strong>visit</strong>(node : Crystal::If)
+        def <strong>clone</strong>
 
-        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3AIf%29-instance-method">#</a>
+        <a class="method-permalink" href="#clone-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutant/condition_flip.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/generator/generator.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="copy_with(neutral_neutral=@neutral,mutated_mutated=@mutated)-instance-method">
+      <div class="signature">
+        
+        def <strong>copy_with</strong>(neutral _neutral = @neutral, mutated _mutated = @mutated)
+
+        <a class="method-permalink" href="#copy_with%28neutral_neutral%3D%40neutral%2Cmutated_mutated%3D%40mutated%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/generator/generator.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mutated:Array(Mutation::Mutation)-instance-method">
+      <div class="signature">
+        
+        def <strong>mutated</strong> : Array(<a href="../../Crytic/Mutation/Mutation.html">Mutation::Mutation</a>)
+
+        <a class="method-permalink" href="#mutated%3AArray%28Mutation%3A%3AMutation%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="neutral:Mutation::Mutation-instance-method">
+      <div class="signature">
+        
+        def <strong>neutral</strong> : <a href="../../Crytic/Mutation/Mutation.html">Mutation::Mutation</a>
+
+        <a class="method-permalink" href="#neutral%3AMutation%3A%3AMutation-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="number_of_mutations-instance-method">
+      <div class="signature">
+        
+        def <strong>number_of_mutations</strong>
+
+        <a class="method-permalink" href="#number_of_mutations-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/generator/generator.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>

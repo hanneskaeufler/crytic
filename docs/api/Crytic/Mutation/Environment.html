@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutant::ConditionFlip - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Mutation::Environment - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -106,7 +106,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant" data-name="crytic::mutant">
       <a href="../../Crytic/Mutant.html">Mutant</a>
       
         <ul>
@@ -141,7 +141,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/ConditionFlip" data-name="crytic::mutant::conditionflip">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutant/ConditionFlip" data-name="crytic::mutant::conditionflip">
       <a href="../../Crytic/Mutant/ConditionFlip.html">ConditionFlip</a>
       
     </li>
@@ -236,7 +236,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../../Crytic/Mutation.html">Mutation</a>
       
         <ul>
@@ -246,7 +246,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Environment" data-name="crytic::mutation::environment">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Environment" data-name="crytic::mutation::environment">
       <a href="../../Crytic/Mutation/Environment.html">Environment</a>
       
     </li>
@@ -425,12 +425,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Mutant::ConditionFlip
+  <span class="kind">struct</span> Crytic::Mutation::Environment
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/ConditionFlip.html">Crytic::Mutant::ConditionFlip</a></li><li class="superclass"><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutation/Environment.html">Crytic::Mutation::Environment</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -451,8 +451,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutant/condition_flip.cr#L5" target="_blank">
-        crytic/mutant/condition_flip.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L5" target="_blank">
+        crytic/mutation/environment.cr
       </a>
     
     <br/>
@@ -462,6 +462,16 @@
 
 
 
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28config%3AConfig%2Cprocess_runner%3ACrytic%3A%3AProcessRunner%2Cfile_remover%3AString-%3EVoid%2Ctempfile_writer%3AString%2CString%2CString-%3EString%29-class-method" class="signature"><strong>.new</strong>(config : Config, process_runner : Crytic::ProcessRunner, file_remover : String -> Void, tempfile_writer : String, String, String -> String)</a>
+        
+      </li>
+    
+  </ul>
+
 
 
 
@@ -470,7 +480,87 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#visit%28node%3ACrystal%3A%3AIf%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::If)</a>
+        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#config%3AConfig-instance-method" class="signature"><strong>#config</strong> : Config</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#copy_with%28config_config%3D%40config%2Cprocess_runner_process_runner%3D%40process_runner%2Cfile_remover_file_remover%3D%40file_remover%2Ctempfile_writer_tempfile_writer%3D%40tempfile_writer%29-instance-method" class="signature"><strong>#copy_with</strong>(config _config = @config, process_runner _process_runner = @process_runner, file_remover _file_remover = @file_remover, tempfile_writer _tempfile_writer = @tempfile_writer)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#execute%28cmd%2Cargs%2Coutput%2Cerror%2Ctimeout%29-instance-method" class="signature"><strong>#execute</strong>(cmd, args, output, error, timeout)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#execute%28cmd%2Cargs%2Coutput%2Cerror%29-instance-method" class="signature"><strong>#execute</strong>(cmd, args, output, error)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#file_remover%3AString-%3EVoid-instance-method" class="signature"><strong>#file_remover</strong> : String -> Void</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mutant%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#mutant</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mutant%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#mutant</strong>(*args, **options, &block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#preamble%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#preamble</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#preamble%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#preamble</strong>(*args, **options, &block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#process_runner%3ACrytic%3A%3AProcessRunner-instance-method" class="signature"><strong>#process_runner</strong> : Crytic::ProcessRunner</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#remove_file%28path%29-instance-method" class="signature"><strong>#remove_file</strong>(path)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#spec_file_paths-instance-method" class="signature"><strong>#spec_file_paths</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#subject-instance-method" class="signature"><strong>#subject</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#subject_path-instance-method" class="signature"><strong>#subject_path</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#tempfile_writer%3AString%2CString%2CString-%3EString-instance-method" class="signature"><strong>#tempfile_writer</strong> : String, String, String -> String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#write_tempfile%28path%2Cext%2Ccontent%29-instance-method" class="signature"><strong>#write_tempfile</strong>(path, ext, content)</a>
         
       </li>
     
@@ -481,39 +571,6 @@
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></code></h3>
-  
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#location%3ACrytic%3A%3AMutant%3A%3AFullLocation-instance-method" class="tooltip">
-      <span>location : Crytic::Mutant::FullLocation</span>
-    location</a>, 
-    
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="tooltip">
-      <span>visit(node : Crystal::ASTNode)</span>
-    visit</a>
-    
-  
-
-
-    
-
-
-    
-
-  <h3>Class methods inherited from class <code><a href="../../Crytic/Mutant/VisitorMutant.html">Crytic::Mutant::VisitorMutant</a></code></h3>
-  
-  
-    <a href="../../Crytic/Mutant/VisitorMutant.html#at%28location%3AFullLocation%29-class-method" class="tooltip">
-      <span>at(location : FullLocation)</span>
-    at</a>
-    
-  
-
-
   
     
 
@@ -548,24 +605,291 @@
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(config:Config,process_runner:Crytic::ProcessRunner,file_remover:String-&gt;Void,tempfile_writer:String,String,String-&gt;String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(config : <a href="../../Crytic/Mutation/Config.html">Config</a>, process_runner : <a href="../../Crytic/ProcessRunner.html">Crytic::ProcessRunner</a>, file_remover : String -> Void, tempfile_writer : String, String, String -> String)
+
+        <a class="method-permalink" href="#new%28config%3AConfig%2Cprocess_runner%3ACrytic%3A%3AProcessRunner%2Cfile_remover%3AString-%3EVoid%2Ctempfile_writer%3AString%2CString%2CString-%3EString%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
 
 
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="visit(node:Crystal::If)-instance-method">
+    <div class="entry-detail" id="clone-instance-method">
       <div class="signature">
         
-        def <strong>visit</strong>(node : Crystal::If)
+        def <strong>clone</strong>
 
-        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3AIf%29-instance-method">#</a>
+        <a class="method-permalink" href="#clone-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutant/condition_flip.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="config:Config-instance-method">
+      <div class="signature">
+        
+        def <strong>config</strong> : <a href="../../Crytic/Mutation/Config.html">Config</a>
+
+        <a class="method-permalink" href="#config%3AConfig-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="copy_with(config_config=@config,process_runner_process_runner=@process_runner,file_remover_file_remover=@file_remover,tempfile_writer_tempfile_writer=@tempfile_writer)-instance-method">
+      <div class="signature">
+        
+        def <strong>copy_with</strong>(config _config = @config, process_runner _process_runner = @process_runner, file_remover _file_remover = @file_remover, tempfile_writer _tempfile_writer = @tempfile_writer)
+
+        <a class="method-permalink" href="#copy_with%28config_config%3D%40config%2Cprocess_runner_process_runner%3D%40process_runner%2Cfile_remover_file_remover%3D%40file_remover%2Ctempfile_writer_tempfile_writer%3D%40tempfile_writer%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="execute(cmd,args,output,error,timeout)-instance-method">
+      <div class="signature">
+        
+        def <strong>execute</strong>(cmd, args, output, error, timeout)
+
+        <a class="method-permalink" href="#execute%28cmd%2Cargs%2Coutput%2Cerror%2Ctimeout%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L28" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="execute(cmd,args,output,error)-instance-method">
+      <div class="signature">
+        
+        def <strong>execute</strong>(cmd, args, output, error)
+
+        <a class="method-permalink" href="#execute%28cmd%2Cargs%2Coutput%2Cerror%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="file_remover:String-&gt;Void-instance-method">
+      <div class="signature">
+        
+        def <strong>file_remover</strong> : String -> Void
+
+        <a class="method-permalink" href="#file_remover%3AString-%3EVoid-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mutant(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>mutant</strong>(*args, **options)
+
+        <a class="method-permalink" href="#mutant%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mutant(*args,**options,&amp;block)-instance-method">
+      <div class="signature">
+        
+        def <strong>mutant</strong>(*args, **options, &block)
+
+        <a class="method-permalink" href="#mutant%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="preamble(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>preamble</strong>(*args, **options)
+
+        <a class="method-permalink" href="#preamble%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="preamble(*args,**options,&amp;block)-instance-method">
+      <div class="signature">
+        
+        def <strong>preamble</strong>(*args, **options, &block)
+
+        <a class="method-permalink" href="#preamble%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="process_runner:Crytic::ProcessRunner-instance-method">
+      <div class="signature">
+        
+        def <strong>process_runner</strong> : <a href="../../Crytic/ProcessRunner.html">Crytic::ProcessRunner</a>
+
+        <a class="method-permalink" href="#process_runner%3ACrytic%3A%3AProcessRunner-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="remove_file(path)-instance-method">
+      <div class="signature">
+        
+        def <strong>remove_file</strong>(path)
+
+        <a class="method-permalink" href="#remove_file%28path%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L32" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="spec_file_paths-instance-method">
+      <div class="signature">
+        
+        def <strong>spec_file_paths</strong>
+
+        <a class="method-permalink" href="#spec_file_paths-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L20" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="subject-instance-method">
+      <div class="signature">
+        
+        def <strong>subject</strong>
+
+        <a class="method-permalink" href="#subject-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="subject_path-instance-method">
+      <div class="signature">
+        
+        def <strong>subject_path</strong>
+
+        <a class="method-permalink" href="#subject_path-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="tempfile_writer:String,String,String-&gt;String-instance-method">
+      <div class="signature">
+        
+        def <strong>tempfile_writer</strong> : String, String, String -> String
+
+        <a class="method-permalink" href="#tempfile_writer%3AString%2CString%2CString-%3EString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="write_tempfile(path,ext,content)-instance-method">
+      <div class="signature">
+        
+        def <strong>write_tempfile</strong>(path, ext, content)
+
+        <a class="method-permalink" href="#write_tempfile%28path%2Cext%2Ccontent%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/55681bb911281eb6e71dc6b90b7aa9e288027a41/src/crytic/mutation/environment.cr#L36" target="_blank">View source</a>]
         
       </div>
     </div>
