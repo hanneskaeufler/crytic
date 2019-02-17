@@ -101,6 +101,14 @@ module Crytic
         cli_options_parser.msi_threshold.should eq 100.0
       end
     end
+
+    describe "#mutants" do
+      it "returns all mutants" do
+        opts = CliOptions.new(IO::Memory.new, IO::Memory.new, noop_exit_fun)
+
+        opts.mutants.should eq Generator::Generator::ALL_MUTANTS
+      end
+    end
   end
 end
 

@@ -1,3 +1,4 @@
+require "../mutant/**"
 require "../mutation/mutation"
 
 module Crytic::Generator
@@ -8,6 +9,18 @@ module Crytic::Generator
   end
 
   abstract class Generator
+    ALL_MUTANTS = [
+      Mutant::AndOrSwapPossibilities.new,
+      Mutant::AnyAllSwapPossibilities.new,
+      Mutant::BoolLiteralFlipPossibilities.new,
+      Mutant::ConditionFlipPossibilities.new,
+      Mutant::NumberLiteralChangePossibilities.new,
+      Mutant::NumberLiteralSignFlipPossibilities.new,
+      Mutant::RegexLiteralChangePossibilities.new,
+      Mutant::SelectRejectSwapPossibilities.new,
+      Mutant::StringLiteralChangePossibilities.new,
+    ] of Mutant::Possibilities
+
     DEFAULT_PREAMBLE = <<-CODE
     require "spec"
     Spec.fail_fast = true

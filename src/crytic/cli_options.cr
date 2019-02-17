@@ -1,9 +1,11 @@
 require "./generator/generator"
+require "./mutant/possibilities"
 require "option_parser"
 
 module Crytic
   class CliOptions
-    getter preamble = Crytic::Generator::Generator::DEFAULT_PREAMBLE
+    getter mutants : Array(Mutant::Possibilities) = Generator::Generator::ALL_MUTANTS
+    getter preamble = Generator::Generator::DEFAULT_PREAMBLE
     getter msi_threshold = 100.0
     @spec_files = [] of String
     @subject = [] of String

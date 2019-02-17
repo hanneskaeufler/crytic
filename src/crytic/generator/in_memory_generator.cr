@@ -1,4 +1,3 @@
-require "../mutant/**"
 require "../mutation/config"
 require "./generator"
 require "compiler/crystal/syntax/*"
@@ -7,18 +6,6 @@ module Crytic::Generator
   # Determines all possible mutations for the given source files.
   class InMemoryMutationsGenerator < Generator
     alias MutationFactory = Mutation::Config -> Mutation::Mutation
-
-    ALL_MUTANTS = [
-      Mutant::AndOrSwapPossibilities.new,
-      Mutant::AnyAllSwapPossibilities.new,
-      Mutant::BoolLiteralFlipPossibilities.new,
-      Mutant::ConditionFlipPossibilities.new,
-      Mutant::NumberLiteralChangePossibilities.new,
-      Mutant::NumberLiteralSignFlipPossibilities.new,
-      Mutant::RegexLiteralChangePossibilities.new,
-      Mutant::SelectRejectSwapPossibilities.new,
-      Mutant::StringLiteralChangePossibilities.new,
-    ] of Mutant::Possibilities
 
     def initialize(
       @possibilities : Array(Mutant::Possibilities),

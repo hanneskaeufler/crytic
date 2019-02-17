@@ -25,7 +25,7 @@ if (key = ENV["STRYKER_DASHBOARD_API_KEY"]?) && !key.empty?
 end
 
 generator = Crytic::Generator::InMemoryMutationsGenerator.new(
-  Crytic::Generator::InMemoryMutationsGenerator::ALL_MUTANTS,
+  options.mutants,
   options.preamble,
   ->Crytic::Generator.isolated_mutation_factory(Crytic::Mutation::Config))
 
