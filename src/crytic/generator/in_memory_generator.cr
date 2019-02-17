@@ -1,7 +1,7 @@
 require "../mutant/**"
 require "../mutation/config"
-require "../mutation/isolated_mutation"
 require "./generator"
+require "./isolated_mutation_factory"
 require "compiler/crystal/syntax/*"
 
 module Crytic::Generator
@@ -21,15 +21,7 @@ module Crytic::Generator
       Mutant::StringLiteralChangePossibilities.new,
     ] of Mutant::Possibilities
 
-    property mutation_factory : MutationFactory = ->(config : Mutation::Config) {
-      Mutation::IsolatedMutation.with(Mutation::Environment.new(
-        config,
-        ProcessProcessRunner.new,
-        ->File.delete(String),
-        ->(name : String, extension : String, content : String) {
-          File.tempfile(name, extension) { |file| file.print(content) }.path
-        })).as(Mutation::Mutation)
-    }
+    property mutation_factory : MutationFactory = ->Crytic::Generator.isolated_mutation_factory(Mutation::Config)
 
     def initialize(@possibilities : Array(Mutant::Possibilities), @preamble : String)
     end
