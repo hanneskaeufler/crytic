@@ -1,16 +1,24 @@
 require "./generator/generator"
 require "./mutant/possibilities"
+require "./reporter/*"
 require "option_parser"
 
 module Crytic
   class CliOptions
+    getter msi_threshold = 100.0
     getter mutants : Array(Mutant::Possibilities) = Generator::Generator::ALL_MUTANTS
     getter preamble = Generator::Generator::DEFAULT_PREAMBLE
-    getter msi_threshold = 100.0
+    getter reporters = [] of Reporter::Reporter
     @spec_files = [] of String
     @subject = [] of String
 
-    def initialize(@std_out : IO, @std_err : IO, @exit_fun : (Int32) ->)
+    def initialize(
+      @std_out : IO,
+      @std_err : IO,
+      @exit_fun : (Int32) ->,
+      @env : Hash(String, String)
+    )
+      @reporters << Reporter::IoReporter.new(@std_out)
     end
 
     def parse(args)
@@ -32,6 +40,14 @@ module Crytic
 
         parser.on("-s SOURCE", "--subject=SOURCE", "Specifies the source file for the subject") do |source|
           @subject = [source]
+        end
+
+        parser.on("-r REPORTERS", "--reporters=REPORTERS", "Comma-separated list of reporters to be used.") do |list|
+          list = list.split(",").map(&.strip.downcase)
+          @reporters = [] of Reporter::Reporter
+          @reporters << console_reporter if list.includes?("console")
+          @reporters << stryker_reporter if list.includes?("stryker")
+          @reporters << file_summary_reporter if list.includes?("consolefilesummary")
         end
 
         parser.unknown_args do |unknown|
@@ -58,6 +74,19 @@ module Crytic
       return Dir["./src/**/*.cr"] if @subject.empty?
 
       @subject
+    end
+
+    private def console_reporter
+      Reporter::IoReporter.new(@std_out)
+    end
+
+    private def stryker_reporter
+      client = Reporter::DefaultHttpClient.new
+      Reporter::StrykerBadgeReporter.new(client, @env, @std_out)
+    end
+
+    private def file_summary_reporter
+      Reporter::FileSummaryIoReporter.new(@std_out)
     end
   end
 end

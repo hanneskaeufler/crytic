@@ -59,6 +59,8 @@ The above command determines a list of mutations that can be performed on the so
 
 `--preamble`/`-p` specifies some source code to prepended to the combination of mutated source and specs. By default this will inject a bit of code to enable the "fail fast" mode of crystal [spec](https://crystal-lang.org/api/0.27.0/Spec.html). This can be used to disable the fail fast behaviour or avoid errors if you don't use crystal spec.
 
+`--reporters/-r` specifies which reporters to enable via a comma separated list. Reporters `Console`, `Stryker` and `ConsoleFileSummary` exist. `Console` is enabled by default if the option is omitted.
+
 The rest of the unnamed positional arguments are relative filepaths to the specs to be run.
 
 ### How to read the output

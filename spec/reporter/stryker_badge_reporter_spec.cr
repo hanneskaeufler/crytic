@@ -42,15 +42,6 @@ module Crytic::Reporter
   end
 end
 
-private def fake_env
-  {
-    "CIRCLE_BRANCH"             => "master",
-    "CIRCLE_PROJECT_REPONAME"   => "crytic",
-    "CIRCLE_PROJECT_USERNAME"   => "hanneskaeufler",
-    "STRYKER_DASHBOARD_API_KEY" => "apikey",
-  }
-end
-
 private def results
   Crytic::Mutation::ResultSet.new([result])
 end
