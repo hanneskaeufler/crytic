@@ -61,3 +61,12 @@ end
 def fake_mutation_factory
   ->(_config : Crytic::Mutation::Config) { fake_mutation }
 end
+
+def fake_env
+  {
+    "CIRCLE_BRANCH"             => "master",
+    "CIRCLE_PROJECT_REPONAME"   => "crytic",
+    "CIRCLE_PROJECT_USERNAME"   => "hanneskaeufler",
+    "STRYKER_DASHBOARD_API_KEY" => "apikey",
+  }
+end
