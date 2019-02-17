@@ -1,15 +1,14 @@
-require "../generator/**"
+require "../generator/generator"
 require "../msi_calculator"
 require "../mutation/no_mutation"
 require "../mutation/result"
 require "../mutation/result_set"
-require "../reporter/**"
-require "../runner_argument_validator"
-require "../subject"
+require "../reporter/reporter"
+require "./argument_validator"
 
 module Crytic::Runner
   class Sequential
-    include RunnerArgumentValidator
+    include ArgumentValidator
 
     alias Threshold = Float64
     alias NoMutationFactory = (Array(String)) -> Mutation::NoMutation

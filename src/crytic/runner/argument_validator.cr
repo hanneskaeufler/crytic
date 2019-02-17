@@ -1,5 +1,5 @@
-module Crytic
-  module RunnerArgumentValidator
+module Crytic::Runner
+  module ArgumentValidator
     private def validate_args!(source, specs)
       if specs.empty?
         raise ArgumentError.new("No spec files given.")
