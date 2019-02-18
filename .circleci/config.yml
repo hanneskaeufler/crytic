@@ -4,16 +4,12 @@ jobs:
   test-crystal: &test-template
     docker:
       - image: crystallang/crystal:0.27.2
+  test-crystal-0.27.2:
+    <<: *test-template
     steps:
       - checkout
       - run: shards
-      - run: ./bin/static-analysis
-      - run: ./bin/code-style
-      - run: SPEC_VERBOSE=1 ./bin/test
-  test-crystal-0.27.2:
-    <<: *test-template
-    docker:
-      - image: crystallang/crystal:0.27.2
+      - run: ./bin/ci
   test-coverage:
     docker:
       - image: hanneskaeufler/crystal-kcov:0.27.2-v36
@@ -21,11 +17,9 @@ jobs:
       - checkout
       - run: ./bin/test-coverage
   test-mutations:
-    docker:
-      - image: crystallang/crystal:0.27.2
+    <<: *test-template
     steps:
       - checkout
-      - run: shards
       - run: make bin
       - run: ./bin/test-mutations
 
@@ -33,7 +27,7 @@ workflows:
   version: 2
   ci:
     jobs:
-      - test-crystal-0.27.2
+      - test
       - test-coverage
   nightly:
     triggers:
@@ -43,6 +37,6 @@ workflows:
             branches:
               only: master
     jobs:
-      - test-crystal-0.27.2
+      - test
       - test-coverage
       - test-mutations

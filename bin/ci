@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+./bin/static-analysis
+./bin/code-style
+SPEC_VERBOSE=1 ./bin/test
