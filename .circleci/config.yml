@@ -9,6 +9,7 @@ jobs:
   test:
     <<: *test-template
     steps:
+      - checkout
       - run: shards
       - run: ./bin/ci
   test-coverage:
