@@ -4,10 +4,11 @@ jobs:
   test-crystal: &test-template
     docker:
       - image: crystallang/crystal:0.27.2
-  test-crystal-0.27.2:
-    <<: *test-template
     steps:
       - checkout
+  test:
+    <<: *test-template
+    steps:
       - run: shards
       - run: ./bin/ci
   test-coverage:
@@ -19,7 +20,6 @@ jobs:
   test-mutations:
     <<: *test-template
     steps:
-      - checkout
       - run: make bin
       - run: ./bin/test-mutations
 
