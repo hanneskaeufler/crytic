@@ -1,4 +1,5 @@
 require "../mutation/config"
+require "../subject"
 require "./generator"
 require "compiler/crystal/syntax/*"
 
@@ -26,37 +27,31 @@ module Crytic::Generator
     end
 
     private def noop_mutation_for(src, specs) : Mutation::Mutation
-      @mutation_factory.call(Mutation::Config.new(noop_mutant_for(src), src, specs, @preamble))
+      @mutation_factory.call(Mutation::Config.noop(src, specs, @preamble))
     end
 
-    private def noop_mutant_for(src)
-      Mutant::Noop.at(Mutant::FullLocation.at(src, 0, 0))
-    end
+    private def mutations_for(source : String, specs : Array(String))
+      subject = Subject.from_filepath(source)
 
-    private def mutations_for(source : String, specs : Array(String)) : Array(Mutation::Mutation)
-      ast = ast_for(source: source)
-
-      @possibilities
-        .map(&.reset)
-        .map do |inspector|
-          ast.accept(inspector)
-          inspector
-        end
-        .select(&.any?)
-        .map do |inspector|
-          inspector.locations.map do |location|
+      find_possibilities(subject)
+        .map do |possibilities|
+          possibilities.locations.map do |location|
             @mutation_factory.call(Mutation::Config.new(
-              inspector.mutant_class.at(location), source, specs, @preamble))
+              possibilities.mutant_class.at(location), source, specs, @preamble))
           end
         end
         .flatten
     end
 
-    private def ast_for(source)
-      Crystal::Parser
-        .new(File.read(source))
-        .tap(&.filename = source)
-        .parse
+    private def find_possibilities(subject)
+      reset_possibilities.map do |inspector|
+        subject.inspect(inspector)
+        inspector
+      end.select(&.any?)
+    end
+
+    private def reset_possibilities
+      @possibilities.map(&.reset)
     end
   end
 end

@@ -1,5 +1,6 @@
 require "./diff"
 require "./mutant/mutant"
+require "./mutant/possibilities"
 require "compiler/crystal/syntax/*"
 
 module Crytic
@@ -9,11 +10,14 @@ module Crytic
     private getter ast : Crystal::ASTNode
 
     def self.from_filepath(subject_file_path : String)
-      new(source: File.read(subject_file_path))
+      new(File.read(subject_file_path), subject_file_path)
     end
 
-    def initialize(@source : SourceCode)
-      @ast = Crystal::Parser.parse(@source)
+    def initialize(source : SourceCode, path)
+      @ast = Crystal::Parser
+        .new(source)
+        .tap(&.filename = path)
+        .parse
     end
 
     def mutated(mutant : Crystal::Transformer)
@@ -24,6 +28,10 @@ module Crytic
       new_ast = ast.clone
       new_ast.accept(mutant)
       MutatedSubject.new(ast.to_s, new_ast.to_s)
+    end
+
+    def inspect(inspector : Mutant::Possibilities)
+      ast.accept(inspector)
     end
   end
 
