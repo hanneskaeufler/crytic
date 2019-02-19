@@ -6,8 +6,6 @@ module Crytic
   alias SourceCode = String
 
   class Subject
-    getter original_source : SourceCode
-    getter! mutated_source : SourceCode
     private getter ast : Crystal::ASTNode
 
     def self.from_filepath(subject_file_path : String)
@@ -16,20 +14,22 @@ module Crytic
 
     def initialize(@source : SourceCode)
       @ast = Crystal::Parser.parse(@source)
-      @original_source = ast.to_s
     end
 
-    def mutate_source!(mutant : Crystal::Transformer) : SourceCode
-      @mutated_source ||= ast.transform(mutant).to_s
+    def mutated(mutant : Crystal::Transformer)
+      MutatedSubject.new(ast.to_s, ast.transform(mutant).to_s)
     end
 
-    def mutate_source!(mutant : Crystal::Visitor) : SourceCode
-      ast.accept(mutant)
-      @mutated_source ||= ast.to_s
+    def mutated(mutant : Crystal::Visitor)
+      new_ast = ast.clone
+      new_ast.accept(mutant)
+      MutatedSubject.new(ast.to_s, new_ast.to_s)
     end
+  end
 
+  record MutatedSubject, original_source_code : String, source_code : String do
     def diff
-      Crytic::Diff.unified_diff(original_source, mutated_source).to_s
+      Crytic::Diff.unified_diff(original_source_code, source_code).to_s
     end
   end
 end

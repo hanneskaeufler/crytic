@@ -15,8 +15,8 @@ module Crytic::Mutation
     # Compiles the mutated source code into a binary and runs this binary,
     # recording exit code, stderr and stdout output.
     def run
-      subject = @environment.subject
-      process_result = run(subject.mutate_source!(@environment.mutant))
+      mutated = @environment.subject.mutated(@environment.mutant)
+      process_result = run(mutated.source_code)
       success_messages_in_output = /Finished/ =~ process_result[:output]
       status = if process_result[:exit_code] == ProcessRunner::SUCCESS
                  Status::Uncovered
@@ -28,7 +28,7 @@ module Crytic::Mutation
                  Status::Covered
                end
 
-      Result.new(status, @environment.mutant, subject.diff, process_result[:output])
+      Result.new(status, @environment.mutant, mutated.diff, process_result[:output])
     end
 
     def self.with(environment)
