@@ -46,7 +46,8 @@ def fake_mutation
 end
 
 def config(mutant, original, specs, preamble = "")
-  Crytic::Mutation::Config.new(mutant, original, specs, preamble)
+  Crytic::Mutation::Config.new(
+    mutant, Crytic::Subject.from_filepath(original), specs, preamble)
 end
 
 def environment(

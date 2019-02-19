@@ -38,7 +38,7 @@ module Crytic::Generator
         .map do |possibilities|
           possibilities.locations.map do |location|
             @mutation_factory.call(Mutation::Config.new(
-              possibilities.mutant_class.at(location), source, specs, @preamble))
+              possibilities.mutant_class.at(location), subject, specs, @preamble))
           end
         end
         .flatten

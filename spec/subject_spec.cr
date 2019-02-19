@@ -27,9 +27,13 @@ module Crytic
         mutated.source_code.should eq "0"
       end
 
-      it "forwards the original code" do
-        mutated = Subject.new(source: "1", path: "").mutated(number_literal_change)
+      it "forwards the original code and path" do
+        mutated = Subject
+          .new(source: "1", path: "source.cr")
+          .mutated(number_literal_change)
+
         mutated.diff.should eq Crytic::Diff.unified_diff("1", "0")
+        mutated.path.should eq "source.cr"
       end
 
       it "doesn't mutate the original ast for visitor mutants" do
