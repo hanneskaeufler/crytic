@@ -39,20 +39,6 @@ module Crytic::Generator
         mutations.size.should eq 1
       end
 
-      it "doesn't mix mutations for multiple sources" do
-        source = fixture_source("non_empty_source_file.cr")
-
-        generator = InMemoryMutationsGenerator.new(
-          [Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities,
-          preamble,
-          fake_mutation_factory)
-
-        generator.mutations_for(source, specs)
-        mutations = generator.mutations_for(source, specs)
-
-        mutations.size.should eq 1
-      end
-
       it "passes along the preamble" do
         last_preamble = ""
         factory = ->(config : Mutation::Config) {

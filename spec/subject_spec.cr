@@ -41,14 +41,24 @@ module Crytic
     end
 
     describe "#inspect" do
-      it "walks the subjects ast with the given visitor" do
+      it "walks the subjects ast with the given visitors" do
         subject = Subject.new(source: "1", path: "source.cr")
         possibilities = Mutant::NumberLiteralChangePossibilities.new
 
-        subject.inspect(possibilities)
+        subject.inspect([possibilities] of Mutant::Possibilities)
 
         possibilities.any?.should be_true
         possibilities.locations.first.location.to_s.should eq "source.cr:1:1"
+      end
+
+      it "doesn't mix mutations for multiple sources" do
+        subject = Subject.new(source: "1", path: "source.cr")
+        possibilities = Mutant::NumberLiteralChangePossibilities.new
+
+        subject.inspect([possibilities] of Mutant::Possibilities)
+        subject
+          .inspect([possibilities] of Mutant::Possibilities)
+          .first.locations.size.should eq 1
       end
     end
   end

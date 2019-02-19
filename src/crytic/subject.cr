@@ -30,8 +30,10 @@ module Crytic
       MutatedSubject.new(ast.to_s, new_ast.to_s)
     end
 
-    def inspect(inspector : Mutant::Possibilities)
-      ast.accept(inspector)
+    def inspect(inspectors : Array(Mutant::Possibilities))
+      inspectors
+        .map(&.reset)
+        .tap(&.each { |inspector| ast.accept(inspector) })
     end
   end
 

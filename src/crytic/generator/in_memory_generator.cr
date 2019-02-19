@@ -33,7 +33,8 @@ module Crytic::Generator
     private def mutations_for(source : String, specs : Array(String))
       subject = Subject.from_filepath(source)
 
-      find_possibilities(subject)
+      subject
+        .inspect(@possibilities)
         .map do |possibilities|
           possibilities.locations.map do |location|
             @mutation_factory.call(Mutation::Config.new(
@@ -41,17 +42,6 @@ module Crytic::Generator
           end
         end
         .flatten
-    end
-
-    private def find_possibilities(subject)
-      reset_possibilities.map do |inspector|
-        subject.inspect(inspector)
-        inspector
-      end.select(&.any?)
-    end
-
-    private def reset_possibilities
-      @possibilities.map(&.reset)
     end
   end
 end
