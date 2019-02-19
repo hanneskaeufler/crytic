@@ -11,11 +11,10 @@ module Crytic
     private getter ast : Crystal::ASTNode
 
     def self.from_filepath(subject_file_path : String)
-      new(source: File.read(subject_file_path),
-        subject_file_path: subject_file_path)
+      new(source: File.read(subject_file_path))
     end
 
-    def initialize(@source : SourceCode, subject_file_path : String)
+    def initialize(@source : SourceCode)
       @ast = Crystal::Parser.parse(@source)
       @original_source = ast.to_s
     end

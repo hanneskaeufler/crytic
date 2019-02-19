@@ -8,7 +8,7 @@ module Crytic
   describe Subject do
     describe "#original_source" do
       it "returns the original, but parsed source" do
-        source = Subject.new(source: "puts \"hi\"", subject_file_path: "foo.cr")
+        source = Subject.new(source: "puts \"hi\"")
         source.original_source.should eq "puts(\"hi\")"
       end
     end
@@ -19,7 +19,7 @@ module Crytic
           line_number: 1,
           column_number: 1))
 
-        source = Subject.new(source: "1 && 2", subject_file_path: "foo.cr")
+        source = Subject.new(source: "1 && 2")
         source.mutate_source!(mutant).should eq "1 || 2"
         source.mutated_source.should eq "1 || 2"
       end
@@ -29,7 +29,7 @@ module Crytic
           line_number: 1,
           column_number: 1))
 
-        source = Subject.new(source: "1", subject_file_path: "foo.cr")
+        source = Subject.new(source: "1")
         source.mutate_source!(mutant).should eq "0"
         source.mutated_source.should eq "0"
       end
