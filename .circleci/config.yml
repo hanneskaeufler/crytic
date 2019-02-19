@@ -21,6 +21,7 @@ jobs:
   test-mutations:
     <<: *test-template
     steps:
+      - checkout
       - run: make bin
       - run: ./bin/test-mutations
 
