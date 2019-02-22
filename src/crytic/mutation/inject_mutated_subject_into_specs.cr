@@ -107,7 +107,7 @@ module Crytic::Mutation
         InjectMutatedSubjectIntoSpecs.parse_file(file_to_load) do
           required_file = InjectMutatedSubjectIntoSpecs.new(
             path: file_to_load,
-            source: fetch_source(file_to_load),
+            source: @mutated_subject.source_or_other_source(file_to_load),
             mutated_subject: @mutated_subject)
 
           required_file.process # Process on load, since it can change the requirement order
@@ -123,14 +123,6 @@ module Crytic::Mutation
 
     def visit(node : Crystal::ASTNode)
       true
-    end
-
-    private def fetch_source(some_path : String)
-      if @mutated_subject.is?(some_path)
-        @mutated_subject.source_code
-      else
-        File.read(some_path)
-      end
     end
   end
 end

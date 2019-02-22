@@ -43,8 +43,12 @@ module Crytic
       Crytic::Diff.unified_diff(original_source_code, source_code).to_s
     end
 
-    def is?(other)
-      File.expand_path(path.gsub(/^#{FileUtils.pwd}\//, "")) == other
+    def source_or_other_source(other_path)
+      if File.expand_path(path.gsub(/^#{FileUtils.pwd}\//, "")) == other_path
+        source_code
+      else
+        File.read(other_path)
+      end
     end
   end
 end
