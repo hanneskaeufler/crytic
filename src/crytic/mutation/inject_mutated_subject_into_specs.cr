@@ -24,6 +24,8 @@ module Crytic::Mutation
 
     getter path : String
     getter source : String
+    @mutated_subject_source : String
+    @subject_path : String
 
     def self.register_file(file)
       @@already_parsed_file_name.add(file.path)
@@ -42,7 +44,9 @@ module Crytic::Mutation
       end
     end
 
-    def initialize(@path, @source, @subject_path : String, @mutated_subject_source : String)
+    def initialize(@path, @source, @mutated_subject : MutatedSubject)
+      @mutated_subject_source = @mutated_subject.source_code
+      @subject_path = @mutated_subject.path
       @path = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.expand_path(@path, "."))
       InjectMutatedSubjectIntoSpecs.register_file(self)
     end
@@ -108,8 +112,7 @@ module Crytic::Mutation
           required_file = InjectMutatedSubjectIntoSpecs.new(
             path: file_to_load,
             source: fetch_source(file_to_load),
-            mutated_subject_source: @mutated_subject_source,
-            subject_path: @subject_path)
+            mutated_subject: @mutated_subject)
 
           required_file.process # Process on load, since it can change the requirement order
 

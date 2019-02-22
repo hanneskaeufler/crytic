@@ -86,8 +86,7 @@ module Crytic::Mutation
       @environment.spec_file_paths.map do |spec_file|
         InjectMutatedSubjectIntoSpecs
           .new(
-          subject_path: mutated.path,
-          mutated_subject_source: mutated.source_code,
+          mutated_subject: mutated,
           path: spec_file,
           source: File.read(spec_file))
           .to_mutated_source
