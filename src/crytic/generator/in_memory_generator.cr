@@ -15,7 +15,7 @@ module Crytic::Generator
     )
     end
 
-    def mutations_for(sources : Array(String), specs : Array(String))
+    def mutations_for(sources : Array(Subject), specs : Array(String))
       sources
         .map do |src|
           MutationSet.new(
@@ -26,13 +26,11 @@ module Crytic::Generator
         .reject(&.mutated.empty?)
     end
 
-    private def noop_mutation_for(src, specs) : Mutation::Mutation
-      @mutation_factory.call(Mutation::Config.noop(src, specs, @preamble))
+    private def noop_mutation_for(subject, specs) : Mutation::Mutation
+      @mutation_factory.call(Mutation::Config.noop(subject.path, specs, @preamble))
     end
 
-    private def mutations_for(source : String, specs : Array(String))
-      subject = Subject.from_filepath(source)
-
+    private def mutations_for(subject : Subject, specs : Array(String))
       subject
         .inspect(@possibilities)
         .map do |possibilities|

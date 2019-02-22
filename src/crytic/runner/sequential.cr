@@ -25,12 +25,13 @@ module Crytic::Runner
 
     def run(source : Array(String), specs : Array(String)) : Bool
       validate_args!(source, specs)
+      subjects = source.map { |s| Subject.from_filepath(s) }
 
       original_result = run_original_test_suite(specs)
 
       return false unless original_result.successful?
 
-      mutations = determine_possible_mutations(source, specs)
+      mutations = determine_possible_mutations(subjects, specs)
       results = Mutation::ResultSet.new(run_all_mutations(mutations))
 
       @reporters.each(&.report_summary(results))
@@ -49,8 +50,8 @@ module Crytic::Runner
       original_result
     end
 
-    private def determine_possible_mutations(source, specs)
-      mutations = @generator.mutations_for(source, specs)
+    private def determine_possible_mutations(subject, specs)
+      mutations = @generator.mutations_for(subject, specs)
       @reporters.each(&.report_mutations(mutations))
       mutations
     end

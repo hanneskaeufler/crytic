@@ -8,33 +8,33 @@ module Crytic::Generator
   describe InMemoryMutationsGenerator do
     describe "#mutations_for" do
       it "returns no mutations for no possibilities" do
-        source = fixture_source("non_empty_source_file.cr")
+        subject = fixture_subject("non_empty_source_file.cr")
 
         mutations = InMemoryMutationsGenerator
           .new([] of Mutant::Possibilities, preamble, fake_mutation_factory)
-          .mutations_for(source, specs)
+          .mutations_for(subject, specs)
 
         mutations.should be_empty
       end
 
-      it "returns no mutations for no possibilities in the source" do
-        source = fixture_source("empty_source_file.cr")
+      it "returns no mutations for no possibilities in the subject" do
+        subject = fixture_subject("empty_source_file.cr")
 
         mutations = InMemoryMutationsGenerator
           .new(InMemoryMutationsGenerator::ALL_MUTANTS, preamble, fake_mutation_factory)
-          .mutations_for(source, specs)
+          .mutations_for(subject, specs)
 
         mutations.should be_empty
       end
 
       it "returns a number literal mutation for the number literal" do
-        source = fixture_source("non_empty_source_file.cr")
+        subject = fixture_subject("non_empty_source_file.cr")
 
         mutations = InMemoryMutationsGenerator.new(
           [Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities,
           preamble,
           fake_mutation_factory)
-          .mutations_for(source, specs)
+          .mutations_for(subject, specs)
 
         mutations.size.should eq 1
       end
@@ -45,14 +45,14 @@ module Crytic::Generator
           last_preamble = config.preamble
           FakeMutation.new.as(Mutation::Mutation)
         }
-        source = fixture_source("non_empty_source_file.cr")
+        subject = fixture_subject("non_empty_source_file.cr")
 
         generator = InMemoryMutationsGenerator.new(
           [Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities,
           "preamble",
           factory)
 
-        generator.mutations_for(source, specs)
+        generator.mutations_for(subject, specs)
 
         last_preamble.should eq "preamble"
       end
@@ -65,6 +65,6 @@ end
 # evaluate to "." which is not the correct path. See https://github.com/hanneskaeufler/crytic/issues/19
 DIR = "./spec/generator"
 
-private def fixture_source(filename)
-  ["#{DIR}/#{filename}"]
+private def fixture_subject(filename)
+  [Crytic::Subject.from_filepath("#{DIR}/#{filename}")]
 end
