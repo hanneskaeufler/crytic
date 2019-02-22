@@ -24,8 +24,6 @@ module Crytic::Mutation
 
     getter path : String
     getter source : String
-    @mutated_subject_source : String
-    @subject_path : String
 
     def self.register_file(file)
       @@already_parsed_file_name.add(file.path)
@@ -45,8 +43,6 @@ module Crytic::Mutation
     end
 
     def initialize(@path, @source, @mutated_subject : MutatedSubject)
-      @mutated_subject_source = @mutated_subject.source_code
-      @subject_path = @mutated_subject.path
       @path = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.expand_path(@path, "."))
       InjectMutatedSubjectIntoSpecs.register_file(self)
     end
@@ -130,8 +126,8 @@ module Crytic::Mutation
     end
 
     private def fetch_source(some_path : String)
-      if some_path == File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@subject_path))
-        @mutated_subject_source
+      if some_path == File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@mutated_subject.path))
+        @mutated_subject.source_code
       else
         File.read(some_path)
       end
