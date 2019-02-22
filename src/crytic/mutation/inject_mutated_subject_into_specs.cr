@@ -126,7 +126,7 @@ module Crytic::Mutation
     end
 
     private def fetch_source(some_path : String)
-      if some_path == File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@mutated_subject.path))
+      if @mutated_subject.is?(some_path)
         @mutated_subject.source_code
       else
         File.read(some_path)
