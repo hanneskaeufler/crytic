@@ -24,8 +24,7 @@ module Crytic::Runner
     end
 
     def run(source : Array(String), specs : Array(String)) : Bool
-      validate_args!(source, specs)
-      subjects = source.map { |s| Subject.from_filepath(s) }
+      subjects = validate_args!(source, specs)
 
       original_result = run_original_test_suite(specs)
 

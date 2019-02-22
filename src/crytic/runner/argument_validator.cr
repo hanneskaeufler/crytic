@@ -5,8 +5,11 @@ module Crytic::Runner
         raise ArgumentError.new("No spec files given.")
       end
 
-      unless source.map { |path| File.exists?(path) }.all?
-        raise ArgumentError.new("Source file for subject doesn't exist.")
+      subjects = source.map do |path|
+        unless File.exists?(path)
+          raise ArgumentError.new("Source file for subject #{path} doesn't exist.")
+        end
+        Subject.from_filepath(path)
       end
 
       specs.each do |spec_file|
@@ -14,6 +17,8 @@ module Crytic::Runner
           raise ArgumentError.new("Spec file #{spec_file} doesn't exist.")
         end
       end
+
+      subjects
     end
   end
 end
