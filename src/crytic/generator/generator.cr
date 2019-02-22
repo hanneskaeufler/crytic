@@ -30,6 +30,7 @@ module Crytic::Generator
 
     abstract def mutations_for(
       subject : Array(Subject),
-      specs : Array(String)) : Array(MutationSet)
+      specs : Array(String)
+    ) : Array(MutationSet)
   end
 end
