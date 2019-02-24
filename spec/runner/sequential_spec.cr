@@ -5,12 +5,6 @@ require "../spec_helper"
 module Crytic::Runner
   describe Sequential do
     describe "#run" do
-      it "raises for empty specs" do
-        expect_raises(ArgumentError) do
-          runner.run("", [] of String)
-        end
-      end
-
       it "raises for non-existent files" do
         expect_raises(ArgumentError, "Source file") do
           runner.run("./nope.cr", ["./nope_spec.cr"])
@@ -90,7 +84,7 @@ end
 private def runner
   Crytic::Runner::Sequential.new(
     threshold: 100.0,
-    reporters: [Crytic::Reporter::IoReporter.new(IO::Memory.new)] of Crytic::Reporter::Reporter,
+    reporters: [] of Crytic::Reporter::Reporter,
     generator: FakeGenerator.new)
 end
 

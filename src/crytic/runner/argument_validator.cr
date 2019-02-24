@@ -1,10 +1,6 @@
 module Crytic::Runner
   module ArgumentValidator
     private def validate_args!(source, specs)
-      if specs.empty?
-        raise ArgumentError.new("No spec files given.")
-      end
-
       subjects = source.map do |path|
         unless File.exists?(path)
           raise ArgumentError.new("Source file for subject #{path} doesn't exist.")

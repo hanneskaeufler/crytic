@@ -5,6 +5,7 @@ require "option_parser"
 
 module Crytic
   class CliOptions
+    DEFAULT_SPEC_FILES_GLOB = "./spec/**/*_spec.cr"
     getter msi_threshold = 100.0
     getter mutants : Array(Mutant::Possibilities) = Generator::Generator::ALL_MUTANTS
     getter preamble = Generator::Generator::DEFAULT_PREAMBLE
@@ -16,7 +17,8 @@ module Crytic
       @std_out : IO,
       @std_err : IO,
       @exit_fun : (Int32) ->,
-      @env : Hash(String, String)
+      @env : Hash(String, String),
+      @spec_files_glob : String
     )
       @reporters << Reporter::IoReporter.new(@std_out)
     end
@@ -65,9 +67,15 @@ module Crytic
     end
 
     def spec_files : Array(String)
-      return Dir["./spec/**/*_spec.cr"] if @spec_files.empty?
+      files = unless @spec_files.empty?
+        @spec_files
+      else
+        Dir[@spec_files_glob]
+      end
 
-      @spec_files
+      raise ArgumentError.new("No spec files given or found.") if files.empty?
+
+      files
     end
 
     def subject : Array(String)

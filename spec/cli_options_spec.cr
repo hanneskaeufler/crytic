@@ -8,31 +8,20 @@ module Crytic
         std_err = IO::Memory.new
         exit_code : Int32? = nil
 
-        CliOptions
-          .new(IO::Memory.new, std_err, ->(code : Int32) { exit_code = code }, fake_env)
+        cli_options_parser(
+          std_err: std_err,
+          exit_fun: ->(code : Int32) { exit_code = code })
           .parse(["-unknown"])
 
         std_err.to_s.lines.first.should eq "ERROR: -unknown is not a valid option."
         exit_code.should eq 1
       end
 
-      it "shows help for -h" do
-        std_out = IO::Memory.new
-
-        CliOptions
-          .new(std_out, IO::Memory.new, noop_exit_fun, fake_env)
-          .parse(["-h"])
-
-        std_out.to_s.lines.first.should eq "Usage: crytic [arguments]"
-      end
-
       {% for flag in ["-h", "--help"] %}
       it "shows help for {{ flag.id }}" do
         std_out = IO::Memory.new
 
-        CliOptions
-          .new(std_out, IO::Memory.new, noop_exit_fun, fake_env)
-          .parse([{{ flag }}])
+        cli_options_parser(std_out: std_out).parse([{{ flag }}])
 
         std_out.to_s.lines.first.should eq "Usage: crytic [arguments]"
         std_out.to_s.lines[1].strip.should eq "-h, --help                       Show this help"
@@ -42,8 +31,7 @@ module Crytic
       it "exits when showing the help" do
         exit_code : Int32? = nil
 
-        CliOptions
-          .new(IO::Memory.new, IO::Memory.new, ->(code : Int32) { exit_code = code }, fake_env)
+        cli_options_parser(exit_fun: ->(code : Int32) { exit_code = code })
           .parse(["--help"])
 
         exit_code.should eq 0
@@ -59,6 +47,12 @@ module Crytic
         opts = cli_options_parser.parse([] of String)
 
         opts.spec_files.should eq Dir["./spec/**/*_spec.cr"]
+      end
+
+      it "throws when no spec files were given" do
+        expect_raises(ArgumentError) do
+          cli_options_parser(spec_files_glob: "").spec_files
+        end
       end
 
       {% for flag in ["-s", "--subject"] %}
@@ -129,9 +123,7 @@ module Crytic
 
     describe "#mutants" do
       it "returns all mutants" do
-        opts = CliOptions.new(IO::Memory.new, IO::Memory.new, noop_exit_fun, fake_env)
-
-        opts.mutants.should eq Generator::Generator::ALL_MUTANTS
+        cli_options_parser.mutants.should eq Generator::Generator::ALL_MUTANTS
       end
     end
   end
@@ -141,6 +133,12 @@ private def noop_exit_fun
   ->(_code : Int32) {}
 end
 
-private def cli_options_parser
-  Crytic::CliOptions.new(IO::Memory.new, IO::Memory.new, noop_exit_fun, fake_env)
+private def cli_options_parser(
+  std_out = IO::Memory.new,
+  std_err = IO::Memory.new,
+  exit_fun = noop_exit_fun,
+  env = fake_env,
+  spec_files_glob = Crytic::CliOptions::DEFAULT_SPEC_FILES_GLOB
+)
+  Crytic::CliOptions.new(std_out, std_err, exit_fun, env, spec_files_glob)
 end
