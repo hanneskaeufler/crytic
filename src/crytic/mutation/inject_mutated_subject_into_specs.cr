@@ -90,9 +90,6 @@ module Crytic::Mutation
       file = node.string
       return false unless file.starts_with?(".")
 
-      current_directory = InjectMutatedSubjectIntoSpecs
-        .relative_path_to_project(File.dirname(@path))
-
       new_files_to_load = RequireResolver
         .new
         .find_in_path_relative_to_dir(file, current_directory)
@@ -123,6 +120,10 @@ module Crytic::Mutation
 
     def visit(node : Crystal::ASTNode)
       true
+    end
+
+    private def current_directory
+      InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.dirname(@path))
     end
   end
 end
