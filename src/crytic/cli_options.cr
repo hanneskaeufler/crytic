@@ -67,10 +67,10 @@ module Crytic
     end
 
     def spec_files : Array(String)
-      files = unless @spec_files.empty?
-        @spec_files
-      else
+      files = if @spec_files.empty?
         Dir[@spec_files_glob]
+      else
+        @spec_files
       end
 
       raise ArgumentError.new("No spec files given or found.") if files.empty?
