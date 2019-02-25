@@ -11,7 +11,7 @@ options = Crytic::CliOptions
   "CIRCLE_PROJECT_REPONAME"   => ENV["CIRCLE_PROJECT_REPONAME"]? || "",
   "CIRCLE_PROJECT_USERNAME"   => ENV["CIRCLE_PROJECT_USERNAME"]? || "",
   "STRYKER_DASHBOARD_API_KEY" => ENV["STRYKER_DASHBOARD_API_KEY"]? || "",
-})
+}, Crytic::CliOptions::DEFAULT_SPEC_FILES_GLOB)
   .parse(ARGV)
 
 generator = Crytic::Generator::InMemoryMutationsGenerator.new(
