@@ -57,6 +57,11 @@ module Crytic::Mutation
 
     private def write_full_source_into_tempfile(mutated_source)
       full_source = @environment.preamble + mutated_specs_source(mutated_source)
+
+      if ENV["CRYTIC_DRY_RUN"]?
+        STDOUT.puts full_source
+        exit 0
+      end
       @environment.write_tempfile("crytic", ".cr", full_source)
     end
 
