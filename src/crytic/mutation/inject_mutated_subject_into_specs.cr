@@ -98,7 +98,6 @@ module Crytic::Mutation
         .find_in_path_relative_to_dir(file, current_directory)
 
       return if new_files_to_load.nil?
-      new_files_to_load = [new_files_to_load] if new_files_to_load.is_a?(String)
 
       idx = InjectMutatedSubjectIntoSpecs.require_expanders.size
       list_of_required_file = [] of InjectMutatedSubjectIntoSpecs
