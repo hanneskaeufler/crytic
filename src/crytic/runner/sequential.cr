@@ -23,8 +23,8 @@ module Crytic::Runner
     )
     end
 
-    def run(source : Array(String), specs : Array(String)) : Bool
-      subjects = validate_args!(source, specs)
+    def run(subjects : Array(Subject), specs : Array(String)) : Bool
+      validate_args!(subjects, specs)
 
       original_result = run_original_test_suite(specs)
 
@@ -37,10 +37,6 @@ module Crytic::Runner
       @reporters.each(&.report_msi(results))
 
       !results.empty? && MsiCalculator.new(results).msi.passes?(@threshold)
-    end
-
-    def run(source : String, specs : Array(String)) : Bool
-      run([source], specs)
     end
 
     private def run_original_test_suite(specs)

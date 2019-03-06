@@ -78,10 +78,12 @@ module Crytic
       files
     end
 
-    def subject : Array(String)
-      return Dir["./src/**/*.cr"] if @subject.empty?
-
-      @subject
+    def subject
+      if @subject.empty?
+        Dir["./src/**/*.cr"]
+      else
+        @subject
+      end.map { |path| Subject.from_filepath(path) }
     end
 
     private def console_reporter

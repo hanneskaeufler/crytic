@@ -57,16 +57,16 @@ module Crytic
 
       {% for flag in ["-s", "--subject"] %}
       it "accepts a subject with {{ flag.id }}" do
-        opts = cli_options_parser.parse([{{ flag }}, "subject.cr"])
+        opts = cli_options_parser.parse([{{ flag }}, "./fixtures/simple/bar.cr"])
 
-        opts.subject.should eq ["subject.cr"]
+        opts.subject.map(&.path).should eq ["./fixtures/simple/bar.cr"]
       end
       {% end %}
 
       it "defaults to a glob in src for the subject" do
         opts = cli_options_parser.parse([] of String)
 
-        opts.subject.should eq Dir["./src/**/*.cr"]
+        opts.subject.map(&.path).should eq Dir["./src/**/*.cr"]
       end
 
       {% for flag in ["-p", "--preamble"] %}

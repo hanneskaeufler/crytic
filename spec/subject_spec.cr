@@ -6,9 +6,7 @@ require "./spec_helper"
 
 module Crytic
   def self.number_literal_change
-    Mutant::NumberLiteralChange.at(location_at(
-      line_number: 1,
-      column_number: 1))
+    Mutant::NumberLiteralChange.at(location_at(line_number: 1, column_number: 1))
   end
 
   describe Subject do
