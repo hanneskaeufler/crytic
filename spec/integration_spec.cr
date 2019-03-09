@@ -1,7 +1,8 @@
 require "./spec_helper"
 
 {% unless flag?("skip-integration") %}
-  describe Crytic do
+describe Crytic do
+  describe "the test command" do
     describe "--help/-h" do
       it "prints usage info" do
         result = run_crytic("--help")
@@ -15,7 +16,7 @@ require "./spec_helper"
 
     describe "--preamble/-p" do
       it "injects the given custom preamble, failing the neutral mutant" do
-        result = run_crytic("-s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr -p 'exit 1'")
+        result = run_crytic("test -s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr -p 'exit 1'")
         result.output.should contain("unmodified subject")
         result.output.should_not contain("ConditionFlip")
         result.exit_code.should eq 1

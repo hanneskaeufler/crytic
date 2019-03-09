@@ -11,6 +11,8 @@ module Crytic
     end
 
     def run(args)
+      args = args.tap(&.shift) if args.first? == "test"
+
       options = parse_options(args)
       generator = build_generator(options)
 
