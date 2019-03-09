@@ -41,6 +41,11 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Cli" data-name="crytic::cli">
+      <a href="../Crytic/Cli.html">Cli</a>
+      
+    </li>
+  
   <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/CliOptions" data-name="crytic::clioptions">
       <a href="../Crytic/CliOptions.html">CliOptions</a>
       
@@ -236,6 +241,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutatedSubject" data-name="crytic::mutatedsubject">
+      <a href="../Crytic/MutatedSubject.html">MutatedSubject</a>
+      
+    </li>
+  
   <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../Crytic/Mutation.html">Mutation</a>
       
@@ -283,6 +293,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/OriginalResult" data-name="crytic::mutation::originalresult">
       <a href="../Crytic/Mutation/OriginalResult.html">OriginalResult</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/RequireResolver" data-name="crytic::mutation::requireresolver">
+      <a href="../Crytic/Mutation/RequireResolver.html">RequireResolver</a>
       
     </li>
   
@@ -451,7 +466,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/cli_options.cr#L7" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/cli_options.cr#L7" target="_blank">
         crytic/cli_options.cr
       </a>
     
@@ -460,13 +475,25 @@
 
 
 
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="DEFAULT_SPEC_FILES_GLOB">
+        <strong>DEFAULT_SPEC_FILES_GLOB</strong> = <code><span class="s">&quot;./spec/**/*_spec.cr&quot;</span></code>
+      </dt>
+      
+    
+  </dl>
+
 
 
   <h2>Constructors</h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28std_out%3AIO%2Cstd_err%3AIO%2Cexit_fun%3AInt32-%3E%2Cenv%3AHash%28String%2CString%29%29-class-method" class="signature"><strong>.new</strong>(std_out : IO, std_err : IO, exit_fun : Int32 -> , env : Hash(String, String))</a>
+        <a href="#new%28std_out%3AIO%2Cstd_err%3AIO%2Cexit_fun%3AInt32-%3E%2Cenv%3AHash%28String%2CString%29%2Cspec_files_glob%3AString%29-class-method" class="signature"><strong>.new</strong>(std_out : IO, std_err : IO, exit_fun : Int32 -> , env : Hash(String, String), spec_files_glob : String)</a>
         
       </li>
     
@@ -510,7 +537,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#subject%3AArray%28String%29-instance-method" class="signature"><strong>#subject</strong> : Array(String)</a>
+        <a href="#subject-instance-method" class="signature"><strong>#subject</strong></a>
         
       </li>
     
@@ -547,18 +574,18 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(std_out:IO,std_err:IO,exit_fun:Int32-&gt;,env:Hash(String,String))-class-method">
+    <div class="entry-detail" id="new(std_out:IO,std_err:IO,exit_fun:Int32-&gt;,env:Hash(String,String),spec_files_glob:String)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(std_out : IO, std_err : IO, exit_fun : Int32 -> , env : Hash(String, String))
+        def self.<strong>new</strong>(std_out : IO, std_err : IO, exit_fun : Int32 -> , env : Hash(String, String), spec_files_glob : String)
 
-        <a class="method-permalink" href="#new%28std_out%3AIO%2Cstd_err%3AIO%2Cexit_fun%3AInt32-%3E%2Cenv%3AHash%28String%2CString%29%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28std_out%3AIO%2Cstd_err%3AIO%2Cexit_fun%3AInt32-%3E%2Cenv%3AHash%28String%2CString%29%2Cspec_files_glob%3AString%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/cli_options.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/cli_options.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -581,7 +608,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/cli_options.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/cli_options.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -597,7 +624,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/cli_options.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/cli_options.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -613,7 +640,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/cli_options.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/cli_options.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -629,7 +656,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/cli_options.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/cli_options.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -645,7 +672,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/cli_options.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/cli_options.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -661,23 +688,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/cli_options.cr#L67" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/cli_options.cr#L69" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="subject:Array(String)-instance-method">
+    <div class="entry-detail" id="subject-instance-method">
       <div class="signature">
         
-        def <strong>subject</strong> : Array(String)
+        def <strong>subject</strong>
 
-        <a class="method-permalink" href="#subject%3AArray%28String%29-instance-method">#</a>
+        <a class="method-permalink" href="#subject-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/cli_options.cr#L73" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/cli_options.cr#L81" target="_blank">View source</a>]
         
       </div>
     </div>

@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Runner::ArgumentValidator - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Mutation::RequireResolver - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -246,7 +246,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../../Crytic/Mutation.html">Mutation</a>
       
         <ul>
@@ -296,7 +296,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/RequireResolver" data-name="crytic::mutation::requireresolver">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/RequireResolver" data-name="crytic::mutation::requireresolver">
       <a href="../../Crytic/Mutation/RequireResolver.html">RequireResolver</a>
       
     </li>
@@ -376,12 +376,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
       <a href="../../Crytic/Runner.html">Runner</a>
       
         <ul>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/ArgumentValidator" data-name="crytic::runner::argumentvalidator">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/ArgumentValidator" data-name="crytic::runner::argumentvalidator">
       <a href="../../Crytic/Runner/ArgumentValidator.html">ArgumentValidator</a>
       
     </li>
@@ -440,11 +440,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Crytic::Runner::ArgumentValidator
+  <span class="kind">class</span> Crytic::Mutation::RequireResolver
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutation/RequireResolver.html">Crytic::Mutation::RequireResolver</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -458,12 +459,6 @@
 
 
 
-  <h2>Direct including types</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type"><a href="../../Crytic/Runner/Sequential.html">Crytic::Runner::Sequential</a></li>
-  
-  </ul>
 
 
 
@@ -471,8 +466,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/runner/argument_validator.cr#L2" target="_blank">
-        crytic/runner/argument_validator.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/require_resolver.cr#L2" target="_blank">
+        crytic/mutation/require_resolver.cr
       </a>
     
     <br/>
@@ -486,11 +481,43 @@
 
 
 
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#find_in_path_relative_to_dir%28filename%2Crelative_to%29%3AArray%28String%29%3F-instance-method" class="signature"><strong>#find_in_path_relative_to_dir</strong>(filename, relative_to) : Array(String)?</a>
+        
+          <div class="summary"><p>All of the below code is stolen from crystal itself https://github.com/crystal-lang/crystal/blob/master/src/compiler/crystal/crystal_path.cr Because we are caring about relative requires "./foo/bar" exclusively, a lot of code was removed from this method.</p></div>
+        
+      </li>
+    
+  </ul>
+
 
 
 
 
 <div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
   
 </div>
 
@@ -498,6 +525,30 @@
 
 
 
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="find_in_path_relative_to_dir(filename,relative_to):Array(String)?-instance-method">
+      <div class="signature">
+        
+        def <strong>find_in_path_relative_to_dir</strong>(filename, relative_to) : Array(String)?
+
+        <a class="method-permalink" href="#find_in_path_relative_to_dir%28filename%2Crelative_to%29%3AArray%28String%29%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>All of the below code is stolen from crystal itself
+https://github.com/crystal-lang/crystal/blob/master/src/compiler/crystal/crystal_path.cr
+Because we are caring about relative requires "./foo/bar" exclusively, a lot of code
+was removed from this method.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/require_resolver.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

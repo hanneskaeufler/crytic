@@ -41,6 +41,11 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Cli" data-name="crytic::cli">
+      <a href="../../Crytic/Cli.html">Cli</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/CliOptions" data-name="crytic::clioptions">
       <a href="../../Crytic/CliOptions.html">CliOptions</a>
       
@@ -236,6 +241,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutatedSubject" data-name="crytic::mutatedsubject">
+      <a href="../../Crytic/MutatedSubject.html">MutatedSubject</a>
+      
+    </li>
+  
   <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../../Crytic/Mutation.html">Mutation</a>
       
@@ -283,6 +293,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/OriginalResult" data-name="crytic::mutation::originalresult">
       <a href="../../Crytic/Mutation/OriginalResult.html">OriginalResult</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/RequireResolver" data-name="crytic::mutation::requireresolver">
+      <a href="../../Crytic/Mutation/RequireResolver.html">RequireResolver</a>
       
     </li>
   
@@ -455,7 +470,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/generator/in_memory_generator.cr#L7" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/generator/in_memory_generator.cr#L8" target="_blank">
         crytic/generator/in_memory_generator.cr
       </a>
     
@@ -484,7 +499,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#mutations_for%28sources%3AArray%28String%29%2Cspecs%3AArray%28String%29%29-instance-method" class="signature"><strong>#mutations_for</strong>(sources : Array(String), specs : Array(String))</a>
+        <a href="#mutations_for%28sources%3AArray%28Subject%29%2Cspecs%3AArray%28String%29%29-instance-method" class="signature"><strong>#mutations_for</strong>(sources : Array(Subject), specs : Array(String))</a>
         
       </li>
     
@@ -501,8 +516,8 @@
   <h3>Instance methods inherited from class <code><a href="../../Crytic/Generator/Generator.html">Crytic::Generator::Generator</a></code></h3>
   
   
-    <a href="../../Crytic/Generator/Generator.html#mutations_for%28source%3AArray%28String%29%2Cspecs%3AArray%28String%29%29%3AArray%28MutationSet%29-instance-method" class="tooltip">
-      <span>mutations_for(source : Array(String), specs : Array(String)) : Array(MutationSet)</span>
+    <a href="../../Crytic/Generator/Generator.html#mutations_for%28subject%3AArray%28Subject%29%2Cspecs%3AArray%28String%29%29%3AArray%28MutationSet%29-instance-method" class="tooltip">
+      <span>mutations_for(subject : Array(Subject), specs : Array(String)) : Array(MutationSet)</span>
     mutations_for</a>
     
   
@@ -551,7 +566,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/generator/in_memory_generator.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/generator/in_memory_generator.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -563,18 +578,18 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="mutations_for(sources:Array(String),specs:Array(String))-instance-method">
+    <div class="entry-detail" id="mutations_for(sources:Array(Subject),specs:Array(String))-instance-method">
       <div class="signature">
         
-        def <strong>mutations_for</strong>(sources : Array(String), specs : Array(String))
+        def <strong>mutations_for</strong>(sources : Array(<a href="../../Crytic/Subject.html">Subject</a>), specs : Array(String))
 
-        <a class="method-permalink" href="#mutations_for%28sources%3AArray%28String%29%2Cspecs%3AArray%28String%29%29-instance-method">#</a>
+        <a class="method-permalink" href="#mutations_for%28sources%3AArray%28Subject%29%2Cspecs%3AArray%28String%29%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/generator/in_memory_generator.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/generator/in_memory_generator.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>

@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
+## [5.0.1] - 2019-03-09
+
 ### Fixed
 
 - When the production code requires e.g. `./html/builder`, crytic will mimic crystal langs require and find `html/builder/builder.cr`

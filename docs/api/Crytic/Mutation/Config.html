@@ -41,6 +41,11 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Cli" data-name="crytic::cli">
+      <a href="../../Crytic/Cli.html">Cli</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/CliOptions" data-name="crytic::clioptions">
       <a href="../../Crytic/CliOptions.html">CliOptions</a>
       
@@ -236,6 +241,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutatedSubject" data-name="crytic::mutatedsubject">
+      <a href="../../Crytic/MutatedSubject.html">MutatedSubject</a>
+      
+    </li>
+  
   <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../../Crytic/Mutation.html">Mutation</a>
       
@@ -283,6 +293,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/OriginalResult" data-name="crytic::mutation::originalresult">
       <a href="../../Crytic/Mutation/OriginalResult.html">OriginalResult</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/RequireResolver" data-name="crytic::mutation::requireresolver">
+      <a href="../../Crytic/Mutation/RequireResolver.html">RequireResolver</a>
       
     </li>
   
@@ -451,7 +466,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/config.cr#L4" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/config.cr#L5" target="_blank">
         crytic/mutation/config.cr
       </a>
     
@@ -466,13 +481,23 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28mutant%3AMutant%3A%3AMutant%2Coriginal%3AString%2Cspecs%3AArray%28String%29%2Cpreamble%3AString%29-class-method" class="signature"><strong>.new</strong>(mutant : Mutant::Mutant, original : String, specs : Array(String), preamble : String)</a>
+        <a href="#new%28mutant%3AMutant%3A%3AMutant%2Csubject%3ASubject%2Cspecs%3AArray%28String%29%2Cpreamble%3AString%29-class-method" class="signature"><strong>.new</strong>(mutant : Mutant::Mutant, subject : Subject, specs : Array(String), preamble : String)</a>
         
       </li>
     
   </ul>
 
 
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#noop%28src%2Cspecs%2Cpreamble%29-class-method" class="signature"><strong>.noop</strong>(src, specs, preamble)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -485,17 +510,12 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#copy_with%28mutant_mutant%3D%40mutant%2Coriginal_original%3D%40original%2Cspecs_specs%3D%40specs%2Cpreamble_preamble%3D%40preamble%29-instance-method" class="signature"><strong>#copy_with</strong>(mutant _mutant = @mutant, original _original = @original, specs _specs = @specs, preamble _preamble = @preamble)</a>
+        <a href="#copy_with%28mutant_mutant%3D%40mutant%2Csubject_subject%3D%40subject%2Cspecs_specs%3D%40specs%2Cpreamble_preamble%3D%40preamble%29-instance-method" class="signature"><strong>#copy_with</strong>(mutant _mutant = @mutant, subject _subject = @subject, specs _specs = @specs, preamble _preamble = @preamble)</a>
         
       </li>
     
       <li class="entry-summary">
         <a href="#mutant%3AMutant%3A%3AMutant-instance-method" class="signature"><strong>#mutant</strong> : Mutant::Mutant</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#original%3AString-instance-method" class="signature"><strong>#original</strong> : String</a>
         
       </li>
     
@@ -506,6 +526,11 @@
     
       <li class="entry-summary">
         <a href="#specs%3AArray%28String%29-instance-method" class="signature"><strong>#specs</strong> : Array(String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#subject%3ASubject-instance-method" class="signature"><strong>#subject</strong> : Subject</a>
         
       </li>
     
@@ -552,24 +577,43 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(mutant:Mutant::Mutant,original:String,specs:Array(String),preamble:String)-class-method">
+    <div class="entry-detail" id="new(mutant:Mutant::Mutant,subject:Subject,specs:Array(String),preamble:String)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(mutant : <a href="../../Crytic/Mutant/Mutant.html">Mutant::Mutant</a>, original : String, specs : Array(String), preamble : String)
+        def self.<strong>new</strong>(mutant : <a href="../../Crytic/Mutant/Mutant.html">Mutant::Mutant</a>, subject : <a href="../../Crytic/Subject.html">Subject</a>, specs : Array(String), preamble : String)
 
-        <a class="method-permalink" href="#new%28mutant%3AMutant%3A%3AMutant%2Coriginal%3AString%2Cspecs%3AArray%28String%29%2Cpreamble%3AString%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28mutant%3AMutant%3A%3AMutant%2Csubject%3ASubject%2Cspecs%3AArray%28String%29%2Cpreamble%3AString%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/config.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/config.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="noop(src,specs,preamble)-class-method">
+      <div class="signature">
+        
+        def self.<strong>noop</strong>(src, specs, preamble)
+
+        <a class="method-permalink" href="#noop%28src%2Cspecs%2Cpreamble%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/config.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
@@ -586,23 +630,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/config.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/config.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="copy_with(mutant_mutant=@mutant,original_original=@original,specs_specs=@specs,preamble_preamble=@preamble)-instance-method">
+    <div class="entry-detail" id="copy_with(mutant_mutant=@mutant,subject_subject=@subject,specs_specs=@specs,preamble_preamble=@preamble)-instance-method">
       <div class="signature">
         
-        def <strong>copy_with</strong>(mutant _mutant = @mutant, original _original = @original, specs _specs = @specs, preamble _preamble = @preamble)
+        def <strong>copy_with</strong>(mutant _mutant = @mutant, subject _subject = @subject, specs _specs = @specs, preamble _preamble = @preamble)
 
-        <a class="method-permalink" href="#copy_with%28mutant_mutant%3D%40mutant%2Coriginal_original%3D%40original%2Cspecs_specs%3D%40specs%2Cpreamble_preamble%3D%40preamble%29-instance-method">#</a>
+        <a class="method-permalink" href="#copy_with%28mutant_mutant%3D%40mutant%2Csubject_subject%3D%40subject%2Cspecs_specs%3D%40specs%2Cpreamble_preamble%3D%40preamble%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/config.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/config.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -613,20 +657,6 @@
         def <strong>mutant</strong> : <a href="../../Crytic/Mutant/Mutant.html">Mutant::Mutant</a>
 
         <a class="method-permalink" href="#mutant%3AMutant%3A%3AMutant-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="original:String-instance-method">
-      <div class="signature">
-        
-        def <strong>original</strong> : String
-
-        <a class="method-permalink" href="#original%3AString-instance-method">#</a>
       </div>
       
       <br/>
@@ -655,6 +685,20 @@
         def <strong>specs</strong> : Array(String)
 
         <a class="method-permalink" href="#specs%3AArray%28String%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="subject:Subject-instance-method">
+      <div class="signature">
+        
+        def <strong>subject</strong> : <a href="../../Crytic/Subject.html">Subject</a>
+
+        <a class="method-permalink" href="#subject%3ASubject-instance-method">#</a>
       </div>
       
       <br/>

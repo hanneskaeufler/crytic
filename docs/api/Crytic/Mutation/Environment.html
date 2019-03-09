@@ -41,6 +41,11 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Cli" data-name="crytic::cli">
+      <a href="../../Crytic/Cli.html">Cli</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/CliOptions" data-name="crytic::clioptions">
       <a href="../../Crytic/CliOptions.html">CliOptions</a>
       
@@ -236,6 +241,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/MutatedSubject" data-name="crytic::mutatedsubject">
+      <a href="../../Crytic/MutatedSubject.html">MutatedSubject</a>
+      
+    </li>
+  
   <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../../Crytic/Mutation.html">Mutation</a>
       
@@ -283,6 +293,11 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/OriginalResult" data-name="crytic::mutation::originalresult">
       <a href="../../Crytic/Mutation/OriginalResult.html">OriginalResult</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/RequireResolver" data-name="crytic::mutation::requireresolver">
+      <a href="../../Crytic/Mutation/RequireResolver.html">RequireResolver</a>
       
     </li>
   
@@ -451,7 +466,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L5" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L5" target="_blank">
         crytic/mutation/environment.cr
       </a>
     
@@ -495,12 +510,12 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#execute%28cmd%2Cargs%2Coutput%2Cerror%2Ctimeout%29-instance-method" class="signature"><strong>#execute</strong>(cmd, args, output, error, timeout)</a>
+        <a href="#execute%28cmd%2Cargs%2Coutput%2Cerror%29-instance-method" class="signature"><strong>#execute</strong>(cmd, args, output, error)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#execute%28cmd%2Cargs%2Coutput%2Cerror%29-instance-method" class="signature"><strong>#execute</strong>(cmd, args, output, error)</a>
+        <a href="#execute%28cmd%2Cargs%2Coutput%2Cerror%2Ctimeout%29-instance-method" class="signature"><strong>#execute</strong>(cmd, args, output, error, timeout)</a>
         
       </li>
     
@@ -516,6 +531,11 @@
     
       <li class="entry-summary">
         <a href="#mutant%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#mutant</strong>(*args, **options, &block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#perform_mutation-instance-method" class="signature"><strong>#perform_mutation</strong></a>
         
       </li>
     
@@ -545,7 +565,12 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#subject-instance-method" class="signature"><strong>#subject</strong></a>
+        <a href="#subject%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#subject</strong>(*args, **options, &block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#subject%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#subject</strong>(*args, **options)</a>
         
       </li>
     
@@ -618,7 +643,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -641,7 +666,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -671,23 +696,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L5" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="execute(cmd,args,output,error,timeout)-instance-method">
-      <div class="signature">
-        
-        def <strong>execute</strong>(cmd, args, output, error, timeout)
-
-        <a class="method-permalink" href="#execute%28cmd%2Cargs%2Coutput%2Cerror%2Ctimeout%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -703,7 +712,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="execute(cmd,args,output,error,timeout)-instance-method">
+      <div class="signature">
+        
+        def <strong>execute</strong>(cmd, args, output, error, timeout)
+
+        <a class="method-permalink" href="#execute%28cmd%2Cargs%2Coutput%2Cerror%2Ctimeout%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L28" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -733,7 +758,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -749,7 +774,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="perform_mutation-instance-method">
+      <div class="signature">
+        
+        def <strong>perform_mutation</strong>
+
+        <a class="method-permalink" href="#perform_mutation-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -765,7 +806,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -781,7 +822,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -811,7 +852,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -827,23 +868,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="subject-instance-method">
+    <div class="entry-detail" id="subject(*args,**options,&amp;block)-instance-method">
       <div class="signature">
         
-        def <strong>subject</strong>
+        def <strong>subject</strong>(*args, **options, &block)
 
-        <a class="method-permalink" href="#subject-instance-method">#</a>
+        <a class="method-permalink" href="#subject%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="subject(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>subject</strong>(*args, **options)
+
+        <a class="method-permalink" href="#subject%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -859,7 +916,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -889,7 +946,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/8d56fff46d0b4312f60df5ffffc09418ada2fccc/src/crytic/mutation/environment.cr#L36" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/environment.cr#L36" target="_blank">View source</a>]
         
       </div>
     </div>
