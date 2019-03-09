@@ -5,10 +5,6 @@ require "../spec_helper"
 
 module Crytic::Mutation
   describe Mutation do
-    Spec.before_each do
-      InjectMutatedSubjectIntoSpecs.reset
-    end
-
     describe ".with" do
       it "can be used with both types of mutations" do
         transformer_mutant = Crytic::Mutant::AndOrSwap.at(location_at(0, 0))

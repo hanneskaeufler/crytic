@@ -6,22 +6,19 @@ require "file_utils"
 
 module Crytic::Mutation
   class InjectMutatedSubjectIntoSpecs < Crystal::Visitor
-    class_getter! project_path : String
-
     getter! astree : Crystal::ASTNode
     getter! enriched_source : String
 
     getter path : String
     getter source : String
 
-    def self.relative_path_to_project(path)
-      @@project_path ||= FileUtils.pwd
-      path.gsub(/^#{InjectMutatedSubjectIntoSpecs.project_path}\//, "")
-    end
-
-    def initialize(@path, @source, @mutated_subject : MutatedSubject, @tracker : Tracker)
-      @path = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.expand_path(@path, "."))
-      @tracker.register_file(self)
+    def initialize(
+      @path,
+      @source,
+      @mutated_subject : MutatedSubject,
+      @tracker : Tracker
+    )
+      @path = @tracker.register_file(self)
     end
 
     # Inject in AST tree if required.
@@ -77,7 +74,7 @@ module Crytic::Mutation
       @tracker.require_expanders << list_of_required_file
 
       new_files_to_load.each do |file_to_load|
-        @tracker.parse_file(InjectMutatedSubjectIntoSpecs.relative_path_to_project(file_to_load)) do
+        @tracker.parse_file(file_to_load) do
           required_file = InjectMutatedSubjectIntoSpecs.new(
             path: file_to_load,
             source: @mutated_subject.source_or_other_source(file_to_load),
@@ -100,7 +97,7 @@ module Crytic::Mutation
     end
 
     private def current_directory
-      InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.dirname(@path))
+      File.dirname(@path)
     end
   end
 end

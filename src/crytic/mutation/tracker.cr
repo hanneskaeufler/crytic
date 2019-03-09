@@ -4,9 +4,14 @@ module Crytic::Mutation
     private property file_list = [] of InjectMutatedSubjectIntoSpecs
     property require_expanders = [] of Array(InjectMutatedSubjectIntoSpecs)
 
+    def relative_path_to_project(path)
+      path.gsub(/^#{FileUtils.pwd}\//, "")
+    end
+
     def register_file(file)
       already_parsed_file_name.add(file.path)
       file_list << file
+      relative_path_to_project(File.expand_path(file.path, "."))
     end
 
     def track_file(file)
@@ -18,11 +23,11 @@ module Crytic::Mutation
     end
 
     def parse_file(file)
+      file = relative_path_to_project(file)
       unless already_tracked?(file)
         track_file(file)
         yield
       end
     end
   end
-
 end
