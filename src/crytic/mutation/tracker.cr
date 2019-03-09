@@ -6,7 +6,6 @@ module Crytic::Mutation
     private property file_list = [] of InjectMutatedSubjectIntoSpecs
     property require_expanders = [] of Array(InjectMutatedSubjectIntoSpecs)
 
-
     def currently_tracked_count
       require_expanders.size
     end

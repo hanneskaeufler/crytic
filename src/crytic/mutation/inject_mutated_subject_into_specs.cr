@@ -6,13 +6,11 @@ module Crytic::Mutation
   class InjectMutatedSubjectIntoSpecs < Crystal::Visitor
     getter! astree : Crystal::ASTNode
     getter! enriched_source : String
-
     getter path : String
-    getter source : String
 
     def initialize(
       @path,
-      @source,
+      @source : String,
       @mutated_subject : MutatedSubject,
       @tracker : Tracker
     )
@@ -22,7 +20,7 @@ module Crytic::Mutation
     # Inject in AST tree if required.
     def process
       unless @astree
-        @astree = Crystal::Parser.parse(source)
+        @astree = Crystal::Parser.parse(@source)
         astree.accept(self)
       end
     end
