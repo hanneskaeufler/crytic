@@ -1,4 +1,5 @@
 require "../mutation/inject_mutated_subject_into_specs"
+require "../mutation/tracker"
 require "../subject"
 require "option_parser"
 
@@ -17,10 +18,10 @@ class Crytic::Command::Noop
       end
     end
 
-    Mutation::InjectMutatedSubjectIntoSpecs.reset
+    tracker = Tracker.new
     @std_out.puts(spec_files.map do |spec_file|
       Mutation::InjectMutatedSubjectIntoSpecs
-        .new(spec_file, File.read(spec_file), MutatedSubject.new("", "", ""))
+        .new(spec_file, File.read(spec_file), MutatedSubject.new("", "", ""), tracker)
         .to_mutated_source
     end.join("\n"))
 
