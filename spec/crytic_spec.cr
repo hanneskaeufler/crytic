@@ -6,7 +6,7 @@ describe Crytic do
     module_version = Crytic::VERSION
 
     shard_version.should eq module_version
-    readme_version.should eq module_version
+    readme_version.should eq module_version.split(".").first
     docs_version.should eq module_version
     changelog_version.should eq module_version
   end
