@@ -85,9 +85,3 @@ private def runner
     reporters: [] of Crytic::Reporter::Reporter,
     generator: FakeGenerator.new)
 end
-
-private def fake_no_mutation_factory
-  ->(specs : Array(String)) {
-    Crytic::Mutation::NoMutation.with(specs, Crytic::FakeProcessRunner.new)
-  }
-end

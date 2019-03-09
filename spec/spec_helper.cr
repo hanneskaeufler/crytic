@@ -76,3 +76,9 @@ def fake_env
     "STRYKER_DASHBOARD_API_KEY" => "apikey",
   }
 end
+
+def fake_no_mutation_factory
+  ->(specs : Array(String)) {
+    Crytic::Mutation::NoMutation.with(specs, Crytic::FakeProcessRunner.new)
+  }
+end
