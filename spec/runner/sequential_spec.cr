@@ -3,23 +3,15 @@ require "../../src/crytic/runner/sequential"
 require "../spec_helper"
 
 module Crytic::Runner
+  def self.subjects(paths)
+    paths.map { |path| Subject.from_filepath(path) }
+  end
+
   describe Sequential do
     describe "#run" do
-      it "raises for empty specs" do
-        expect_raises(ArgumentError) do
-          runner.run("", [] of String)
-        end
-      end
-
       it "raises for non-existent files" do
-        expect_raises(ArgumentError, "Source file") do
-          runner.run("./nope.cr", ["./nope_spec.cr"])
-        end
-        expect_raises(ArgumentError, "Source file") do
-          runner.run(["./nope.cr", "./fixtures/simple/bar.cr"], ["./fixtures/simple/bar_spec.cr"])
-        end
         expect_raises(ArgumentError, "Spec file") do
-          runner.run("./fixtures/simple/bar.cr", ["./nope_spec.cr"])
+          runner.run(subjects(["./fixtures/simple/bar.cr"]), ["./nope_spec.cr"])
         end
       end
 
@@ -32,7 +24,7 @@ module Crytic::Runner
           no_mutation_factory: fake_no_mutation_factory)
 
         runner.run(
-          ["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"],
+          subjects(["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"]),
           ["./fixtures/simple/bar_spec.cr"]).should eq false
       end
 
@@ -50,7 +42,7 @@ module Crytic::Runner
           })
 
         runner.run(
-          ["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"],
+          subjects(["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"]),
           ["./fixtures/simple/bar_spec.cr"]).should eq false
       end
 
@@ -62,7 +54,7 @@ module Crytic::Runner
           reporters: [reporter] of Crytic::Reporter::Reporter,
           no_mutation_factory: fake_no_mutation_factory)
 
-        runner.run("./fixtures/simple/bar.cr", ["./fixtures/simple/bar_spec.cr"])
+        runner.run(subjects(["./fixtures/simple/bar.cr"]), ["./fixtures/simple/bar_spec.cr"])
 
         reporter.events.should eq ["report_original_result", "report_mutations", "report_neutral_result", "report_result", "report_summary", "report_msi"]
       end
@@ -78,7 +70,7 @@ module Crytic::Runner
           reporters: [reporter] of Crytic::Reporter::Reporter,
           no_mutation_factory: fake_no_mutation_factory)
 
-        runner.run("./fixtures/simple/bar.cr", ["./fixtures/simple/bar_spec.cr"])
+        runner.run(subjects(["./fixtures/simple/bar.cr"]), ["./fixtures/simple/bar_spec.cr"])
 
         reporter.events.should_not contain("report_result")
         mutation.as(FakeMutation).run_call_count.should eq 0
@@ -90,7 +82,7 @@ end
 private def runner
   Crytic::Runner::Sequential.new(
     threshold: 100.0,
-    reporters: [Crytic::Reporter::IoReporter.new(IO::Memory.new)] of Crytic::Reporter::Reporter,
+    reporters: [] of Crytic::Reporter::Reporter,
     generator: FakeGenerator.new)
 end
 

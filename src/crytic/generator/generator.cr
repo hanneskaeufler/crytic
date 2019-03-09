@@ -1,5 +1,6 @@
 require "../mutant/**"
 require "../mutation/mutation"
+require "../subject"
 
 module Crytic::Generator
   record MutationSet, neutral : Mutation::Mutation, mutated : Array(Mutation::Mutation) do
@@ -27,6 +28,9 @@ module Crytic::Generator
 
     CODE
 
-    abstract def mutations_for(source : Array(String), specs : Array(String)) : Array(MutationSet)
+    abstract def mutations_for(
+      subject : Array(Subject),
+      specs : Array(String)
+    ) : Array(MutationSet)
   end
 end

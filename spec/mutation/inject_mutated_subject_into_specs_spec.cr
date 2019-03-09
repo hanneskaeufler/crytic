@@ -14,8 +14,9 @@ module Crytic::Mutation
         .new(
         path: spec_file,
         source: File.read(spec_file),
-        subject_path: "./fixtures/simple/bar.cr",
-        mutated_subject_source: "puts \"mutated source\"")
+        mutated_subject: mutated_subject(
+          path: "./fixtures/simple/bar.cr",
+          source_code: "puts \"mutated source\""))
         .to_mutated_source
         .should eq <<-CODE
         # require of `fixtures/simple/bar.cr` from `fixtures/simple/bar_spec.cr`
@@ -36,8 +37,9 @@ module Crytic::Mutation
         .new(
         path: spec_file,
         source: File.read(spec_file),
-        subject_path: "./fixtures/simple/bar.cr",
-        mutated_subject_source: "puts \"mutated source\"")
+        mutated_subject: mutated_subject(
+          path: "./fixtures/simple/bar.cr",
+          source_code: "puts \"mutated source\""))
         .to_mutated_source
         .should eq <<-CODE
         # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr`
@@ -62,8 +64,9 @@ module Crytic::Mutation
         .new(
         path: spec_file,
         source: File.read(spec_file),
-        subject_path: subject_file,
-        mutated_subject_source: File.read(subject_file))
+        mutated_subject: mutated_subject(
+          path: subject_file,
+          source_code: File.read(subject_file)))
         .to_mutated_source
         .should eq <<-CODE
         # require of `fixtures/require_order/blog.cr` from `fixtures/require_order/blog_spec.cr`
@@ -98,8 +101,9 @@ module Crytic::Mutation
         .new(
         path: spec_file,
         source: File.read(spec_file),
-        subject_path: subject_file,
-        mutated_subject_source: File.read(subject_file))
+        mutated_subject: mutated_subject(
+          path: subject_file,
+          source_code: File.read(subject_file)))
         .to_mutated_source
         .should eq <<-CODE
         # require of `fixtures/require_wildcards/foo.cr` from `fixtures/require_wildcards/foo_spec.cr`

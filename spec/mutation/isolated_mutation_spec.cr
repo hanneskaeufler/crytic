@@ -13,7 +13,7 @@ module Crytic::Mutation
       it "can be used with both types of mutations" do
         transformer_mutant = Crytic::Mutant::AndOrSwap.at(location_at(0, 0))
         IsolatedMutation.with(environment(config(
-          original: "./bar.cr",
+          original: "./fixtures/simple/bar.cr",
           specs: ["./bar_spec.cr"],
           mutant: transformer_mutant)))
           .should be_a(Crytic::Mutation::Mutation)

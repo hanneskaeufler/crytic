@@ -42,7 +42,7 @@ module Crytic::Mutation
       end
     end
 
-    def initialize(@path, @source, @subject_path : String, @mutated_subject_source : String)
+    def initialize(@path, @source, @mutated_subject : MutatedSubject)
       @path = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.expand_path(@path, "."))
       InjectMutatedSubjectIntoSpecs.register_file(self)
     end
@@ -68,7 +68,7 @@ module Crytic::Mutation
     end
 
     private def unfold_required(output)
-      output.gsub(/require[ \t]+\"\$([0-9]+)\"/) do |_str, matcher|
+      output.gsub(/require\s+"\$(\d+)"/) do |_str, matcher|
         expansion_id = matcher[1].to_i
         file_list = InjectMutatedSubjectIntoSpecs.require_expanders[expansion_id]
 
@@ -90,9 +90,6 @@ module Crytic::Mutation
       file = node.string
       return false unless file.starts_with?(".")
 
-      current_directory = InjectMutatedSubjectIntoSpecs
-        .relative_path_to_project(File.dirname(@path))
-
       new_files_to_load = RequireResolver
         .new
         .find_in_path_relative_to_dir(file, current_directory)
@@ -107,9 +104,8 @@ module Crytic::Mutation
         InjectMutatedSubjectIntoSpecs.parse_file(file_to_load) do
           required_file = InjectMutatedSubjectIntoSpecs.new(
             path: file_to_load,
-            source: fetch_source(file_to_load),
-            mutated_subject_source: @mutated_subject_source,
-            subject_path: @subject_path)
+            source: @mutated_subject.source_or_other_source(file_to_load),
+            mutated_subject: @mutated_subject)
 
           required_file.process # Process on load, since it can change the requirement order
 
@@ -126,12 +122,8 @@ module Crytic::Mutation
       true
     end
 
-    private def fetch_source(some_path : String)
-      if some_path == File.expand_path(InjectMutatedSubjectIntoSpecs.relative_path_to_project(@subject_path))
-        @mutated_subject_source
-      else
-        File.read(some_path)
-      end
+    private def current_directory
+      InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.dirname(@path))
     end
   end
 end
