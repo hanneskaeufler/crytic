@@ -1,8 +1,21 @@
+require "file_utils"
+
 module Crytic::Mutation
   class Tracker
     private property already_parsed_file_name = Set(String).new
     private property file_list = [] of InjectMutatedSubjectIntoSpecs
     property require_expanders = [] of Array(InjectMutatedSubjectIntoSpecs)
+
+
+    def currently_tracked_count
+      require_expanders.size
+    end
+
+    def new_bag
+      list_of_required_file = [] of InjectMutatedSubjectIntoSpecs
+      require_expanders << list_of_required_file
+      list_of_required_file
+    end
 
     def relative_path_to_project(path)
       path.gsub(/^#{FileUtils.pwd}\//, "")

@@ -1,8 +1,6 @@
 require "./require_resolver"
 require "./tracker"
 require "compiler/crystal/syntax/*"
-require "digest"
-require "file_utils"
 
 module Crytic::Mutation
   class InjectMutatedSubjectIntoSpecs < Crystal::Visitor
@@ -69,9 +67,8 @@ module Crytic::Mutation
 
       return if new_files_to_load.nil?
 
-      idx = @tracker.require_expanders.size
-      list_of_required_file = [] of InjectMutatedSubjectIntoSpecs
-      @tracker.require_expanders << list_of_required_file
+      idx = @tracker.currently_tracked_count
+      list_of_required_file = @tracker.new_bag
 
       new_files_to_load.each do |file_to_load|
         @tracker.parse_file(file_to_load) do
