@@ -4,7 +4,11 @@ module Crytic::Mutation
   class Tracker
     private property already_parsed_file_name = Set(String).new
     private property file_list = [] of InjectMutatedSubjectIntoSpecs
-    property require_expanders = [] of Array(InjectMutatedSubjectIntoSpecs)
+    private property require_expanders = [] of Array(InjectMutatedSubjectIntoSpecs)
+
+    def required_files_for_id(expansion_id)
+      require_expanders[expansion_id]
+    end
 
     def currently_tracked_count
       require_expanders.size

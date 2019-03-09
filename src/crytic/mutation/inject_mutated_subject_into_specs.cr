@@ -39,8 +39,7 @@ module Crytic::Mutation
 
     private def unfold_required(output)
       output.gsub(/require\s+"\$(\d+)"/) do |_str, matcher|
-        expansion_id = matcher[1].to_i
-        file_list = @tracker.require_expanders[expansion_id]
+        file_list = @tracker.required_files_for_id(matcher[1].to_i)
 
         String.build do |io|
           file_list.each do |file|
