@@ -74,8 +74,7 @@ module Crytic::Mutation
 
         String.build do |io|
           file_list.each do |file|
-            io << "#" << " require of `" << file.path
-            io << "` from `" << self.path << "`" << "\n"
+            io << "# require of `#{file.path}` from `#{self.path}`\n"
             io << file.to_mutated_source
           end
         end
