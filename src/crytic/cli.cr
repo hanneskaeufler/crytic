@@ -1,4 +1,4 @@
-require "./command/test"
+require "./command/*"
 require "./side_effects"
 
 module Crytic
@@ -9,7 +9,18 @@ module Crytic
 
     def run(args)
       args = args.tap(&.shift) if args.first? == "test"
-      Command::Test.new(@side_effects.std_out, @side_effects.std_err, @side_effects.exit_fun, @side_effects.env).execute(args)
+      case args.first?
+      when "test"
+        test_command.execute(args.tap(&.shift))
+      when "noop"
+        Command::Noop.new(@std_out).execute(args.tap(&.shift))
+      else
+        test_command.execute(args)
+      end
+    end
+
+    private def test_command
+      Command::Test.new(@side_effects.std_out, @side_effects.std_err, @side_effects.exit_fun, @side_effects.env)
     end
   end
 end

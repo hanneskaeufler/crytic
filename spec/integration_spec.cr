@@ -92,6 +92,15 @@ describe Crytic do
       end
     end
   end
+
+  describe "the noop command" do
+    it "outputs the noop'ed code to stdout" do
+      result = run_crytic("noop ./fixtures/conditionals/uncovered_spec.cr")
+      result.output.should contain "def fully_covered"
+      result.exit_code.should eq 0
+    end
+  end
+end
 {% end %}
 
 def run_crytic_in_dir(dir : String)

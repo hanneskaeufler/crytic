@@ -9,7 +9,8 @@ class Crytic::Command::Test
     @std_out : IO,
     @std_err : IO,
     @exit_fun : (Int32) ->,
-    @env : Hash(String, String))
+    @env : Hash(String, String)
+  )
   end
 
   def execute(args)
