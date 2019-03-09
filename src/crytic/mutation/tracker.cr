@@ -1,3 +1,4 @@
+require "./inject_mutated_subject_into_specs"
 require "file_utils"
 
 module Crytic::Mutation
