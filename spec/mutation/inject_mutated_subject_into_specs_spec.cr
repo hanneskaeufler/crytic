@@ -4,14 +4,11 @@ require "../spec_helper"
 
 module Crytic::Mutation
   describe InjectMutatedSubjectIntoSpecs do
-    Spec.before_each do
-      InjectMutatedSubjectIntoSpecs.reset
-    end
-
     it "can replace the subject in a direct require" do
       spec_file = "./fixtures/simple/bar_spec.cr"
       InjectMutatedSubjectIntoSpecs
         .new(
+        tracker: Tracker.new,
         path: spec_file,
         source: File.read(spec_file),
         mutated_subject: mutated_subject(
@@ -35,6 +32,7 @@ module Crytic::Mutation
       spec_file = "./fixtures/simple/bar_with_helper_spec.cr"
       InjectMutatedSubjectIntoSpecs
         .new(
+        tracker: Tracker.new,
         path: spec_file,
         source: File.read(spec_file),
         mutated_subject: mutated_subject(
@@ -62,6 +60,7 @@ module Crytic::Mutation
       subject_file = "./fixtures/require_order/blog.cr"
       InjectMutatedSubjectIntoSpecs
         .new(
+        tracker: Tracker.new,
         path: spec_file,
         source: File.read(spec_file),
         mutated_subject: mutated_subject(
@@ -99,6 +98,7 @@ module Crytic::Mutation
       subject_file = "./fixtures/require_wildcards/foo.cr"
       InjectMutatedSubjectIntoSpecs
         .new(
+        tracker: Tracker.new,
         path: spec_file,
         source: File.read(spec_file),
         mutated_subject: mutated_subject(

@@ -1,43 +1,11 @@
 require "./require_resolver"
+require "./tracker"
 require "compiler/crystal/syntax/*"
 require "digest"
 require "file_utils"
 
 module Crytic::Mutation
-  class Tracker
-    private property already_parsed_file_name = Set(String).new
-    private property file_list = [] of InjectMutatedSubjectIntoSpecs
-    property require_expanders = [] of Array(InjectMutatedSubjectIntoSpecs)
-
-    def register_file(file)
-      already_parsed_file_name.add(file.path)
-      file_list << file
-    end
-
-    def track_file(file)
-      already_parsed_file_name.add(file)
-    end
-
-    def already_tracked?(file)
-      already_parsed_file_name.includes?(file)
-    end
-
-    def parse_file(file)
-      unless already_tracked?(file)
-        track_file(file)
-        yield
-      end
-    end
-  end
-
   class InjectMutatedSubjectIntoSpecs < Crystal::Visitor
-    # Because the class is used and instantiated multiple times, but these are
-    # class vars, they need to be reset :(
-    def self.reset
-      @@tracker = Tracker.new
-    end
-
-    class_getter tracker = Tracker.new
     class_getter! project_path : String
 
     getter! astree : Crystal::ASTNode
@@ -51,9 +19,9 @@ module Crytic::Mutation
       path.gsub(/^#{InjectMutatedSubjectIntoSpecs.project_path}\//, "")
     end
 
-    def initialize(@path, @source, @mutated_subject : MutatedSubject)
+    def initialize(@path, @source, @mutated_subject : MutatedSubject, @tracker : Tracker)
       @path = InjectMutatedSubjectIntoSpecs.relative_path_to_project(File.expand_path(@path, "."))
-      @@tracker.register_file(self)
+      @tracker.register_file(self)
     end
 
     # Inject in AST tree if required.
@@ -79,7 +47,7 @@ module Crytic::Mutation
     private def unfold_required(output)
       output.gsub(/require\s+"\$(\d+)"/) do |_str, matcher|
         expansion_id = matcher[1].to_i
-        file_list = @@tracker.require_expanders[expansion_id]
+        file_list = @tracker.require_expanders[expansion_id]
 
         String.build do |io|
           file_list.each do |file|
@@ -104,16 +72,17 @@ module Crytic::Mutation
 
       return if new_files_to_load.nil?
 
-      idx = @@tracker.require_expanders.size
+      idx = @tracker.require_expanders.size
       list_of_required_file = [] of InjectMutatedSubjectIntoSpecs
-      @@tracker.require_expanders << list_of_required_file
+      @tracker.require_expanders << list_of_required_file
 
       new_files_to_load.each do |file_to_load|
-        @@tracker.parse_file(InjectMutatedSubjectIntoSpecs.relative_path_to_project(file_to_load)) do
+        @tracker.parse_file(InjectMutatedSubjectIntoSpecs.relative_path_to_project(file_to_load)) do
           required_file = InjectMutatedSubjectIntoSpecs.new(
             path: file_to_load,
             source: @mutated_subject.source_or_other_source(file_to_load),
-            mutated_subject: @mutated_subject)
+            mutated_subject: @mutated_subject,
+            tracker: @tracker)
 
           required_file.process # Process on load, since it can change the requirement order
 
