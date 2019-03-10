@@ -3,7 +3,7 @@ require "file_utils"
 
 module Crytic::Mutation
   class Tracker
-    private property already_parsed_file_name = Set(String).new
+    private property tracked_filepaths = Set(String).new
     private property require_expanders = [] of Array(InjectMutatedSubjectIntoSpecs)
 
     def required_files_for_id(expansion_id)
@@ -21,20 +21,20 @@ module Crytic::Mutation
     end
 
     def register_file(file)
-      already_parsed_file_name.add(file.path)
+      tracked_filepaths.add(file.path)
       relative_path_to_project(File.expand_path(file.path, "."))
-    end
-
-    def already_tracked?(file)
-      already_parsed_file_name.includes?(file)
     end
 
     def parse_file_at_path(file)
       file = relative_path_to_project(file)
-      unless already_tracked?(file)
-        already_parsed_file_name.add(file)
+      unless is_already_tracked?(file)
+        tracked_filepaths.add(file)
         yield
       end
+    end
+
+    private def is_already_tracked?(file)
+      tracked_filepaths.includes?(file)
     end
 
     private def relative_path_to_project(path)
