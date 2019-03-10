@@ -68,7 +68,7 @@ module Crytic::Mutation
       list_of_required_file = @tracker.new_bag
 
       new_files_to_load.each do |file_to_load|
-        @tracker.parse_file(file_to_load) do
+        @tracker.parse_file_at_path(file_to_load) do
           required_file = InjectMutatedSubjectIntoSpecs.new(
             path: file_to_load,
             source: @mutated_subject.source_or_other_source(file_to_load),
