@@ -13,7 +13,9 @@ module Crytic
       when "test"
         test_command.execute(args.tap(&.shift))
       when "noop"
-        Command::Noop.new(@std_out).execute(args.tap(&.shift))
+        Command::Noop
+          .new(@std_out, @std_err, Command::Noop::DEFAULT_SPEC_FILES_GLOB)
+          .execute(args.tap(&.shift))
       else
         test_command.execute(args)
       end

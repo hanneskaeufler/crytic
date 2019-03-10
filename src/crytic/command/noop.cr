@@ -1,16 +1,32 @@
 require "../mutation/inject_mutated_subject_into_specs"
 require "../mutation/tracker"
+require "../runner/argument_validator"
 require "../subject"
 require "option_parser"
 
 class Crytic::Command::Noop
   DEFAULT_SPEC_FILES_GLOB = "./spec/**/*_spec.cr"
+  include Runner::ArgumentValidator
 
-  def initialize(@std_out : IO)
+  def initialize(@std_out : IO, @std_err : IO, @spec_files_glob : String)
   end
 
   def execute(args)
-    spec_files = Dir[DEFAULT_SPEC_FILES_GLOB]
+    spec_files = parse_args(args)
+    validate_args!(spec_files)
+
+    tracker = Mutation::Tracker.new
+    @std_out.puts(spec_files.map do |spec_file|
+      Mutation::InjectMutatedSubjectIntoSpecs
+        .new(spec_file, File.read(spec_file), irrelevant_subject, tracker)
+        .to_mutated_source
+    end.join("\n"))
+
+    true
+  end
+
+  private def parse_args(args)
+    spec_files = Dir[@spec_files_glob]
 
     OptionParser.parse(args) do |parser|
       parser.unknown_args do |unknown|
@@ -18,13 +34,12 @@ class Crytic::Command::Noop
       end
     end
 
-    tracker = Tracker.new
-    @std_out.puts(spec_files.map do |spec_file|
-      Mutation::InjectMutatedSubjectIntoSpecs
-        .new(spec_file, File.read(spec_file), MutatedSubject.new("", "", ""), tracker)
-        .to_mutated_source
-    end.join("\n"))
+    spec_files
+  end
 
-    true
+  # Because this command runs a noop mutation, we never
+  # actually have to replace the subject by its mutation.
+  private def irrelevant_subject
+    MutatedSubject.new("", "", "")
   end
 end
