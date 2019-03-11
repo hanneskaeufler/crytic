@@ -1,4 +1,5 @@
 require "../src/crytic/cli_options"
+require "../src/crytic/side_effects"
 require "./spec_helper"
 
 module Crytic
@@ -10,7 +11,7 @@ module Crytic
 
         cli_options_parser(
           std_err: std_err,
-          exit_fun: ->(code : Int32) { exit_code = code })
+          exit_fun: ->(code : Int32) { exit_code = code; nil })
           .parse(["-unknown"])
 
         std_err.to_s.lines.first.should eq "ERROR: -unknown is not a valid option."
@@ -31,7 +32,7 @@ module Crytic
       it "exits when showing the help" do
         exit_code : Int32? = nil
 
-        cli_options_parser(exit_fun: ->(code : Int32) { exit_code = code })
+        cli_options_parser(exit_fun: ->(code : Int32) { exit_code = code; nil })
           .parse(["--help"])
 
         exit_code.should eq 0
@@ -140,5 +141,6 @@ private def cli_options_parser(
   env = fake_env,
   spec_files_glob = Crytic::CliOptions::DEFAULT_SPEC_FILES_GLOB
 )
-  Crytic::CliOptions.new(std_out, std_err, exit_fun, env, spec_files_glob)
+  Crytic::CliOptions.new(Crytic::SideEffects.new(
+    std_out, std_err, exit_fun, env), spec_files_glob)
 end

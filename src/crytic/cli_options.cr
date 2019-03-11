@@ -1,6 +1,7 @@
 require "./generator/generator"
 require "./mutant/possibilities"
 require "./reporter/*"
+require "./side_effects"
 require "option_parser"
 
 module Crytic
@@ -13,14 +14,8 @@ module Crytic
     @spec_files = [] of String
     @subject = [] of String
 
-    def initialize(
-      @std_out : IO,
-      @std_err : IO,
-      @exit_fun : (Int32) ->,
-      @env : Hash(String, String),
-      @spec_files_glob : String
-    )
-      @reporters << Reporter::IoReporter.new(@std_out)
+    def initialize(@side_effects : SideEffects, @spec_files_glob : String)
+      @reporters << Reporter::IoReporter.new(@side_effects.std_out)
     end
 
     def parse(args)
@@ -28,8 +23,8 @@ module Crytic
         parser.banner = "Usage: crytic [arguments]"
 
         parser.on("-h", "--help", "Show this help") do
-          @std_out.puts parser
-          @exit_fun.call(0)
+          @side_effects.std_out.puts parser
+          @side_effects.exit_fun.call(0)
         end
 
         parser.on("-m", "--min-msi=THRESHOLD", "Crytic will exit with zero if this threshold is reached.") do |threshold|
@@ -57,9 +52,9 @@ module Crytic
         end
 
         parser.invalid_option do |flag|
-          @std_err.puts "ERROR: #{flag} is not a valid option."
-          @std_err.puts parser
-          @exit_fun.call(1)
+          @side_effects.std_err.puts "ERROR: #{flag} is not a valid option."
+          @side_effects.std_err.puts parser
+          @side_effects.exit_fun.call(1)
         end
       end
 
@@ -87,16 +82,16 @@ module Crytic
     end
 
     private def console_reporter
-      Reporter::IoReporter.new(@std_out)
+      Reporter::IoReporter.new(@side_effects.std_out)
     end
 
     private def stryker_reporter
       client = Reporter::DefaultHttpClient.new
-      Reporter::StrykerBadgeReporter.new(client, @env, @std_out)
+      Reporter::StrykerBadgeReporter.new(client, @side_effects.env, @side_effects.std_out)
     end
 
     private def file_summary_reporter
-      Reporter::FileSummaryIoReporter.new(@std_out)
+      Reporter::FileSummaryIoReporter.new(@side_effects.std_out)
     end
   end
 end
