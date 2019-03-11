@@ -23,7 +23,8 @@ module Crytic::Command
       it "uses the default glob when not passing any spec files" do
         stdout = IO::Memory.new
 
-        subject(stdout: stdout, spec_files_glob: "./fixtures/simple/*_spec.cr").execute([] of String)
+        subject(stdout: stdout, spec_files_glob: "./fixtures/simple/*_spec.cr")
+          .execute([] of String)
 
         stdout.to_s.should contain File.read("./fixtures/simple/bar.cr")
       end
