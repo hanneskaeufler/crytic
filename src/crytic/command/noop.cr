@@ -1,20 +1,17 @@
 require "../mutation/inject_mutated_subject_into_specs"
 require "../mutation/tracker"
-require "../runner/argument_validator"
 require "../side_effects"
 require "../subject"
 require "option_parser"
 
 class Crytic::Command::Noop
   DEFAULT_SPEC_FILES_GLOB = "./spec/**/*_spec.cr"
-  include Runner::ArgumentValidator
 
   def initialize(@side_effects : SideEffects, @spec_files_glob : String)
   end
 
   def execute(args)
     spec_files = parse_args(args)
-    validate_args!(spec_files)
 
     tracker = Mutation::Tracker.new
     @side_effects.std_out.puts(spec_files.map do |spec_file|
@@ -35,6 +32,16 @@ class Crytic::Command::Noop
       end
     end
 
+    if spec_files.empty?
+      error "No spec files given or found."
+    end
+
+    spec_files.each do |spec_file|
+      unless File.exists?(spec_file)
+        error "Spec file #{spec_file} doesn't exist."
+      end
+    end
+
     spec_files
   end
 
@@ -42,5 +49,10 @@ class Crytic::Command::Noop
   # actually have to replace the subject by its mutation.
   private def irrelevant_subject
     MutatedSubject.new("", "", "")
+  end
+
+  private def error(msg)
+    @side_effects.std_err.puts msg
+    @side_effects.exit_fun.call(1)
   end
 end

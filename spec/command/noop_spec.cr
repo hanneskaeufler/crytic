@@ -5,10 +5,12 @@ module Crytic::Command
   def self.subject(
     stdout = IO::Memory.new,
     stderr = IO::Memory.new,
+    exit_fun = ->(_code : Int32) {},
     spec_files_glob = Noop::DEFAULT_SPEC_FILES_GLOB
   )
-    Noop.new(SideEffects.new(
-      stdout, stderr, ->(_code : Int32) {}, Hash(String, String).new), spec_files_glob)
+    Noop.new(
+      SideEffects.new(stdout, stderr, exit_fun, Hash(String, String).new),
+      spec_files_glob)
   end
 
   describe Noop do
@@ -30,10 +32,35 @@ module Crytic::Command
         stdout.to_s.should contain File.read("./fixtures/simple/bar.cr")
       end
 
+      it "errors when no spec files where given and none found with the glob" do
+        stderr = IO::Memory.new
+        exit_code : Int32? = nil
+
+        subject(
+          stderr: stderr,
+          exit_fun: ->(code : Int32) { exit_code = code; nil },
+          spec_files_glob: "")
+          .execute([] of String)
+
+        exit_code.should eq 1
+        stderr.to_s.should eq "No spec files given or found.\n"
+      end
+
       it "errors when a non existing spec file was given" do
-        expect_raises(ArgumentError, "Spec file doesnt_exist.cr doesn't exist.") do
-          subject.execute(["doesnt_exist.cr"])
+        stderr = IO::Memory.new
+        exit_code : Int32? = nil
+
+        noop = subject(
+          stderr: stderr,
+          exit_fun: ->(code : Int32) { exit_code = code; nil })
+
+        begin
+          noop.execute(["doesnt_exist.cr"])
+        rescue
         end
+
+        exit_code.should eq 1
+        stderr.to_s.should eq "Spec file doesnt_exist.cr doesn't exist.\n"
       end
     end
   end
