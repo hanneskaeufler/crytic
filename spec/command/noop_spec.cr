@@ -7,7 +7,8 @@ module Crytic::Command
     stderr = IO::Memory.new,
     spec_files_glob = Noop::DEFAULT_SPEC_FILES_GLOB
   )
-    Noop.new(stdout, stderr, spec_files_glob)
+    Noop.new(SideEffects.new(
+      stdout, stderr, ->(_code : Int32) {}, Hash(String, String).new), spec_files_glob)
   end
 
   describe Noop do

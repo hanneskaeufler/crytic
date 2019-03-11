@@ -2,15 +2,11 @@ require "../cli_options"
 require "../generator/in_memory_generator"
 require "../generator/isolated_mutation_factory"
 require "../runner/sequential"
+require "../side_effects"
 require "../subject"
 
 class Crytic::Command::Test
-  def initialize(
-    @std_out : IO,
-    @std_err : IO,
-    @exit_fun : (Int32) ->,
-    @env : Hash(String, String)
-  )
+  def initialize(@side_effects : SideEffects)
   end
 
   def execute(args)
@@ -24,7 +20,7 @@ class Crytic::Command::Test
 
   private def parse_options(args)
     Crytic::CliOptions
-      .new(@std_out, @std_err, @exit_fun, @env, Crytic::CliOptions::DEFAULT_SPEC_FILES_GLOB)
+      .new(@side_effects, Crytic::CliOptions::DEFAULT_SPEC_FILES_GLOB)
       .parse(args)
   end
 
