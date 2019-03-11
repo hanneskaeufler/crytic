@@ -9,12 +9,6 @@ module Crytic::Runner
 
   describe Sequential do
     describe "#run" do
-      it "raises for non-existent files" do
-        expect_raises(ArgumentError, "Spec file") do
-          runner.run(subjects(["./fixtures/simple/bar.cr"]), ["./nope_spec.cr"])
-        end
-      end
-
       it "takes a list of subjects" do
         reporter = FakeReporter.new
         runner = Sequential.new(

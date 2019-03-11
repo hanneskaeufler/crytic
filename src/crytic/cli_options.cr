@@ -52,9 +52,7 @@ module Crytic
         end
 
         parser.invalid_option do |flag|
-          @side_effects.std_err.puts "ERROR: #{flag} is not a valid option."
-          @side_effects.std_err.puts parser
-          @side_effects.exit_fun.call(1)
+          error "ERROR: #{flag} is not a valid option.\n#{parser}"
         end
       end
 
@@ -68,7 +66,15 @@ module Crytic
                 @spec_files
               end
 
-      raise ArgumentError.new("No spec files given or found.") if files.empty?
+      if files.empty?
+        error "No spec files given or found."
+      end
+
+      files.each do |spec_file|
+        unless File.exists?(spec_file)
+          error "Spec file #{spec_file} doesn't exist."
+        end
+      end
 
       files
     end
@@ -92,6 +98,11 @@ module Crytic
 
     private def file_summary_reporter
       Reporter::FileSummaryIoReporter.new(@side_effects.std_out)
+    end
+
+    private def error(msg)
+      @side_effects.std_err.puts msg
+      @side_effects.exit_fun.call(1)
     end
   end
 end

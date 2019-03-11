@@ -50,10 +50,30 @@ module Crytic
         opts.spec_files.should eq Dir["./spec/**/*_spec.cr"]
       end
 
-      it "throws when no spec files were given" do
-        expect_raises(ArgumentError) do
-          cli_options_parser(spec_files_glob: "").spec_files
-        end
+      it "throws when no spec are found by glob" do
+        exit_code : Int32? = nil
+        std_err = IO::Memory.new
+
+        cli_options_parser(
+          exit_fun: ->(code : Int32) { exit_code = code; nil },
+          spec_files_glob: "",
+          std_err: std_err).spec_files
+
+        exit_code.should eq 1
+        std_err.to_s.should contain "No spec files given or found."
+      end
+
+      it "throws when non existing spec file is given" do
+        exit_code : Int32? = nil
+        std_err = IO::Memory.new
+
+        cli_options_parser(
+          exit_fun: ->(code : Int32) { exit_code = code; nil },
+          spec_files_glob: "",
+          std_err: std_err).parse(["nope.cr"]).spec_files
+
+        exit_code.should eq 1
+        std_err.to_s.should contain "Spec file nope.cr doesn't exist."
       end
 
       {% for flag in ["-s", "--subject"] %}
