@@ -4,12 +4,9 @@ require "../mutation/no_mutation"
 require "../mutation/result"
 require "../mutation/result_set"
 require "../reporter/reporter"
-require "./argument_validator"
 
 module Crytic::Runner
   class Sequential
-    include ArgumentValidator
-
     alias Threshold = Float64
     alias NoMutationFactory = (Array(String)) -> Mutation::NoMutation
 
@@ -24,8 +21,6 @@ module Crytic::Runner
     end
 
     def run(subjects : Array(Subject), specs : Array(String)) : Bool
-      validate_args!(subjects, specs)
-
       original_result = run_original_test_suite(specs)
 
       return false unless original_result.successful?
