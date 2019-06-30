@@ -17,9 +17,9 @@ module Crytic::Mutant
 
       case node
       when Crystal::And | Crystal::Or
-          return is_same(node_location, location) && is_same(node.end_location, name_location)
+        is_same(node_location, location) && is_same(node.end_location, name_location)
       else
-          return is_same(node_location, location) && is_same(node.name_location, name_location)
+        is_same(node_location, location) && is_same(node.name_location, name_location)
       end
     end
 
