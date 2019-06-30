@@ -3,7 +3,7 @@ version: 2
 jobs:
   test-crystal: &test-template
     docker:
-      - image: crystallang/crystal:0.27.2
+      - image: crystallang/crystal:0.29.0
     steps:
       - checkout
   test:
@@ -30,7 +30,6 @@ workflows:
   ci:
     jobs:
       - test
-      - test-coverage
   nightly:
     triggers:
       - schedule:
@@ -40,5 +39,4 @@ workflows:
               only: master
     jobs:
       - test
-      - test-coverage
       - test-mutations
