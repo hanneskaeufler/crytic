@@ -8,7 +8,7 @@ module Crytic
       transformed = ast.transform(Mutant::AndOrSwap.at(location_at(
         line_number: 1,
         column_number: 1,
-        end_location: Crystal::Location.new(nil, 1, 6))))
+        name_location: Crystal::Location.new(nil, 1, 6))))
       transformed.to_s.should eq "1 || 2"
     end
 
@@ -17,7 +17,7 @@ module Crytic
       transformed = ast.transform(Mutant::AndOrSwap.at(location_at(
         line_number: 1,
         column_number: 1,
-        end_location: Crystal::Location.new(nil, 1, 6))))
+        name_location: Crystal::Location.new(nil, 1, 6))))
       transformed.to_s.should eq "1 && 2"
     end
 
@@ -26,7 +26,7 @@ module Crytic
       transformed = ast.transform(Mutant::AndOrSwap.at(location_at(
         line_number: 100,
         column_number: 100,
-        end_location: Crystal::Location.new(nil, 1, 6))))
+        name_location: Crystal::Location.new(nil, 1, 6))))
       transformed.to_s.should eq "1 && 2"
     end
 
@@ -35,7 +35,7 @@ module Crytic
       transformed = ast.transform(Mutant::AndOrSwap.at(location_at(
         line_number: 1,
         column_number: 1,
-        end_location: Crystal::Location.new(nil, 1, 6))))
+        name_location: Crystal::Location.new(nil, 1, 6))))
       transformed.to_s.should eq "(1 || 2) && 3"
     end
   end

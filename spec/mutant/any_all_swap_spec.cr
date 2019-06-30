@@ -9,7 +9,7 @@ module Crytic
       transformed = ast.transform(Mutant::AnyAllSwap.at(location_at(
         line_number: 1,
         column_number: 1,
-        name_column_number: 5)))
+        name_location: Crystal::Location.new(nil, 1, 5))))
       transformed.to_s.should eq "[1].any?"
     end
 
@@ -18,7 +18,7 @@ module Crytic
       transformed = ast.transform(Mutant::AnyAllSwap.at(location_at(
         line_number: 1,
         column_number: 1,
-        name_column_number: 5)))
+        name_location: Crystal::Location.new(nil, 1, 5))))
       transformed.to_s.should eq "[1].all?"
     end
 
@@ -27,7 +27,7 @@ module Crytic
       transformed = ast.transform(Mutant::AnyAllSwap.at(location_at(
         line_number: 100,
         column_number: 100,
-        name_column_number: 5)))
+        name_location: Crystal::Location.new(nil, 1, 5))))
       transformed.to_s.should eq "[1].all?"
     end
 
@@ -36,7 +36,7 @@ module Crytic
       transformed = ast.transform(Mutant::AnyAllSwap.at(location_at(
         line_number: 1,
         column_number: 1,
-        name_column_number: 6)))
+        name_location: Crystal::Location.new(nil, 1, 6))))
       transformed.to_s.should eq "[1].all?"
     end
 
@@ -45,7 +45,7 @@ module Crytic
       transformed = ast.transform(Mutant::AnyAllSwap.at(location_at(
         line_number: 1,
         column_number: 1,
-        name_column_number: 14)))
+        name_location: Crystal::Location.new(nil, 1, 14))))
       transformed.to_s.should eq "[1].not_nil!.any?"
     end
 

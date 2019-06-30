@@ -7,14 +7,14 @@ module Crytic
     it "switches select calls for reject calls" do
       ast = Crystal::Parser.parse("[1].select(&.nil?)")
       transformed = ast.transform(Mutant::SelectRejectSwap.at(location_at(
-        line_number: 1, column_number: 1, name_column_number: 5)))
+        line_number: 1, column_number: 1, name_location: Crystal::Location.new(nil, 1, 5))))
       transformed.to_s.should eq "[1].reject do |__arg0|\n  __arg0.nil?\nend"
     end
 
     it "switches reject calls for select calls" do
       ast = Crystal::Parser.parse("[1].reject(&.nil?)")
       transformed = ast.transform(Mutant::SelectRejectSwap.at(location_at(
-        line_number: 1, column_number: 1, name_column_number: 5)))
+        line_number: 1, column_number: 1, name_location: Crystal::Location.new(nil, 1, 5))))
       transformed.to_s.should eq "[1].select do |__arg0|\n  __arg0.nil?\nend"
     end
 

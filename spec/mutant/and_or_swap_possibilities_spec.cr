@@ -24,8 +24,8 @@ module Crytic
       ast.accept(possibilities)
       possibilities.any?.should eq true
       possibilities.locations.size.should eq 2
-      possibilities.locations.first.end_location.should_not be_nil
-      possibilities.locations.last.end_location.should_not be_nil
+      possibilities.locations.first.name_location.should_not be_nil
+      possibilities.locations.last.name_location.should_not be_nil
     end
 
     it "finds || as well" do
@@ -34,7 +34,7 @@ module Crytic
       ast.accept(possibilities)
       possibilities.any?.should eq true
       possibilities.locations.size.should eq 1
-      possibilities.locations.first.end_location.should_not be_nil
+      possibilities.locations.first.name_location.should_not be_nil
     end
   end
 end

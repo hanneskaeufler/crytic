@@ -37,6 +37,20 @@ module Crytic
           range_a == other.range_a &&
           range_b == other.range_b
       end
+
+      def prefix
+        append? ? '+'.colorize(:green).to_s : '-'.colorize(:red).to_s
+      end
+
+      def colored_data
+        data.map do |d|
+          d.colorize(append? ? :green : :red).to_s
+        end
+      end
+
+      def is_last_chunk?(a_size, b_size)
+        delete? ? range_a.end == a_size : range_b.end == b_size
+      end
     end
 
     enum Type
@@ -185,14 +199,11 @@ module Crytic
           add_with_prefix ' ', prv.data.last(n), group
         end
 
-        prefix = cur.append? ? '+'.colorize(:green).to_s : '-'.colorize(:red).to_s
-        add_with_prefix prefix, cur.data.map { |d| d.colorize(cur.append? ? :green : :red).to_s }, group
+        add_with_prefix cur.prefix, cur.colored_data, group
 
-        if !group.last.ends_with?(newline)
-          if cur.delete? ? cur.range_a.end == a.size : cur.range_b.end == b.size
-            group[-1] += newline
-            group.push "\\ No newline at end of file" + newline
-          end
+        if !group.last.ends_with?(newline) && cur.is_last_chunk?(a.size, b.size)
+          group[-1] += newline
+          group.push "\\ No newline at end of file#{newline}"
         end
 
         if nxt.no_change?
@@ -204,13 +215,7 @@ module Crytic
             start_a += 1 unless size_a == 0
             start_b += 1 unless size_b == 0
 
-            result.push String.build { |io|
-              io << "@@ -" << start_a
-              io << "," << size_a unless size_a == 1
-              io << " +" << start_b
-              io << "," << size_b unless size_b == 1
-              io << " @@" << newline
-            }
+            result.push(build_group_header(start_a, size_a, start_b, size_b))
             result += group
             group.clear
           else
@@ -220,6 +225,16 @@ module Crytic
       end
 
       result
+    end
+
+    private def self.build_group_header(start_a, size_a, start_b, size_b)
+      String.build do |io|
+        io << "@@ -" << start_a
+        io << "," << size_a unless size_a == 1
+        io << " +" << start_b
+        io << "," << size_b unless size_b == 1
+        io << " @@\n"
+      end
     end
 
     private def self.add_with_prefix(prefix, lines, to array)

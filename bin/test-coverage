@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -e
 echo "require \"./spec/**\"" > run_tests.cr && \
 crystal build run_tests.cr -D skip-integration && \
 kcov --clean --include-path=$(pwd)/src $(pwd)/coverage ./run_tests && \
