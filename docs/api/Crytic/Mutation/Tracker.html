@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.27.1">
+<meta name="generator" content="Crystal Docs 0.28.0">
 
 
 <link href="../../css/style.css" rel="stylesheet" type="text/css">
@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Runner::ArgumentValidator - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Mutation::Tracker - github.com/hanneskaeufler/crytic</title>
 </head>
 <body>
 
@@ -246,7 +246,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../../Crytic/Mutation.html">Mutation</a>
       
         <ul>
@@ -316,6 +316,11 @@
       
     </li>
   
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Tracker" data-name="crytic::mutation::tracker">
+      <a href="../../Crytic/Mutation/Tracker.html">Tracker</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -376,15 +381,10 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner" data-name="crytic::runner">
       <a href="../../Crytic/Runner.html">Runner</a>
       
         <ul>
-  
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/ArgumentValidator" data-name="crytic::runner::argumentvalidator">
-      <a href="../../Crytic/Runner/ArgumentValidator.html">ArgumentValidator</a>
-      
-    </li>
   
   <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Sequential" data-name="crytic::runner::sequential">
       <a href="../../Crytic/Runner/Sequential.html">Sequential</a>
@@ -408,6 +408,11 @@
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/SideEffects" data-name="crytic::sideeffects">
+      <a href="../../Crytic/SideEffects.html">SideEffects</a>
       
     </li>
   
@@ -440,11 +445,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Crytic::Runner::ArgumentValidator
+  <span class="kind">class</span> Crytic::Mutation::Tracker
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutation/Tracker.html">Crytic::Mutation::Tracker</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -458,12 +464,6 @@
 
 
 
-  <h2>Direct including types</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type"><a href="../../Crytic/Runner/Sequential.html">Crytic::Runner::Sequential</a></li>
-  
-  </ul>
 
 
 
@@ -471,8 +471,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/runner/argument_validator.cr#L2" target="_blank">
-        crytic/runner/argument_validator.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/tracker.cr#L5" target="_blank">
+        crytic/mutation/tracker.cr
       </a>
     
     <br/>
@@ -486,11 +486,61 @@
 
 
 
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#currently_tracked_count-instance-method" class="signature"><strong>#currently_tracked_count</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new_bag-instance-method" class="signature"><strong>#new_bag</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse_file_at_path%28file%2C%26block%29-instance-method" class="signature"><strong>#parse_file_at_path</strong>(file, &block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#register_file%28file%29-instance-method" class="signature"><strong>#register_file</strong>(file)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#required_files_for_id%28expansion_id%29-instance-method" class="signature"><strong>#required_files_for_id</strong>(expansion_id)</a>
+        
+      </li>
+    
+  </ul>
+
 
 
 
 
 <div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
   
 </div>
 
@@ -498,6 +548,89 @@
 
 
 
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="currently_tracked_count-instance-method">
+      <div class="signature">
+        
+        def <strong>currently_tracked_count</strong>
+
+        <a class="method-permalink" href="#currently_tracked_count-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/tracker.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new_bag-instance-method">
+      <div class="signature">
+        
+        def <strong>new_bag</strong>
+
+        <a class="method-permalink" href="#new_bag-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/tracker.cr#L17" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse_file_at_path(file,&amp;block)-instance-method">
+      <div class="signature">
+        
+        def <strong>parse_file_at_path</strong>(file, &block)
+
+        <a class="method-permalink" href="#parse_file_at_path%28file%2C%26block%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/tracker.cr#L28" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="register_file(file)-instance-method">
+      <div class="signature">
+        
+        def <strong>register_file</strong>(file)
+
+        <a class="method-permalink" href="#register_file%28file%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/tracker.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="required_files_for_id(expansion_id)-instance-method">
+      <div class="signature">
+        
+        def <strong>required_files_for_id</strong>(expansion_id)
+
+        <a class="method-permalink" href="#required_files_for_id%28expansion_id%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/tracker.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

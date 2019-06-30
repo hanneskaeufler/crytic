@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.27.1">
+<meta name="generator" content="Crystal Docs 0.28.0">
 
 
 <link href="../../css/style.css" rel="stylesheet" type="text/css">
@@ -316,6 +316,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Tracker" data-name="crytic::mutation::tracker">
+      <a href="../../Crytic/Mutation/Tracker.html">Tracker</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -381,11 +386,6 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/ArgumentValidator" data-name="crytic::runner::argumentvalidator">
-      <a href="../../Crytic/Runner/ArgumentValidator.html">ArgumentValidator</a>
-      
-    </li>
-  
   <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Sequential" data-name="crytic::runner::sequential">
       <a href="../../Crytic/Runner/Sequential.html">Sequential</a>
       
@@ -408,6 +408,11 @@
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/SideEffects" data-name="crytic::sideeffects">
+      <a href="../../Crytic/SideEffects.html">SideEffects</a>
       
     </li>
   
@@ -466,7 +471,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L7" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L6" target="_blank">
         crytic/mutation/inject_mutated_subject_into_specs.cr
       </a>
     
@@ -481,65 +486,13 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28path%2Csource%2Cmutated_subject%3AMutatedSubject%29-class-method" class="signature"><strong>.new</strong>(path, source, mutated_subject : MutatedSubject)</a>
+        <a href="#new%28path%2Csource%3AString%2Cmutated_subject%3AMutatedSubject%2Ctracker%3ATracker%29-class-method" class="signature"><strong>.new</strong>(path, source : String, mutated_subject : MutatedSubject, tracker : Tracker)</a>
         
       </li>
     
   </ul>
 
 
-
-  <h2>Class Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#already_parsed_file_name-class-method" class="signature"><strong>.already_parsed_file_name</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#file_list-class-method" class="signature"><strong>.file_list</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#parse_file%28file%2C%26block%29-class-method" class="signature"><strong>.parse_file</strong>(file, &block)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#project_path-class-method" class="signature"><strong>.project_path</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#project_path%3F-class-method" class="signature"><strong>.project_path?</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#register_file%28file%29-class-method" class="signature"><strong>.register_file</strong>(file)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#relative_path_to_project%28path%29-class-method" class="signature"><strong>.relative_path_to_project</strong>(path)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#require_expanders-class-method" class="signature"><strong>.require_expanders</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#reset-class-method" class="signature"><strong>.reset</strong></a>
-        
-          <div class="summary"><p>Because the class is used and instantiated multiple times, but these are class vars, they need to be reset :(</p></div>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -575,11 +528,6 @@
         <a href="#process-instance-method" class="signature"><strong>#process</strong></a>
         
           <div class="summary"><p>Inject in AST tree if required.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#source%3AString-instance-method" class="signature"><strong>#source</strong> : String</a>
         
       </li>
     
@@ -643,174 +591,24 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(path,source,mutated_subject:MutatedSubject)-class-method">
+    <div class="entry-detail" id="new(path,source:String,mutated_subject:MutatedSubject,tracker:Tracker)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(path, source, mutated_subject : <a href="../../Crytic/MutatedSubject.html">MutatedSubject</a>)
+        def self.<strong>new</strong>(path, source : String, mutated_subject : <a href="../../Crytic/MutatedSubject.html">MutatedSubject</a>, tracker : <a href="../../Crytic/Mutation/Tracker.html">Tracker</a>)
 
-        <a class="method-permalink" href="#new%28path%2Csource%2Cmutated_subject%3AMutatedSubject%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28path%2Csource%3AString%2Cmutated_subject%3AMutatedSubject%2Ctracker%3ATracker%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L45" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
-
-  <h2>Class Method Detail</h2>
-  
-    <div class="entry-detail" id="already_parsed_file_name-class-method">
-      <div class="signature">
-        
-        def self.<strong>already_parsed_file_name</strong>
-
-        <a class="method-permalink" href="#already_parsed_file_name-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L19" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="file_list-class-method">
-      <div class="signature">
-        
-        def self.<strong>file_list</strong>
-
-        <a class="method-permalink" href="#file_list-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L20" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="parse_file(file,&amp;block)-class-method">
-      <div class="signature">
-        
-        def self.<strong>parse_file</strong>(file, &block)
-
-        <a class="method-permalink" href="#parse_file%28file%2C%26block%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L38" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="project_path-class-method">
-      <div class="signature">
-        
-        def self.<strong>project_path</strong>
-
-        <a class="method-permalink" href="#project_path-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L28" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="project_path?-class-method">
-      <div class="signature">
-        
-        def self.<strong>project_path?</strong>
-
-        <a class="method-permalink" href="#project_path%3F-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L24" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="register_file(file)-class-method">
-      <div class="signature">
-        
-        def self.<strong>register_file</strong>(file)
-
-        <a class="method-permalink" href="#register_file%28file%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L28" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="relative_path_to_project(path)-class-method">
-      <div class="signature">
-        
-        def self.<strong>relative_path_to_project</strong>(path)
-
-        <a class="method-permalink" href="#relative_path_to_project%28path%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L33" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="require_expanders-class-method">
-      <div class="signature">
-        
-        def self.<strong>require_expanders</strong>
-
-        <a class="method-permalink" href="#require_expanders-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L21" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="reset-class-method">
-      <div class="signature">
-        
-        def self.<strong>reset</strong>
-
-        <a class="method-permalink" href="#reset-class-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Because the class is used and instantiated multiple times, but these are
-class vars, they need to be reset :(</p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L10" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
@@ -827,7 +625,7 @@ class vars, they need to be reset :(</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -843,7 +641,7 @@ class vars, they need to be reset :(</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L26" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -859,7 +657,7 @@ class vars, they need to be reset :(</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -875,7 +673,7 @@ class vars, they need to be reset :(</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L27" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -891,7 +689,7 @@ class vars, they need to be reset :(</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L27" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -909,23 +707,7 @@ class vars, they need to be reset :(</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L51" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="source:String-instance-method">
-      <div class="signature">
-        
-        def <strong>source</strong> : String
-
-        <a class="method-permalink" href="#source%3AString-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -941,7 +723,7 @@ class vars, they need to be reset :(</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L58" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L28" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -962,7 +744,7 @@ Then on finalization, we replace each require "xxx" by the proper file.</p></div
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L89" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L57" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -978,7 +760,7 @@ Then on finalization, we replace each require "xxx" by the proper file.</p></div
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L121" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutation/inject_mutated_subject_into_specs.cr#L89" target="_blank">View source</a>]
         
       </div>
     </div>

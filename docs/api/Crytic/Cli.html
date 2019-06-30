@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.27.1">
+<meta name="generator" content="Crystal Docs 0.28.0">
 
 
 <link href="../css/style.css" rel="stylesheet" type="text/css">
@@ -316,6 +316,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Tracker" data-name="crytic::mutation::tracker">
+      <a href="../Crytic/Mutation/Tracker.html">Tracker</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -381,11 +386,6 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/ArgumentValidator" data-name="crytic::runner::argumentvalidator">
-      <a href="../Crytic/Runner/ArgumentValidator.html">ArgumentValidator</a>
-      
-    </li>
-  
   <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Sequential" data-name="crytic::runner::sequential">
       <a href="../Crytic/Runner/Sequential.html">Sequential</a>
       
@@ -408,6 +408,11 @@
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/SideEffects" data-name="crytic::sideeffects">
+      <a href="../Crytic/SideEffects.html">SideEffects</a>
       
     </li>
   
@@ -466,7 +471,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/cli.cr#L8" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/cli.cr#L9" target="_blank">
         crytic/cli.cr
       </a>
     
@@ -481,7 +486,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28std_out%3AIO%2Cstd_err%3AIO%2Cexit_fun%3AInt32-%3E%2Cenv%3AHash%28String%2CString%29%29-class-method" class="signature"><strong>.new</strong>(std_out : IO, std_err : IO, exit_fun : Int32 -> , env : Hash(String, String))</a>
+        <a href="#new%28side_effects%3ASideEffects%29-class-method" class="signature"><strong>.new</strong>(side_effects : SideEffects)</a>
         
       </li>
     
@@ -532,18 +537,18 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(std_out:IO,std_err:IO,exit_fun:Int32-&gt;,env:Hash(String,String))-class-method">
+    <div class="entry-detail" id="new(side_effects:SideEffects)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(std_out : IO, std_err : IO, exit_fun : Int32 -> , env : Hash(String, String))
+        def self.<strong>new</strong>(side_effects : <a href="../Crytic/SideEffects.html">SideEffects</a>)
 
-        <a class="method-permalink" href="#new%28std_out%3AIO%2Cstd_err%3AIO%2Cexit_fun%3AInt32-%3E%2Cenv%3AHash%28String%2CString%29%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28side_effects%3ASideEffects%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/cli.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/cli.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -566,7 +571,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/f9d736c2e6be626a18fbb3072d7925298dac2767/src/crytic/cli.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/cli.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
