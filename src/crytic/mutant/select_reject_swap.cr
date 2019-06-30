@@ -7,16 +7,9 @@ module Crytic::Mutant
       super
       return node unless SelectRejectSwapPossibilities::SELECT_REJECT.includes?(node.name) &&
                          @location.matches?(node)
-      Crystal::Call.new(
-        node.obj,
-        node.name == "reject" ? "select" : "reject",
-        node.args,
-        node.block,
-        node.block_arg,
-        node.named_args,
-        node.global?,
-        node.name_column_number,
-        node.has_parentheses?)
+      new_node = node.clone
+      new_node.name = node.name == "reject" ? "select" : "reject"
+      new_node
     end
   end
 end

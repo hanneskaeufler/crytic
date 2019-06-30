@@ -25,7 +25,7 @@ module Crytic
       possibilities.locations.size.should eq 2
       possibilities.locations.first.line_number.should eq 1
       possibilities.locations.first.column_number.should eq 1
-      possibilities.locations.first.name_column_number.should eq 5
+      possibilities.locations.first.name_location.try(&.column_number).should eq 5
     end
   end
 end

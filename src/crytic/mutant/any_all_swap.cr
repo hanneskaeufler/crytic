@@ -6,16 +6,9 @@ module Crytic::Mutant
     def transform(node : Crystal::Call)
       super
       return node unless @location.matches?(node)
-      Crystal::Call.new(
-        node.obj,
-        node.name == "any?" ? "all?" : "any?",
-        node.args,
-        node.block,
-        node.block_arg,
-        node.named_args,
-        node.global?,
-        node.name_column_number,
-        node.has_parentheses?)
+      new_node = node.clone
+      new_node.name = node.name == "any?" ? "all?" : "any?"
+      new_node
     end
   end
 end

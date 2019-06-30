@@ -15,7 +15,7 @@ module Crytic::Mutant
       it "is nil by default" do
         full = FullLocation.at(nil, 1, 2)
 
-        full.name_column_number.should be_nil
+        full.name_location.should be_nil
       end
     end
   end

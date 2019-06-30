@@ -8,7 +8,7 @@ module Crytic::Mutant
       return true unless SELECT_REJECT.includes?(node.name)
       location = node.location
       unless location.nil?
-        @locations << FullLocation.new(location, node.name_column_number)
+        @locations << FullLocation.new(location, node.name_location)
       end
       true
     end
