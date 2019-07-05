@@ -10,17 +10,20 @@ module Crytic::Mutant
       new(Crystal::Location.new(filename, line_number, column_number), name_location)
     end
 
-    def matches?(node)
+    def matches?(node : Crystal::And | Crystal::Or)
       node_location = node.location
       return false if node_location.nil?
       return is_same(node_location, location) if name_location.nil?
 
-      case node
-      when Crystal::And | Crystal::Or
-        is_same(node_location, location) && is_same(node.end_location, name_location)
-      else
-        is_same(node_location, location) && is_same(node.name_location, name_location)
-      end
+      is_same(node_location, location) && is_same(node.end_location, name_location)
+    end
+
+    def matches?(node : Crystal::ASTNode)
+      node_location = node.location
+      return false if node_location.nil?
+      return is_same(node_location, location) if name_location.nil?
+
+      is_same(node_location, location) && is_same(node.name_location, name_location)
     end
 
     private def is_same(location : Crystal::Location, other : Crystal::Location) : Bool
