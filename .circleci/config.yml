@@ -3,7 +3,7 @@ version: 2
 jobs:
   test-crystal: &test-template
     docker:
-      - image: crystallang/crystal:0.29.0
+      - image: crystallang/crystal:0.31.1
     steps:
       - checkout
   test:
