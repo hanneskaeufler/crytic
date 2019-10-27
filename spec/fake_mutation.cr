@@ -16,7 +16,7 @@ class FakeMutation < Crytic::Mutation::Mutation
   def initialize(@reported_status = Crytic::Mutation::Status::Uncovered)
   end
 
-  def run
+  def run : Crytic::Mutation::Result
     @run_call_count += 1
     Crytic::Mutation::Result.new(@reported_status, irrelevant_mutant, "", "")
   end

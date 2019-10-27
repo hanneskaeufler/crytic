@@ -15,7 +15,7 @@ module Crytic::Generator
     )
     end
 
-    def mutations_for(sources : Array(Subject), specs : Array(String))
+    def mutations_for(sources : Array(Subject), specs : Array(String)) : Array(MutationSet)
       sources
         .map do |src|
           MutationSet.new(
