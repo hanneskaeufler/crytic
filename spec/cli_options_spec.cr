@@ -98,11 +98,19 @@ module Crytic
       end
       {% end %}
 
+      {% if Crystal::VERSION == "0.31.0" || Crystal::VERSION == "0.31.1" %}
+      it "defaults to a simple spec preamble" do
+        opts = cli_options_parser.parse([] of String)
+
+        opts.preamble.should eq "require \"spec\"\n\n"
+      end
+      {% else %}
       it "defaults to a fail fast preamble" do
         opts = cli_options_parser.parse([] of String)
 
         opts.preamble.should eq Generator::Generator::DEFAULT_PREAMBLE
       end
+      {% end %}
 
       {% for flag in ["-m", "--min-msi"] %}
       it "accepts a msi threshold with {{ flag.id }}" do

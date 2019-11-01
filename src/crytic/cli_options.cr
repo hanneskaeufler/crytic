@@ -2,6 +2,7 @@ require "./generator/generator"
 require "./mutant/possibilities"
 require "./reporter/*"
 require "./side_effects"
+require "colorize"
 require "option_parser"
 
 module Crytic
@@ -9,8 +10,8 @@ module Crytic
     DEFAULT_SPEC_FILES_GLOB = "./spec/**/*_spec.cr"
     getter msi_threshold = 100.0
     getter mutants : Array(Mutant::Possibilities) = Generator::Generator::ALL_MUTANTS
-    getter preamble = Generator::Generator::DEFAULT_PREAMBLE
     getter reporters = [] of Reporter::Reporter
+    @preamble = Generator::Generator::DEFAULT_PREAMBLE
     @spec_files = [] of String
     @subject = [] of String
 
@@ -85,6 +86,24 @@ module Crytic
       else
         @subject
       end.map { |path| Subject.from_filepath(path) }
+    end
+
+    def preamble
+      {% if Crystal::VERSION == "0.31.1" || Crystal::VERSION == "0.31.0" %}
+        if @preamble =~ /fail_fast/
+          puts(<<-MSG.colorize(:yellow))
+
+          ⚠️  You specified a preamble that uses Spec#fail_fast. Due to a bug
+             in crystal 0.31.0 and 0.31.1, the Spec#fail_fast mode cannot be
+             used in crytic. We disabled it for you. See
+             https://github.com/crystal-lang/crystal/issues/8420 for details.
+
+          MSG
+          return @preamble.gsub(/Spec\.fail_fast\s*=\s*true/, "")
+        end
+      {% end %}
+
+      @preamble
     end
 
     private def console_reporter
