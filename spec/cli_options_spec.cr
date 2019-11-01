@@ -101,7 +101,11 @@ module Crytic
       it "defaults to a fail fast preamble" do
         opts = cli_options_parser.parse([] of String)
 
-        opts.preamble.should eq Generator::Generator::DEFAULT_PREAMBLE
+        {% if Crystal::VERSION == "0.31.0" || Crystal::VERSION == "0.31.1" %}
+          opts.preamble.should eq "require \"spec\"\n\n"
+        {% else %}
+          opts.preamble.should eq Generator::Generator::DEFAULT_PREAMBLE
+        {% end %}
       end
 
       {% for flag in ["-m", "--min-msi"] %}

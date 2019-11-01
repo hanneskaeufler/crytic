@@ -8,7 +8,7 @@ module Crytic::Reporter
   class IoReporter < Reporter
     INDENT = "    "
 
-    def initialize(@io : IO, @start_time = Time.now)
+    def initialize(@io : IO, @start_time = Time.utc)
     end
 
     def report_original_result(original_result)
@@ -77,7 +77,7 @@ module Crytic::Reporter
     end
 
     private def elapsed_time
-      Time.now - @start_time
+      Time.utc - @start_time
     end
   end
 end

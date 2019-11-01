@@ -14,10 +14,10 @@ module Crytic::Mutation
 
     # Compiles the mutated source code into a binary and runs this binary,
     # recording exit code, stderr and stdout output.
-    def run
+    def run : Result
       mutated = @environment.perform_mutation
       process_result = run(mutated)
-      success_messages_in_output = /Finished/ =~ process_result[:output]
+      success_messages_in_output = /F/ =~ process_result[:output]
       status = if process_result[:exit_code] == ProcessRunner::SUCCESS
                  Status::Uncovered
                elsif process_result[:exit_code] == ProcessRunner::TIMEOUT
