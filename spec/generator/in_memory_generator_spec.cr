@@ -11,7 +11,8 @@ module Crytic::Generator
         subject = fixture_subject("non_empty_source_file.cr")
 
         mutations = InMemoryMutationsGenerator
-          .new([] of Mutant::Possibilities, preamble, fake_mutation_factory)
+          .new([] of Mutant::Possibilities,
+            preamble, fake_mutation_factory, side_effects)
           .mutations_for(subject, specs)
 
         mutations.should be_empty
@@ -21,7 +22,7 @@ module Crytic::Generator
         subject = fixture_subject("empty_source_file.cr")
 
         mutations = InMemoryMutationsGenerator
-          .new(InMemoryMutationsGenerator::ALL_MUTANTS, preamble, fake_mutation_factory)
+          .new(InMemoryMutationsGenerator::ALL_MUTANTS, preamble, fake_mutation_factory, side_effects)
           .mutations_for(subject, specs)
 
         mutations.should be_empty
@@ -33,7 +34,8 @@ module Crytic::Generator
         mutations = InMemoryMutationsGenerator.new(
           [Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities,
           preamble,
-          fake_mutation_factory)
+          fake_mutation_factory,
+          side_effects)
           .mutations_for(subject, specs)
 
         mutations.size.should eq 1
@@ -41,8 +43,8 @@ module Crytic::Generator
 
       it "passes along the preamble" do
         last_preamble = ""
-        factory = ->(config : Mutation::Config) {
-          last_preamble = config.preamble
+        factory = ->(env : Mutation::Environment) {
+          last_preamble = env.config.preamble
           FakeMutation.new.as(Mutation::Mutation)
         }
         subject = fixture_subject("non_empty_source_file.cr")
@@ -50,7 +52,8 @@ module Crytic::Generator
         generator = InMemoryMutationsGenerator.new(
           [Mutant::NumberLiteralSignFlipPossibilities.new] of Mutant::Possibilities,
           "preamble",
-          factory)
+          factory,
+          side_effects)
 
         generator.mutations_for(subject, specs)
 

@@ -49,13 +49,28 @@ def config(mutant, original, specs, preamble = "")
     mutant, Crytic::Subject.from_filepath(original), specs, preamble)
 end
 
+def side_effects(
+  process_runner = Crytic::FakeProcessRunner.new,
+  file_remover = ->FakeFile.delete(String),
+  tempfile_writer = ->FakeFile.tempfile(String, String, String)
+)
+  Crytic::SideEffects.new(
+    IO::Memory.new,
+    IO::Memory.new,
+    noop_exit_fun,
+    empty_env,
+    process_runner,
+    file_remover,
+    tempfile_writer)
+end
+
 def environment(
   config,
   process_runner = Crytic::FakeProcessRunner.new,
   file_remover = ->FakeFile.delete(String),
   tempfile_writer = ->FakeFile.tempfile(String, String, String)
 )
-  Crytic::Mutation::Environment.new(config, process_runner, file_remover, tempfile_writer)
+  Crytic::Mutation::Environment.new(config, side_effects(process_runner, file_remover, tempfile_writer))
 end
 
 def mutated_subject(path = "", original_source_code = "", source_code = "")
@@ -63,7 +78,11 @@ def mutated_subject(path = "", original_source_code = "", source_code = "")
 end
 
 def fake_mutation_factory
-  ->(_config : Crytic::Mutation::Config) { fake_mutation }
+  ->(_env : Crytic::Mutation::Environment) { fake_mutation }
+end
+
+def empty_env
+  {} of String => String
 end
 
 def fake_env
@@ -79,4 +98,23 @@ def fake_no_mutation_factory
   ->(specs : Array(String)) {
     Crytic::Mutation::NoMutation.with(specs, Crytic::FakeProcessRunner.new)
   }
+end
+
+def noop_exit_fun
+  ->(_code : Int32) {}
+end
+
+def cli_options_parser(
+  std_out = IO::Memory.new,
+  std_err = IO::Memory.new,
+  exit_fun = noop_exit_fun,
+  env = fake_env,
+  spec_files_glob = Crytic::CliOptions::DEFAULT_SPEC_FILES_GLOB
+)
+  Crytic::CliOptions.new(Crytic::SideEffects.new(
+    std_out, std_err, exit_fun, env,
+    Crytic::FakeProcessRunner.new,
+    ->FakeFile.delete(String),
+    ->FakeFile.tempfile(String, String, String)
+  ), spec_files_glob)
 end

@@ -1,5 +1,6 @@
 require "./crytic/cli"
 require "./crytic/side_effects"
+require "./crytic/process_process_runner"
 
 success = !Crytic::Cli
   .new(Crytic::SideEffects.new(STDOUT, STDERR, ->(code : Int32) { exit(code) }, {
@@ -9,7 +10,11 @@ success = !Crytic::Cli
     "CIRCLE_PROJECT_REPONAME"   => ENV["CIRCLE_PROJECT_REPONAME"]? || "",
     "CIRCLE_PROJECT_USERNAME"   => ENV["CIRCLE_PROJECT_USERNAME"]? || "",
     "STRYKER_DASHBOARD_API_KEY" => ENV["STRYKER_DASHBOARD_API_KEY"]? || "",
-  }))
+  }, Crytic::ProcessProcessRunner.new,
+    ->File.delete(String),
+    ->(name : String, extension : String, content : String) {
+      File.tempfile(name, extension) { |file| file.print(content) }.path
+    }))
   .run(ARGV)
 
 exit(success.to_unsafe)
