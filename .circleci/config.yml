@@ -19,6 +19,14 @@ jobs:
     steps:
       - checkout
       - run: shards
+      - run: SPEC_VERBOSE=1 ./bin/test
+  test-crystal-0.32.0:
+    <<: *test-template
+    docker:
+      - image: crystallang/crystal:0.32.0
+    steps:
+      - checkout
+      - run: shards
       - run: ./bin/ci
   test-coverage:
     docker:
@@ -37,6 +45,7 @@ workflows:
   version: 2
   ci:
     jobs:
+      - test-crystal-0.32.0
       - test-crystal-0.31.1
       - test-crystal-0.30.1
   nightly:
@@ -47,6 +56,7 @@ workflows:
             branches:
               only: master
     jobs:
+      - test-crystal-0.32.0
       - test-crystal-0.31.1
       - test-crystal-0.30.1
       - test-mutations
