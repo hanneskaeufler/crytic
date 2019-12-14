@@ -1,4 +1,5 @@
-require "../mutation/config"
+require "../mutation/environment"
+require "../side_effects"
 require "../subject"
 require "./generator"
 require "compiler/crystal/syntax/*"
@@ -6,12 +7,13 @@ require "compiler/crystal/syntax/*"
 module Crytic::Generator
   # Determines all possible mutations for the given source files.
   class InMemoryMutationsGenerator < Generator
-    alias MutationFactory = Mutation::Config -> Mutation::Mutation
+    alias MutationFactory = Mutation::Environment -> Mutation::Mutation
 
     def initialize(
       @possibilities : Array(Mutant::Possibilities),
       @preamble : String,
-      @mutation_factory : MutationFactory
+      @mutation_factory : MutationFactory,
+      @side_effects : SideEffects
     )
     end
 
@@ -27,7 +29,7 @@ module Crytic::Generator
     end
 
     private def noop_mutation_for(subject, specs) : Mutation::Mutation
-      @mutation_factory.call(Mutation::Config.noop(subject.path, specs, @preamble))
+      @mutation_factory.call(env(Mutation::Config.noop(subject.path, specs, @preamble)))
     end
 
     private def mutations_for(subject : Subject, specs : Array(String))
@@ -35,11 +37,15 @@ module Crytic::Generator
         .inspect(@possibilities)
         .map do |possibilities|
           possibilities.locations.map do |location|
-            @mutation_factory.call(Mutation::Config.new(
-              possibilities.mutant_class.at(location), subject, specs, @preamble))
+            @mutation_factory.call(env(Mutation::Config.new(
+              possibilities.mutant_class.at(location), subject, specs, @preamble)))
           end
         end
         .flatten
+    end
+
+    private def env(config)
+      Mutation::Environment.new(config, @side_effects)
     end
   end
 end

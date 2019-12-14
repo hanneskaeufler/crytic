@@ -153,18 +153,3 @@ module Crytic
     end
   end
 end
-
-private def noop_exit_fun
-  ->(_code : Int32) {}
-end
-
-private def cli_options_parser(
-  std_out = IO::Memory.new,
-  std_err = IO::Memory.new,
-  exit_fun = noop_exit_fun,
-  env = fake_env,
-  spec_files_glob = Crytic::CliOptions::DEFAULT_SPEC_FILES_GLOB
-)
-  Crytic::CliOptions.new(Crytic::SideEffects.new(
-    std_out, std_err, exit_fun, env), spec_files_glob)
-end

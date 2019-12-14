@@ -1,5 +1,4 @@
 require "../mutant/mutant"
-require "../process_process_runner"
 require "../process_runner"
 require "../subject"
 require "./environment"
@@ -31,7 +30,7 @@ module Crytic::Mutation
       Result.new(status, @environment.mutant, mutated.diff, process_result[:output])
     end
 
-    def self.with(environment)
+    def self.with(environment : Environment)
       new(environment)
     end
 
