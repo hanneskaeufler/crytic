@@ -1,9 +1,5 @@
-require "../generator/generator"
-require "../msi_calculator"
-require "../mutation/no_mutation"
 require "../mutation/result"
 require "../mutation/result_set"
-require "../reporter/reporter"
 require "./run"
 
 module Crytic::Runner
