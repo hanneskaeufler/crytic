@@ -6,7 +6,6 @@ require "./fake_generator"
 require "./fake_http_client"
 require "./fake_mutation"
 require "./fake_process_runner"
-require "./fake_reporter"
 require "compiler/crystal/syntax/*"
 require "spec"
 
