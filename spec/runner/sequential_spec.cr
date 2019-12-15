@@ -19,6 +19,13 @@ module Crytic::Runner
         Sequential.new.run(run, side_effects).should eq false
       end
 
+      it "returns false if the original spec suite fails" do
+        run = FakeRun.new
+        run.original_exit_code = 1
+
+        Sequential.new.run(run, side_effects).should eq false
+      end
+
       it "reports neutral results before mutation results" do
         run = FakeRun.new
         run.mutations = [FakeMutation.new.as(Crytic::Mutation::Mutation)]
@@ -31,8 +38,8 @@ module Crytic::Runner
       it "skips the mutations if the neutral result errored" do
         run = FakeRun.new
         mutation = fake_mutation
+        run.neutral = FakeMutation.new(Crytic::Mutation::Status::Errored)
         run.mutations = [mutation]
-        run.original_exit_code = 1
 
         Sequential.new.run(run, side_effects)
 
@@ -48,11 +55,10 @@ private class FakeRun
   property events = [] of String
   property original_exit_code = 0
   property final_result = true
+  property neutral = FakeMutation.new.as(Crytic::Mutation::Mutation)
 
   def generate_mutations
-    [Crytic::Generator::MutationSet.new(
-      neutral: FakeMutation.new.as(Crytic::Mutation::Mutation),
-      mutated: mutations)]
+    [Crytic::Generator::MutationSet.new(neutral, mutations)]
   end
 
   def report_neutral_result(result)
