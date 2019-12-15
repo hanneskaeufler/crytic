@@ -14,8 +14,8 @@ class Crytic::Command::Test
     generator = build_generator(options)
 
     Crytic::Runner::Sequential
-      .new(Crytic::Runner::Run.from_options(options), generator)
-      .run
+      .new(generator)
+      .run(Crytic::Runner::Run.from_options(options))
   end
 
   private def parse_options(args)
