@@ -16,11 +16,15 @@ module Crytic::Runner
     end
 
     def execute_original_test_suite(side_effects)
-      no_mutation_factory.call(spec_files).run(side_effects)
+      original_result = no_mutation_factory.call(spec_files).run(side_effects)
+      report_original_result(original_result)
+      original_result
     end
 
     def generate_mutations
-      generator.mutations_for(subjects, spec_files)
+      mutations = generator.mutations_for(subjects, spec_files)
+      report_mutations(mutations)
+      mutations
     end
 
     {% for method in [:original_result, :mutations, :neutral_result, :result, :msi, :summary] %}

@@ -9,26 +9,14 @@ require "./run"
 module Crytic::Runner
   class Sequential
     def run(run, side_effects) : Bool
-      original_result = run_original_test_suite(run, side_effects)
+      original_result = run.execute_original_test_suite(side_effects)
 
       return false unless original_result.successful?
 
-      mutations = determine_possible_mutations(run)
+      mutations = run.generate_mutations
       results = Mutation::ResultSet.new(run_all_mutations(mutations, run))
 
       run.report_final(results)
-    end
-
-    private def run_original_test_suite(run, side_effects)
-      original_result = run.execute_original_test_suite(side_effects)
-      run.report_original_result(original_result)
-      original_result
-    end
-
-    private def determine_possible_mutations(run)
-      mutations = run.generate_mutations
-      run.report_mutations(mutations)
-      mutations
     end
 
     private def run_mutations_for_single_subject(mutation_set, run)
