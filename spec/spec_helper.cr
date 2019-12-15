@@ -50,14 +50,17 @@ def config(mutant, original, specs, preamble = "")
 end
 
 def side_effects(
+  stdout = IO::Memory.new,
+  stderr = IO::Memory.new,
+  exit_fun = noop_exit_fun,
   process_runner = Crytic::FakeProcessRunner.new,
   file_remover = ->FakeFile.delete(String),
   tempfile_writer = ->FakeFile.tempfile(String, String, String)
 )
   Crytic::SideEffects.new(
-    IO::Memory.new,
-    IO::Memory.new,
-    noop_exit_fun,
+    stdout,
+    stderr,
+    exit_fun,
     empty_env,
     process_runner,
     file_remover,
@@ -70,7 +73,7 @@ def environment(
   file_remover = ->FakeFile.delete(String),
   tempfile_writer = ->FakeFile.tempfile(String, String, String)
 )
-  Crytic::Mutation::Environment.new(config, side_effects(process_runner, file_remover, tempfile_writer))
+  Crytic::Mutation::Environment.new(config, side_effects(process_runner: process_runner, file_remover: file_remover, tempfile_writer: tempfile_writer))
 end
 
 def mutated_subject(path = "", original_source_code = "", source_code = "")

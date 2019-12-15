@@ -6,9 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
-- Crystal 0.31.x compatibility (no changes were needed for crystal 0.30.x). Be careful
-  with crystal 0.31.0 and 0.31.1 because there is a bug that might cause your CI job
-  to pass even with failing tests. See [#8420](https://github.com/crystal-lang/crystal/issues/8420).
+### Added
+
+- New command `crytic noop` to output the code as crytic would run it. This helps with debugging, e.g. `crytic noop | crystal eval`
+- Crystal 0.31.x compatibility (no changes were needed for crystal 0.30.x). Be careful with crystal 0.31.0 and 0.31.1 because there is a bug that might cause your CI job to pass even with failing tests. See [#8420](https://github.com/crystal-lang/crystal/issues/8420).
 
 ## [6.0.0] - 2019-06-30
 
