@@ -5,13 +5,12 @@ module Crytic::Runner
   alias NoMutationFactory = (Array(String)) -> Mutation::NoMutation
 
   record Run,
-      msi_threshold : Float64,
-      reporters : Array(Crytic::Reporter::Reporter),
-      spec_files : Array(String),
-      subjects : Array(Subject),
-      generator : Generator::Generator,
-      no_mutation_factory : NoMutationFactory do
-
+    msi_threshold : Float64,
+    reporters : Array(Crytic::Reporter::Reporter),
+    spec_files : Array(String),
+    subjects : Array(Subject),
+    generator : Generator::Generator,
+    no_mutation_factory : NoMutationFactory do
     def self.from_options(options, generator, no_mutation_factory)
       new(options.msi_threshold, options.reporters, options.spec_files, options.subject, generator, no_mutation_factory)
     end

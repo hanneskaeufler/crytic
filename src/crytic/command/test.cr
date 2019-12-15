@@ -13,7 +13,7 @@ class Crytic::Command::Test
     options = parse_options(args)
     generator = build_generator(options)
     factory = ->(specs : Array(String)) {
-        Mutation::NoMutation.with(specs)
+      Mutation::NoMutation.with(specs)
     }
 
     Crytic::Runner::Sequential

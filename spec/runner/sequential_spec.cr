@@ -11,12 +11,12 @@ module Crytic::Runner
     describe "#run" do
       it "returns false if threshold ain't reached" do
         run = Run.new(
-            msi_threshold: 100.0,
-            reporters: [] of Crytic::Reporter::Reporter,
-            subjects: subjects(["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"]),
-            spec_files: ["./fixtures/simple/bar_spec.cr"],
-              generator: FakeGenerator.new,
-              no_mutation_factory: fake_no_mutation_factory
+          msi_threshold: 100.0,
+          reporters: [] of Crytic::Reporter::Reporter,
+          subjects: subjects(["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"]),
+          spec_files: ["./fixtures/simple/bar_spec.cr"],
+          generator: FakeGenerator.new,
+          no_mutation_factory: fake_no_mutation_factory
         )
 
         Sequential.new.run(run, side_effects).should eq false
@@ -26,15 +26,15 @@ module Crytic::Runner
         process_runner = Crytic::FakeProcessRunner.new
         process_runner.exit_code = [1, 0]
         run = Run.new(
-            msi_threshold: 100.0,
-            reporters: [] of Crytic::Reporter::Reporter,
-            subjects: subjects(["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"]),
-            spec_files: ["./fixtures/simple/bar_spec.cr"],
-            generator: FakeGenerator.new,
-            no_mutation_factory: ->(specs : Array(String)) {
-                no_mutation = Crytic::Mutation::NoMutation.with(specs)
-                no_mutation
-            }
+          msi_threshold: 100.0,
+          reporters: [] of Crytic::Reporter::Reporter,
+          subjects: subjects(["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"]),
+          spec_files: ["./fixtures/simple/bar_spec.cr"],
+          generator: FakeGenerator.new,
+          no_mutation_factory: ->(specs : Array(String)) {
+            no_mutation = Crytic::Mutation::NoMutation.with(specs)
+            no_mutation
+          }
         )
 
         Sequential.new.run(run, side_effects(process_runner: process_runner)).should eq false
@@ -43,12 +43,12 @@ module Crytic::Runner
       it "reports events in order" do
         reporter = FakeReporter.new
         run = Run.new(
-            msi_threshold: 100.0,
-            reporters: [reporter] of Crytic::Reporter::Reporter,
-            subjects: subjects(["./fixtures/simple/bar.cr"]),
-            spec_files: ["./fixtures/simple/bar_spec.cr"],
-            generator: FakeGenerator.new([fake_mutation]),
-            no_mutation_factory: fake_no_mutation_factory
+          msi_threshold: 100.0,
+          reporters: [reporter] of Crytic::Reporter::Reporter,
+          subjects: subjects(["./fixtures/simple/bar.cr"]),
+          spec_files: ["./fixtures/simple/bar_spec.cr"],
+          generator: FakeGenerator.new([fake_mutation]),
+          no_mutation_factory: fake_no_mutation_factory
         )
 
         Sequential.new.run(run, side_effects)
@@ -60,14 +60,14 @@ module Crytic::Runner
         reporter = FakeReporter.new
         mutation = fake_mutation
         run = Run.new(
-            msi_threshold: 100.0,
-            reporters: [reporter] of Crytic::Reporter::Reporter,
-            subjects: subjects(["./fixtures/simple/bar.cr"]),
-            spec_files: ["./fixtures/simple/bar_spec.cr"],
-            generator: FakeGenerator.new(
-                neutral: erroring_mutation,
-                mutations: [mutation]),
-            no_mutation_factory: fake_no_mutation_factory
+          msi_threshold: 100.0,
+          reporters: [reporter] of Crytic::Reporter::Reporter,
+          subjects: subjects(["./fixtures/simple/bar.cr"]),
+          spec_files: ["./fixtures/simple/bar_spec.cr"],
+          generator: FakeGenerator.new(
+            neutral: erroring_mutation,
+            mutations: [mutation]),
+          no_mutation_factory: fake_no_mutation_factory
         )
 
         Sequential.new.run(run, side_effects)
