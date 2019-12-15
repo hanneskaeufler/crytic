@@ -8,7 +8,6 @@ module Crytic
     end
 
     def run(args)
-      args = args.tap(&.shift) if args.first? == "test"
       case args.first?
       when "test"
         Command::Test.new(@side_effects).execute(args.tap(&.shift))
