@@ -28,6 +28,7 @@ class Crytic::Command::Test
     Crytic::Generator::InMemoryMutationsGenerator.new(
       options.mutants,
       options.preamble,
-      ->Crytic::Generator.isolated_mutation_factory(Crytic::Mutation::Config))
+      ->Crytic::Generator.isolated_mutation_factory(Crytic::Mutation::Environment),
+      @side_effects)
   end
 end

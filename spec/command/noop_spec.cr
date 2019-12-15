@@ -8,9 +8,7 @@ module Crytic::Command
     exit_fun = ->(_code : Int32) {},
     spec_files_glob = Noop::DEFAULT_SPEC_FILES_GLOB
   )
-    Noop.new(
-      SideEffects.new(stdout, stderr, exit_fun, Hash(String, String).new),
-      spec_files_glob)
+    Noop.new(side_effects(stdout, stderr, exit_fun), spec_files_glob)
   end
 
   describe Noop do
