@@ -4,15 +4,14 @@ require "../mutation/no_mutation"
 require "../mutation/result"
 require "../mutation/result_set"
 require "../reporter/reporter"
+require "./run"
 
 module Crytic::Runner
   class Sequential
-    alias Threshold = Float64
     alias NoMutationFactory = (Array(String)) -> Mutation::NoMutation
 
     def initialize(
-      @threshold : Threshold,
-      @reporters : Array(Reporter::Reporter),
+      @run : Run,
       @generator : Generator::Generator,
       @no_mutation_factory : NoMutationFactory = ->(specs : Array(String)) {
         Mutation::NoMutation.with(specs, ProcessProcessRunner.new)
@@ -20,36 +19,33 @@ module Crytic::Runner
     )
     end
 
-    def run(subjects : Array(Subject), specs : Array(String)) : Bool
-      original_result = run_original_test_suite(specs)
+    def run : Bool
+      original_result = run_original_test_suite(@run.spec_files)
 
       return false unless original_result.successful?
 
-      mutations = determine_possible_mutations(subjects, specs)
+      mutations = determine_possible_mutations(@run.subjects, @run.spec_files)
       results = Mutation::ResultSet.new(run_all_mutations(mutations))
 
-      @reporters.each(&.report_summary(results))
-      @reporters.each(&.report_msi(results))
-
-      !results.empty? && MsiCalculator.new(results).msi.passes?(@threshold)
+      @run.report_final(results)
     end
 
     private def run_original_test_suite(specs)
       original_result = @no_mutation_factory.call(specs).run
-      @reporters.each(&.report_original_result(original_result))
+      @run.report_original_result(original_result)
       original_result
     end
 
     private def determine_possible_mutations(subject, specs)
       mutations = @generator.mutations_for(subject, specs)
-      @reporters.each(&.report_mutations(mutations))
+      @run.report_mutations(mutations)
       mutations
     end
 
     private def run_mutations_for_single_subject(mutation_set)
       mutation_set.mutated.map do |mutation|
         result = mutation.run
-        @reporters.each(&.report_result(result))
+        @run.report_result(result)
         result
       end
     end
@@ -61,7 +57,7 @@ module Crytic::Runner
     private def run_all_mutations(mutations)
       mutations.map do |mutation_set|
         neutral_result = mutation_set.neutral.run
-        @reporters.each(&.report_neutral_result(neutral_result))
+        @run.report_neutral_result(neutral_result)
 
         if neutral_result.errored?
           discard_further_mutations_for_single_subject
