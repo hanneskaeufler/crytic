@@ -78,10 +78,3 @@ module Crytic::Runner
     end
   end
 end
-
-private def runner
-  Crytic::Runner::Sequential.new(
-    threshold: 100.0,
-    reporters: [] of Crytic::Reporter::Reporter,
-    generator: FakeGenerator.new)
-end
