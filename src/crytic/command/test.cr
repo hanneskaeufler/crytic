@@ -12,10 +12,13 @@ class Crytic::Command::Test
   def execute(args)
     options = parse_options(args)
     generator = build_generator(options)
+    factory = ->(specs : Array(String)) {
+        Mutation::NoMutation.with(specs)
+    }
 
     Crytic::Runner::Sequential
-      .new(generator)
-      .run(Crytic::Runner::Run.from_options(options))
+      .new
+      .run(Crytic::Runner::Run.from_options(options, generator, factory), @side_effects)
   end
 
   private def parse_options(args)

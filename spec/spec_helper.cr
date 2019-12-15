@@ -99,7 +99,7 @@ end
 
 def fake_no_mutation_factory
   ->(specs : Array(String)) {
-    Crytic::Mutation::NoMutation.with(specs, Crytic::FakeProcessRunner.new)
+    Crytic::Mutation::NoMutation.with(specs)
   }
 end
 

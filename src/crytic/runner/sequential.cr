@@ -8,18 +8,8 @@ require "./run"
 
 module Crytic::Runner
   class Sequential
-    alias NoMutationFactory = (Array(String)) -> Mutation::NoMutation
-
-    def initialize(
-      @generator : Generator::Generator,
-      @no_mutation_factory : NoMutationFactory = ->(specs : Array(String)) {
-        Mutation::NoMutation.with(specs, ProcessProcessRunner.new)
-      }
-    )
-    end
-
-    def run(run) : Bool
-      original_result = run_original_test_suite(run)
+    def run(run, side_effects) : Bool
+      original_result = run_original_test_suite(run, side_effects)
 
       return false unless original_result.successful?
 
@@ -29,14 +19,14 @@ module Crytic::Runner
       run.report_final(results)
     end
 
-    private def run_original_test_suite(run)
-      original_result = @no_mutation_factory.call(run.spec_files).run
+    private def run_original_test_suite(run, side_effects)
+      original_result = run.execute_original_test_suite(side_effects)
       run.report_original_result(original_result)
       original_result
     end
 
     private def determine_possible_mutations(run)
-      mutations = @generator.mutations_for(run.subjects, run.spec_files)
+      mutations = run.generate_mutations
       run.report_mutations(mutations)
       mutations
     end

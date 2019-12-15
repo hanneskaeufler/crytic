@@ -5,7 +5,7 @@ describe Crytic::Runner::Run do
   it "is just another wrapper for options" do
     opts = Opts.new(99.0, [] of Crytic::Reporter::Reporter, [] of String, [] of Crytic::Subject)
 
-    Crytic::Runner::Run.from_options(opts).msi_threshold.should eq 99.0
+    Crytic::Runner::Run.from_options(opts, FakeGenerator.new, fake_no_mutation_factory).msi_threshold.should eq 99.0
   end
 end
 
