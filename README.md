@@ -37,21 +37,28 @@ After `shards install`, this will place the `crytic` executable into the `bin/` 
 
 ## Usage
 
-Running crytic without any arguments will mutate all of the source files found by `src/**/*.cr` and use the test-suite containing `spec/**/*_spec.cr`. Depending on the size of your project and the duration of a full `crystal spec`, this might take quite a bit of time.
+Crytic understands two commands: `test` and `noop`.
+
+Running `crytic test` without further arguments will mutate all of the source files found by `src/**/*.cr` and use the test-suite containing `spec/**/*_spec.cr`. Depending on the size of your project and the duration of a full `crystal spec`, this might take quite a bit of time.
 
 ```shell
-./bin/crytic
+./bin/crytic test
 ```
 
 Crytic can also be run to only mutate statements in one file, let's call that our subject, or `--subject` in the command line interface. You can also provide a list of test files to be executed in order to find the defects. This might be helpful to exclude certain long-running integration specs in order to speed up the test suite.
 
 ```shell
-./bin/crytic --subject src/blog/pages/archive.cr spec/blog_spec.cr spec/blog/pages/archive_spec.cr
+./bin/crytic test --subject src/blog/pages/archive.cr spec/blog_spec.cr spec/blog/pages/archive_spec.cr
 ```
 
 The above command determines a list of mutations that can be performed on the source code of `archive.cr` and joins the `blog_spec.cr` and `archive_spec.cr` as a test-suite to find suriving mutants.
 
+Running `./bin/crytic noop` will output the source code as if crytic applied a no-operation mutation. This can help with debugging crytic bugs by
+executing e.g. `./bin/crytic noop | crystal eval`.
+
 ### CLI options
+
+#### For "test" command
 
 `--subject`/`-s` specifies a relative filepath to the sourcecode being mutated.
 
@@ -62,6 +69,10 @@ The above command determines a list of mutations that can be performed on the so
 `--reporters/-r` specifies which reporters to enable via a comma separated list. Reporters `Console`, `Stryker` and `ConsoleFileSummary` exist. `Console` is enabled by default if the option is omitted.
 
 The rest of the unnamed positional arguments are relative filepaths to the specs to be run.
+
+#### For "noop" command
+
+All unnamed positional arguments are relative filepaths to the specs source code to be printed.
 
 ### How to read the output
 
