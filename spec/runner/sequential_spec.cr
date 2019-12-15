@@ -9,72 +9,65 @@ module Crytic::Runner
 
   describe Sequential do
     describe "#run" do
-      it "returns false if threshold ain't reached" do
-        run = Run.new(
-          msi_threshold: 100.0,
-          reporters: [] of Crytic::Reporter::Reporter,
-          subjects: subjects(["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"]),
-          spec_files: ["./fixtures/simple/bar_spec.cr"],
-          generator: FakeGenerator.new,
-          no_mutation_factory: fake_no_mutation_factory
-        )
+      it "returns the runs final result" do
+        run = FakeRun.new
+        run.final_result = true
 
+        Sequential.new.run(run, side_effects).should eq true
+
+        run.final_result = false
         Sequential.new.run(run, side_effects).should eq false
       end
 
-      it "doesn't execute mutations if the initial suite run fails" do
-        process_runner = Crytic::FakeProcessRunner.new
-        process_runner.exit_code = [1, 0]
-        run = Run.new(
-          msi_threshold: 100.0,
-          reporters: [] of Crytic::Reporter::Reporter,
-          subjects: subjects(["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"]),
-          spec_files: ["./fixtures/simple/bar_spec.cr"],
-          generator: FakeGenerator.new,
-          no_mutation_factory: ->(specs : Array(String)) {
-            no_mutation = Crytic::Mutation::NoMutation.with(specs)
-            no_mutation
-          }
-        )
-
-        Sequential.new.run(run, side_effects(process_runner: process_runner)).should eq false
-      end
-
-      it "reports events in order" do
-        reporter = FakeReporter.new
-        run = Run.new(
-          msi_threshold: 100.0,
-          reporters: [reporter] of Crytic::Reporter::Reporter,
-          subjects: subjects(["./fixtures/simple/bar.cr"]),
-          spec_files: ["./fixtures/simple/bar_spec.cr"],
-          generator: FakeGenerator.new([fake_mutation]),
-          no_mutation_factory: fake_no_mutation_factory
-        )
+      it "reports neutral results before mutation results" do
+        run = FakeRun.new
+        run.mutations = [FakeMutation.new.as(Crytic::Mutation::Mutation)]
 
         Sequential.new.run(run, side_effects)
 
-        reporter.events.should eq ["report_original_result", "report_mutations", "report_neutral_result", "report_result", "report_summary", "report_msi"]
+        run.events.should eq ["report_neutral_result", "report_result"]
       end
 
       it "skips the mutations if the neutral result errored" do
-        reporter = FakeReporter.new
+        run = FakeRun.new
         mutation = fake_mutation
-        run = Run.new(
-          msi_threshold: 100.0,
-          reporters: [reporter] of Crytic::Reporter::Reporter,
-          subjects: subjects(["./fixtures/simple/bar.cr"]),
-          spec_files: ["./fixtures/simple/bar_spec.cr"],
-          generator: FakeGenerator.new(
-            neutral: erroring_mutation,
-            mutations: [mutation]),
-          no_mutation_factory: fake_no_mutation_factory
-        )
+        run.mutations = [mutation]
+        run.original_exit_code = 1
 
         Sequential.new.run(run, side_effects)
 
-        reporter.events.should_not contain("report_result")
+        run.events.should_not contain("report_result")
         mutation.as(FakeMutation).run_call_count.should eq 0
       end
     end
+  end
+end
+
+private class FakeRun
+  property mutations = [] of Crytic::Mutation::Mutation
+  property events = [] of String
+  property original_exit_code = 0
+  property final_result = true
+
+  def generate_mutations
+    [Crytic::Generator::MutationSet.new(
+      neutral: FakeMutation.new.as(Crytic::Mutation::Mutation),
+      mutated: mutations)]
+  end
+
+  def report_neutral_result(result)
+    events << "report_neutral_result"
+  end
+
+  def report_result(result)
+    events << "report_result"
+  end
+
+  def report_final(results)
+    final_result
+  end
+
+  def execute_original_test_suite(side_effects)
+    Crytic::Mutation::OriginalResult.new(exit_code: original_exit_code, output: "")
   end
 end
