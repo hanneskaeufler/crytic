@@ -1,3 +1,4 @@
+require "../mutation/no_mutation"
 require "../reporter/reporter"
 require "../subject"
 
