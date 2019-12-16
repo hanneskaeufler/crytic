@@ -6,18 +6,18 @@ module Crytic::Mutation
     describe "#run" do
       it "runs crystal spec with a single spec file" do
         fake = FakeProcessRunner.new
-        mutation = NoMutation.with(["./single/test_spec.cr"], fake)
+        mutation = NoMutation.with(["./single/test_spec.cr"])
 
-        mutation.run
+        mutation.run(side_effects(process_runner: fake))
 
         fake.cmd_with_args.last.should eq "crystal spec ./single/test_spec.cr"
       end
 
       it "runs crystal spec with multiple spec files" do
         fake = FakeProcessRunner.new
-        mutation = NoMutation.with(["./a/b_spec.cr", "./a/c_spec.cr"], fake)
+        mutation = NoMutation.with(["./a/b_spec.cr", "./a/c_spec.cr"])
 
-        mutation.run
+        mutation.run(side_effects(process_runner: fake))
 
         fake.cmd_with_args.last.should eq "crystal spec ./a/b_spec.cr ./a/c_spec.cr"
       end

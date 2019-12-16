@@ -10,4 +10,6 @@ module Crytic::Reporter
     abstract def report_summary(results : Mutation::ResultSet)
     abstract def report_msi(results : Mutation::ResultSet)
   end
+
+  alias Reporters = Array(Reporter)
 end

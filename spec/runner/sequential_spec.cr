@@ -9,73 +9,71 @@ module Crytic::Runner
 
   describe Sequential do
     describe "#run" do
-      it "takes a list of subjects" do
-        reporter = FakeReporter.new
-        runner = Sequential.new(
-          threshold: 100.0,
-          generator: FakeGenerator.new,
-          reporters: [reporter] of Crytic::Reporter::Reporter,
-          no_mutation_factory: fake_no_mutation_factory)
+      it "returns the runs final result" do
+        run = FakeRun.new
+        run.final_result = true
 
-        runner.run(
-          subjects(["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"]),
-          ["./fixtures/simple/bar_spec.cr"]).should eq false
+        Sequential.new.run(run, side_effects).should eq true
+
+        run.final_result = false
+        Sequential.new.run(run, side_effects).should eq false
       end
 
-      it "doesn't execute mutations if the initial suite run fails" do
-        reporter = FakeReporter.new
-        runner = Sequential.new(
-          threshold: 100.0,
-          generator: FakeGenerator.new,
-          reporters: [reporter] of Crytic::Reporter::Reporter,
-          no_mutation_factory: ->(specs : Array(String)) {
-            process_runner = Crytic::FakeProcessRunner.new
-            no_mutation = Crytic::Mutation::NoMutation.with(specs, process_runner)
-            process_runner.exit_code = [1, 0]
-            no_mutation
-          })
+      it "returns false if the original spec suite fails" do
+        run = FakeRun.new
+        run.original_exit_code = 1
 
-        runner.run(
-          subjects(["./fixtures/require_order/blog.cr", "./fixtures/require_order/pages/blog/archive.cr"]),
-          ["./fixtures/simple/bar_spec.cr"]).should eq false
+        Sequential.new.run(run, side_effects).should eq false
       end
 
-      it "reports events in order" do
-        reporter = FakeReporter.new
-        runner = Sequential.new(
-          threshold: 100.0,
-          generator: FakeGenerator.new([fake_mutation]),
-          reporters: [reporter] of Crytic::Reporter::Reporter,
-          no_mutation_factory: fake_no_mutation_factory)
+      it "reports neutral results before mutation results" do
+        run = FakeRun.new
+        run.mutations = [FakeMutation.new.as(Crytic::Mutation::Mutation)]
 
-        runner.run(subjects(["./fixtures/simple/bar.cr"]), ["./fixtures/simple/bar_spec.cr"])
+        Sequential.new.run(run, side_effects)
 
-        reporter.events.should eq ["report_original_result", "report_mutations", "report_neutral_result", "report_result", "report_summary", "report_msi"]
+        run.events.should eq ["report_neutral_result", "report_result"]
       end
 
       it "skips the mutations if the neutral result errored" do
-        reporter = FakeReporter.new
+        run = FakeRun.new
         mutation = fake_mutation
-        runner = Sequential.new(
-          threshold: 100.0,
-          generator: FakeGenerator.new(
-            neutral: erroring_mutation,
-            mutations: [mutation]),
-          reporters: [reporter] of Crytic::Reporter::Reporter,
-          no_mutation_factory: fake_no_mutation_factory)
+        run.neutral = FakeMutation.new(Crytic::Mutation::Status::Errored)
+        run.mutations = [mutation]
 
-        runner.run(subjects(["./fixtures/simple/bar.cr"]), ["./fixtures/simple/bar_spec.cr"])
+        Sequential.new.run(run, side_effects)
 
-        reporter.events.should_not contain("report_result")
+        run.events.should_not contain("report_result")
         mutation.as(FakeMutation).run_call_count.should eq 0
       end
     end
   end
 end
 
-private def runner
-  Crytic::Runner::Sequential.new(
-    threshold: 100.0,
-    reporters: [] of Crytic::Reporter::Reporter,
-    generator: FakeGenerator.new)
+private class FakeRun
+  property mutations = [] of Crytic::Mutation::Mutation
+  property events = [] of String
+  property original_exit_code = 0
+  property final_result = true
+  property neutral = FakeMutation.new.as(Crytic::Mutation::Mutation)
+
+  def generate_mutations
+    [Crytic::Generator::MutationSet.new(neutral, mutations)]
+  end
+
+  def report_neutral_result(result)
+    events << "report_neutral_result"
+  end
+
+  def report_result(result)
+    events << "report_result"
+  end
+
+  def report_final(results)
+    final_result
+  end
+
+  def execute_original_test_suite(side_effects)
+    Crytic::Mutation::OriginalResult.new(exit_code: original_exit_code, output: "")
+  end
 end

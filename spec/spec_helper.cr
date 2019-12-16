@@ -6,7 +6,6 @@ require "./fake_generator"
 require "./fake_http_client"
 require "./fake_mutation"
 require "./fake_process_runner"
-require "./fake_reporter"
 require "compiler/crystal/syntax/*"
 require "spec"
 
@@ -99,7 +98,7 @@ end
 
 def fake_no_mutation_factory
   ->(specs : Array(String)) {
-    Crytic::Mutation::NoMutation.with(specs, Crytic::FakeProcessRunner.new)
+    Crytic::Mutation::NoMutation.with(specs)
   }
 end
 
