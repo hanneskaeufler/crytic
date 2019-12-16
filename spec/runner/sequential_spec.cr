@@ -49,31 +49,3 @@ module Crytic::Runner
     end
   end
 end
-
-private class FakeRun
-  property mutations = [] of Crytic::Mutation::Mutation
-  property events = [] of String
-  property original_exit_code = 0
-  property final_result = true
-  property neutral = FakeMutation.new.as(Crytic::Mutation::Mutation)
-
-  def generate_mutations
-    [Crytic::Generator::MutationSet.new(neutral, mutations)]
-  end
-
-  def report_neutral_result(result)
-    events << "report_neutral_result"
-  end
-
-  def report_result(result)
-    events << "report_result"
-  end
-
-  def report_final(results)
-    final_result
-  end
-
-  def execute_original_test_suite(side_effects)
-    Crytic::Mutation::OriginalResult.new(exit_code: original_exit_code, output: "")
-  end
-end

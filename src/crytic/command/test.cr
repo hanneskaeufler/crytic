@@ -1,7 +1,7 @@
 require "../cli_options"
 require "../generator/in_memory_generator"
 require "../generator/isolated_mutation_factory"
-require "../runner/sequential"
+require "../runner/parallel"
 require "../side_effects"
 require "../subject"
 
@@ -16,7 +16,7 @@ class Crytic::Command::Test
       Mutation::NoMutation.with(specs)
     }
 
-    Crytic::Runner::Sequential
+    Crytic::Runner::Parallel
       .new
       .run(Crytic::Runner::Run.from_options(options, generator, factory), @side_effects)
   end

@@ -7,6 +7,14 @@ module Crytic::Generator
     def number_of_mutations
       mutated.size
     end
+
+    def run_neutral
+      neutral.run
+    end
+
+    def run_mutated
+      mutated.map(&.run)
+    end
   end
 
   abstract class Generator
