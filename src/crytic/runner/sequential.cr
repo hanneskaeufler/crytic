@@ -15,27 +15,18 @@ module Crytic::Runner
       run.report_final(results)
     end
 
-    private def run_mutations_for_single_subject(mutation_set, run)
-      mutation_set.mutated.map do |mutation|
-        result = mutation.run
-        run.report_result(result)
-        result
-      end
-    end
-
     private def discard_further_mutations_for_single_subject
       [] of Mutation::Result
     end
 
     private def run_all_mutations(mutations, run)
       mutations.map do |mutation_set|
-        neutral_result = mutation_set.neutral.run
-        run.report_neutral_result(neutral_result)
+        neutral_result = mutation_set.run_neutral(run)
 
         if neutral_result.errored?
           discard_further_mutations_for_single_subject
         else
-          run_mutations_for_single_subject(mutation_set, run)
+          mutation_set.run_mutated(run)
         end
       end.flatten
     end

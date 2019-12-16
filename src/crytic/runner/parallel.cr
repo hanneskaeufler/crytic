@@ -24,23 +24,14 @@ module Crytic::Runner
       mutation_sets.each_with_index do |set, idx|
         channel = channels[idx]
         spawn do
-          neutral_result = set.run_neutral
-          run.report_neutral_result(neutral_result)
+          neutral_result = set.run_neutral(run)
 
           if neutral_result.errored?
             channel.send(discard_further_mutations_for_single_subject)
           else
-            channel.send(run_mutations_for_single_subject(set, run))
+            channel.send(set.run_mutated(run))
           end
         end
-      end
-    end
-
-    private def run_mutations_for_single_subject(mutation_set, run)
-      mutation_set.mutated.map do |mutation|
-        result = mutation.run
-        run.report_result(result)
-        result
       end
     end
   end

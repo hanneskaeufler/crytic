@@ -8,8 +8,18 @@ module Crytic::Generator
       mutated.size
     end
 
-    def run_neutral
-      neutral.run
+    def run_neutral(run)
+      result = neutral.run
+      run.report_neutral_result(result)
+      result
+    end
+
+    def run_mutated(run)
+      mutated.map do |mutation|
+        result = mutation.run
+        run.report_result(result)
+        result
+      end
     end
   end
 
