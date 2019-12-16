@@ -17,7 +17,7 @@ module Crytic::Runner
       it "generates mutations once" do
         run = FakeRun.new
 
-        res = Parallel.new.run(run, side_effects)
+        Parallel.new.run(run, side_effects)
 
         run.generate_mutations_call_count.should eq 1
       end
