@@ -7,9 +7,20 @@ module Crytic::Runner
 
       mutation_sets = run.generate_mutations
       channels = mutation_sets.map { Channel(Array(Mutation::Result)).new }
+      run_all_mutations(mutation_sets, channels, run)
+      results = wait_for_all_jobs_to_finish(channels)
+      run.report_final(Mutation::ResultSet.new(results))
+    end
 
-      results = [] of Mutation::Result
+    private def discard_further_mutations_for_single_subject
+      [] of Mutation::Result
+    end
 
+    private def wait_for_all_jobs_to_finish(channels)
+      channels.map(&.receive).flatten
+    end
+
+    private def run_all_mutations(mutation_sets, channels, run)
       mutation_sets.each_with_index do |set, idx|
         channel = channels[idx]
         spawn do
@@ -17,21 +28,20 @@ module Crytic::Runner
           run.report_neutral_result(neutral_result)
 
           if neutral_result.errored?
-            channel.send([] of Mutation::Result)
+            channel.send(discard_further_mutations_for_single_subject)
           else
-            res = set.run_mutated
-            run.report_result(res)
-            channel.send(res)
+            channel.send(run_mutations_for_single_subject(set, run))
           end
         end
       end
-
-      results = wait_for_all_jobs_to_finish(channels)
-      run.report_final(results)
     end
 
-    private def wait_for_all_jobs_to_finish(channels)
-      channels.map(&.receive).flatten
+    private def run_mutations_for_single_subject(mutation_set, run)
+      mutation_set.mutated.map do |mutation|
+        result = mutation.run
+        run.report_result(result)
+        result
+      end
     end
   end
 end

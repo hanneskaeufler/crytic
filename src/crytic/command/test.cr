@@ -1,7 +1,9 @@
 require "../cli_options"
 require "../generator/in_memory_generator"
 require "../generator/isolated_mutation_factory"
+require "../mutation/no_mutation"
 require "../runner/parallel"
+require "../runner/run"
 require "../side_effects"
 require "../subject"
 

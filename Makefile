@@ -3,7 +3,7 @@ SHARD_BIN ?= ../../bin
 
 build: bin/crytic
 bin/crytic:
-	$(SHARDS_BIN) build $(CRFLAGS)
+	$(SHARDS_BIN) build -Dpreview_mt $(CRFLAGS)
 
 bin: build
 	mkdir -p $(SHARD_BIN)

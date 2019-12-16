@@ -11,10 +11,6 @@ module Crytic::Generator
     def run_neutral
       neutral.run
     end
-
-    def run_mutated
-      mutated.map(&.run)
-    end
   end
 
   abstract class Generator
