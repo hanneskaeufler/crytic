@@ -1,6 +1,8 @@
+require "./runner"
+
 module Crytic::Runner
-  class Parallel
-    def run(run, side_effects)
+  class Parallel < Runner
+    def run(run, side_effects) : Bool
       original_result = run.execute_original_test_suite(side_effects)
 
       return false unless original_result.successful?
