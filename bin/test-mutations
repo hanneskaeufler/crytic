@@ -2,4 +2,4 @@
 
 list=(`find spec -name '*_spec.cr' -and -not -name 'integration_spec.cr'`)
 printf '%s\n' "${list[@]}" | sort
-./bin/crytic test --min-msi=70.0 --reporters=Console,Stryker,ConsoleFileSummary "${list[@]}"
+./bin/crytic test-parallel --min-msi=70.0 --reporters=Console,Stryker,ConsoleFileSummary "${list[@]}"

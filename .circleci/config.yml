@@ -48,6 +48,7 @@ workflows:
       - test-crystal-0.32.0
       - test-crystal-0.31.1
       - test-crystal-0.30.1
+      - test-mutations
   nightly:
     triggers:
       - schedule:
