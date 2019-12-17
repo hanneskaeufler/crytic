@@ -56,7 +56,6 @@ module Crytic::Runner
 
         Parallel.new.run(run, side_effects)
 
-
         run.events.should eq ["report_neutral_result", "report_exception"]
       end
     end
