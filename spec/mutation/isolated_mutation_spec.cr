@@ -78,6 +78,14 @@ module Crytic::Mutation
           "./fixtures/simple/bar.cr",
           ["./fixtures/simple/bar_spec.cr"])))
 
+        # When running this spec as part of crytic, we have to
+        # explicitly enable the colorization because otherwise
+        # it is evaluated that the spec isn't run from a tty
+        # and doesn't support coloring. This is the case
+        # since crystal 0.32.0 by the following change:
+        # https://github.com/crystal-lang/crystal/pull/8271/files#diff-0c497e87ce156eb81914a478f8564cc2R81
+        Colorize.enabled = true
+
         mutation.run.diff.should eq <<-DIFF
         @@ -1,5 +1,5 @@\n def bar\n\e[31m-\e[0m\e[31m  if true\e[0m\n\e[32m+\e[0m\e[32m  if false\e[0m\n     2\n   else\n     3\n
         DIFF
