@@ -49,6 +49,16 @@ module Crytic::Runner
 
         run.events.should eq ["report_neutral_result", "report_result"]
       end
+
+      it "handles exception throwing mutations" do
+        run = FakeRun.new
+        run.mutations = [ThrowingMutation.new.as(Crytic::Mutation::Mutation)]
+
+        Parallel.new.run(run, side_effects)
+
+
+        run.events.should eq ["report_neutral_result", "report_exception"]
+      end
     end
   end
 end

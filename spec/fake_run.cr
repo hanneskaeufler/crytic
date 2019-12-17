@@ -22,6 +22,10 @@ class FakeRun
     events << "report_result"
   end
 
+  def report_exception(exc)
+    events << "report_exception"
+  end
+
   def report_final(results)
     final_result
   end

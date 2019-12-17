@@ -1,3 +1,4 @@
+require "../mutation/result_set"
 require "./runner"
 
 module Crytic::Runner
@@ -33,6 +34,9 @@ module Crytic::Runner
           else
             channel.send(set.run_mutated(run))
           end
+        rescue exc
+          run.report_exception(exc)
+          channel.send(discard_further_mutations_for_single_subject)
         end
       end
     end
