@@ -1,16 +1,14 @@
 require "../src/crytic/reporter/http_client"
+require "http/server/response"
 
 class FakeHttpClient < Crytic::Reporter::HttpClient
-  def post(url : String, bbody : Hash(String, String | Float64))
+  alias ResponseBody = Hash(String, String | Float64)
+  getter path : String?, body : ResponseBody?
+  property response = HTTP::Server::Response.new(IO::Memory.new)
+
+  def post(url : String, body : ResponseBody)
     @path = url
-    @body = bbody
-  end
-
-  def path
-    @path
-  end
-
-  def body
-    @body
+    @body = body
+    response
   end
 end

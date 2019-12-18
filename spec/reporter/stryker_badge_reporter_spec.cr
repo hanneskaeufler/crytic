@@ -11,6 +11,7 @@ module Crytic::Reporter
         client = FakeHttpClient.new
         io = IO::Memory.new
 
+        client.response.status = HTTP::Status::CREATED
         StrykerBadgeReporter.new(client, {
           "CIRCLE_BRANCH"             => "master",
           "CIRCLE_PROJECT_REPONAME"   => "crytic",
@@ -25,7 +26,7 @@ module Crytic::Reporter
           "mutationScore"  => 100.0,
           "repositorySlug" => "github.com/hanneskaeufler/crytic",
         })
-        io.to_s.should eq "Mutation score uploaded to stryker dashboard."
+        io.to_s.should eq "Mutation score uploaded to stryker dashboard.\n"
       end
 
       it "reports NaN score as " do
@@ -35,8 +36,19 @@ module Crytic::Reporter
 
         subject.report_msi(Mutation::ResultSet.new([] of Mutation::Result))
 
-        io.to_s.should eq "Mutation score wasn't uploaded to stryker dashboard. No results found."
+        io.to_s.should eq "Mutation score wasn't uploaded to stryker dashboard. No results found.\n"
         client.path.should be_nil
+      end
+
+      it "reports a failed http request" do
+        client = FakeHttpClient.new
+        io = IO::Memory.new
+        subject = StrykerBadgeReporter.new(client, fake_env, io)
+
+        client.response.status = HTTP::Status::UNAUTHORIZED
+        subject.report_msi(results)
+
+        io.to_s.should eq "Mutation score wasn't uploaded to stryker dashboard. Response status encountered: UNAUTHORIZED\n"
       end
     end
   end
