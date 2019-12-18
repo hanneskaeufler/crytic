@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - Unknown
 
+## [6.0.1] - 2019-12-18
+
 ### Added
 
 - New command `crytic noop` to output the code as crytic would run it. This helps with debugging, e.g. `crytic noop | crystal eval`
