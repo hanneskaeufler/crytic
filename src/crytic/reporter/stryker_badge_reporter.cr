@@ -1,6 +1,7 @@
 require "../msi_calculator"
 require "./http_client"
 require "./reporter"
+require "http/status"
 
 module Crytic::Reporter
   # Sends a MSI score to the stryker dashboard
@@ -13,17 +14,18 @@ module Crytic::Reporter
 
     def report_msi(results)
       if results.empty?
-        @io << "Mutation score wasn't uploaded to stryker dashboard. No results found."
+        @io << "Mutation score wasn't uploaded to stryker dashboard. No results found.\n"
         return
       end
 
-      @client.post(DASHBOARD_URL, {
+      response = @client.post(DASHBOARD_URL, {
         "apiKey"         => @env["STRYKER_DASHBOARD_API_KEY"],
         "repositorySlug" => slug,
         "branch"         => @env["CIRCLE_BRANCH"],
         "mutationScore"  => score(results),
       })
-      @io << "Mutation score uploaded to stryker dashboard."
+
+      print_status(response)
     end
 
     def report_original_result(original_result)
@@ -47,6 +49,14 @@ module Crytic::Reporter
 
     private def score(results)
       MsiCalculator.new(results).msi.value
+    end
+
+    private def print_status(response)
+      if response.status == HTTP::Status::CREATED
+        @io << "Mutation score uploaded to stryker dashboard.\n"
+      else
+        @io << "Mutation score wasn't uploaded to stryker dashboard. Response status encountered: #{response.status}\n"
+      end
     end
   end
 end
