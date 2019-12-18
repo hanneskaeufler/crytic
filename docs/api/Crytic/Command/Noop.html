@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
-  <title>Crytic::Mutation::Mutation - github.com/hanneskaeufler/crytic</title>
+  <title>Crytic::Command::Noop - github.com/hanneskaeufler/crytic</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../../";
   </script>
@@ -55,12 +55,12 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Command" data-name="crytic::command">
+  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Command" data-name="crytic::command">
       <a href="../../Crytic/Command.html">Command</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Command/Noop" data-name="crytic::command::noop">
+  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Command/Noop" data-name="crytic::command::noop">
       <a href="../../Crytic/Command/Noop.html">Noop</a>
       
     </li>
@@ -270,7 +270,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation" data-name="crytic::mutation">
       <a href="../../Crytic/Mutation.html">Mutation</a>
       
         <ul>
@@ -305,7 +305,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Mutation/Mutation" data-name="crytic::mutation::mutation">
       <a href="../../Crytic/Mutation/Mutation.html">Mutation</a>
       
     </li>
@@ -469,12 +469,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">abstract class</span> Crytic::Mutation::Mutation
+  <span class="kind">class</span> Crytic::Command::Noop
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutation/Mutation.html">Crytic::Mutation::Mutation</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Command/Noop.html">Crytic::Command::Noop</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -486,20 +486,6 @@
 
 
 
-
-  <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Direct Known Subclasses
-  </h2>
-  <ul class="other-types-list">
-    
-      <li class="other-type"><a href="../../Crytic/Mutation/IsolatedMutation.html">Crytic::Mutation::IsolatedMutation</a></li>
-    
-  </ul>
 
 
 
@@ -516,8 +502,8 @@
   </h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/mutation/mutation.cr#L4" target="_blank">
-        crytic/mutation/mutation.cr
+      <a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/command/noop.cr#L7" target="_blank">
+        crytic/command/noop.cr
       </a>
     
     <br/>
@@ -525,7 +511,43 @@
 
 
 
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="DEFAULT_SPEC_FILES_GLOB">
+        <strong>DEFAULT_SPEC_FILES_GLOB</strong> = <code><span class="s">&quot;./spec/**/*_spec.cr&quot;</span></code>
+      </dt>
+      
+    
+  </dl>
 
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(side_effects:SideEffects,spec_files_glob:String)-class-method" class="signature"><strong>.new</strong>(side_effects : SideEffects, spec_files_glob : String)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -542,7 +564,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#run:Result-instance-method" class="signature"><strong>#run</strong> : Result</a>
+        <a href="#execute(args)-instance-method" class="signature"><strong>#execute</strong>(args)</a>
         
       </li>
     
@@ -577,6 +599,32 @@
 </div>
 
 
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(side_effects:SideEffects,spec_files_glob:String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(side_effects : <a href="../../Crytic/SideEffects.html">SideEffects</a>, spec_files_glob : String)
+
+        <a class="method-permalink" href="#new(side_effects:SideEffects,spec_files_glob:String)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/command/noop.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
 
 
@@ -590,18 +638,18 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="run:Result-instance-method">
+    <div class="entry-detail" id="execute(args)-instance-method">
       <div class="signature">
-        abstract 
-        def <strong>run</strong> : <a href="../../Crytic/Mutation/Result.html">Result</a>
+        
+        def <strong>execute</strong>(args)
 
-        <a class="method-permalink" href="#run:Result-instance-method">#</a>
+        <a class="method-permalink" href="#execute(args)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/mutation/mutation.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/command/noop.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>

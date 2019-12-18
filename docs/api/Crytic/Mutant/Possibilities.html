@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.28.0">
+<meta name="generator" content="Crystal Docs 0.31.1">
 
-
-<link href="../../css/style.css" rel="stylesheet" type="text/css">
-
+<link href="../../css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../../js/doc.js"></script>
-<script type="text/javascript">
-  CrystalDoc.base_path = "../../";
-</script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
   <title>Crytic::Mutant::Possibilities - github.com/hanneskaeufler/crytic</title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "../../";
+  </script>
 </head>
 <body>
 
@@ -48,6 +52,26 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/CliOptions" data-name="crytic::clioptions">
       <a href="../../Crytic/CliOptions.html">CliOptions</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Command" data-name="crytic::command">
+      <a href="../../Crytic/Command.html">Command</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Command/Noop" data-name="crytic::command::noop">
+      <a href="../../Crytic/Command/Noop.html">Noop</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Command/Test" data-name="crytic::command::test">
+      <a href="../../Crytic/Command/Test.html">Test</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -371,6 +395,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/Reporters" data-name="crytic::reporter::reporters">
+      <a href="../../Crytic/Reporter/Reporters.html">Reporters</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/StrykerBadgeReporter" data-name="crytic::reporter::strykerbadgereporter">
       <a href="../../Crytic/Reporter/StrykerBadgeReporter.html">StrykerBadgeReporter</a>
       
@@ -386,23 +415,18 @@
       
         <ul>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Sequential" data-name="crytic::runner::sequential">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/NoMutationFactory" data-name="crytic::runner::nomutationfactory">
+      <a href="../../Crytic/Runner/NoMutationFactory.html">NoMutationFactory</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Run" data-name="crytic::runner::run">
+      <a href="../../Crytic/Runner/Run.html">Run</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Sequential" data-name="crytic::runner::sequential">
       <a href="../../Crytic/Runner/Sequential.html">Sequential</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Sequential/NoMutationFactory" data-name="crytic::runner::sequential::nomutationfactory">
-      <a href="../../Crytic/Runner/Sequential/NoMutationFactory.html">NoMutationFactory</a>
-      
-    </li>
-  
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Sequential/Threshold" data-name="crytic::runner::sequential::threshold">
-      <a href="../../Crytic/Runner/Sequential/Threshold.html">Threshold</a>
-      
-    </li>
-  
-</ul>
-
       
     </li>
   
@@ -455,7 +479,14 @@
 
 
 
-  <h2>Overview</h2>
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
 
   <p>An instance of this marks the possibility of a mutation at a certain
 code location.</p>
@@ -468,27 +499,34 @@ code location.</p>
 
 
 
-  <h2>Direct Known Subclasses</h2>
+  <h2>
+    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Direct Known Subclasses
+  </h2>
   <ul class="other-types-list">
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/AndOrSwapPossibilities.html">Crytic::Mutant::AndOrSwapPossibilities</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/AnyAllSwapPossibilities.html">Crytic::Mutant::AnyAllSwapPossibilities</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/BoolLiteralFlipPossibilities.html">Crytic::Mutant::BoolLiteralFlipPossibilities</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/ConditionFlipPossibilities.html">Crytic::Mutant::ConditionFlipPossibilities</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/NumberLiteralChangePossibilities.html">Crytic::Mutant::NumberLiteralChangePossibilities</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/NumberLiteralSignFlipPossibilities.html">Crytic::Mutant::NumberLiteralSignFlipPossibilities</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/RegexLiteralChangePossibilities.html">Crytic::Mutant::RegexLiteralChangePossibilities</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/SelectRejectSwapPossibilities.html">Crytic::Mutant::SelectRejectSwapPossibilities</a></li>
-  
-    <li class="other-type"><a href="../../Crytic/Mutant/StringLiteralChangePossibilities.html">Crytic::Mutant::StringLiteralChangePossibilities</a></li>
-  
+    
+      <li class="other-type"><a href="../../Crytic/Mutant/AndOrSwapPossibilities.html">Crytic::Mutant::AndOrSwapPossibilities</a></li>
+    
+      <li class="other-type"><a href="../../Crytic/Mutant/AnyAllSwapPossibilities.html">Crytic::Mutant::AnyAllSwapPossibilities</a></li>
+    
+      <li class="other-type"><a href="../../Crytic/Mutant/BoolLiteralFlipPossibilities.html">Crytic::Mutant::BoolLiteralFlipPossibilities</a></li>
+    
+      <li class="other-type"><a href="../../Crytic/Mutant/ConditionFlipPossibilities.html">Crytic::Mutant::ConditionFlipPossibilities</a></li>
+    
+      <li class="other-type"><a href="../../Crytic/Mutant/NumberLiteralChangePossibilities.html">Crytic::Mutant::NumberLiteralChangePossibilities</a></li>
+    
+      <li class="other-type"><a href="../../Crytic/Mutant/NumberLiteralSignFlipPossibilities.html">Crytic::Mutant::NumberLiteralSignFlipPossibilities</a></li>
+    
+      <li class="other-type"><a href="../../Crytic/Mutant/RegexLiteralChangePossibilities.html">Crytic::Mutant::RegexLiteralChangePossibilities</a></li>
+    
+      <li class="other-type"><a href="../../Crytic/Mutant/SelectRejectSwapPossibilities.html">Crytic::Mutant::SelectRejectSwapPossibilities</a></li>
+    
+      <li class="other-type"><a href="../../Crytic/Mutant/StringLiteralChangePossibilities.html">Crytic::Mutant::StringLiteralChangePossibilities</a></li>
+    
   </ul>
 
 
@@ -496,10 +534,17 @@ code location.</p>
 
 
 
-  <h2>Defined in:</h2>
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutant/possibilities.cr#L7" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/mutant/possibilities.cr#L7" target="_blank">
         crytic/mutant/possibilities.cr
       </a>
     
@@ -514,18 +559,25 @@ code location.</p>
 
 
 
-  <h2>Instance Method Summary</h2>
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#any%3F-instance-method" class="signature"><strong>#any?</strong></a>
+        <a href="#any?-instance-method" class="signature"><strong>#any?</strong></a>
         
           <div class="summary"><p>True if there are any locations found.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#locations%3AArray%28Crytic%3A%3AMutant%3A%3AFullLocation%29-instance-method" class="signature"><strong>#locations</strong> : Array(Crytic::Mutant::FullLocation)</a>
+        <a href="#locations:Array(Crytic::Mutant::FullLocation)-instance-method" class="signature"><strong>#locations</strong> : Array(Crytic::Mutant::FullLocation)</a>
         
       </li>
     
@@ -537,7 +589,7 @@ code location.</p>
       </li>
     
       <li class="entry-summary">
-        <a href="#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::ASTNode)</a>
+        <a href="#visit(node:Crystal::ASTNode)-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::ASTNode)</a>
         
       </li>
     
@@ -586,22 +638,32 @@ code location.</p>
 
 
 
-  <h2>Instance Method Detail</h2>
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
   
     <div class="entry-detail" id="any?-instance-method">
       <div class="signature">
         
         def <strong>any?</strong>
 
-        <a class="method-permalink" href="#any%3F-instance-method">#</a>
+        <a class="method-permalink" href="#any?-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>True if there are any locations found.</p></div>
+        <div class="doc">
+          
+          <p>True if there are any locations found.</p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutant/possibilities.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/mutant/possibilities.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -611,13 +673,13 @@ code location.</p>
         
         def <strong>locations</strong> : Array(<a href="../../Crytic/Mutant/FullLocation.html">Crytic::Mutant::FullLocation</a>)
 
-        <a class="method-permalink" href="#locations%3AArray%28Crytic%3A%3AMutant%3A%3AFullLocation%29-instance-method">#</a>
+        <a class="method-permalink" href="#locations:Array(Crytic::Mutant::FullLocation)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutant/possibilities.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/mutant/possibilities.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -630,12 +692,15 @@ code location.</p>
         <a class="method-permalink" href="#reset-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Clears the locations in this instance.</p></div>
+        <div class="doc">
+          
+          <p>Clears the locations in this instance.</p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutant/possibilities.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/mutant/possibilities.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -645,13 +710,13 @@ code location.</p>
         
         def <strong>visit</strong>(node : Crystal::ASTNode)
 
-        <a class="method-permalink" href="#visit%28node%3ACrystal%3A%3AASTNode%29-instance-method">#</a>
+        <a class="method-permalink" href="#visit(node:Crystal::ASTNode)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/mutant/possibilities.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/mutant/possibilities.cr#L28" target="_blank">View source</a>]
         
       </div>
     </div>

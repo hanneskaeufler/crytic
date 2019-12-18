@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.28.0">
+<meta name="generator" content="Crystal Docs 0.31.1">
 
-
-<link href="../css/style.css" rel="stylesheet" type="text/css">
-
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../js/doc.js"></script>
-<script type="text/javascript">
-  CrystalDoc.base_path = "../";
-</script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
 
   <meta id="repository-name" content="github.com/hanneskaeufler/crytic">
   <title>Crytic::ProcessProcessRunner - github.com/hanneskaeufler/crytic</title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "../";
+  </script>
 </head>
 <body>
 
@@ -48,6 +52,26 @@
   
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/CliOptions" data-name="crytic::clioptions">
       <a href="../Crytic/CliOptions.html">CliOptions</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Command" data-name="crytic::command">
+      <a href="../Crytic/Command.html">Command</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Command/Noop" data-name="crytic::command::noop">
+      <a href="../Crytic/Command/Noop.html">Noop</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Command/Test" data-name="crytic::command::test">
+      <a href="../Crytic/Command/Test.html">Test</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -371,6 +395,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/Reporters" data-name="crytic::reporter::reporters">
+      <a href="../Crytic/Reporter/Reporters.html">Reporters</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Reporter/StrykerBadgeReporter" data-name="crytic::reporter::strykerbadgereporter">
       <a href="../Crytic/Reporter/StrykerBadgeReporter.html">StrykerBadgeReporter</a>
       
@@ -386,23 +415,18 @@
       
         <ul>
   
-  <li class="parent " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Sequential" data-name="crytic::runner::sequential">
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/NoMutationFactory" data-name="crytic::runner::nomutationfactory">
+      <a href="../Crytic/Runner/NoMutationFactory.html">NoMutationFactory</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Run" data-name="crytic::runner::run">
+      <a href="../Crytic/Runner/Run.html">Run</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Sequential" data-name="crytic::runner::sequential">
       <a href="../Crytic/Runner/Sequential.html">Sequential</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Sequential/NoMutationFactory" data-name="crytic::runner::sequential::nomutationfactory">
-      <a href="../Crytic/Runner/Sequential/NoMutationFactory.html">NoMutationFactory</a>
-      
-    </li>
-  
-  <li class=" " data-id="github.com/hanneskaeufler/crytic/Crytic/Runner/Sequential/Threshold" data-name="crytic::runner::sequential::threshold">
-      <a href="../Crytic/Runner/Sequential/Threshold.html">Threshold</a>
-      
-    </li>
-  
-</ul>
-
       
     </li>
   
@@ -455,7 +479,14 @@
 
 
 
-  <h2>Overview</h2>
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
 
   <p>Runs processes using crystals <code>Process</code> class</p>
 
@@ -472,10 +503,17 @@
 
 
 
-  <h2>Defined in:</h2>
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
   
     
-      <a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/process_process_runner.cr#L6" target="_blank">
+      <a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/process_process_runner.cr#L6" target="_blank">
         crytic/process_process_runner.cr
       </a>
     
@@ -490,18 +528,25 @@
 
 
 
-  <h2>Instance Method Summary</h2>
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#run%28cmd%2Cargs%2Coutput%2Cerror%2Ctimeout%29-instance-method" class="signature"><strong>#run</strong>(cmd, args, output, error, timeout)</a>
+        <a href="#run(cmd,args,output,error,timeout)-instance-method" class="signature"><strong>#run</strong>(cmd, args, output, error, timeout)</a>
         
           <div class="summary"><p>Run the given command with args and save output to given io Times out and kills the provess after given period.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#run%28cmd%2Cargs%2Coutput%2Cerror%29-instance-method" class="signature"><strong>#run</strong>(cmd, args, output, error)</a>
+        <a href="#run(cmd,args,output,error)-instance-method" class="signature"><strong>#run</strong>(cmd, args, output, error)</a>
         
           <div class="summary"><p>Run the given command with args and save output to given io</p></div>
         
@@ -520,7 +565,7 @@
   <h3>Instance methods inherited from class <code><a href="../Crytic/ProcessRunner.html">Crytic::ProcessRunner</a></code></h3>
   
   
-    <a href="../Crytic/ProcessRunner.html#run%28cmd%3AString%2Cargs%2Coutput%2Cerror%29-instance-method" class="tooltip">
+    <a href="../Crytic/ProcessRunner.html#run(cmd:String,args,output,error)-instance-method" class="tooltip">
       <span>run(cmd : String, args, output, error)</span>
     run</a>
     
@@ -561,23 +606,33 @@
 
 
 
-  <h2>Instance Method Detail</h2>
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
   
     <div class="entry-detail" id="run(cmd,args,output,error,timeout)-instance-method">
       <div class="signature">
         
         def <strong>run</strong>(cmd, args, output, error, timeout)
 
-        <a class="method-permalink" href="#run%28cmd%2Cargs%2Coutput%2Cerror%2Ctimeout%29-instance-method">#</a>
+        <a class="method-permalink" href="#run(cmd,args,output,error,timeout)-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Run the given command with args and save output to given io
-Times out and kills the provess after given period.</p></div>
+        <div class="doc">
+          
+          <p>Run the given command with args and save output to given io
+Times out and kills the provess after given period.</p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/process_process_runner.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/process_process_runner.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -587,15 +642,18 @@ Times out and kills the provess after given period.</p></div>
         
         def <strong>run</strong>(cmd, args, output, error)
 
-        <a class="method-permalink" href="#run%28cmd%2Cargs%2Coutput%2Cerror%29-instance-method">#</a>
+        <a class="method-permalink" href="#run(cmd,args,output,error)-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Run the given command with args and save output to given io</p></div>
+        <div class="doc">
+          
+          <p>Run the given command with args and save output to given io</p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hanneskaeufler/crytic/blob/e488212c65c9a43cbad0739066378003bb52da2f/src/crytic/process_process_runner.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/hanneskaeufler/crytic/blob/9055ad50e568a15389cf5ee95757b12f19a81237/src/crytic/process_process_runner.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>

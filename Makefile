@@ -14,3 +14,8 @@ test-unit:
 
 test:
 	docker run --rm -it -v "$(shell pwd):/src" -w /src crystallang/crystal:0.32.0 /bin/sh -c "./bin/test"
+
+docs:
+	docker run --rm -it -v "$(shell pwd):/src" -w /src crystallang/crystal:0.32.0 /bin/sh -c "./bin/generate-docs"
+
+.PHONY: docs test test-unit
