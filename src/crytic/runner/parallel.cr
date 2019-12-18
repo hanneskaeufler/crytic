@@ -1,9 +1,8 @@
 require "../mutation/result_set"
-require "./runner"
 
 module Crytic::Runner
-  class Parallel < Runner
-    private SLICE_SIZE = 2
+  class Parallel
+    private SLICE_SIZE = 5
 
     def run(run, side_effects) : Bool
       original_result = run.execute_original_test_suite(side_effects)
@@ -28,22 +27,16 @@ module Crytic::Runner
       mutation_sets.each_slice(SLICE_SIZE) do |slice|
         channel = Channel(Array(Mutation::Result)).new(SLICE_SIZE)
 
-        slice.each_with_index do |set, idx|
-          STDOUT.puts "--- Mutant ##{idx}"
+        slice.each do |set|
           spawn do
-            STDOUT.puts "Run neutral mutant ##{idx}"
             neutral_result = set.run_neutral(run)
-            STDOUT.puts "Finished neutral mutant ##{idx}"
 
             if neutral_result.errored?
               channel.send(discard_further_mutations_for_single_subject)
             else
-              STDOUT.puts "Run mutant ##{idx}"
               channel.send(set.run_mutated(run))
-              STDOUT.puts "Finished mutant ##{idx}"
             end
           rescue exc
-            STDOUT.puts exc
             run.report_exception(exc)
             channel.send(discard_further_mutations_for_single_subject)
           end

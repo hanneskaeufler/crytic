@@ -14,7 +14,6 @@ module Crytic
     @preamble = Generator::Generator::DEFAULT_PREAMBLE
     @spec_files = [] of String
     @subject = [] of String
-    getter multi_threaded : Bool = false
 
     def initialize(@side_effects : SideEffects, @spec_files_glob : String)
       @reporters << Reporter::IoReporter.new(@side_effects.std_out)

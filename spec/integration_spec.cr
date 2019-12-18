@@ -13,11 +13,10 @@ require "./spec_helper"
       end
     end
 
-    {% for command in ["test", "test-parallel"] %}
-    describe "the {{ command.id }} command" do
+    describe "the test command" do
       describe "--preamble/-p" do
         it "injects the given custom preamble, failing the neutral mutant" do
-          result = run_crytic("{{ command.id }} -s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr -p 'exit 1'")
+          result = run_crytic("test -s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr -p 'exit 1'")
           result.output.should contain("unmodified subject")
           result.output.should_not contain("ConditionFlip")
           result.exit_code.should eq 1
@@ -26,7 +25,7 @@ require "./spec_helper"
 
       describe "with a fully covered subject" do
         it "passes the mutation specs" do
-          result = run_crytic("{{ command.id }} -s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/fully_covered_spec.cr")
+          result = run_crytic("test -s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/fully_covered_spec.cr")
           result.output.should contain("✅ ConditionFlip")
           result.output.should contain("✅ BoolLiteralFlip")
           result.output.should contain("3 covered")
@@ -36,7 +35,7 @@ require "./spec_helper"
 
       describe "with an insufficiently covered subject" do
         it "fails the mutation specs" do
-          result = run_crytic("{{ command.id }} -s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr")
+          result = run_crytic("test -s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr")
           result.output.should contain("❌ ConditionFlip")
           result.output.should contain("❌ BoolLiteralFlip")
           result.output.should contain("3 uncovered")
@@ -44,14 +43,14 @@ require "./spec_helper"
         end
 
         it "exits successfully when the msi threshold is set sufficiently" do
-          result = run_crytic("{{ command.id }} --min-msi=0.0 -s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr")
+          result = run_crytic("test --min-msi=0.0 -s ./fixtures/conditionals/fully_covered.cr ./fixtures/conditionals/uncovered_spec.cr")
           result.exit_code.should eq 0
         end
       end
 
       describe "without passing a subject or tests" do
         it "mutates all sources and runs all tests" do
-          result = run_crytic_in_dir("./fixtures/autofind", {{ command }})
+          result = run_crytic_in_dir("./fixtures/autofind", "test")
           result.output.should contain("✅ ConditionFlip")
           result.output.should contain("✅ BoolLiteralFlip")
           result.output.should contain("✅ NumberLiteralSignFlip")
@@ -65,7 +64,7 @@ require "./spec_helper"
 
       describe "subject without any coverage" do
         it "fails all mutants" do
-          result = run_crytic("{{ command.id }} -s ./fixtures/uncovered/without.cr ./fixtures/uncovered/without_spec.cr")
+          result = run_crytic("test -s ./fixtures/uncovered/without.cr ./fixtures/uncovered/without_spec.cr")
           result.output.should contain("❌ BoolLiteralFlip")
           result.output.should contain("❌ ConditionFlip")
           result.output.should contain("❌ NumberLiteralSignFlip")
@@ -77,7 +76,7 @@ require "./spec_helper"
 
       describe "a failing initial test suite" do
         it "reports initial failure" do
-          result = run_crytic("{{ command.id }} -s ./fixtures/uncovered/without.cr ./fixtures/failing/failing_spec.cr")
+          result = run_crytic("test -s ./fixtures/uncovered/without.cr ./fixtures/failing/failing_spec.cr")
           result.output.should contain "❌ Original test suite failed.\n"
           result.output.should contain "no overload matches"
           result.exit_code.should be > 0
@@ -86,14 +85,13 @@ require "./spec_helper"
 
       describe "a subject that is mutated into an endless loop" do
         it "finishes and reports a timed out spec" do
-          result = run_crytic("{{ command.id }} -s ./fixtures/timeout/timeout.cr ./fixtures/timeout/timeout_spec.cr")
+          result = run_crytic("test -s ./fixtures/timeout/timeout.cr ./fixtures/timeout/timeout_spec.cr")
           result.output.should contain "✅ Original test suite passed.\n"
           result.output.should contain "1 timeout"
           result.exit_code.should be > 0
         end
       end
     end
-    {% end %}
 
     describe "the noop command" do
       it "outputs the noop'ed code to stdout" do

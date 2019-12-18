@@ -1,6 +1,5 @@
 require "./command/*"
 require "./runner/parallel"
-require "./runner/sequential"
 require "./side_effects"
 
 module Crytic
@@ -12,15 +11,13 @@ module Crytic
     def run(args)
       case args.first?
       when "test"
-        Command::Test.new(Runner::Sequential.new, @side_effects).execute(args.tap(&.shift))
-      when "test-parallel"
-        Command::Test.new(Runner::Parallel.new, @side_effects).execute(args.tap(&.shift))
+        Command::Test.new(@side_effects).execute(args.tap(&.shift))
       when "noop"
         Command::Noop
           .new(@side_effects, Command::Noop::DEFAULT_SPEC_FILES_GLOB)
           .execute(args.tap(&.shift))
       else
-        Command::Test.new(Runner::Sequential.new, @side_effects).execute(args)
+        Command::Test.new(@side_effects).execute(args)
       end
     end
   end

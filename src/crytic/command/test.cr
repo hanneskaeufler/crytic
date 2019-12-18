@@ -2,13 +2,13 @@ require "../cli_options"
 require "../generator/in_memory_generator"
 require "../generator/isolated_mutation_factory"
 require "../mutation/no_mutation"
+require "../runner/parallel"
 require "../runner/run"
-require "../runner/runner"
 require "../side_effects"
 require "../subject"
 
 class Crytic::Command::Test
-  def initialize(@runner : Runner::Runner, @side_effects : SideEffects)
+  def initialize(@side_effects : SideEffects)
   end
 
   def execute(args)
@@ -18,7 +18,9 @@ class Crytic::Command::Test
       Mutation::NoMutation.with(specs)
     }
 
-    @runner.run(Crytic::Runner::Run.from_options(options, generator, factory), @side_effects)
+    Crytic::Runner::Parallel
+      .new
+      .run(Crytic::Runner::Run.from_options(options, generator, factory), @side_effects)
   end
 
   private def parse_options(args)
