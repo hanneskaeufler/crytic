@@ -4,11 +4,14 @@ CRYSTAL_VERSION ?= 0.33.0
 
 build: bin/crytic
 bin/crytic:
-	$(SHARDS_BIN) build $(CRFLAGS)
+	$(SHARDS_BIN) build -Dpreview_mt $(CRFLAGS)
 
 bin: build
 	mkdir -p $(SHARD_BIN)
 	cp ./bin/crytic $(SHARD_BIN)
+
+run:
+	docker run --rm -it -v "$(shell pwd):/src" -w /src crystallang/crystal:0.32.0 /bin/sh -c "$(CMD)"
 
 test-unit:
 	docker run --rm -it -v "$(shell pwd):/src" -w /src crystallang/crystal:$(CRYSTAL_VERSION) /bin/sh -c "./bin/test-unit"

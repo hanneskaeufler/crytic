@@ -21,3 +21,9 @@ class FakeMutation < Crytic::Mutation::Mutation
     Crytic::Mutation::Result.new(@reported_status, irrelevant_mutant, "", "")
   end
 end
+
+class ThrowingMutation < Crytic::Mutation::Mutation
+  def run : Crytic::Mutation::Result
+    raise "Intentional error"
+  end
+end

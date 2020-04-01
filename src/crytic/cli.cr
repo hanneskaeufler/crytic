@@ -1,4 +1,5 @@
 require "./command/*"
+require "./runner/parallel"
 require "./side_effects"
 
 module Crytic

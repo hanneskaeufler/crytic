@@ -1,11 +1,13 @@
 require "../src/crytic/mutant/full_location"
 require "../src/crytic/mutant/number_literal_change"
+require "../src/crytic/side_effects"
 require "../src/crytic/subject"
 require "./fake_file"
 require "./fake_generator"
 require "./fake_http_client"
 require "./fake_mutation"
 require "./fake_process_runner"
+require "./fake_run"
 require "compiler/crystal/syntax/*"
 require "spec"
 

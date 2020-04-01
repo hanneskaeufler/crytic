@@ -44,5 +44,9 @@ module Crytic::Runner
 
       !results.empty? && MsiCalculator.new(results).msi.passes?(@msi_threshold)
     end
+
+    def report_exception(exc)
+      STDOUT.puts exc.to_s
+    end
   end
 end
