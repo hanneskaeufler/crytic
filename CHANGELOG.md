@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - Unknown
+## [7.0.0] - 2020-04-10
+
+### Changed
+
+- Dropped support for crystal `< 0.34.0`
 
 ## [6.0.1] - 2019-12-18
 
@@ -14,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Crystal 0.31.x compatibility (no changes were needed for crystal 0.30.x). Be careful with crystal 0.31.0 and 0.31.1 because there is a bug that might cause your CI job to pass even with failing tests. See [#8420](https://github.com/crystal-lang/crystal/issues/8420).
 - Crystal 0.32.x compatibility
 
-## Changed
+### Changed
 
 - The stryker dashboard reporter only reports a successfull upload if the API responds with the correct status code
 
