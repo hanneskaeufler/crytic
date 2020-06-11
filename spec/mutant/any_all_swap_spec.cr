@@ -53,7 +53,7 @@ module Crytic
       code = <<-CODE
       class Bar
         private def unfold_required(output)
-          output.gsub(/require[ \t]+\"\$([0-9]+)\"/) do |_str, matcher|
+          output.gsub(/require[ \t]+"$([0-9]+)"/) do |_str, matcher|
             expansion_id = matcher[1].to_i
             file_list = InjectMutatedSubjectIntoSpecs.require_expanders[expansion_id]
             if file_list.any?
