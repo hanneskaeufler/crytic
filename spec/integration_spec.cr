@@ -3,16 +3,15 @@ require "./spec_helper"
 {% unless flag?("skip-integration") %}
   describe Crytic do
     describe "the test command" do
-      describe "--help/-h" do
-        it "prints usage info" do
-          result = run_crytic("--help")
-          result.output.should contain("Usage: crytic [arguments]")
-          result.exit_code.should eq 0
-          result = run_crytic("-h")
-          result.output.should contain("Usage: crytic [arguments]")
-          result.exit_code.should eq 0
+      {% for flag in ["-h", "--help"] %}
+        describe "{{ flag.id }}" do
+          it "prints usage info" do
+            result = run_crytic({{ flag }})
+            result.output.should contain("Usage: crytic [test|noop] [arguments]")
+            result.exit_code.should eq 0
+          end
         end
-      end
+      {% end %}
 
       describe "--preamble/-p" do
         it "injects the given custom preamble, failing the neutral mutant" do
