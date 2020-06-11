@@ -21,7 +21,7 @@ module Crytic
 
     def parse(args)
       OptionParser.parse(args) do |parser|
-        parser.banner = "Usage: crytic [arguments]"
+        parser.banner = "Usage: crytic [test|noop] [arguments]"
 
         parser.on("-h", "--help", "Show this help") do
           @side_effects.std_out.puts parser
@@ -89,20 +89,6 @@ module Crytic
     end
 
     def preamble
-      {% if Crystal::VERSION == "0.31.1" || Crystal::VERSION == "0.31.0" %}
-        if @preamble =~ /fail_fast/
-          puts(<<-MSG.colorize(:yellow))
-
-          ⚠️  You specified a preamble that uses Spec#fail_fast. Due to a bug
-             in crystal 0.31.0 and 0.31.1, the Spec#fail_fast mode cannot be
-             used in crytic. We disabled it for you. See
-             https://github.com/crystal-lang/crystal/issues/8420 for details.
-
-          MSG
-          return @preamble.gsub(/Spec\.fail_fast\s*=\s*true/, "")
-        end
-      {% end %}
-
       @preamble
     end
 

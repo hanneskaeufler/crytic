@@ -24,7 +24,7 @@ module Crytic
 
         cli_options_parser(std_out: std_out).parse([{{ flag }}])
 
-        std_out.to_s.lines.first.should eq "Usage: crytic [arguments]"
+        std_out.to_s.lines.first.should eq "Usage: crytic [test|noop] [arguments]"
         std_out.to_s.lines[1].strip.should eq "-h, --help                       Show this help"
       end
       {% end %}
@@ -101,11 +101,7 @@ module Crytic
       it "defaults to a fail fast preamble" do
         opts = cli_options_parser.parse([] of String)
 
-        {% if Crystal::VERSION == "0.31.0" || Crystal::VERSION == "0.31.1" %}
-          opts.preamble.should eq "require \"spec\"\n\n"
-        {% else %}
-          opts.preamble.should eq Generator::Generator::DEFAULT_PREAMBLE
-        {% end %}
+        opts.preamble.should eq Generator::Generator::DEFAULT_PREAMBLE
       end
 
       {% for flag in ["-m", "--min-msi"] %}
