@@ -19,7 +19,7 @@ module Crytic
       when value = channel.receive
         value
       when Timeout.after(timeout)
-        process.kill(Signal::KILL)
+        process.signal(Signal::KILL)
         ProcessRunner::TIMEOUT
       end
     end
