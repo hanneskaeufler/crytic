@@ -25,9 +25,9 @@ module Crytic
 
       def data
         case type
-        when Type::APPEND
+        in Type::APPEND
           diff.b[range_b]
-        else
+        in Type::DELETE, Type::NO_CHANGE
           diff.a[range_a]
         end
       end
