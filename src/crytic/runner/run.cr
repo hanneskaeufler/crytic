@@ -27,9 +27,9 @@ module Crytic::Runner
     end
 
     def generate_mutations
-      mutations = @generator.mutations_for(@subjects, @spec_files)
-      report_mutations(mutations)
-      mutations
+      @generator.mutations_for(@subjects, @spec_files).tap do |mutations|
+        report_mutations(mutations)
+      end
     end
 
     {% for method in [:original_result, :mutations, :neutral_result, :result, :msi, :summary] %}
