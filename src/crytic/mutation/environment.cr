@@ -1,4 +1,3 @@
-require "../process_runner"
 require "./config"
 
 module Crytic::Mutation
