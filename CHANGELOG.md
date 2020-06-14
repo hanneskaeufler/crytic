@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
 - Dropped support for crystal `< 0.35.0`
+
+### Added
+
+- New mutant `DropCallInVoidDef` which replaces method calls with `nil`
+  inside void methods
 
 ## [7.0.0] - 2020-04-10
 

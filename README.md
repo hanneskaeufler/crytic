@@ -208,6 +208,17 @@ This mutant exchanges calls to [Enumerable#select](https://crystal-lang.org/api/
 + [1].reject(&.nil?)
 ```
 
+#### DropCallInVoidDef
+
+This mutant replaces method calls with `nil`. The mutation is only performed inside methods that are of void return type.
+
+```diff
+def some_method : Nil
+- perform_side_effect
++ nil
+end
+```
+
 ## Credits & inspiration
 
 I have to credit the crystal [code-coverage](https://github.com/anykeyh/crystal-coverage) shard which finally helped me create a working mutation testing tool after one or two failed attempts. I took heavy inspirations from its [SourceFile](https://github.com/anykeyh/crystal-coverage/blob/master/src/coverage/inject/source_file.cr) class and actually lifted nearly all the code.
