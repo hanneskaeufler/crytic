@@ -4,14 +4,14 @@ require "../spec_helper"
 module Crytic
   describe Mutant::AndOrSwapPossibilities do
     it "returns no possibilities if there is no and binary operator" do
-      ast = Crystal::Parser.parse("1")
+      ast = ast_from("1")
       possibilities = Mutant::AndOrSwapPossibilities.new
       ast.accept(possibilities)
       possibilities.any?.should eq false
     end
 
     it "returns locations for every possible mutation" do
-      ast = Crystal::Parser.parse("1 && 2; true && false")
+      ast = ast_from("1 && 2; true && false")
       possibilities = Mutant::AndOrSwapPossibilities.new
       ast.accept(possibilities)
       possibilities.any?.should eq true
@@ -19,7 +19,7 @@ module Crytic
     end
 
     it "treats a compound conditional as multiple possibilities" do
-      ast = Crystal::Parser.parse("1 && 2 && 3")
+      ast = ast_from("1 && 2 && 3")
       possibilities = Mutant::AndOrSwapPossibilities.new
       ast.accept(possibilities)
       possibilities.any?.should eq true
@@ -29,7 +29,7 @@ module Crytic
     end
 
     it "finds || as well" do
-      ast = Crystal::Parser.parse("1 || 2")
+      ast = ast_from("1 || 2")
       possibilities = Mutant::AndOrSwapPossibilities.new
       ast.accept(possibilities)
       possibilities.any?.should eq true
