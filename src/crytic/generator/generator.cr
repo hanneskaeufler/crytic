@@ -21,6 +21,7 @@ module Crytic::Generator
       Mutant::RegexLiteralChangePossibilities.new,
       Mutant::SelectRejectSwapPossibilities.new,
       Mutant::StringLiteralChangePossibilities.new,
+      Mutant::SymbolLiteralChangePossibilities.new,
     ] of Mutant::Possibilities
 
     DEFAULT_PREAMBLE = <<-CODE

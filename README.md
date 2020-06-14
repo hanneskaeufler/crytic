@@ -219,6 +219,15 @@ def some_method : Nil
 end
 ```
 
+#### SymbolLiteralChange
+
+This mutant modifies symbol literals by prefixing them with `__crytic__`.
+
+```diff
+- :hello
++ :__crytic__hello
+```
+
 ## Credits & inspiration
 
 I have to credit the crystal [code-coverage](https://github.com/anykeyh/crystal-coverage) shard which finally helped me create a working mutation testing tool after one or two failed attempts. I took heavy inspirations from its [SourceFile](https://github.com/anykeyh/crystal-coverage/blob/master/src/coverage/inject/source_file.cr) class and actually lifted nearly all the code.
