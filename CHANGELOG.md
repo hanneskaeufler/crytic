@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - New mutant `DropCallInVoidDef` which replaces method calls with `nil`
   inside void methods
+- New mutant `SymbolLiteralChange` which modifies symbol literal with
+  a prefix
 
 ## [7.0.0] - 2020-04-10
 
