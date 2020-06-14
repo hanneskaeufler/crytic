@@ -11,7 +11,7 @@ module Crytic::Reporter
     def initialize(@io : IO, @start_time = Time.utc)
     end
 
-    def report_original_result(original_result)
+    def report_original_result(original_result) : Nil
       if original_result.exit_code != 0
         @io << "❌ Original test suite failed.\n"
         @io << original_result.output
@@ -20,14 +20,14 @@ module Crytic::Reporter
       end
     end
 
-    def report_mutations(mutations : Array(Generator::MutationSet))
+    def report_mutations(mutations : Array(Generator::MutationSet)) : Nil
       number_of_mutations = mutations.sum(&.number_of_mutations)
       @io << "No mutations to be run." if number_of_mutations == 0
       @io << "Running 1 mutation." if number_of_mutations == 1
       @io << "Running #{number_of_mutations} mutations." if number_of_mutations > 1
     end
 
-    def report_neutral_result(result)
+    def report_neutral_result(result) : Nil
       if result.errored?
         @io << "\n#{INDENT}🚧 #{result.mutant_name}"
         @io << "\n#{INDENT + INDENT}in #{result.location.filename}"
@@ -38,7 +38,7 @@ module Crytic::Reporter
       end
     end
 
-    def report_result(result)
+    def report_result(result) : Nil
       @io << "\n#{INDENT}"
       case result.status
       when Mutation::Status::Uncovered
@@ -56,7 +56,7 @@ module Crytic::Reporter
       end
     end
 
-    def report_summary(results : Mutation::ResultSet)
+    def report_summary(results : Mutation::ResultSet) : Nil
       @io << "\n\nFinished in #{Spec.to_human(elapsed_time)}:\n"
       summary = "#{results.total_count} mutations, "
       summary += "#{results.covered_count} covered, "
@@ -69,7 +69,7 @@ module Crytic::Reporter
     end
 
     # intentional noop
-    def report_msi(results)
+    def report_msi(results) : Nil
     end
 
     private def score_in_percent(results)
