@@ -33,7 +33,7 @@ module Crytic::Runner
     end
 
     {% for method in [:original_result, :mutations, :neutral_result, :result, :msi, :summary] %}
-    def report_{{ method.id }}(result)
+    def report_{{ method.id }}(result) : Nil
       @reporters.each(&.report_{{ method.id }}(result))
     end
     {% end %}

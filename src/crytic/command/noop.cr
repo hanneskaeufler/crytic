@@ -51,7 +51,7 @@ class Crytic::Command::Noop
     MutatedSubject.new("", "", "")
   end
 
-  private def error(msg)
+  private def error(msg) : Nil
     @side_effects.std_err.puts msg
     @side_effects.exit_fun.call(1)
   end
