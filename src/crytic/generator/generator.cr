@@ -15,7 +15,7 @@ module Crytic::Generator
       Mutant::AnyAllSwapPossibilities.new,
       Mutant::BoolLiteralFlipPossibilities.new,
       Mutant::ConditionFlipPossibilities.new,
-      Mutant::DropVoidCallPossibilities.new,
+      Mutant::DropCallInVoidDefPossibilities.new,
       Mutant::NumberLiteralChangePossibilities.new,
       Mutant::NumberLiteralSignFlipPossibilities.new,
       Mutant::RegexLiteralChangePossibilities.new,
