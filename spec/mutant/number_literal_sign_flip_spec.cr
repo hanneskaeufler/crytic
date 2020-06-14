@@ -4,7 +4,7 @@ require "../spec_helper"
 module Crytic
   describe Mutant::NumberLiteralSignFlip do
     it "flips the sign of a literal" do
-      ast = Crystal::Parser.parse("1")
+      ast = ast_from("1")
       ast.accept(Mutant::NumberLiteralSignFlip.at(location_at(
         line_number: 1,
         column_number: 1)))
@@ -12,7 +12,7 @@ module Crytic
     end
 
     it "only applies to location" do
-      ast = Crystal::Parser.parse("1")
+      ast = ast_from("1")
       ast.accept(Mutant::NumberLiteralSignFlip.at(location_at(
         line_number: 100,
         column_number: 100)))
@@ -20,7 +20,7 @@ module Crytic
     end
 
     it "flips negative numbers" do
-      ast = Crystal::Parser.parse("-1")
+      ast = ast_from("-1")
       ast.accept(Mutant::NumberLiteralSignFlip.at(location_at(
         line_number: 1,
         column_number: 1)))

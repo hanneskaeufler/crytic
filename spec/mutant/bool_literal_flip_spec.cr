@@ -4,7 +4,7 @@ require "../spec_helper"
 module Crytic
   describe Mutant::BoolLiteralFlip do
     it "flips a boolean" do
-      ast = Crystal::Parser.parse("true")
+      ast = ast_from("true")
       ast.accept(Mutant::BoolLiteralFlip.at(location_at(
         line_number: 1,
         column_number: 1)))
@@ -12,7 +12,7 @@ module Crytic
     end
 
     it "only applies to location" do
-      ast = Crystal::Parser.parse("true")
+      ast = ast_from("true")
       ast.accept(Mutant::BoolLiteralFlip.at(location_at(
         line_number: 100,
         column_number: 100)))

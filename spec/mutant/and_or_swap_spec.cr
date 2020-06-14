@@ -4,7 +4,7 @@ require "../spec_helper"
 module Crytic
   describe Mutant::AndOrSwap do
     it "swaps and for or" do
-      ast = Crystal::Parser.parse("1 && 2")
+      ast = ast_from("1 && 2")
       transformed = ast.transform(Mutant::AndOrSwap.at(location_at(
         line_number: 1,
         column_number: 1,

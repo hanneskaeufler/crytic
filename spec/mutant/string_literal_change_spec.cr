@@ -4,7 +4,7 @@ require "../spec_helper"
 module Crytic
   describe Mutant::StringLiteralChange do
     it "changes to the empty string for non-empty strings" do
-      ast = Crystal::Parser.parse("\"hi there\"")
+      ast = ast_from("\"hi there\"")
       ast.accept(Mutant::StringLiteralChange.at(location_at(
         line_number: 1,
         column_number: 1)))
@@ -12,7 +12,7 @@ module Crytic
     end
 
     it "changes empty strings to __crytic__" do
-      ast = Crystal::Parser.parse("\"\"")
+      ast = ast_from("\"\"")
       ast.accept(Mutant::StringLiteralChange.at(location_at(
         line_number: 1,
         column_number: 1)))
@@ -20,7 +20,7 @@ module Crytic
     end
 
     it "only applies to location" do
-      ast = Crystal::Parser.parse("\"hi there\"")
+      ast = ast_from("\"hi there\"")
       ast.accept(Mutant::StringLiteralChange.at(location_at(
         line_number: 100,
         column_number: 100)))

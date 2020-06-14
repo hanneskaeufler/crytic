@@ -5,21 +5,21 @@ require "../spec_helper"
 module Crytic
   describe Mutant::SelectRejectSwap do
     it "switches select calls for reject calls" do
-      ast = Crystal::Parser.parse("[1].select(&.nil?)")
+      ast = ast_from("[1].select(&.nil?)")
       transformed = ast.transform(Mutant::SelectRejectSwap.at(location_at(
         line_number: 1, column_number: 1, name_location: Crystal::Location.new(nil, 1, 5))))
       transformed.to_s.should eq "[1].reject do |__arg0|\n  __arg0.nil?\nend"
     end
 
     it "switches reject calls for select calls" do
-      ast = Crystal::Parser.parse("[1].reject(&.nil?)")
+      ast = ast_from("[1].reject(&.nil?)")
       transformed = ast.transform(Mutant::SelectRejectSwap.at(location_at(
         line_number: 1, column_number: 1, name_location: Crystal::Location.new(nil, 1, 5))))
       transformed.to_s.should eq "[1].select do |__arg0|\n  __arg0.nil?\nend"
     end
 
     it "only applies to location" do
-      ast = Crystal::Parser.parse("[1].select(&.nil?)")
+      ast = ast_from("[1].select(&.nil?)")
       transformed = ast.transform(Mutant::SelectRejectSwap.at(location_at(
         line_number: 100,
         column_number: 100)))
@@ -27,7 +27,7 @@ module Crytic
     end
 
     it "can cope with additional calls following" do
-      ast = Crystal::Parser.parse("[1, 2, 3, 4].select { |i| i > 4 }.flatten")
+      ast = ast_from("[1, 2, 3, 4].select { |i| i > 4 }.flatten")
       possibilities = Mutant::SelectRejectSwapPossibilities.new
       ast.accept(possibilities)
       mutant = Mutant::SelectRejectSwap.at(possibilities.locations.first)
@@ -40,7 +40,7 @@ module Crytic
     end
 
     it "works together with a multi-callsite possibility" do
-      ast = Crystal::Parser.parse(<<-CODE
+      ast = ast_from(<<-CODE
       MUTANT_POSSIBILITIES.map do |inspector|
         ast.accept(inspector)
         inspector
