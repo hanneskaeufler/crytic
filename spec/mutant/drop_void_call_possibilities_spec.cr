@@ -32,7 +32,37 @@ module Crytic
       ast.accept(possibilities)
 
       possibilities.any?.should eq false
-      possibilities.locations.size.should eq 0
+    end
+
+    it "marks a possibility for each method call in the void def" do
+      ast = ast_from(<<-CODE
+        def intreturning; 1; end
+        def voidfn : Nil
+          intreturning
+          intreturning
+        end
+        CODE
+      )
+      possibilities = Mutant::DropVoidCallPossibilities.new
+
+      ast.accept(possibilities)
+
+      possibilities.locations.size.should eq 2
+    end
+
+    it "doesn't mess with local variable declarations" do
+      ast = ast_from(<<-CODE
+        def voidfn : Nil
+          foo = 1
+          bar = 2
+        end
+        CODE
+      )
+      possibilities = Mutant::DropVoidCallPossibilities.new
+
+      ast.accept(possibilities)
+
+      possibilities.any?.should eq false
     end
   end
 end
