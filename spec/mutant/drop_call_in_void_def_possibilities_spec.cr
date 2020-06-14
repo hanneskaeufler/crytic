@@ -52,9 +52,11 @@ module Crytic
 
     it "doesn't mess with local variable declarations" do
       ast = ast_from(<<-CODE
+        def generate(a); a; end
         def voidfn : Nil
           foo = 1
-          bar = 2
+          bar = "2".to_i
+          bar = [generate(2)].map(&.to_s)
         end
         CODE
       )
