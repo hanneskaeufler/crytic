@@ -1,12 +1,12 @@
-require "../../src/crytic/mutant/drop_void_call"
+require "../../src/crytic/mutant/drop_call_in_void_def"
 require "../spec_helper.cr"
 
 module Crytic
-  describe Mutant::DropVoidCall do
+  describe Mutant::DropCallInVoidDef do
     it "simply replaces a void function call with a Nil literal" do
       ast = ast_from("dropme")
 
-      transformed = ast.transform(Mutant::DropVoidCall.at(location_at(
+      transformed = ast.transform(Mutant::DropCallInVoidDef.at(location_at(
         line_number: 1,
         column_number: 1)))
 
@@ -16,7 +16,7 @@ module Crytic
     it "doesn't replace for the wrong possibility" do
       ast = ast_from("dontdropme")
 
-      transformed = ast.transform(Mutant::DropVoidCall.at(location_at(
+      transformed = ast.transform(Mutant::DropCallInVoidDef.at(location_at(
         line_number: 2,
         column_number: 4)))
 

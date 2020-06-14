@@ -1,8 +1,8 @@
-require "../../src/crytic/mutant/drop_void_call_possibilities"
+require "../../src/crytic/mutant/drop_call_in_void_def_possibilities"
 require "../spec_helper.cr"
 
 module Crytic
-  describe Mutant::DropVoidCallPossibilities do
+  describe Mutant::DropCallInVoidDefPossibilities do
     it "marks calls in a nil returning method" do
       ast = ast_from(<<-CODE
         def voidfn : Nil
@@ -10,7 +10,7 @@ module Crytic
         end
         CODE
       )
-      possibilities = Mutant::DropVoidCallPossibilities.new
+      possibilities = Mutant::DropCallInVoidDefPossibilities.new
 
       ast.accept(possibilities)
 
@@ -27,7 +27,7 @@ module Crytic
         end
         CODE
       )
-      possibilities = Mutant::DropVoidCallPossibilities.new
+      possibilities = Mutant::DropCallInVoidDefPossibilities.new
 
       ast.accept(possibilities)
 
@@ -43,7 +43,7 @@ module Crytic
         end
         CODE
       )
-      possibilities = Mutant::DropVoidCallPossibilities.new
+      possibilities = Mutant::DropCallInVoidDefPossibilities.new
 
       ast.accept(possibilities)
 
@@ -58,7 +58,7 @@ module Crytic
         end
         CODE
       )
-      possibilities = Mutant::DropVoidCallPossibilities.new
+      possibilities = Mutant::DropCallInVoidDefPossibilities.new
 
       ast.accept(possibilities)
 

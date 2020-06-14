@@ -1,7 +1,7 @@
 require "./possibilities"
 
 module Crytic::Mutant
-  class DropVoidCallPossibilities < Possibilities
+  class DropCallInVoidDefPossibilities < Possibilities
     def visit(node : Crystal::Def)
       location = node.location
       unless location.nil?

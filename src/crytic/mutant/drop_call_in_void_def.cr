@@ -2,7 +2,7 @@ require "compiler/crystal/syntax/*"
 require "./mutant"
 
 module Crytic::Mutant
-  class DropVoidCall < TransformerMutant
+  class DropCallInVoidDef < TransformerMutant
     def transform(node : Crystal::Call)
       super
       return node unless @location.matches?(node)
