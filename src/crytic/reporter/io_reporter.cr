@@ -1,5 +1,6 @@
 require "../msi_calculator"
 require "../mutation/mutation"
+require "./timer"
 require "./reporter"
 require "spec/dsl"
 
@@ -8,7 +9,7 @@ module Crytic::Reporter
   class IoReporter < Reporter
     INDENT = "    "
 
-    def initialize(@io : IO, @start_time = Time.utc)
+    def initialize(@io : IO, @timer = Timer.new)
     end
 
     def report_original_result(original_result) : Nil
@@ -57,7 +58,7 @@ module Crytic::Reporter
     end
 
     def report_summary(results : Mutation::ResultSet) : Nil
-      @io << "\n\nFinished in #{Spec.to_human(elapsed_time)}:\n"
+      @io << "\n\nFinished in #{Spec.to_human(@timer.elapsed_time)}:\n"
       summary = "#{results.total_count} mutations, "
       summary += "#{results.covered_count} covered, "
       summary += "#{results.uncovered_count} uncovered, "
@@ -74,10 +75,6 @@ module Crytic::Reporter
 
     private def score_in_percent(results)
       MsiCalculator.new(results).msi.to_s
-    end
-
-    private def elapsed_time
-      Time.utc - @start_time
     end
   end
 end
