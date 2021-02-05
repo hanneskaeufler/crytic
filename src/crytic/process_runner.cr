@@ -7,6 +7,6 @@ module Crytic
 
     # Run a process with the given command and args.
     # Returns the status code of the finished process
-    abstract def run(cmd : String, args, output, error)
+    abstract def run(cmd : String, args : Array(String), output, error)
   end
 end
