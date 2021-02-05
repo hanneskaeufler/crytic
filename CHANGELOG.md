@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Support for crystal `0.36.1`
 - Dropped support for crystal `< 0.35.0`
 
 ### Added
