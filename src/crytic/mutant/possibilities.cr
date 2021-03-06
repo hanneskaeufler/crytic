@@ -14,9 +14,9 @@ module Crytic::Mutant
     getter locations
     @locations = [] of FullLocation
 
-    # True if there are any locations found.
-    def any?
-      @locations.size > 0
+    # True if there aren't any locations found.
+    def empty?
+      @locations.size == 0
     end
 
     # Clears the locations in this instance.

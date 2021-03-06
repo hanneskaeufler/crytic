@@ -49,7 +49,7 @@ module Crytic
 
         subject.inspect([possibilities] of Mutant::Possibilities)
 
-        possibilities.any?.should be_true
+        possibilities.empty?.should be_false
         possibilities.locations.first.location.to_s.should eq "source.cr:1:1"
       end
 

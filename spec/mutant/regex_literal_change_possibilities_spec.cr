@@ -8,7 +8,7 @@ module Crytic
 
       ast_from("true").accept(possibilities)
 
-      possibilities.any?.should eq false
+      possibilities.empty?.should be_true
     end
 
     it "returns locations for every possible mutation" do
@@ -16,7 +16,7 @@ module Crytic
 
       ast_from("/.*/").accept(possibilities)
 
-      possibilities.any?.should eq true
+      possibilities.empty?.should be_false
       possibilities.locations.size.should eq 1
     end
   end

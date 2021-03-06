@@ -8,7 +8,7 @@ module Crytic::Mutant
 
       ast_from("a = 1; a.to_s").accept(possibilities)
 
-      possibilities.any?.should eq false
+      possibilities.empty?.should be_true
     end
 
     it "marks any and all symbol literals" do
@@ -21,7 +21,7 @@ module Crytic::Mutant
       CODE
       ).accept(possibilities)
 
-      possibilities.any?.should eq true
+      possibilities.empty?.should be_false
       possibilities.locations.size.should eq 3
       possibilities.locations.last.line_number.should eq 3
       possibilities.locations.last.column_number.should eq 10

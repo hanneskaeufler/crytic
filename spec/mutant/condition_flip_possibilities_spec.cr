@@ -7,14 +7,14 @@ module Crytic
       ast = ast_from("true")
       possibilities = Mutant::ConditionFlipPossibilities.new
       ast.accept(possibilities)
-      possibilities.any?.should eq false
+      possibilities.empty?.should be_true
     end
 
     it "returns locations for every possible mutation" do
       ast = ast_from("if true; 1; else; 2; end; if true; 1; else; 2; end;")
       possibilities = Mutant::ConditionFlipPossibilities.new
       ast.accept(possibilities)
-      possibilities.any?.should eq true
+      possibilities.empty?.should be_false
       possibilities.locations.size.should eq 2
     end
   end
