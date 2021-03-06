@@ -14,11 +14,11 @@ class Crytic::Command::Noop
     spec_files = parse_args(args)
 
     tracker = Mutation::Tracker.new
-    @side_effects.std_out.puts(spec_files.map do |spec_file|
+    @side_effects.std_out.puts(spec_files.join("\n") do |spec_file|
       Mutation::InjectMutatedSubjectIntoSpecs
         .new(spec_file, File.read(spec_file), irrelevant_subject, tracker)
         .to_mutated_source
-    end.join("\n"))
+    end)
 
     true
   end
