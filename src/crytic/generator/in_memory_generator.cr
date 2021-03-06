@@ -35,13 +35,12 @@ module Crytic::Generator
     private def mutations_for(subject : Subject, specs : Array(String))
       subject
         .inspect(@possibilities)
-        .map do |possibilities|
+        .flat_map do |possibilities|
           possibilities.locations.map do |location|
             @mutation_factory.call(env(Mutation::Config.new(
               possibilities.mutant_class.at(location), subject, specs, @preamble)))
           end
         end
-        .flatten
     end
 
     private def env(config)

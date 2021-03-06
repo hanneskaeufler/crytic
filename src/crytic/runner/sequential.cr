@@ -28,7 +28,7 @@ module Crytic::Runner
     end
 
     private def run_all_mutations(mutations, run)
-      mutations.map do |mutation_set|
+      mutations.flat_map do |mutation_set|
         neutral_result = mutation_set.neutral.run
         run.report_neutral_result(neutral_result)
 
@@ -37,7 +37,7 @@ module Crytic::Runner
         else
           run_mutations_for_single_subject(mutation_set, run)
         end
-      end.flatten
+      end
     end
   end
 end
