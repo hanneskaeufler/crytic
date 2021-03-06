@@ -13,7 +13,7 @@ success = !Crytic::Cli
   }, Crytic::ProcessProcessRunner.new,
     ->File.delete(String),
     ->(name : String, extension : String, content : String) {
-      File.tempfile(name, extension) { |file| file.print(content) }.path
+      File.tempfile(name, extension, &.print(content)).path
     }))
   .run(ARGV)
 
