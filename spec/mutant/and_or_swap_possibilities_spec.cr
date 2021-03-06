@@ -7,14 +7,14 @@ module Crytic
       ast = ast_from("1")
       possibilities = Mutant::AndOrSwapPossibilities.new
       ast.accept(possibilities)
-      possibilities.any?.should eq false
+      possibilities.empty?.should be_true
     end
 
     it "returns locations for every possible mutation" do
       ast = ast_from("1 && 2; true && false")
       possibilities = Mutant::AndOrSwapPossibilities.new
       ast.accept(possibilities)
-      possibilities.any?.should eq true
+      possibilities.empty?.should be_false
       possibilities.locations.size.should eq 2
     end
 
@@ -22,7 +22,7 @@ module Crytic
       ast = ast_from("1 && 2 && 3")
       possibilities = Mutant::AndOrSwapPossibilities.new
       ast.accept(possibilities)
-      possibilities.any?.should eq true
+      possibilities.empty?.should be_false
       possibilities.locations.size.should eq 2
       possibilities.locations.first.name_location.should_not be_nil
       possibilities.locations.last.name_location.should_not be_nil
@@ -32,7 +32,7 @@ module Crytic
       ast = ast_from("1 || 2")
       possibilities = Mutant::AndOrSwapPossibilities.new
       ast.accept(possibilities)
-      possibilities.any?.should eq true
+      possibilities.empty?.should be_false
       possibilities.locations.size.should eq 1
       possibilities.locations.first.name_location.should_not be_nil
     end

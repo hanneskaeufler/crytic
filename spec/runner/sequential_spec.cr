@@ -13,17 +13,17 @@ module Crytic::Runner
         run = FakeRun.new
         run.final_result = true
 
-        Sequential.new.run(run, side_effects).should eq true
+        Sequential.new.run(run, side_effects).should be_true
 
         run.final_result = false
-        Sequential.new.run(run, side_effects).should eq false
+        Sequential.new.run(run, side_effects).should be_false
       end
 
       it "returns false if the original spec suite fails" do
         run = FakeRun.new
         run.original_exit_code = 1
 
-        Sequential.new.run(run, side_effects).should eq false
+        Sequential.new.run(run, side_effects).should be_false
       end
 
       it "reports neutral results before mutation results" do

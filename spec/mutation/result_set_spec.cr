@@ -8,14 +8,14 @@ module Crytic::Mutation
         ResultSet.new([
           result(Status::Covered),
           result(Status::Covered),
-        ]).all_covered?.should eq true
+        ]).all_covered?.should be_true
       end
 
       it "returns false if any of the results isn't covered" do
         ResultSet.new([
           result(Status::Errored),
           result(Status::Covered),
-        ]).all_covered?.should eq false
+        ]).all_covered?.should be_false
       end
     end
 

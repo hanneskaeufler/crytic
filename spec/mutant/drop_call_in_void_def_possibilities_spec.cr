@@ -14,7 +14,7 @@ module Crytic
 
       ast.accept(possibilities)
 
-      possibilities.any?.should eq true
+      possibilities.empty?.should be_false
       possibilities.locations.size.should eq 1
       possibilities.locations.first.line_number.should eq 2
     end
@@ -31,7 +31,7 @@ module Crytic
 
       ast.accept(possibilities)
 
-      possibilities.any?.should eq false
+      possibilities.empty?.should be_true
     end
 
     it "marks a possibility for each method call in the void def" do
@@ -64,7 +64,7 @@ module Crytic
 
       ast.accept(possibilities)
 
-      possibilities.any?.should eq false
+      possibilities.empty?.should be_true
     end
   end
 end

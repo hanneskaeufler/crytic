@@ -82,7 +82,7 @@ module Crytic::Mutation
 
     private def mutated_specs_source(mutated)
       tracker = Tracker.new
-      @environment.spec_file_paths.map do |spec_file|
+      @environment.spec_file_paths.join("\n") do |spec_file|
         InjectMutatedSubjectIntoSpecs
           .new(
             tracker: tracker,
@@ -90,7 +90,7 @@ module Crytic::Mutation
             path: spec_file,
             source: File.read(spec_file))
           .to_mutated_source
-      end.join("\n")
+      end
     end
   end
 end

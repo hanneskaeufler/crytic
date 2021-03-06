@@ -7,14 +7,14 @@ module Crytic
       ast = ast_from("true")
       possibilities = Mutant::NumberLiteralChangePossibilities.new
       ast.accept(possibilities)
-      possibilities.any?.should eq false
+      possibilities.empty?.should be_true
     end
 
     it "returns locations for every possible mutation" do
       ast = ast_from("1; puts 2")
       possibilities = Mutant::NumberLiteralChangePossibilities.new
       ast.accept(possibilities)
-      possibilities.any?.should eq true
+      possibilities.empty?.should be_false
       possibilities.locations.size.should eq 2
     end
   end

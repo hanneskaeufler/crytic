@@ -43,9 +43,7 @@ module Crytic
       end
 
       def colored_data
-        data.map do |d|
-          d.colorize(append? ? :green : :red).to_s
-        end
+        data.map(&.colorize(append? ? :green : :red).to_s)
       end
 
       def is_last_chunk?(a_size, b_size)

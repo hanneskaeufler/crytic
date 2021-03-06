@@ -7,14 +7,14 @@ module Crytic
       ast = ast_from("true")
       possibilities = Mutant::NumberLiteralSignFlipPossibilities.new
       ast.accept(possibilities)
-      possibilities.any?.should eq false
+      possibilities.empty?.should be_true
     end
 
     it "returns locations for every possible mutation" do
       ast = ast_from("1; puts 2")
       possibilities = Mutant::NumberLiteralSignFlipPossibilities.new
       ast.accept(possibilities)
-      possibilities.any?.should eq true
+      possibilities.empty?.should be_false
       possibilities.locations.size.should eq 2
     end
 
@@ -22,7 +22,7 @@ module Crytic
       ast = ast_from("0")
       possibilities = Mutant::NumberLiteralSignFlipPossibilities.new
       ast.accept(possibilities)
-      possibilities.any?.should eq false
+      possibilities.empty?.should be_true
       possibilities.locations.size.should eq 0
     end
 
@@ -30,7 +30,7 @@ module Crytic
       ast = ast_from("1_u8; 1_u16; 1_u32; 1_u64;")
       possibilities = Mutant::NumberLiteralSignFlipPossibilities.new
       ast.accept(possibilities)
-      possibilities.any?.should eq false
+      possibilities.empty?.should be_true
       possibilities.locations.size.should eq 0
     end
   end
