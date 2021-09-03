@@ -13,7 +13,7 @@
 <script type="text/javascript" src="../../js/doc.js"></script>
 
   <meta name="repository-name" content="crytic">
-  <title>Crytic::Reporter::DefaultHttpClient - crytic 7.1.0-dev</title>
+  <title>Crytic::Mutant::SymbolLiteralChangePossibilities - crytic 7.1.0-dev</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -146,7 +146,7 @@
       
     </li>
   
-  <li class="parent " data-id="crytic/Crytic/Mutant" data-name="crytic::mutant">
+  <li class="parent open current" data-id="crytic/Crytic/Mutant" data-name="crytic::mutant">
       <a href="../../Crytic/Mutant.html">Mutant</a>
       
         <ul>
@@ -276,7 +276,7 @@
       
     </li>
   
-  <li class=" " data-id="crytic/Crytic/Mutant/SymbolLiteralChangePossibilities" data-name="crytic::mutant::symbolliteralchangepossibilities">
+  <li class=" current" data-id="crytic/Crytic/Mutant/SymbolLiteralChangePossibilities" data-name="crytic::mutant::symbolliteralchangepossibilities">
       <a href="../../Crytic/Mutant/SymbolLiteralChangePossibilities.html">SymbolLiteralChangePossibilities</a>
       
     </li>
@@ -396,12 +396,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="crytic/Crytic/Reporter" data-name="crytic::reporter">
+  <li class="parent " data-id="crytic/Crytic/Reporter" data-name="crytic::reporter">
       <a href="../../Crytic/Reporter.html">Reporter</a>
       
         <ul>
   
-  <li class=" current" data-id="crytic/Crytic/Reporter/DefaultHttpClient" data-name="crytic::reporter::defaulthttpclient">
+  <li class=" " data-id="crytic/Crytic/Reporter/DefaultHttpClient" data-name="crytic::reporter::defaulthttpclient">
       <a href="../../Crytic/Reporter/DefaultHttpClient.html">DefaultHttpClient</a>
       
     </li>
@@ -505,12 +505,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Reporter::DefaultHttpClient
+  <span class="kind">class</span> Crytic::Mutant::SymbolLiteralChangePossibilities
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Reporter/DefaultHttpClient.html">Crytic::Reporter::DefaultHttpClient</a></li><li class="superclass"><a href="../../Crytic/Reporter/HttpClient.html">Crytic::Reporter::HttpClient</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/SymbolLiteralChangePossibilities.html">Crytic::Mutant::SymbolLiteralChangePossibilities</a></li><li class="superclass"><a href="../../Crytic/Mutant/Possibilities.html">Crytic::Mutant::Possibilities</a></li><li class="superclass">Crystal::Visitor</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -557,7 +557,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#post(url:String,body:Hash(String,String%7CFloat64))-instance-method" class="signature"><strong>#post</strong>(url : String, body : Hash(String, String | Float64))</a>
+        <a href="#mutant_class-instance-method" class="signature"><strong>#mutant_class</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#visit(node:Crystal::SymbolLiteral)-instance-method" class="signature"><strong>#visit</strong>(node : Crystal::SymbolLiteral)</a>
         
       </li>
     
@@ -571,14 +576,39 @@
   
     
 
-  <h3>Instance methods inherited from class <code><a href="../../Crytic/Reporter/HttpClient.html">Crytic::Reporter::HttpClient</a></code></h3>
+  <h3>Instance methods inherited from class <code><a href="../../Crytic/Mutant/Possibilities.html">Crytic::Mutant::Possibilities</a></code></h3>
   
   
-    <a href="../../Crytic/Reporter/HttpClient.html#post(url:String,body:Hash(String,String%7CFloat64))-instance-method" class="tooltip">
-      <span>post(url : String, body : Hash(String, String | Float64))</span>
-    post</a>
+    <a href="../../Crytic/Mutant/Possibilities.html#empty?-instance-method" class="tooltip">
+      <span>empty?</span>
+    empty?</a>, 
     
   
+    <a href="../../Crytic/Mutant/Possibilities.html#locations:Array(Crytic::Mutant::FullLocation)-instance-method" class="tooltip">
+      <span>locations : Array(Crytic::Mutant::FullLocation)</span>
+    locations</a>, 
+    
+  
+    <a href="../../Crytic/Mutant/Possibilities.html#reset-instance-method" class="tooltip">
+      <span>reset</span>
+    reset</a>, 
+    
+  
+    <a href="../../Crytic/Mutant/Possibilities.html#visit(node:Crystal::ASTNode)-instance-method" class="tooltip">
+      <span>visit(node : Crystal::ASTNode)</span>
+    visit</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
 
 
     
@@ -624,12 +654,26 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="post(url:String,body:Hash(String,String|Float64))-instance-method">
+    <div class="entry-detail" id="mutant_class-instance-method">
       <div class="signature">
         
-        def <strong>post</strong>(url : String, body : Hash(String, String | Float64))
+        def <strong>mutant_class</strong>
 
-        <a class="method-permalink" href="#post(url:String,body:Hash(String,String%7CFloat64))-instance-method">#</a>
+        <a class="method-permalink" href="#mutant_class-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="visit(node:Crystal::SymbolLiteral)-instance-method">
+      <div class="signature">
+        
+        def <strong>visit</strong>(node : Crystal::SymbolLiteral)
+
+        <a class="method-permalink" href="#visit(node:Crystal::SymbolLiteral)-instance-method">#</a>
       </div>
       
       <br/>

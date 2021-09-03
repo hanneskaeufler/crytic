@@ -13,7 +13,7 @@
 <script type="text/javascript" src="../../js/doc.js"></script>
 
   <meta name="repository-name" content="crytic">
-  <title>Crytic::Reporter::DefaultHttpClient - crytic 7.1.0-dev</title>
+  <title>Crytic::Mutant::DropCallInVoidDef - crytic 7.1.0-dev</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -146,7 +146,7 @@
       
     </li>
   
-  <li class="parent " data-id="crytic/Crytic/Mutant" data-name="crytic::mutant">
+  <li class="parent open current" data-id="crytic/Crytic/Mutant" data-name="crytic::mutant">
       <a href="../../Crytic/Mutant.html">Mutant</a>
       
         <ul>
@@ -191,7 +191,7 @@
       
     </li>
   
-  <li class=" " data-id="crytic/Crytic/Mutant/DropCallInVoidDef" data-name="crytic::mutant::dropcallinvoiddef">
+  <li class=" current" data-id="crytic/Crytic/Mutant/DropCallInVoidDef" data-name="crytic::mutant::dropcallinvoiddef">
       <a href="../../Crytic/Mutant/DropCallInVoidDef.html">DropCallInVoidDef</a>
       
     </li>
@@ -396,12 +396,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="crytic/Crytic/Reporter" data-name="crytic::reporter">
+  <li class="parent " data-id="crytic/Crytic/Reporter" data-name="crytic::reporter">
       <a href="../../Crytic/Reporter.html">Reporter</a>
       
         <ul>
   
-  <li class=" current" data-id="crytic/Crytic/Reporter/DefaultHttpClient" data-name="crytic::reporter::defaulthttpclient">
+  <li class=" " data-id="crytic/Crytic/Reporter/DefaultHttpClient" data-name="crytic::reporter::defaulthttpclient">
       <a href="../../Crytic/Reporter/DefaultHttpClient.html">DefaultHttpClient</a>
       
     </li>
@@ -505,12 +505,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Crytic::Reporter::DefaultHttpClient
+  <span class="kind">class</span> Crytic::Mutant::DropCallInVoidDef
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Reporter/DefaultHttpClient.html">Crytic::Reporter::DefaultHttpClient</a></li><li class="superclass"><a href="../../Crytic/Reporter/HttpClient.html">Crytic::Reporter::HttpClient</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Crytic/Mutant/DropCallInVoidDef.html">Crytic::Mutant::DropCallInVoidDef</a></li><li class="superclass"><a href="../../Crytic/Mutant/TransformerMutant.html">Crytic::Mutant::TransformerMutant</a></li><li class="superclass">Crystal::Transformer</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -557,7 +557,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#post(url:String,body:Hash(String,String%7CFloat64))-instance-method" class="signature"><strong>#post</strong>(url : String, body : Hash(String, String | Float64))</a>
+        <a href="#transform(node:Crystal::Call)-instance-method" class="signature"><strong>#transform</strong>(node : Crystal::Call)</a>
         
       </li>
     
@@ -571,14 +571,33 @@
   
     
 
-  <h3>Instance methods inherited from class <code><a href="../../Crytic/Reporter/HttpClient.html">Crytic::Reporter::HttpClient</a></code></h3>
+  <h3>Instance methods inherited from class <code><a href="../../Crytic/Mutant/TransformerMutant.html">Crytic::Mutant::TransformerMutant</a></code></h3>
   
   
-    <a href="../../Crytic/Reporter/HttpClient.html#post(url:String,body:Hash(String,String%7CFloat64))-instance-method" class="tooltip">
-      <span>post(url : String, body : Hash(String, String | Float64))</span>
-    post</a>
+    <a href="../../Crytic/Mutant/TransformerMutant.html#location:Crytic::Mutant::FullLocation-instance-method" class="tooltip">
+      <span>location : Crytic::Mutant::FullLocation</span>
+    location</a>
     
   
+
+
+    
+
+
+    
+
+  <h3>Class methods inherited from class <code><a href="../../Crytic/Mutant/TransformerMutant.html">Crytic::Mutant::TransformerMutant</a></code></h3>
+  
+  
+    <a href="../../Crytic/Mutant/TransformerMutant.html#at(location:FullLocation)-class-method" class="tooltip">
+      <span>at(location : FullLocation)</span>
+    at</a>
+    
+  
+
+
+  
+    
 
 
     
@@ -624,12 +643,12 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="post(url:String,body:Hash(String,String|Float64))-instance-method">
+    <div class="entry-detail" id="transform(node:Crystal::Call)-instance-method">
       <div class="signature">
         
-        def <strong>post</strong>(url : String, body : Hash(String, String | Float64))
+        def <strong>transform</strong>(node : Crystal::Call)
 
-        <a class="method-permalink" href="#post(url:String,body:Hash(String,String%7CFloat64))-instance-method">#</a>
+        <a class="method-permalink" href="#transform(node:Crystal::Call)-instance-method">#</a>
       </div>
       
       <br/>
