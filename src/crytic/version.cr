@@ -1,3 +1,3 @@
 module Crytic
-  VERSION = "7.1.0"
+  VERSION = "8.0.0"
 end

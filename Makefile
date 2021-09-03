@@ -1,6 +1,6 @@
 SHARDS_BIN ?= $(shell which shards)
 SHARD_BIN ?= ../../bin
-CRYSTAL_VERSION ?= 0.36.1
+CRYSTAL_VERSION ?= 1.1.1
 
 build: bin/crytic
 bin/crytic:
