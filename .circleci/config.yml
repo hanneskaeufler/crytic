@@ -39,4 +39,3 @@ workflows:
               only: master
     jobs:
       - test-crystal-1.1.1
-      - test-mutations
