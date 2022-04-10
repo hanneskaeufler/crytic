@@ -14,13 +14,7 @@ module Crytic::Mutant
     end
 
     private def is_unsigned_type(node)
-      node.kind
-      case node.kind
-      when :u8, :u16, :u32, :u64
-        true
-      else
-        false
-      end
+      node.kind.to_s.starts_with?("u")
     end
   end
 end
