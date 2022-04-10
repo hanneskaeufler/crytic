@@ -18,4 +18,4 @@ scripts:
 development_dependencies:
   ameba:
     github: veelenga/ameba
-    version: ~> 0.13
+    version: ~> 1.0
