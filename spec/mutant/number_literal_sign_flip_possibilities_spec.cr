@@ -27,7 +27,7 @@ module Crytic
     end
 
     it "doesn't consider unsigned integer types" do
-      ast = ast_from("1_u8; 1_u16; 1_u32; 1_u64;")
+      ast = ast_from("1_u8; 1_u16; 1_u32; 1_u64; 1_u128;")
       possibilities = Mutant::NumberLiteralSignFlipPossibilities.new
       ast.accept(possibilities)
       possibilities.empty?.should be_true
