@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Support for crystal `1.2.2`
+- Support for crystal `1.4.0`. Fixed a bug where the `NumberLiteralSignFlip` mutant would apply to unsigned integers
 
 ## [8.0.0] - 2021-09-03
 
