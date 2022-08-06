@@ -6,7 +6,7 @@ class FakeGenerator < Crytic::Generator::Generator
                  @neutral = FakeMutation.new.as(Crytic::Mutation::Mutation))
   end
 
-  def mutations_for(source : Array(Crytic::Subject), specs : Array(String)) : Array(Crytic::Generator::MutationSet)
+  def mutations_for(subject : Array(Crytic::Subject), specs : Array(String)) : Array(Crytic::Generator::MutationSet)
     [Crytic::Generator::MutationSet.new(
       neutral: @neutral,
       mutated: @mutations)]
