@@ -77,7 +77,7 @@ require "./spec_helper"
         it "reports initial failure" do
           result = run_crytic("-s ./fixtures/uncovered/without.cr ./fixtures/failing/failing_spec.cr")
           result.output.should contain "❌ Original test suite failed.\n"
-          result.output.should contain "no overload matches"
+          result.output.should contain "Overloads are"
           result.exit_code.should be > 0
         end
       end
