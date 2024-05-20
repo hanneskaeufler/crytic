@@ -30,7 +30,7 @@ Add this to your application's `shard.yml`:
 development_dependencies:
   crytic:
     github: hanneskaeufler/crytic
-    version: ~> 8
+    version: ~> 9
 ```
 
 After `shards install`, this will place the `crytic` executable into the `bin/` folder inside your project.
