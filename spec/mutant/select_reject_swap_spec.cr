@@ -8,14 +8,14 @@ module Crytic
       ast = ast_from("[1].select(&.nil?)")
       transformed = ast.transform(Mutant::SelectRejectSwap.at(location_at(
         line_number: 1, column_number: 1, name_location: Crystal::Location.new(nil, 1, 5))))
-      transformed.to_s.should eq "[1].reject do |__arg0|\n  __arg0.nil?\nend"
+      transformed.to_s.should eq "[1].reject() do |__arg0|\n  __arg0.nil?\nend"
     end
 
     it "switches reject calls for select calls" do
       ast = ast_from("[1].reject(&.nil?)")
       transformed = ast.transform(Mutant::SelectRejectSwap.at(location_at(
         line_number: 1, column_number: 1, name_location: Crystal::Location.new(nil, 1, 5))))
-      transformed.to_s.should eq "[1].select do |__arg0|\n  __arg0.nil?\nend"
+      transformed.to_s.should eq "[1].select() do |__arg0|\n  __arg0.nil?\nend"
     end
 
     it "only applies to location" do
@@ -23,7 +23,7 @@ module Crytic
       transformed = ast.transform(Mutant::SelectRejectSwap.at(location_at(
         line_number: 100,
         column_number: 100)))
-      transformed.to_s.should eq "[1].select do |__arg0|\n  __arg0.nil?\nend"
+      transformed.to_s.should eq "[1].select() do |__arg0|\n  __arg0.nil?\nend"
     end
 
     it "can cope with additional calls following" do
