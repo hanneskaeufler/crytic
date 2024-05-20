@@ -26,7 +26,12 @@ module Crytic::Generator
 
     DEFAULT_PREAMBLE = <<-CODE
     require "spec"
-    Spec.fail_fast = true
+    class Spec::CLI
+      def fail_fast!
+        @fail_fast = true
+      end
+    end
+    Spec.cli.fail_fast!
 
     CODE
 
