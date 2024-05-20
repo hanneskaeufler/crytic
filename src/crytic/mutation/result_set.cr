@@ -26,7 +26,7 @@ module Crytic::Mutation
     end
 
     def longest_mutated_filename_length
-      @results.map(&.mutated_file.size).max? || 0
+      @results.max_of?(&.mutated_file.size) || 0
     end
   end
 end

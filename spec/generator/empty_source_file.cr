@@ -1,0 +1,1 @@
+# ameba:disable Lint/SpecFilename

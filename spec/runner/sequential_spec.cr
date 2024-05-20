@@ -54,7 +54,7 @@ private class FakeRun
   property mutations = [] of Crytic::Mutation::Mutation
   property events = [] of String
   property original_exit_code = 0
-  property final_result = true
+  property? final_result = true
   property neutral = FakeMutation.new.as(Crytic::Mutation::Mutation)
 
   def generate_mutations
@@ -70,7 +70,7 @@ private class FakeRun
   end
 
   def report_final(results)
-    final_result
+    final_result?
   end
 
   def execute_original_test_suite(side_effects)

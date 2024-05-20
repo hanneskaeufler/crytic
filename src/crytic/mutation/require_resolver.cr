@@ -9,7 +9,7 @@ module Crytic::Mutation
       recursive = filename.ends_with?("/**")
 
       if filename.ends_with?("/*") || recursive
-        filename_dir_index = filename.rindex('/').not_nil!
+        filename_dir_index = filename.rindex!('/')
         filename_dir = filename[0..filename_dir_index]
         relative_dir = "#{relative_to}/#{filename_dir}"
 

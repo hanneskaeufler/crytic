@@ -1,3 +1,4 @@
+# ameba:disable Lint/SpecFilename
 class FakeFile
   @@files_deleted = [] of String
   @@tempfiles_created = [] of String

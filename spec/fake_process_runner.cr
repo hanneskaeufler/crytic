@@ -1,3 +1,4 @@
+# ameba:disable Lint/SpecFilename
 require "../src/crytic/process_runner"
 
 module Crytic
@@ -10,7 +11,7 @@ module Crytic
     @output_io = IO::Memory.new
 
     def cmd_with_args
-      @cmd.zip(@args).map { |c, a| "#{c} #{a}".strip }
+      @cmd.zip(@args).map { |cmd, args| "#{cmd} #{args}".strip }
     end
 
     def run(cmd : String, args : Array(String), output, error)

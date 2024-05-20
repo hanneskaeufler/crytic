@@ -1,3 +1,4 @@
+# ameba:disable Lint/SpecFilename
 require "../src/crytic/generator/generator"
 require "../src/crytic/mutation/mutation"
 

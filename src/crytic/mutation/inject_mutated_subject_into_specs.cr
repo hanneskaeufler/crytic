@@ -33,7 +33,9 @@ module Crytic::Mutation
 
         @enriched_source = unfold_required(astree.to_s)
       else
-        @enriched_source.not_nil!
+        # force unwrapping is fine here, we're in the else
+        # branch of having done the nil check
+        @enriched_source.not_nil! # ameba:disable Lint/NotNil
       end
     end
 

@@ -1,3 +1,4 @@
+# ameba:disable Lint/SpecFilename
 require "../src/crytic/mutant/bool_literal_flip"
 require "../src/crytic/mutation/mutation"
 require "../src/crytic/mutation/result"

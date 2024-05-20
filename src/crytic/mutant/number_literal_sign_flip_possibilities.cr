@@ -4,7 +4,7 @@ module Crytic::Mutant
   class NumberLiteralSignFlipPossibilities < Possibilities
     def visit(node : Crystal::NumberLiteral)
       return true if node.value == "0"
-      return true if is_unsigned_type(node)
+      return true if unsigned_type?(node)
 
       location = node.location
       unless location.nil?
@@ -13,7 +13,7 @@ module Crytic::Mutant
       true
     end
 
-    private def is_unsigned_type(node)
+    private def unsigned_type?(node)
       node.kind.to_s.starts_with?("u")
     end
   end

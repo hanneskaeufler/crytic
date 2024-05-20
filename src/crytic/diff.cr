@@ -46,7 +46,7 @@ module Crytic
         data.map(&.colorize(append? ? :green : :red).to_s)
       end
 
-      def is_last_chunk?(a_size, b_size)
+      def last_chunk?(a_size, b_size)
         delete? ? range_a.end == a_size : range_b.end == b_size
       end
     end
@@ -199,7 +199,7 @@ module Crytic
 
         add_with_prefix cur.prefix, cur.colored_data, group
 
-        if !group.last.ends_with?(newline) && cur.is_last_chunk?(a.size, b.size)
+        if !group.last.ends_with?(newline) && cur.last_chunk?(a.size, b.size)
           group[-1] += newline
           group.push "\\ No newline at end of file#{newline}"
         end

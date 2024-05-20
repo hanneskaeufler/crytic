@@ -13,32 +13,32 @@ module Crytic::Mutant
     def matches?(node : Crystal::And | Crystal::Or)
       node_location = node.location
       return false if node_location.nil?
-      return is_same(node_location, location) if name_location.nil?
+      return same?(node_location, location) if name_location.nil?
 
-      is_same(node_location, location) && is_same(node.end_location, name_location)
+      same?(node_location, location) && same?(node.end_location, name_location)
     end
 
     def matches?(node : Crystal::ASTNode)
       node_location = node.location
       return false if node_location.nil?
-      return is_same(node_location, location) if name_location.nil?
+      return same?(node_location, location) if name_location.nil?
 
-      is_same(node_location, location) && is_same(node.name_location, name_location)
+      same?(node_location, location) && same?(node.name_location, name_location)
     end
 
-    private def is_same(location : Crystal::Location, other : Crystal::Location) : Bool
+    private def same?(location : Crystal::Location, other : Crystal::Location) : Bool
       location.line_number == other.line_number && location.column_number == other.column_number
     end
 
-    private def is_same(location : Nil, other : Nil) : Bool
+    private def same?(location : Nil, other : Nil) : Bool
       false
     end
 
-    private def is_same(location : Crystal::Location, other : Nil) : Bool
+    private def same?(location : Crystal::Location, other : Nil) : Bool
       false
     end
 
-    private def is_same(location : Nil, other : Crystal::Location) : Bool
+    private def same?(location : Nil, other : Crystal::Location) : Bool
       false
     end
   end

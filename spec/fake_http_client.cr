@@ -1,3 +1,4 @@
+# ameba:disable Lint/SpecFilename
 require "../src/crytic/reporter/http_client"
 require "http/server/response"
 

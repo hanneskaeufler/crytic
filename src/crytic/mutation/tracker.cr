@@ -25,15 +25,15 @@ module Crytic::Mutation
       relative_path_to_project(File.expand_path(file.path, "."))
     end
 
-    def parse_file_at_path(file)
+    def parse_file_at_path(file, &)
       file = relative_path_to_project(file)
-      unless is_already_tracked?(file)
+      unless already_tracked?(file)
         tracked_filepaths.add(file)
         yield
       end
     end
 
-    private def is_already_tracked?(file)
+    private def already_tracked?(file)
       tracked_filepaths.includes?(file)
     end
 
