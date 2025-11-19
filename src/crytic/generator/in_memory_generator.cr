@@ -13,7 +13,7 @@ module Crytic::Generator
       @possibilities : Array(Mutant::Possibilities),
       @preamble : String,
       @mutation_factory : MutationFactory,
-      @side_effects : SideEffects
+      @side_effects : SideEffects,
     )
     end
 

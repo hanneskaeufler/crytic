@@ -54,7 +54,7 @@ def side_effects(
   exit_fun = noop_exit_fun,
   process_runner = Crytic::FakeProcessRunner.new,
   file_remover = ->FakeFile.delete(String),
-  tempfile_writer = ->FakeFile.tempfile(String, String, String)
+  tempfile_writer = ->FakeFile.tempfile(String, String, String),
 )
   Crytic::SideEffects.new(
     stdout,
@@ -70,7 +70,7 @@ def environment(
   config,
   process_runner = Crytic::FakeProcessRunner.new,
   file_remover = ->FakeFile.delete(String),
-  tempfile_writer = ->FakeFile.tempfile(String, String, String)
+  tempfile_writer = ->FakeFile.tempfile(String, String, String),
 )
   Crytic::Mutation::Environment.new(config, side_effects(process_runner: process_runner, file_remover: file_remover, tempfile_writer: tempfile_writer))
 end
@@ -103,7 +103,7 @@ def fake_no_mutation_factory
 end
 
 def noop_exit_fun
-  ->(_code : Int32) {}
+  ->(_code : Int32) { }
 end
 
 def cli_options_parser(
@@ -111,7 +111,7 @@ def cli_options_parser(
   std_err = IO::Memory.new,
   exit_fun = noop_exit_fun,
   env = fake_env,
-  spec_files_glob = Crytic::CliOptions::DEFAULT_SPEC_FILES_GLOB
+  spec_files_glob = Crytic::CliOptions::DEFAULT_SPEC_FILES_GLOB,
 )
   Crytic::CliOptions.new(Crytic::SideEffects.new(
     std_out, std_err, exit_fun, env,

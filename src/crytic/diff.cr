@@ -5,7 +5,7 @@ module Crytic
         @diff : T,
         @type : Type,
         @range_a : Range(Int32, Int32),
-        @range_b : Range(Int32, Int32)
+        @range_b : Range(Int32, Int32),
       )
       end
 

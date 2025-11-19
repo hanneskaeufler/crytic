@@ -12,7 +12,7 @@ module Crytic::Mutation
       @path,
       @source : String,
       @mutated_subject : MutatedSubject,
-      @tracker : Tracker
+      @tracker : Tracker,
     )
       @path = @tracker.register_file(self)
     end

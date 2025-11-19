@@ -12,7 +12,7 @@ module Crytic::Runner
       @spec_files : Array(String),
       @subjects : Array(Subject),
       @generator : Generator::Generator,
-      @no_mutation_factory : NoMutationFactory
+      @no_mutation_factory : NoMutationFactory,
     )
     end
 

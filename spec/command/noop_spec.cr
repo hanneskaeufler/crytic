@@ -5,8 +5,8 @@ module Crytic::Command
   def self.subject(
     stdout = IO::Memory.new,
     stderr = IO::Memory.new,
-    exit_fun = ->(_code : Int32) {},
-    spec_files_glob = Noop::DEFAULT_SPEC_FILES_GLOB
+    exit_fun = ->(_code : Int32) { },
+    spec_files_glob = Noop::DEFAULT_SPEC_FILES_GLOB,
   )
     Noop.new(side_effects(stdout, stderr, exit_fun), spec_files_glob)
   end

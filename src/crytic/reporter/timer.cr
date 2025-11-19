@@ -2,7 +2,7 @@ module Crytic::Reporter
   class Timer
     @start_time : Time
 
-    def initialize(@time : -> Time = ->{ Time.utc })
+    def initialize(@time : -> Time = -> { Time.utc })
       @start_time = @time.call
     end
 

@@ -15,7 +15,7 @@ class Crytic::SideEffects
     @env,
     @process_runner : ProcessRunner,
     @file_remover : (String -> Void),
-    @tempfile_writer : ((String, String, String) -> String)
+    @tempfile_writer : ((String, String, String) -> String),
   )
   end
 
