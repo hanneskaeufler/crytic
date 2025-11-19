@@ -1,4 +1,5 @@
 require "./config"
+require "../side_effects"
 
 module Crytic::Mutation
   record Environment,

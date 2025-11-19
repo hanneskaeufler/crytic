@@ -38,6 +38,7 @@ module Crytic::Mutation
           end
         end
         require "spec"
+
         describe("bar") do
           it("works") do
             bar.should(eq(2))
@@ -87,7 +88,7 @@ module Crytic::Mutation
         Colorize.enabled = true
 
         mutation.run.diff.should eq <<-DIFF
-        @@ -1,5 +1,5 @@\n def bar\n\e[31m-\e[0m\e[31m  if true\e[0m\n\e[32m+\e[0m\e[32m  if false\e[0m\n     2\n   else\n     3\n
+        @@ -1,5 +1,5 @@\n def bar\n\e[31m-\e[39m\e[31m  if true\e[39m\n\e[32m+\e[39m\e[32m  if false\e[39m\n     2\n   else\n     3\n
         DIFF
       end
 
@@ -111,6 +112,7 @@ module Crytic::Mutation
         end
 
         require "spec"
+
         describe("bar") do
           it("works") do
             bar.should(eq(2))
@@ -141,6 +143,7 @@ module Crytic::Mutation
         end
 
         require "spec"
+
         describe("bar") do
           it("works") do
             bar.should(eq(2))
@@ -149,6 +152,7 @@ module Crytic::Mutation
 
 
         require "spec"
+
         describe("bar") do
           it("works") do
             2.should(eq(2))

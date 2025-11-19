@@ -19,6 +19,7 @@ module Crytic::Mutation
         # require of `fixtures/simple/bar.cr` from `fixtures/simple/bar_spec.cr`
         puts("mutated source")
         require "spec"
+
         describe("bar") do
           it("works") do
             bar.should(eq(2))
@@ -46,6 +47,7 @@ module Crytic::Mutation
         puts("mutated source")
 
         require "spec"
+
         describe("bar") do
           it("works") do
             bar.should(eq(2))
@@ -77,6 +79,7 @@ module Crytic::Mutation
             "welcome page"
           end
         end
+
         class Blog
           def render
             "\#{Archive.new.render} \#{1}"
@@ -84,6 +87,7 @@ module Crytic::Mutation
         end
 
         require "spec"
+
         describe(Blog) do
           it("renders") do
             Blog.new.render.should(eq("welcome page 1"))
@@ -109,9 +113,11 @@ module Crytic::Mutation
         # require of `fixtures/require_wildcards/foo.cr` from `fixtures/require_wildcards/foo_spec.cr`
         # require of `fixtures/require_wildcards/app.cr` from `fixtures/require_wildcards/foo.cr`
 
+
         puts("hi")
 
         require "spec"
+
         describe("foo") do
           it("always passes") do
             true.should(eq(true))
