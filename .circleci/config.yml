@@ -3,10 +3,10 @@ version: 2
 jobs:
   test-crystal: &test-template
     docker:
-      - image: crystallang/crystal:1.12.1
+      - image: crystallang/crystal:1.18.2
     steps:
       - checkout
-  test-crystal-1.12.1:
+  test-crystal-1.18.2:
     <<: *test-template
     steps:
       - checkout
@@ -29,7 +29,7 @@ workflows:
   version: 2
   ci:
     jobs:
-      - test-crystal-1.12.1
+      - test-crystal-1.18.2
   nightly:
     triggers:
       - schedule:
@@ -38,4 +38,4 @@ workflows:
             branches:
               only: master
     jobs:
-      - test-crystal-1.12.1
+      - test-crystal-1.18.2
