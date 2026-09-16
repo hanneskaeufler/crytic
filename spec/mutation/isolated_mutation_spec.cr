@@ -29,23 +29,23 @@ module Crytic::Mutation
         fake.cmd_with_args[-2].should eq "crystal build -o /tmp/crytic.RANDOM --no-debug /tmp/crytic.RANDOM.cr"
         fake.cmd_with_args.last.should eq "/tmp/crytic.RANDOM"
         FakeFile.tempfile_contents.last.should eq <<-CODE
-        # require of `fixtures/simple/bar.cr` from `fixtures/simple/bar_spec.cr`
-        def bar
-          if false
-            2
-          else
-            3
+          # require of `fixtures/simple/bar.cr` from `fixtures/simple/bar_spec.cr`
+          def bar
+            if false
+              2
+            else
+              3
+            end
           end
-        end
-        require "spec"
+          require "spec"
 
-        describe("bar") do
-          it("works") do
-            bar.should(eq(2))
+          describe("bar") do
+            it("works") do
+              bar.should(eq(2))
+            end
           end
-        end
 
-        CODE
+          CODE
       end
 
       it "considers a mutant covered if the process fails" do
@@ -88,8 +88,8 @@ module Crytic::Mutation
         Colorize.enabled = true
 
         mutation.run.diff.should eq <<-DIFF
-        @@ -1,5 +1,5 @@\n def bar\n\e[31m-\e[39m\e[31m  if true\e[39m\n\e[32m+\e[39m\e[32m  if false\e[39m\n     2\n   else\n     3\n
-        DIFF
+          @@ -1,5 +1,5 @@\n def bar\n\e[31m-\e[39m\e[31m  if true\e[39m\n\e[32m+\e[39m\e[32m  if false\e[39m\n     2\n   else\n     3\n
+          DIFF
       end
 
       it "resolves nested requires" do
@@ -100,26 +100,26 @@ module Crytic::Mutation
 
         mutation.run
         FakeFile.tempfile_contents.last.should eq <<-CODE
-        # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr`
-        require "http"
-        # require of `fixtures/simple/bar.cr` from `fixtures/simple/spec_helper.cr`
-        def bar
-          if false
-            2
-          else
-            3
+          # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr`
+          require "http"
+          # require of `fixtures/simple/bar.cr` from `fixtures/simple/spec_helper.cr`
+          def bar
+            if false
+              2
+            else
+              3
+            end
           end
-        end
 
-        require "spec"
+          require "spec"
 
-        describe("bar") do
-          it("works") do
-            bar.should(eq(2))
+          describe("bar") do
+            it("works") do
+              bar.should(eq(2))
+            end
           end
-        end
 
-        CODE
+          CODE
       end
 
       it "only requires/includes the subject once for multiple spec files" do
@@ -131,35 +131,35 @@ module Crytic::Mutation
         mutation.run
 
         FakeFile.tempfile_contents.last.should eq <<-CODE
-        # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr`
-        require "http"
-        # require of `fixtures/simple/bar.cr` from `fixtures/simple/spec_helper.cr`
-        def bar
-          if false
-            2
-          else
-            3
+          # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr`
+          require "http"
+          # require of `fixtures/simple/bar.cr` from `fixtures/simple/spec_helper.cr`
+          def bar
+            if false
+              2
+            else
+              3
+            end
           end
-        end
 
-        require "spec"
+          require "spec"
 
-        describe("bar") do
-          it("works") do
-            bar.should(eq(2))
+          describe("bar") do
+            it("works") do
+              bar.should(eq(2))
+            end
           end
-        end
 
 
-        require "spec"
+          require "spec"
 
-        describe("bar") do
-          it("works") do
-            2.should(eq(2))
+          describe("bar") do
+            it("works") do
+              2.should(eq(2))
+            end
           end
-        end
 
-        CODE
+          CODE
       end
 
       it "considers errors/failed to compile as not covered" do
@@ -202,9 +202,9 @@ module Crytic::Mutation
 
       it "prepends the preamble" do
         preamble = <<-CODE
-        require "spec"
-        Spec.fail_fast = true
-        CODE
+          require "spec"
+          Spec.fail_fast = true
+          CODE
 
         mutation = IsolatedMutation.with(environment(config(
           mutant,

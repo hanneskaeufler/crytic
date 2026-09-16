@@ -17,5 +17,5 @@ scripts:
 
 development_dependencies:
   ameba:
-    github: veelenga/ameba
-    version: 1.6.1
+    github: crystal-ameba/ameba
+    version: 1.7.0

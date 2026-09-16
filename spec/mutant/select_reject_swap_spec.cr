@@ -33,36 +33,36 @@ module Crytic
       mutant = Mutant::SelectRejectSwap.at(possibilities.locations.first)
       transformed = ast.transform(mutant)
       transformed.to_s.should eq <<-CODE
-      [1, 2, 3, 4].reject do |i| i > 4 end.flatten
-      CODE
+        [1, 2, 3, 4].reject do |i| i > 4 end.flatten
+        CODE
     end
 
     it "works together with a multi-callsite possibility" do
       ast = ast_from(<<-CODE
-      MUTANT_POSSIBILITIES.map do |inspector|
-        ast.accept(inspector)
-        inspector
-      end.select(&.any?).map do |inspector|
-        inspector.locations.map do |location|
-          Mutation::Mutation.with(mutant: inspector.mutant_class.at(location: location), original: source, specs: specs)
-        end
-      end.flatten
-      CODE
+        MUTANT_POSSIBILITIES.map do |inspector|
+          ast.accept(inspector)
+          inspector
+        end.select(&.any?).map do |inspector|
+          inspector.locations.map do |location|
+            Mutation::Mutation.with(mutant: inspector.mutant_class.at(location: location), original: source, specs: specs)
+          end
+        end.flatten
+        CODE
       )
       possibilities = Mutant::SelectRejectSwapPossibilities.new
       ast.accept(possibilities)
       mutant = Mutant::SelectRejectSwap.at(possibilities.locations.first)
       transformed = ast.transform(mutant)
       transformed.to_s.should eq <<-CODE
-      MUTANT_POSSIBILITIES.map do |inspector|
-        ast.accept(inspector)
-        inspector
-      end.reject(&.any?).map do |inspector|
-        inspector.locations.map do |location|
-          Mutation::Mutation.with(mutant: inspector.mutant_class.at(location: location), original: source, specs: specs)
-        end
-      end.flatten
-      CODE
+        MUTANT_POSSIBILITIES.map do |inspector|
+          ast.accept(inspector)
+          inspector
+        end.reject(&.any?).map do |inspector|
+          inspector.locations.map do |location|
+            Mutation::Mutation.with(mutant: inspector.mutant_class.at(location: location), original: source, specs: specs)
+          end
+        end.flatten
+        CODE
     end
   end
 end

@@ -11,6 +11,7 @@ jobs:
     steps:
       - checkout
       - run: shards
+      - run: crystal build -o bin/ameba lib/ameba/bin/ameba.cr
       - run: ./bin/ci
   test-coverage:
     docker:

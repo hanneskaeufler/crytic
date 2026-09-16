@@ -9,12 +9,12 @@ module Crytic
         line_number: 1,
         column_number: 1)))
       ast.to_s.should eq <<-AST
-      if true
-        2
-      else
-        1
-      end
-      AST
+        if true
+          2
+        else
+          1
+        end
+        AST
     end
 
     it "only applies to location" do
@@ -23,12 +23,12 @@ module Crytic
         line_number: 100,
         column_number: 100)))
       ast.to_s.should eq <<-AST
-      if true
-        1
-      else
-        2
-      end
-      AST
+        if true
+          1
+        else
+          2
+        end
+        AST
     end
   end
 end
