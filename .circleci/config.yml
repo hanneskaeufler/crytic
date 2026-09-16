@@ -3,14 +3,15 @@ version: 2
 jobs:
   test-crystal: &test-template
     docker:
-      - image: crystallang/crystal:1.18.2
+      - image: crystallang/crystal:1.21.0
     steps:
       - checkout
-  test-crystal-1.18.2:
+  test-crystal-1.21.0:
     <<: *test-template
     steps:
       - checkout
       - run: shards
+      - run: crystal build -o bin/ameba lib/ameba/bin/ameba.cr
       - run: ./bin/ci
   test-coverage:
     docker:
@@ -29,7 +30,7 @@ workflows:
   version: 2
   ci:
     jobs:
-      - test-crystal-1.18.2
+      - test-crystal-1.21.0
   nightly:
     triggers:
       - schedule:
@@ -38,4 +39,4 @@ workflows:
             branches:
               only: master
     jobs:
-      - test-crystal-1.18.2
+      - test-crystal-1.21.0

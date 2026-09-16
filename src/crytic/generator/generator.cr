@@ -25,15 +25,15 @@ module Crytic::Generator
     ] of Mutant::Possibilities
 
     DEFAULT_PREAMBLE = <<-CODE
-    require "spec"
-    class Spec::CLI
-      def fail_fast!
-        @fail_fast = true
+      require "spec"
+      class Spec::CLI
+        def fail_fast!
+          @fail_fast = true
+        end
       end
-    end
-    Spec.cli.fail_fast!
+      Spec.cli.fail_fast!
 
-    CODE
+      CODE
 
     abstract def mutations_for(
       subject : Array(Subject),

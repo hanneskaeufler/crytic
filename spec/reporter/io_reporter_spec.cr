@@ -138,7 +138,7 @@ module Crytic::Reporter
       it "is a noop" do
         io = IO::Memory.new
         results = [] of Mutation::Result
-        IoReporter.new(io).report_msi(results).should eq nil
+        IoReporter.new(io).report_msi(results).should be_nil
         io.to_s.should eq ""
       end
     end

@@ -4,7 +4,7 @@ module Crytic::Mutation
     # https://github.com/crystal-lang/crystal/blob/master/src/compiler/crystal/crystal_path.cr
     # Because we are caring about relative requires "./foo/bar" exclusively, a lot of code
     # was removed from this method.
-    def find_in_path_relative_to_dir(filename, relative_to) : Array(String) | Nil
+    def find_in_path_relative_to_dir(filename, relative_to) : Array(String)?
       # Check if it's a wildcard.
       recursive = filename.ends_with?("/**")
 

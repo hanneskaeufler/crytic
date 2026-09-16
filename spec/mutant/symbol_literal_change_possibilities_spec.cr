@@ -18,13 +18,13 @@ module Crytic::Mutant
         :foo
         :bar.to_s
         method(:baz)
-      CODE
+        CODE
       ).accept(possibilities)
 
       possibilities.empty?.should be_false
       possibilities.locations.size.should eq 3
       possibilities.locations.last.line_number.should eq 3
-      possibilities.locations.last.column_number.should eq 10
+      possibilities.locations.last.column_number.should eq 8
     end
   end
 end

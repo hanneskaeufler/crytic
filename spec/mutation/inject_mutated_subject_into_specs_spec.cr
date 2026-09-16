@@ -16,17 +16,17 @@ module Crytic::Mutation
             source_code: "puts \"mutated source\""))
         .to_mutated_source
         .should eq <<-CODE
-        # require of `fixtures/simple/bar.cr` from `fixtures/simple/bar_spec.cr`
-        puts("mutated source")
-        require "spec"
+          # require of `fixtures/simple/bar.cr` from `fixtures/simple/bar_spec.cr`
+          puts("mutated source")
+          require "spec"
 
-        describe("bar") do
-          it("works") do
-            bar.should(eq(2))
+          describe("bar") do
+            it("works") do
+              bar.should(eq(2))
+            end
           end
-        end
 
-        CODE
+          CODE
     end
 
     it "can follow a one level deep require" do
@@ -41,20 +41,20 @@ module Crytic::Mutation
             source_code: "puts \"mutated source\""))
         .to_mutated_source
         .should eq <<-CODE
-        # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr`
-        require "http"
-        # require of `fixtures/simple/bar.cr` from `fixtures/simple/spec_helper.cr`
-        puts("mutated source")
+          # require of `fixtures/simple/spec_helper.cr` from `fixtures/simple/bar_with_helper_spec.cr`
+          require "http"
+          # require of `fixtures/simple/bar.cr` from `fixtures/simple/spec_helper.cr`
+          puts("mutated source")
 
-        require "spec"
+          require "spec"
 
-        describe("bar") do
-          it("works") do
-            bar.should(eq(2))
+          describe("bar") do
+            it("works") do
+              bar.should(eq(2))
+            end
           end
-        end
 
-        CODE
+          CODE
     end
 
     it "respects the crystal require order" do
@@ -69,32 +69,32 @@ module Crytic::Mutation
             path: subject_file,
             source_code: File.read(subject_file)))
         .to_mutated_source
-        .should eq <<-CODE
-        # require of `fixtures/require_order/blog.cr` from `fixtures/require_order/blog_spec.cr`
-        # require of `fixtures/require_order/pages/main_layout.cr` from `fixtures/require_order/blog.cr`
-        abstract class MainLayout
-        end# require of `fixtures/require_order/pages/blog/archive.cr` from `fixtures/require_order/blog.cr`
-        class Archive < MainLayout
-          def render
-            "welcome page"
+        .should eq <<-'CODE'
+          # require of `fixtures/require_order/blog.cr` from `fixtures/require_order/blog_spec.cr`
+          # require of `fixtures/require_order/pages/main_layout.cr` from `fixtures/require_order/blog.cr`
+          abstract class MainLayout
+          end# require of `fixtures/require_order/pages/blog/archive.cr` from `fixtures/require_order/blog.cr`
+          class Archive < MainLayout
+            def render
+              "welcome page"
+            end
           end
-        end
 
-        class Blog
-          def render
-            "\#{Archive.new.render} \#{1}"
+          class Blog
+            def render
+              "#{Archive.new.render} #{1}"
+            end
           end
-        end
 
-        require "spec"
+          require "spec"
 
-        describe(Blog) do
-          it("renders") do
-            Blog.new.render.should(eq("welcome page 1"))
+          describe(Blog) do
+            it("renders") do
+              Blog.new.render.should(eq("welcome page 1"))
+            end
           end
-        end
 
-        CODE
+          CODE
     end
 
     it "replaces requires that don't yield any files" do
@@ -110,21 +110,21 @@ module Crytic::Mutation
             source_code: File.read(subject_file)))
         .to_mutated_source
         .should eq <<-CODE
-        # require of `fixtures/require_wildcards/foo.cr` from `fixtures/require_wildcards/foo_spec.cr`
-        # require of `fixtures/require_wildcards/app.cr` from `fixtures/require_wildcards/foo.cr`
+          # require of `fixtures/require_wildcards/foo.cr` from `fixtures/require_wildcards/foo_spec.cr`
+          # require of `fixtures/require_wildcards/app.cr` from `fixtures/require_wildcards/foo.cr`
 
 
-        puts("hi")
+          puts("hi")
 
-        require "spec"
+          require "spec"
 
-        describe("foo") do
-          it("always passes") do
-            true.should(eq(true))
+          describe("foo") do
+            it("always passes") do
+              true.should(eq(true))
+            end
           end
-        end
 
-        CODE
+          CODE
     end
   end
 end

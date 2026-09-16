@@ -51,24 +51,24 @@ module Crytic
 
     it "works together with the possibility" do
       code = <<-CODE
-      class Bar
-        private def unfold_required(output)
-          output.gsub(/require[ \t]+"$([0-9]+)"/) do |_str, matcher|
-            expansion_id = matcher[1].to_i
-            file_list = InjectMutatedSubjectIntoSpecs.require_expanders[expansion_id]
-            if file_list.any?
-              String.build do |io|
-                file_list.each do |file|
-                  puts(file)
+        class Bar
+          private def unfold_required(output)
+            output.gsub(/require[ \t]+"$([0-9]+)"/) do |_str, matcher|
+              expansion_id = matcher[1].to_i
+              file_list = InjectMutatedSubjectIntoSpecs.require_expanders[expansion_id]
+              if file_list.any?
+                String.build do |io|
+                  file_list.each do |file|
+                    puts(file)
+                  end
                 end
+              else
+                ""
               end
-            else
-              ""
             end
           end
         end
-      end
-      CODE
+        CODE
       ast = ast_from(code)
 
       possibilities = Mutant::AnyAllSwapPossibilities.new

@@ -2,7 +2,7 @@ require "./possibilities"
 
 module Crytic::Mutant
   class AnyAllSwapPossibilities < Possibilities
-    private ANY_ALL = %w(all? any?)
+    private ANY_ALL = %w[all? any?]
 
     def visit(node : Crystal::Call)
       return true unless ANY_ALL.includes?(node.name)
