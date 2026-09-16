@@ -1,5 +1,6 @@
 require "../src/crytic/version.cr"
 require "./spec_helper.cr"
+require "xml"
 
 describe Crytic do
   it "has matching version strings" do
@@ -21,9 +22,9 @@ private def readme_version
 end
 
 private def docs_version
-  /&quot;(\d\.\d\.\d)&quot;/.match(File.read("docs/api/Crytic.html")).try &.[1]
+  XML.parse_html(File.read("docs/api/Crytic.html")).xpath_nodes("//span[contains(@class, 'project-version')]").first.text.strip
 end
 
 private def changelog_version
-  /## \[(\d\.\d\.\d)\]/.match(File.read("CHANGELOG.md")).try &.[1]
+  /## \[(\d+\.\d\.\d)\]/.match(File.read("CHANGELOG.md")).try &.[1]
 end
